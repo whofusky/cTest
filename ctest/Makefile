@@ -27,8 +27,13 @@ GEN_LIBS   	:= $(if $(STATIC_LIBS),y,)
 
 ## Flag of generate a dynamic lib: y means yes. It should be blank unless you want to generate a dynamic lib!
 ## Name of the dynamic lib. It should be blank unless the target is a dynamic lib, then the GEN_LIBS is y and GEN_DYN_LIB is y.
-#GEN_DYN_LIB		:= y
 #DYNAMIC_LIBS 	:= libmyfun.so
+#GEN_DYN_LIB    := y
+#DYNAMIC_LIBS := $(if $(myso),$(myso),)
+#GEN_DYN_LIB := $(if $(GEN_DYN_LIB),y,) 
+
+
+
 
 ## The name of target bin file.Please let it be blank unless the target is a excutable file. 
 EXCUTE_BIN		:= $(if $(myexe),$(myexe),)
@@ -167,8 +172,8 @@ endef
 # Call gen_excbin to generate a excutale file.
 $(foreach bin,$(EXCUTE_BIN),$(eval $(call gen_excbin,$(bin),$(CUR_OBJ),$(CXX))))
 
-# Call gen_libs to generate a dynamic lib.
-$(foreach lib,$(DYNAMIC_LIBS),$(eval $(call gen_libs,$(lib),$(CUR_FUNOBJ),$(CXX))))
+# Call gen_libs to generate a dynamic libso.
+$(foreach libso,$(DYNAMIC_LIBS),$(eval $(call gen_libs,$(libso),$(CUR_FUNOBJ),$(CXX))))
 
 # Call gen_libs to generate a static lib.
 $(foreach lib,$(STATIC_LIBS),$(eval $(call gen_libs,$(lib),$(CUR_FUNOBJ),$(AR))))
