@@ -22,15 +22,15 @@ DEBUG       	:= y
 
 ## Flag of generate a dynamic lib or a static lib: y means yes. If the target is a excutable file, it should be blank!
 ## Name of the static lib. It should be blank unless the target is a static lib, then the GEN_LIBS is y and GEN_DYN_LIB is blank.
-STATIC_LIBS	:= $(if $(mylib),$(mylib),)
-GEN_LIBS   	:= $(if $(STATIC_LIBS),y,) 
+STATIC_LIBS	:= $(if $(strip $(mylib)),$(strip $(mylib)),)
+GEN_LIBS   	:= $(if $(strip $(STATIC_LIBS)),y,) 
 
 ## Flag of generate a dynamic lib: y means yes. It should be blank unless you want to generate a dynamic lib!
 ## Name of the dynamic lib. It should be blank unless the target is a dynamic lib, then the GEN_LIBS is y and GEN_DYN_LIB is y.
 #DYNAMIC_LIBS 	:= libmyfun.so
 #GEN_DYN_LIB    := y
-#DYNAMIC_LIBS := $(if $(myso),$(myso),)
-#GEN_DYN_LIB := $(if $(GEN_DYN_LIB),y,) 
+DYNAMIC_LIBS := $(if $(strip $(myso)),$(strip $(myso)),)
+GEN_DYN_LIB  := $(if $(strip $(DYNAMIC_LIBS)),y,)
 
 
 
@@ -107,7 +107,7 @@ $(foreach dirname,$(sort $(PRG_INC_DIR) $(PRG_BIN_DIR) $(PRG_LIB_DIR) $(TMPFILE_
 
 # Complie and link variables. LD_LIBS means the dynamic or static library needed for the object file.
 CFLAGS     	:= $(if $(DEBUG),-g -Wall, -O2 -Wall)
-CFLAGS     	+= $(if $(GEN_DYN_LIB), $(addprefix -fPIC -I ,$(sort $(dir $(SRC_H)))), $(addprefix -I ,$(sort $(dir $(SRC_H)))))
+CFLAGS     	+= $(if $(strip $(GEN_DYN_LIB)), $(addprefix -fPIC -I ,$(sort $(dir $(SRC_H)))), $(addprefix -I ,$(sort $(dir $(SRC_H)))))
 CXXFLAGS   	= $(CFLAGS)
 LDFLAGS    	:= 
 LD_LIB_DIR 	:= -L $(DEPEND_LIB_DIR)
@@ -165,7 +165,7 @@ endef
 define gen_libs
   ULT_LIBS += $(PRG_LIB_DIR)/$1
   $(PRG_LIB_DIR)/$1: $2
-	$3 $(if $(GEN_DYN_LIB),-shared $$^ $(CXXFLAGS) $(LD_LIB_DIR) $(LD_LIBS) $(XLD_FLG) -o $$@,$$@ $$^)
+	$3 $(if $(strip $(GEN_DYN_LIB)),-shared $$^ $(CXXFLAGS) $(LD_LIB_DIR) $(LD_LIBS) $(XLD_FLG) -o $$@,$$@ $$^)
 	@echo -e $(YELLOW)"========================Success========================"$(BLACK)
 endef
 
@@ -213,5 +213,6 @@ help:
 	@echo CUR_DEP=[$(CUR_DEP)]
 	@echo STATIC_LIBS=[$(STATIC_LIBS)]
 	@echo DYNAMIC_LIBS=[$(DYNAMIC_LIBS)]
+	@echo GEN_DYN_LIB=[$(GEN_DYN_LIB)]
 
 

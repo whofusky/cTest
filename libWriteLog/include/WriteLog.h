@@ -1,14 +1,14 @@
 /****************************************
  * 
- *    BaseLog.h 
+ *    WriteLog.h 
  * 
  *    Create by fushikai
  * 
  *    2021-06-19
  * 
  ****************************************/
-#ifndef LIB_BASELOG_H
-#define LIB_BASELOG_H
+#ifndef LIB_WRITELOG_H
+#define LIB_WRITELOG_H
 
 
 
@@ -82,4 +82,4 @@ void _PrintToStdout( const char* FILE_p, int LINE, int logLevel, const char* for
 /******************************************************************************/
 
 
-#endif //LIB_BASELOG_H
+#endif //LIB_WRITELOG_H

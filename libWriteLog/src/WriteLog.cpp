@@ -1,6 +1,6 @@
 /****************************************
  * 
- *    BaseLog.cpp 
+ *    WriteLog.cpp 
  * 
  *    Create by fushikai
  * 
@@ -20,7 +20,7 @@
 #include <errno.h>
 #include <cstdlib>
 #include <sstream>
-#include "BaseLog.h"
+#include "WriteLog.h"
 
 #define LIB_BASE_VERSION "[ libBaseLog.a ] Version: V00.01.000"
 
