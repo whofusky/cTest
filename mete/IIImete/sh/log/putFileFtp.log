@@ -1,0 +1,209 @@
+
+2019/01/19 14:17:28.559360399 putFileFtp.sh:6:start -->
+2019/01/19 14:17:28.559360399 --debug:input param nums:6
+                   --logFile=[./log/putFileFtp.log]
+2019/01/19 14:17:28.559360399 shDebugFlag=[255]
+        ---------ftp para begine--------
+        ----ftpIP     =[192.168.0.154]
+        ----ftpUser   =[Administrator]
+        ----ftpPwd    =[qwer1234]
+        ----ftpRdir   =[/gaolongshan]
+        ----ftpLdir   =[/home/fczx/src/IIImete/filedo/down/back]
+        ----fileName  =[busilist_20181219_0.xml]
+        ----ftpCtrPNum=[21]
+        ----ftpTrType =[ascii]
+        ---------ftp para end----------
+
+
+2019/01/19 14:17:28.904437679 retstat=[0],ftpRet=[function getFtpSerStatu input param 2019/01/19 14:17:28.725397961 
+         debugflag=[1]
+         opFlag=[1],opStr=[upload],opCmd=[mput]
+         trsType=[0],typeStr=[ascii]
+         trsMode=[0],modeStr=[passive],modeOpt=[-p]
+         fileNameTmp=[busilist_20181219_0\.xml]--------
+         ---------ftp para begine--------
+         ----ftpIP     =[192.168.0.154]
+         ----ftpUser   =[Administrator]
+         ----ftpPwd    =[qwer1234]
+         ----ftpRdir   =[/gaolongshan]
+         ----ftpLdir   =[/home/fczx/src/IIImete/filedo/down/back]
+         ----fileName  =[busilist_20181219_0.xml]
+         ----ftpCtrPNum=[21]
+         ---------ftp para end----------
+         
+Connected to 192.168.0.154 (192.168.0.154).
+220 Microsoft FTP Service
+Remote system type is Windows_NT.
+331 Password required for Administrator.
+230 User logged in.
+200 Type set to A.
+250 CWD command successful.
+Local directory now /home/fczx/src/IIImete/filedo/down/back
+Interactive mode off.
+local: busilist_20181219_0.xml remote: busilist_20181219_0.xml
+227 Entering Passive Mode (192,168,0,154,78,142).
+125 Data connection already open; Transfer starting.
+226 Transfer complete.
+557314 bytes sent in 0.0818 secs (6814.55 Kbytes/sec)
+221 Goodbye.]
+
+2019/01/19 14:17:28.954332817 ftpRet=[function getFtpSerStatu input param 2019/01/19 14:17:28.725397961 
+         debugflag=[1]
+         opFlag=[1],opStr=[upload],opCmd=[mput]
+         trsType=[0],typeStr=[ascii]
+         trsMode=[0],modeStr=[passive],modeOpt=[-p]
+         fileNameTmp=[busilist_20181219_0\.xml]--------
+         ---------ftp para begine--------
+         ----ftpIP     =[192.168.0.154]
+         ----ftpUser   =[Administrator]
+         ----ftpPwd    =[qwer1234]
+         ----ftpRdir   =[/gaolongshan]
+         ----ftpLdir   =[/home/fczx/src/IIImete/filedo/down/back]
+         ----fileName  =[busilist_20181219_0.xml]
+         ----ftpCtrPNum=[21]
+         ---------ftp para end----------
+         
+Connected to 192.168.0.154 (192.168.0.154).
+220 Microsoft FTP Service
+Remote system type is Windows_NT.
+331 Password required for Administrator.
+230 User logged in.
+200 Type set to A.
+250 CWD command successful.
+Local directory now /home/fczx/src/IIImete/filedo/down/back
+Interactive mode off.
+local: busilist_20181219_0.xml remote: busilist_20181219_0.xml
+227 Entering Passive Mode (192,168,0,154,78,142).
+125 Data connection already open; Transfer starting.
+226 Transfer complete.
+557314 bytes sent in 0.0818 secs (6814.55 Kbytes/sec)
+221 Goodbye.]
+2019/01/19 14:17:28.904437679 putFileFtp.sh:6:end 
+
+
+2019/01/21 13:20:25.482493848 putFileFtp.sh:6:start -->
+2019/01/21 13:20:25.482493848 --debug:input param nums:6
+                   --logFile=[./log/putFileFtp.log]
+2019/01/21 13:20:25.482493848 shDebugFlag=[255]
+        ---------ftp para begine--------
+        ----ftpIP     =[192.168.0.154]
+        ----ftpUser   =[Administrator]
+        ----ftpPwd    =[qwer1234]
+        ----ftpRdir   =[/gaolongshan]
+        ----ftpLdir   =[/home/fczx/src/IIImete/filedo/down/back]
+        ----fileName  =[busilist_20181219_0.xml]
+        ----ftpCtrPNum=[21]
+        ----ftpTrType =[ascii]
+        ---------ftp para end----------
+
+
+2019/01/21 13:20:25.748656572 retstat=[14],ftpRet=[function getFtpSerStatu input param 2019/01/21 13:20:25.654973071 
+         debugflag=[1]
+         opFlag=[1],opStr=[upload],opCmd=[mput]
+         trsType=[0],typeStr=[ascii]
+         trsMode=[0],modeStr=[passive],modeOpt=[-p]
+         fileNameTmp=[busilist_20181219_0\.xml]--------
+         ---------ftp para begine--------
+         ----ftpIP     =[192.168.0.154]
+         ----ftpUser   =[Administrator]
+         ----ftpPwd    =[qwer1234]
+         ----ftpRdir   =[/gaolongshan]
+         ----ftpLdir   =[/home/fczx/src/IIImete/filedo/down/back]
+         ----fileName  =[busilist_20181219_0.xml]
+         ----ftpCtrPNum=[21]
+         ---------ftp para end----------
+         
+busilist_20181218_0.xml
+busilist_20190114_0.xml]
+
+2019/01/21 13:20:25.748656572 putFileFtp.sh:6:end 
+
+
+2019/01/21 13:28:42.081018658 putFileFtp.sh:6:start -->
+2019/01/21 13:28:42.081018658 --debug:input param nums:6
+                   --logFile=[./log/putFileFtp.log]
+2019/01/21 13:28:42.081018658 shDebugFlag=[255]
+        ---------ftp para begine--------
+        ----ftpIP     =[192.168.0.154]
+        ----ftpUser   =[Administrator]
+        ----ftpPwd    =[qwer1234]
+        ----ftpRdir   =[/gaolongshan]
+        ----ftpLdir   =[/home/fczx/src/IIImete/filedo/down/back]
+        ----fileName  =[busilist_20181219_0.xml]
+        ----ftpCtrPNum=[21]
+        ----ftpTrType =[ascii]
+        ---------ftp para end----------
+
+
+2019/01/21 13:28:42.359294987 retstat=[14],ftpRet=[function getOrPutFtpFile input param 2019/01/21 13:28:42.269929513 
+         debugflag=[1]
+         opFlag=[1],opStr=[upload],opCmd=[mput]
+         trsType=[0],typeStr=[ascii]
+         trsMode=[0],modeStr=[passive],modeOpt=[-p]
+         fileNameTmp=[busilist_20181219_0\.xml]--------
+         ---------ftp para begine--------
+         ----ftpIP     =[192.168.0.154]
+         ----ftpUser   =[Administrator]
+         ----ftpPwd    =[qwer1234]
+         ----ftpRdir   =[/gaolongshan]
+         ----ftpLdir   =[/home/fczx/src/IIImete/filedo/down/back]
+         ----fileName  =[busilist_20181219_0.xml]
+         ----ftpCtrPNum=[21]
+         ---------ftp para end----------
+         
+busilist_20181218_0.xml
+busilist_20190114_0.xml]
+
+2019/01/21 13:28:42.359294987 putFileFtp.sh:6:unsuccessfull 
+
+
+2019/01/21 13:31:58.896649067 putFileFtp.sh:6:start -->
+2019/01/21 13:31:58.896649067 --debug:input param nums:6
+                   --logFile=[./log/putFileFtp.log]
+2019/01/21 13:31:58.896649067 shDebugFlag=[255]
+        ---------ftp para begine--------
+        ----ftpIP     =[192.168.0.154]
+        ----ftpUser   =[Administrator]
+        ----ftpPwd    =[qwer1234]
+        ----ftpRdir   =[/gaolongshan]
+        ----ftpLdir   =[/home/fczx/src/IIImete/filedo/down/back]
+        ----fileName  =[busilist_20181219_0.xml]
+        ----ftpCtrPNum=[21]
+        ----ftpTrType =[ascii]
+        ---------ftp para end----------
+
+
+2019/01/21 13:31:59.309802016 retstat=[0],ftpRet=[function getOrPutFtpFile input param 2019/01/21 13:31:59.067431153 
+         debugflag=[1]
+         opFlag=[1],opStr=[upload],opCmd=[mput]
+         trsType=[0],typeStr=[ascii]
+         trsMode=[0],modeStr=[passive],modeOpt=[-p]
+         fileNameTmp=[busilist_20181219_0\.xml]--------
+         ---------ftp para begine--------
+         ----ftpIP     =[192.168.0.154]
+         ----ftpUser   =[Administrator]
+         ----ftpPwd    =[qwer1234]
+         ----ftpRdir   =[/gaolongshan]
+         ----ftpLdir   =[/home/fczx/src/IIImete/filedo/down/back]
+         ----fileName  =[busilist_20181219_0.xml]
+         ----ftpCtrPNum=[21]
+         ---------ftp para end----------
+         
+Connected to 192.168.0.154 (192.168.0.154).
+220 Microsoft FTP Service
+Remote system type is Windows_NT.
+331 Password required for Administrator.
+230 User logged in.
+200 Type set to A.
+250 CWD command successful.
+Local directory now /home/fczx/src/IIImete/filedo/down/back
+Interactive mode off.
+local: busilist_20181219_0.xml remote: busilist_20181219_0.xml
+227 Entering Passive Mode (192,168,0,154,146,182).
+125 Data connection already open; Transfer starting.
+226 Transfer complete.
+557314 bytes sent in 0.0777 secs (7172.45 Kbytes/sec)
+221 Goodbye.]
+
+2019/01/21 13:31:59.309802016 putFileFtp.sh:6:end 
+

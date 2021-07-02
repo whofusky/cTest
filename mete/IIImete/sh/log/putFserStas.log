@@ -1,0 +1,414 @@
+
+ftpRet=[function getFtpSerStatu input param 2019/01/15 17:00:58.376173364 
+         debugflag=[1]
+         fileNameTmp=[busilist_20190114_0\.xml]--------
+         ---------ftp para begine--------
+         ----ftpIP     =[192.168.0.154]
+         ----ftpUser   =[Administrator]
+         ----ftpPwd    =[qwer1235]
+         ----ftpRdir   =[/gaolongshan]
+         ----ftpLdir   =[./]
+         ----fileName  =[busilist_20190114_0.xml]
+         ----ftpCtrPNum=[21]
+         ---------ftp para end----------
+         
+Connected to 192.168.0.154 (192.168.0.154).
+220 Microsoft FTP Service
+Remote system type is Windows_NT.
+331 Password required for Administrator.
+530 User cannot log in.
+Login failed.
+530 Please login with USER and PASS.
+Local directory now /home/fczx/src/IIImete/sh
+221 Goodbye.]
+2019/01/15 17:00:58.473776462 the ftp username [Administrator] or passwd [qwer1235] is error
+
+
+ftpRet=[function getFtpSerStatu input param 2019/01/15 17:02:00.260084630 
+         debugflag=[1]
+         fileNameTmp=[busilist_20190114_0\.xml]--------
+         ---------ftp para begine--------
+         ----ftpIP     =[192.168.0.154]
+         ----ftpUser   =[Administrator]
+         ----ftpPwd    =[qwer1234]
+         ----ftpRdir   =[/gaolongshan]
+         ----ftpLdir   =[./]
+         ----fileName  =[busilist_20190114_0.xml]
+         ----ftpCtrPNum=[21]
+         ---------ftp para end----------
+         
+getFileFtp.sh
+getFserStas.sh getFserStas.sh~
+getFserStas.sh~
+getPidNum.sh getPidNum.sh~
+getPidNum.sh~
+log/
+meteShFunc.sh meteShFunc.sh~
+meteShFunc.sh~
+myfunc.shold
+putFileFtp.sh
+putFserStas.sh putFserStas.sh~
+putFserStas.sh~
+tst.log]
+2019/01/15 17:02:00.393204708the local file  [busilist_20190114_0.xml] is not exists
+
+2019/01/15 17:04:36.727513887 NOWPSSHNUM=[]
+     shDebugFlag=[15]
+     logFile=[./log/putFserStas.log]
+     ---------ftp para begine--------
+     ----ftpIP     =[192.168.0.154]
+     ----ftpUser   =[Administrator]
+     ----ftpPwd    =[qwer1234]
+     ----ftpRdir   =[/gaolongshan]
+     ----ftpLdir   =[./]
+     ----fileName  =[busilist_20190114_0.xml]
+     ----ftpCtrPNum=[21]
+     ---------ftp para end----------
+     
+
+ftpRet=[function getFtpSerStatu input param 2019/01/15 17:04:36.810736276 
+         debugflag=[1]
+         fileNameTmp=[busilist_20190114_0\.xml]--------
+         ---------ftp para begine--------
+         ----ftpIP     =[192.168.0.154]
+         ----ftpUser   =[Administrator]
+         ----ftpPwd    =[qwer1234]
+         ----ftpRdir   =[/gaolongshan]
+         ----ftpLdir   =[./]
+         ----fileName  =[busilist_20190114_0.xml]
+         ----ftpCtrPNum=[21]
+         ---------ftp para end----------
+         
+getFileFtp.sh
+getFserStas.sh getFserStas.sh~
+getFserStas.sh~
+getPidNum.sh getPidNum.sh~
+getPidNum.sh~
+log/
+meteShFunc.sh meteShFunc.sh~
+meteShFunc.sh~
+myfunc.shold
+putFileFtp.sh
+putFserStas.sh putFserStas.sh~
+putFserStas.sh~
+tst.log]
+2019/01/15 17:04:36.945275015the local file  [busilist_20190114_0.xml] is not exists
+
+2019/01/15 17:06:00.218724571 NOWPSSHNUM=[]
+     shDebugFlag=[15]
+     logFile=[./log/putFserStas.log]
+     ---------ftp para begine--------
+     ----ftpIP     =[192.168.0.154]
+     ----ftpUser   =[Administrator]
+     ----ftpPwd    =[qwer1234]
+     ----ftpRdir   =[/gaolongshan]
+     ----ftpLdir   =[./]
+     ----fileName  =[meteShFunc.sh]
+     ----ftpCtrPNum=[21]
+     ---------ftp para end----------
+     
+
+ftpRet=[function getFtpSerStatu input param 2019/01/15 17:06:00.292440046 
+         debugflag=[1]
+         fileNameTmp=[meteShFunc\.sh]--------
+         ---------ftp para begine--------
+         ----ftpIP     =[192.168.0.154]
+         ----ftpUser   =[Administrator]
+         ----ftpPwd    =[qwer1234]
+         ----ftpRdir   =[/gaolongshan]
+         ----ftpLdir   =[./]
+         ----fileName  =[meteShFunc.sh]
+         ----ftpCtrPNum=[21]
+         ---------ftp para end----------
+         
+Connected to 192.168.0.154 (192.168.0.154).
+220 Microsoft FTP Service
+Remote system type is Windows_NT.
+331 Password required for Administrator.
+230 User logged in.
+250 CWD command successful.
+Local directory now /home/fczx/src/IIImete/sh
+221 Goodbye.]
+2019/01/15 17:06:00.427020916 the ftp server status very good!
+
+2019/01/21 14:19:59.117761504 NOWPSSHNUM=[]
+     shDebugFlag=[15]
+     logFile=[./log/putFserStas.log]
+     ---------ftp para begine--------
+     ----ftpIP     =[192.168.0.154]
+     ----ftpUser   =[Administrator]
+     ----ftpPwd    =[qwer1234]
+     ----ftpRdir   =[/gaolongshan]
+     ----ftpLdir   =[/home/fczx/src/IIImete/filedo/down/back]
+     ----fileName  =[busilist_20181219_0.xml]
+     ----ftpCtrPNum=[21]
+     ---------ftp para end----------
+     
+
+ftpRet=[function getFtpSerStatu input param 2019/01/21 14:19:59.211448826 
+         debugflag=[1]
+         opFlag=[1],opStr=[upload],opCmd=[mput]
+         trsType=[0],typeStr=[ascii]
+         trsMode=[0],modeStr=[passive],modeOpt=[-p]
+         fileNameTmp=[busilist_20181219_0\.xml]--------
+         ---------ftp para begine--------
+         ----ftpIP     =[192.168.0.154]
+         ----ftpUser   =[Administrator]
+         ----ftpPwd    =[qwer1234]
+         ----ftpRdir   =[/gaolongshan]
+         ----ftpLdir   =[/home/fczx/src/IIImete/filedo/down/back]
+         ----fileName  =[busilist_20181219_0.xml]
+         ----ftpCtrPNum=[21]
+         ---------ftp para end----------
+         
+Connected to 192.168.0.154 (192.168.0.154).
+220 Microsoft FTP Service
+Remote system type is Windows_NT.
+331 Password required for Administrator.
+230 User logged in.
+200 Type set to A.
+250 CWD command successful.
+Local directory now /home/fczx/src/IIImete/filedo/down/back
+221 Goodbye.]
+2019/01/21 14:19:59.377228484 the ftp server status very good!
+
+2019/01/21 14:25:38.770744382 NOWPSSHNUM=[]
+     shDebugFlag=[15]
+     logFile=[./log/putFserStas.log]
+     ---------ftp para begine--------
+     ----ftpIP     =[192.168.0.154]
+     ----ftpUser   =[Administrator]
+     ----ftpPwd    =[qwer1234]
+     ----ftpRdir   =[/gaolongshan]
+     ----ftpLdir   =[/home/fczx/src/IIImete/filedo/down/back]
+     ----fileName  =[busilist_20181219_0.xml]
+     ----ftpCtrPNum=[21]
+     ---------ftp para end----------
+     
+
+2019/01/21 14:25:39.037906869 ftpRet=[function getFtpSerStatu input param 2019/01/21 14:25:38.874115991 
+         debugflag=[1]
+         opFlag=[1],opStr=[upload],opCmd=[mput]
+         trsType=[0],typeStr=[ascii]
+         trsMode=[0],modeStr=[passive],modeOpt=[-p]
+         fileNameTmp=[busilist_20181219_0\.xml]--------
+         ---------ftp para begine--------
+         ----ftpIP     =[192.168.0.154]
+         ----ftpUser   =[Administrator]
+         ----ftpPwd    =[qwer1234]
+         ----ftpRdir   =[/gaolongshan]
+         ----ftpLdir   =[/home/fczx/src/IIImete/filedo/down/back]
+         ----fileName  =[busilist_20181219_0.xml]
+         ----ftpCtrPNum=[21]
+         ---------ftp para end----------
+         
+Connected to 192.168.0.154 (192.168.0.154).
+220 Microsoft FTP Service
+Remote system type is Windows_NT.
+331 Password required for Administrator.
+230 User logged in.
+200 Type set to A.
+250 CWD command successful.
+Local directory now /home/fczx/src/IIImete/filedo/down/back
+221 Goodbye.]
+2019/01/21 14:25:39.037906869 the ftp server status very good!
+
+2019/01/21 14:29:46.909333475 putFserStas.sh input param
+     shDebugFlag=[15]
+     logFile=[./log/putFserStas.log]
+     ---------ftp para begine--------
+     ----ftpIP     =[192.168.0.154]
+     ----ftpUser   =[Administrator]
+     ----ftpPwd    =[qwer1234]
+     ----ftpRdir   =[/gaolongshan]
+     ----ftpLdir   =[/home/fczx/src/IIImete/filedo/down/back]
+     ----fileName  =[busilist_20181219_0.xml]
+     ----ftpCtrPNum=[21]
+     ---------ftp para end----------
+     
+
+2019/01/21 14:29:47.163339197 ftpRet=[function getFtpSerStatu input param 2019/01/21 14:29:47.008726373 
+         debugflag=[1]
+         opFlag=[1],opStr=[upload],opCmd=[mput]
+         trsType=[0],typeStr=[ascii]
+         trsMode=[0],modeStr=[passive],modeOpt=[-p]
+         fileNameTmp=[busilist_20181219_0\.xml]--------
+         ---------ftp para begine--------
+         ----ftpIP     =[192.168.0.154]
+         ----ftpUser   =[Administrator]
+         ----ftpPwd    =[qwer1234]
+         ----ftpRdir   =[/gaolongshan]
+         ----ftpLdir   =[/home/fczx/src/IIImete/filedo/down/back]
+         ----fileName  =[busilist_20181219_0.xml]
+         ----ftpCtrPNum=[21]
+         ---------ftp para end----------
+         
+Connected to 192.168.0.154 (192.168.0.154).
+220 Microsoft FTP Service
+Remote system type is Windows_NT.
+331 Password required for Administrator.
+230 User logged in.
+200 Type set to A.
+250 CWD command successful.
+Local directory now /home/fczx/src/IIImete/filedo/down/back
+221 Goodbye.]
+2019/01/21 14:29:47.163339197 the ftp server status very good!
+
+2019/01/21 14:30:46.471223772 putFserStas.sh input param
+     shDebugFlag=[15]
+     logFile=[./log/putFserStas.log]
+     ---------ftp para begine--------
+     ----ftpIP     =[192.168.0.154]
+     ----ftpUser   =[Administrator]
+     ----ftpPwd    =[qwer1234]
+     ----ftpRdir   =[/gaolongshan]
+     ----ftpLdir   =[/home/fczx/src/IIImete/filedo/down/back]
+     ----fileName  =[busilist_20181219_0.xml]
+     ----ftpCtrPNum=[21]
+     ---------ftp para end----------
+     
+
+2019/01/21 14:30:46.740969560 ftpRet=[function getFtpSerStatu input param 2019/01/21 14:30:46.595248280 
+         debugflag=[1]
+         opFlag=[1],opStr=[upload],opCmd=[mput]
+         trsType=[0],typeStr=[ascii]
+         trsMode=[0],modeStr=[passive],modeOpt=[-p]
+         fileNameTmp=[busilist_20181219_0\.xml]--------
+         ---------ftp para begine--------
+         ----ftpIP     =[192.168.0.154]
+         ----ftpUser   =[Administrator]
+         ----ftpPwd    =[qwer1234]
+         ----ftpRdir   =[/gaolongshan]
+         ----ftpLdir   =[/home/fczx/src/IIImete/filedo/down/back]
+         ----fileName  =[busilist_20181219_0.xml]
+         ----ftpCtrPNum=[21]
+         ---------ftp para end----------
+         
+Connected to 192.168.0.154 (192.168.0.154).
+220 Microsoft FTP Service
+Remote system type is Windows_NT.
+331 Password required for Administrator.
+230 User logged in.
+200 Type set to A.
+250 CWD command successful.
+Local directory now /home/fczx/src/IIImete/filedo/down/back
+221 Goodbye.]
+2019/01/21 14:30:46.740969560 the ftp server status very good!
+
+2019/01/21 14:31:08.398155472 putFserStas.sh input param
+     shDebugFlag=[15]
+     logFile=[./log/putFserStas.log]
+     ---------ftp para begine--------
+     ----ftpIP     =[192.168.0.154]
+     ----ftpUser   =[Administrator]
+     ----ftpPwd    =[qwer1234]
+     ----ftpRdir   =[/gaolongshan]
+     ----ftpLdir   =[/home/fczx/src/IIImete/filedo/down/back]
+     ----fileName  =[busilist_20181219_0.xml1]
+     ----ftpCtrPNum=[21]
+     ---------ftp para end----------
+     
+
+2019/01/21 14:31:08.591325404 ftpRet=[function getFtpSerStatu input param 2019/01/21 14:31:08.502242908 
+         debugflag=[1]
+         opFlag=[1],opStr=[upload],opCmd=[mput]
+         trsType=[0],typeStr=[ascii]
+         trsMode=[0],modeStr=[passive],modeOpt=[-p]
+         fileNameTmp=[busilist_20181219_0\.xml1]--------
+         ---------ftp para begine--------
+         ----ftpIP     =[192.168.0.154]
+         ----ftpUser   =[Administrator]
+         ----ftpPwd    =[qwer1234]
+         ----ftpRdir   =[/gaolongshan]
+         ----ftpLdir   =[/home/fczx/src/IIImete/filedo/down/back]
+         ----fileName  =[busilist_20181219_0.xml1]
+         ----ftpCtrPNum=[21]
+         ---------ftp para end----------
+         
+busilist_20181218_0.xml
+busilist_20181219_0.xml
+busilist_20190114_0.xml]
+2019/01/21 14:31:08.591325404the local file  [busilist_20181219_0.xml1] is not exists
+
+2019/01/21 14:56:22.026465005 putFserStas.sh input param
+     shDebugFlag=[15]
+     opFlag=[1],opStr=[upload],opCmd=[mput]
+     trsType=[0],typeStr=[ascii]
+     trsMode=[0],modeStr=[passive],modeOpt=[-p]
+     logFile=[./log/putFserStas.log]
+     ---------ftp para begine--------
+     ----ftpIP     =[192.168.0.154]
+     ----ftpUser   =[Administrator]
+     ----ftpPwd    =[qwer1234]
+     ----ftpRdir   =[/gaolongshan]
+     ----ftpLdir   =[/home/fczx/src/IIImete/filedo/down/back]
+     ----fileName  =[busilist_20181219_0.xml1]
+     ----ftpCtrPNum=[21]
+     ---------ftp para end----------
+     
+
+2019/01/21 14:56:22.236165715 ftpRet=[function getFtpSerStatu input param 2019/01/21 14:56:22.148195461 
+         debugflag=[1]
+         opFlag=[1],opStr=[upload],opCmd=[mput]
+         trsType=[0],typeStr=[ascii]
+         trsMode=[0],modeStr=[passive],modeOpt=[-p]
+         fileNameTmp=[busilist_20181219_0\.xml1]--------
+         ---------ftp para begine--------
+         ----ftpIP     =[192.168.0.154]
+         ----ftpUser   =[Administrator]
+         ----ftpPwd    =[qwer1234]
+         ----ftpRdir   =[/gaolongshan]
+         ----ftpLdir   =[/home/fczx/src/IIImete/filedo/down/back]
+         ----fileName  =[busilist_20181219_0.xml1]
+         ----ftpCtrPNum=[21]
+         ---------ftp para end----------
+         
+busilist_20181218_0.xml
+busilist_20181219_0.xml
+busilist_20190114_0.xml]
+2019/01/21 14:56:22.236165715the local file  [busilist_20181219_0.xml1] is not exists
+
+2019/01/21 14:57:56.487376907 putFserStas.sh input param
+     shDebugFlag=[15]
+     opFlag=[1],opStr=[upload],opCmd=[mput]
+     trsType=[0],typeStr=[ascii]
+     trsMode=[0],modeStr=[passive],modeOpt=[-p]
+     logFile=[./log/putFserStas.log]
+     ---------ftp para begine--------
+     ----ftpIP     =[192.168.0.154]
+     ----ftpUser   =[Administrator]
+     ----ftpPwd    =[qwer1234]
+     ----ftpRdir   =[/gaolongshan]
+     ----ftpLdir   =[/home/fczx/src/IIImete/filedo/down/back]
+     ----fileName  =[busilist_20181219_0.xml]
+     ----ftpCtrPNum=[21]
+     ---------ftp para end----------
+     
+
+2019/01/21 14:57:56.757923597 ftpRet=[function getFtpSerStatu input param 2019/01/21 14:57:56.601005113 
+         debugflag=[1]
+         opFlag=[1],opStr=[upload],opCmd=[mput]
+         trsType=[0],typeStr=[ascii]
+         trsMode=[0],modeStr=[passive],modeOpt=[-p]
+         fileNameTmp=[busilist_20181219_0\.xml]--------
+         ---------ftp para begine--------
+         ----ftpIP     =[192.168.0.154]
+         ----ftpUser   =[Administrator]
+         ----ftpPwd    =[qwer1234]
+         ----ftpRdir   =[/gaolongshan]
+         ----ftpLdir   =[/home/fczx/src/IIImete/filedo/down/back]
+         ----fileName  =[busilist_20181219_0.xml]
+         ----ftpCtrPNum=[21]
+         ---------ftp para end----------
+         
+Connected to 192.168.0.154 (192.168.0.154).
+220 Microsoft FTP Service
+Remote system type is Windows_NT.
+331 Password required for Administrator.
+230 User logged in.
+200 Type set to A.
+250 CWD command successful.
+Local directory now /home/fczx/src/IIImete/filedo/down/back
+221 Goodbye.]
+2019/01/21 14:57:56.757923597 the ftp server status very good!
+

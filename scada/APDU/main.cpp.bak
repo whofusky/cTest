@@ -1,0 +1,149 @@
+#include<stdio.h>
+#include "DataType.h"
+#include "APDU101.h"
+#include "protocol104.h"
+
+typedef struct aaaa{
+    int addr1:8;
+    int body1:24;
+    int addr2:8;
+    int body2:24;
+}T_tmpVal;
+
+typedef struct
+{
+    u_char vsq_n:7;
+    u_char vsq_sq:1;
+}T_VSQ;
+
+int main()
+{
+    //APDU_DSCR
+    memset(&tmpApduDscr,0,sizeof(APDU_DSCR));
+    tmpApduDscr.ASDU_TID=100;
+    tmpApduDscr.ASDU_CMTBL[0]= 6;//APCI
+    tmpApduDscr.ASDU_CMTBL[1]= 1;//ASDU_TID
+    tmpApduDscr.ASDU_CMTBL[2]= 0;//ASDU_LNG
+    tmpApduDscr.ASDU_CMTBL[3]= 1;//ASDU_VSQ
+    tmpApduDscr.ASDU_CMTBL[4]= 1;//ASDU_COT
+    tmpApduDscr.ASDU_CMTBL[5]= 1;//ASDU_ADD
+    tmpApduDscr.ASDU_CMTBL[6]= 0;//BODY_TID
+    tmpApduDscr.ASDU_CMTBL[7]= 1;//BODY_ADD
+    tmpApduDscr.ASDU_CMTBL[8]= 1;//BODY_SET
+    tmpApduDscr.ASDU_CMTBL[9]= 7;//BODY_TSP
+    tmpApduDscr.ASDU_CMTBL[10]=0; //ASDU_TSP
+    tmpApduDscr.InfoEleLng=3;
+
+    //1、调用createAPDU
+    u_char* apdu_p=createAPDU(&tmpApduDscr,1,1);
+
+    //2、调用createRl_P
+    FUN_RL* vRl_P=createRl_P(6 , ONLY_ONE);
+
+   
+    //3、调用getGLoadPnt
+        //为getGLoadPnt准备参数T_snnCfg
+    T_snnCfg* tmp_stnSnnCfg_p=new T_snnCfg();
+    tmp_stnSnnCfg_p->ssnID=STN_INRGTN;  //会话号
+    tmp_stnSnnCfg_p->actFlag=ACTIVE_TYPE;//会话的主动性，保留
+    tmp_stnSnnCfg_p->infoType=0;//会话的信息类型，通用信息对象或文件信息对象
+    tmp_stnSnnCfg_p->cmnAddr=1;//公共地址
+    tmp_stnSnnCfg_p->stepNum=2;//包含的会话总步数
+
+    //////////////////////////////构造第一步的T_ssnStepCfg会话步配置///////////////////
+    //T_ssnStepCfg* tmp_ssnStepCfg=new T_ssnStepCfg();//会话步的一步配置
+    T_ssnStepCfg tmp_ssnStepCfg[2] = {0};
+    T_stnAcsFlag tmp_StnAcsFlag = {0,0,1,1,1,1,1,1,1,1,0};
+    tmp_ssnStepCfg[0].stnAcsFlag=*((u_short*)&tmp_StnAcsFlag);
+    tmp_ssnStepCfg[0].reqAPDUNum=1;//请求帧个数
+    /*u_char* req_setNum = new u_char();
+    *req_setNum = 1;*/
+    u_char req_setNum[1] = {0};
+    req_setNum[0]=1;
+
+    tmp_ssnStepCfg[0].reqBody_setNum=req_setNum;//点数量
+
+    //下面构造步里的 ELE_TYPE***		 reqEleVal
+    ELE_TYPE reqEleVal[1][11] = {0};
+    ELE_TYPE** tReqEleVal_pp;
+    ELE_TYPE* tReqEleVal_p;
+    tReqEleVal_p = &reqEleVal[0][0];
+    tReqEleVal_pp = &tReqEleVal_p;
+   
+    tmp_ssnStepCfg[0].reqEleVal = tReqEleVal_pp;
+
+
+	//构造apci
+    APCI_104 tmp_apci104;
+    memset(&tmp_apci104,0,sizeof(APCI_104));
+	tmp_apci104.startChar=0x68;
+	tmp_apci104.APDULng=34;
+	tmp_apci104.ctlField[0]=0;
+	tmp_apci104.ctlField[1]=0;
+	tmp_apci104.ctlField[2]=0;
+	tmp_apci104.ctlField[3]=0;
+    tmp_ssnStepCfg[0].reqEleVal[0][APDU_APCI_INDEX].sysEleID = APDU_APCI_INDEX;
+    tmp_ssnStepCfg[0].reqEleVal[0][APDU_APCI_INDEX].lng = sizeof(APCI_104);
+    tmp_ssnStepCfg[0].reqEleVal[0][APDU_APCI_INDEX].p_Mem = (u_char*)&tmp_apci104;
+   
+	//构造tid 
+	u_char tid = C_IC_NA;//召唤命令类型标识(tid)  
+    tmp_ssnStepCfg[0].reqEleVal[0][ASDU_TID_INDEX].sysEleID = ASDU_TID_INDEX;
+    tmp_ssnStepCfg[0].reqEleVal[0][ASDU_TID_INDEX].lng = sizeof(u_char);
+    tmp_ssnStepCfg[0].reqEleVal[0][ASDU_TID_INDEX].p_Mem = &tid;
+
+	//构造vsq
+    T_VSQ vsq;
+	memset(&vsq,0,sizeof(T_VSQ));
+    vsq.vsq_n = 1;
+    vsq.vsq_sq = 1;
+    tmp_ssnStepCfg[0].reqEleVal[0][ASDU_VSQ_INDEX].sysEleID = ASDU_VSQ_INDEX;
+    tmp_ssnStepCfg[0].reqEleVal[0][ASDU_VSQ_INDEX].lng = sizeof(T_VSQ);
+    tmp_ssnStepCfg[0].reqEleVal[0][ASDU_VSQ_INDEX].p_Mem = (u_char*)&vsq;
+
+    //构造cot
+    ASDU_COT1_VAL cot;
+	memset(&cot,0,sizeof(ASDU_COT1_VAL));
+	cot.CAUSE = C_COT_1;
+    tmp_ssnStepCfg[0].reqEleVal[0][ASDU_COT_INDEX].sysEleID = ASDU_COT_INDEX;
+    tmp_ssnStepCfg[0].reqEleVal[0][ASDU_COT_INDEX].lng = sizeof(ASDU_COT1_VAL);
+    tmp_ssnStepCfg[0].reqEleVal[0][ASDU_COT_INDEX].p_Mem = (u_char*)&cot;
+
+    //构造cmnAddr
+    u_char cmnAddr = 5;
+    tmp_ssnStepCfg[0].reqEleVal[0][ASDU_ADDR_INDEX].sysEleID = ASDU_ADDR_INDEX;
+    tmp_ssnStepCfg[0].reqEleVal[0][ASDU_ADDR_INDEX].lng = sizeof(u_char);
+    tmp_ssnStepCfg[0].reqEleVal[0][ASDU_ADDR_INDEX].p_Mem = &cmnAddr;
+
+    //构造信息体地址BODY_ADDR
+    u_char bodyAddr = 7;
+    tmp_ssnStepCfg[0].reqEleVal[0][BODY_ADDR_INDEX].sysEleID = BODY_ADDR_INDEX;
+    tmp_ssnStepCfg[0].reqEleVal[0][BODY_ADDR_INDEX].lng = sizeof(u_char);
+    tmp_ssnStepCfg[0].reqEleVal[0][BODY_ADDR_INDEX].p_Mem = &bodyAddr;
+
+    //构造信息元素集 BODY_SET
+    u_int tPntVal = 233;
+    tmp_ssnStepCfg[0].reqEleVal[0][BODY_SET_INDEX].sysEleID = BODY_SET_INDEX;
+    tmp_ssnStepCfg[0].reqEleVal[0][BODY_SET_INDEX].lng = sizeof(u_int);
+    tmp_ssnStepCfg[0].reqEleVal[0][BODY_SET_INDEX].p_Mem = (u_char*)&tPntVal;
+
+    //将第一步的会话步配置赋与T_snnCfg 参数
+    tmp_stnSnnCfg_p->stepCfg= tmp_ssnStepCfg;
+
+    //给getGLoadPnt的出参T_snnPara分配空间及赋于主被动标识
+    T_snnPara *t_snnPara=new T_snnPara();
+    u_char tmp_acsMthd[2] = {0};
+    u_int tmp_ASDUID[2] = {0};
+    T_snnUsrData tmp_snnUsrData[1] = {0};
+    t_snnPara->acsMthd = tmp_acsMthd;
+    t_snnPara->ASDUID = tmp_ASDUID;
+    t_snnPara->actFlag = ACTIVE_TYPE;
+    t_snnPara->usrData_p = tmp_snnUsrData;
+
+    getGLoadPnt( tmp_stnSnnCfg_p ,0, t_snnPara);
+    //end=====3、调用getGLoadPnt
+
+    //4、调用 startStep
+
+    return 0;
+}

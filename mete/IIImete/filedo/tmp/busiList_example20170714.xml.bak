@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<!-- 业务清单示例 -->
+<file>
+    <submitter>1</submitter>
+    <coordinate>100</coordinate>
+    <submitTime>2017-07-10:16-11-00</submitTime>
+    <jobNumber>1</jobNumber>
+    <jobDescList>
+        <jobItemDesc>
+            <jobID>0300</jobID>
+            <featureCode>0000</featureCode>
+            <statisticalRange>0</statisticalRange>
+            <validAralID>00</validAralID>
+            <dataComeIntoTime>2017-07-10:16-00-00</dataComeIntoTime>
+            <dataTimeFeature>0084-15-0001</dataTimeFeature>
+            <postProcessCode>00-00-00-0-1</postProcessCode>
+        </jobItemDesc>
+    </jobDescList>
+    <jobPlan>
+        <planDesc>
+            <planComeIntoTime>2017-07-10:16-11-00</planComeIntoTime>
+            <planItemNumber>1</planItemNumber>
+            <planProcessMode>1</planProcessMode>
+            <arranger>1</arranger>
+        </planDesc>
+        <planProcessList>
+            <jobID>0300</jobID>
+            <actionNumber>1</actionNumber>
+            <actionItem>
+                <actionStartTime>16-11-00</actionStartTime>
+                <actionAlarmTime>00-00-00</actionAlarmTime>
+                <actionAbortTime>00-00-00</actionAbortTime>
+                <actionFinalTime>00-00-00</actionFinalTime>
+            </actionItem>
+        </planProcessList>
+    </jobPlan>
+    <jobDataList>
+        <jobItemData>
+            <jobID>0300</jobID>
+            <dataID>0</dataID>
+            <jobData></jobData>
+        </jobItemData>
+    </jobDataList>
+</file> 

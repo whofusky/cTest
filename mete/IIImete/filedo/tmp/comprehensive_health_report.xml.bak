@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--20170720 comprehensive health report-->
+<FNM>
+    <name>aaaa</name> <!--场站名称 -->
+    <itemList> <!--信息列表 -->
+        <taskNum name="12"> <!--任务编号 -->
+            <itemData> <!--数据项 -->
+                <hostName>dddd</hostName> <!--宿主名称 -->
+                <beWatchedN>haha</beWatchedN> <!--被监视者名称 -->
+                <beWatchedS>ok</beWatchedS> <!--被监视者状态 -->
+                <capTime>2017-07-10:16-00-00</capTime> <!--捕获时间 -->
+                <theMonitor>tt</theMonitor> <!--监视者 -->
+            </itemData>
+            <itemData> <!--数据项 -->
+                <hostName>dddd</hostName> <!--宿主名称 -->
+                <beWatchedN>haha</beWatchedN> <!--被监视者名称 -->
+                <beWatchedS>ok</beWatchedS> <!--被监视者状态 -->
+                <capTime>2017-07-10:16-00-00</capTime> <!--捕获时间 -->
+                <theMonitor>tt</theMonitor> <!--监视者 -->
+            </itemData>
+        </taskNum>
+        <taskNum name="11"> <!--任务编号 -->
+            <itemData> <!--数据项 -->
+                <hostName>dddd</hostName> <!--宿主名称 -->
+                <beWatchedN>haha</beWatchedN> <!--被监视者名称 -->
+                <beWatchedS>ok</beWatchedS> <!--被监视者状态 -->
+                <capTime>2017-07-10:16-00-00</capTime> <!--捕获时间 -->
+                <theMonitor>tt</theMonitor> <!--监视者 -->
+            </itemData>
+            <itemData> <!--数据项 -->
+                <hostName>dddd</hostName> <!--宿主名称 -->
+                <beWatchedN>haha</beWatchedN> <!--被监视者名称 -->
+                <beWatchedS>ok</beWatchedS> <!--被监视者状态 -->
+                <capTime>2017-07-10:16-00-00</capTime> <!--捕获时间 -->
+                <theMonitor>tt</theMonitor> <!--监视者 -->
+            </itemData>
+        </taskNum>
+    </itemList>
+</FNM>

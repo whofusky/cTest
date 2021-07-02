@@ -1,0 +1,2862 @@
+2019/01/14 13:33:40.298704666 input error,please input like this:
+                 getFserStas.sh <ftpIP> <ftpUser> <ftpPwd> <ftpRdir> <ftpLdir> <fileName>
+2019/01/14 13:45:03.004216032 NOWPSSHNUM=[1]
+     shDebugFlag=[15]
+     logFile=[./log/getFserStas.log]
+     fileNameTmp=[busilist_20190114_0\.xml]--------
+     
+     ---------ftp para begine--------
+     ----ftpIP     =[192.168.0.154]
+     ----ftpUser   =[Administrator]
+     ----ftpPwd    =[qwer1234]
+     ----ftpRdir   =[/gaolongshan]
+     ----ftpLdir   =[./]
+     ----fileName  =[busilist_20190114_0.xml]
+     ----ftpCtrPNum=[21]
+     ---------ftp para end----------
+     
+     ftpRet=[Local directory now /home/fczx/src/IIImete/sh
+12-18-18 04:10PM 567328 busilist_20181218_0.xml
+12-19-18 09:54AM 567327 busilist_20181219_0.xml
+12-20-18 08:20AM 567327 busilist_20181220_0.xml
+12-21-18 08:24AM 567327 busilist_20181221_0.xml
+12-22-18 08:20AM 567327 busilist_20181222_0.xml
+12-23-18 08:20AM 567327 busilist_20181223_0.xml
+12-24-18 08:20AM 567327 busilist_20181224_0.xml
+12-25-18 08:20AM 567327 busilist_20181225_0.xml
+12-26-18 08:20AM 567327 busilist_20181226_0.xml
+12-27-18 08:20AM 567327 busilist_20181227_0.xml
+12-28-18 08:20AM 567327 busilist_20181228_0.xml
+12-29-18 08:20AM 567327 busilist_20181229_0.xml
+12-30-18 08:20AM 567327 busilist_20181230_0.xml
+12-31-18 08:20AM 567327 busilist_20181231_0.xml
+01-01-19 08:20AM 567327 busilist_20190101_0.xml
+01-02-19 08:20AM 567327 busilist_20190102_0.xml
+01-03-19 08:20AM 567327 busilist_20190103_0.xml
+01-04-19 08:20AM 567327 busilist_20190104_0.xml
+01-05-19 08:20AM 567327 busilist_20190105_0.xml
+01-06-19 08:20AM 567327 busilist_20190106_0.xml
+01-07-19 08:20AM 567327 busilist_20190107_0.xml
+01-08-19 08:20AM 567327 busilist_20190108_0.xml
+01-09-19 08:20AM 567327 busilist_20190109_0.xml
+01-10-19 08:20AM 567327 busilist_20190110_0.xml
+01-11-19 08:20AM 567327 busilist_20190111_0.xml
+01-12-19 08:20AM 567327 busilist_20190112_0.xml
+01-13-19 08:20AM 567327 busilist_20190113_0.xml
+01-14-19 08:20AM 567327 busilist_20190114_0.xml
+12-18-18 04:05PM <DIR> log
+11-15-18 09:16AM <DIR> tdir1
+01-14-19 08:20AM <DIR> up] 
+2019/01/14 13:45:03.118945630 the ftp server status very good!
+2019/01/14 13:48:08.402478922 NOWPSSHNUM=[2]
+     shDebugFlag=[15]
+     logFile=[./log/getFserStas.log]
+     fileNameTmp=[busilist_20190114_0\.xml]--------
+     
+     ---------ftp para begine--------
+     ----ftpIP     =[192.168.0.154]
+     ----ftpUser   =[Administrator]
+     ----ftpPwd    =[qwer1235]
+     ----ftpRdir   =[/gaolongshan]
+     ----ftpLdir   =[./]
+     ----fileName  =[busilist_20190114_0.xml]
+     ----ftpCtrPNum=[21]
+     ---------ftp para end----------
+     
+     ftpRet=[User cannot log in.
+Login failed.
+Please login with USER and PASS.
+Local directory now /home/fczx/src/IIImete/sh
+Please login with USER and PASS.
+Passive mode refused.] 
+ftpRet=[User cannot log in.
+Login failed.
+Please login with USER and PASS.
+Local directory now /home/fczx/src/IIImete/sh
+Please login with USER and PASS.
+Passive mode refused.]
+2019/01/14 13:48:08.538378786 the ftp username [Administrator] or passwd [qwer1235] is error
+2019/01/14 13:52:14.419234838 NOWPSSHNUM=[1]
+     shDebugFlag=[15]
+     logFile=[./log/getFserStas.log]
+     fileNameTmp=[busilist_20190114_0\.xml]--------
+     
+     ---------ftp para begine--------
+     ----ftpIP     =[192.168.0.154]
+     ----ftpUser   =[Administrator]
+     ----ftpPwd    =[qwer1234]
+     ----ftpRdir   =[/gaolongshan]
+     ----ftpLdir   =[./]
+     ----fileName  =[busilist_20190114_0.xml]
+     ----ftpCtrPNum=[21]
+     ---------ftp para end----------
+     
+     ftpRet=[No proxy connection.
+Connected to 192.168.0.154.
+Mode: stream; Type: ascii; Form: non-print; Structure: file
+Verbose: off; Bell: off; Prompting: on; Globbing: on
+Store unique: off; Receive unique: off
+Case: off; CR stripping: on
+Ntrans: off
+Nmap: off
+Hash mark printing: off; Use of PORT cmds: on
+Tick counter printing: off
+Local directory now /home/fczx/src/IIImete/sh
+12-18-18 04:10PM 567328 busilist_20181218_0.xml
+12-19-18 09:54AM 567327 busilist_20181219_0.xml
+12-20-18 08:20AM 567327 busilist_20181220_0.xml
+12-21-18 08:24AM 567327 busilist_20181221_0.xml
+12-22-18 08:20AM 567327 busilist_20181222_0.xml
+12-23-18 08:20AM 567327 busilist_20181223_0.xml
+12-24-18 08:20AM 567327 busilist_20181224_0.xml
+12-25-18 08:20AM 567327 busilist_20181225_0.xml
+12-26-18 08:20AM 567327 busilist_20181226_0.xml
+12-27-18 08:20AM 567327 busilist_20181227_0.xml
+12-28-18 08:20AM 567327 busilist_20181228_0.xml
+12-29-18 08:20AM 567327 busilist_20181229_0.xml
+12-30-18 08:20AM 567327 busilist_20181230_0.xml
+12-31-18 08:20AM 567327 busilist_20181231_0.xml
+01-01-19 08:20AM 567327 busilist_20190101_0.xml
+01-02-19 08:20AM 567327 busilist_20190102_0.xml
+01-03-19 08:20AM 567327 busilist_20190103_0.xml
+01-04-19 08:20AM 567327 busilist_20190104_0.xml
+01-05-19 08:20AM 567327 busilist_20190105_0.xml
+01-06-19 08:20AM 567327 busilist_20190106_0.xml
+01-07-19 08:20AM 567327 busilist_20190107_0.xml
+01-08-19 08:20AM 567327 busilist_20190108_0.xml
+01-09-19 08:20AM 567327 busilist_20190109_0.xml
+01-10-19 08:20AM 567327 busilist_20190110_0.xml
+01-11-19 08:20AM 567327 busilist_20190111_0.xml
+01-12-19 08:20AM 567327 busilist_20190112_0.xml
+01-13-19 08:20AM 567327 busilist_20190113_0.xml
+01-14-19 08:20AM 567327 busilist_20190114_0.xml
+12-18-18 04:05PM <DIR> log
+11-15-18 09:16AM <DIR> tdir1
+01-14-19 08:20AM <DIR> up] 
+2019/01/14 13:52:14.544097455 the ftp server status very good!
+2019/01/14 13:55:10.316801098 NOWPSSHNUM=[1]
+     shDebugFlag=[15]
+     logFile=[./log/getFserStas.log]
+     fileNameTmp=[busilist_20190114_0\.xml]--------
+     
+     ---------ftp para begine--------
+     ----ftpIP     =[192.168.0.154]
+     ----ftpUser   =[Administrator]
+     ----ftpPwd    =[qwer1234]
+     ----ftpRdir   =[/gaolongshan]
+     ----ftpLdir   =[./]
+     ----fileName  =[busilist_20190114_0.xml]
+     ----ftpCtrPNum=[21]
+     ---------ftp para end----------
+     
+     ftpRet=[Connected to 192.168.0.154 (192.168.0.154).
+220 Microsoft FTP Service
+Remote system type is Windows_NT.
+331 Password required for Administrator.
+230 User logged in.
+No proxy connection.
+Connected to 192.168.0.154.
+Mode: stream; Type: ascii; Form: non-print; Structure: file
+Verbose: on; Bell: off; Prompting: on; Globbing: on
+Store unique: off; Receive unique: off
+Case: off; CR stripping: on
+Ntrans: off
+Nmap: off
+Hash mark printing: off; Use of PORT cmds: on
+Tick counter printing: off
+250 CWD command successful.
+Local directory now /home/fczx/src/IIImete/sh
+227 Entering Passive Mode (192,168,0,154,156,234).
+125 Data connection already open; Transfer starting.
+12-18-18 04:10PM 567328 busilist_20181218_0.xml
+12-19-18 09:54AM 567327 busilist_20181219_0.xml
+12-20-18 08:20AM 567327 busilist_20181220_0.xml
+12-21-18 08:24AM 567327 busilist_20181221_0.xml
+12-22-18 08:20AM 567327 busilist_20181222_0.xml
+12-23-18 08:20AM 567327 busilist_20181223_0.xml
+12-24-18 08:20AM 567327 busilist_20181224_0.xml
+12-25-18 08:20AM 567327 busilist_20181225_0.xml
+12-26-18 08:20AM 567327 busilist_20181226_0.xml
+12-27-18 08:20AM 567327 busilist_20181227_0.xml
+12-28-18 08:20AM 567327 busilist_20181228_0.xml
+12-29-18 08:20AM 567327 busilist_20181229_0.xml
+12-30-18 08:20AM 567327 busilist_20181230_0.xml
+12-31-18 08:20AM 567327 busilist_20181231_0.xml
+01-01-19 08:20AM 567327 busilist_20190101_0.xml
+01-02-19 08:20AM 567327 busilist_20190102_0.xml
+01-03-19 08:20AM 567327 busilist_20190103_0.xml
+01-04-19 08:20AM 567327 busilist_20190104_0.xml
+01-05-19 08:20AM 567327 busilist_20190105_0.xml
+01-06-19 08:20AM 567327 busilist_20190106_0.xml
+01-07-19 08:20AM 567327 busilist_20190107_0.xml
+01-08-19 08:20AM 567327 busilist_20190108_0.xml
+01-09-19 08:20AM 567327 busilist_20190109_0.xml
+01-10-19 08:20AM 567327 busilist_20190110_0.xml
+01-11-19 08:20AM 567327 busilist_20190111_0.xml
+01-12-19 08:20AM 567327 busilist_20190112_0.xml
+01-13-19 08:20AM 567327 busilist_20190113_0.xml
+01-14-19 08:20AM 567327 busilist_20190114_0.xml
+12-18-18 04:05PM <DIR> log
+11-15-18 09:16AM <DIR> tdir1
+01-14-19 08:20AM <DIR> up
+226 Transfer complete.
+221 Goodbye.] 
+2019/01/14 13:55:10.466325357 the ftp server status very good!
+2019/01/14 13:56:07.477248400 NOWPSSHNUM=[2]
+     shDebugFlag=[15]
+     logFile=[./log/getFserStas.log]
+     fileNameTmp=[busilist_20190114_0\.xml]--------
+     
+     ---------ftp para begine--------
+     ----ftpIP     =[192.168.0.154]
+     ----ftpUser   =[Administrator]
+     ----ftpPwd    =[qwer1235]
+     ----ftpRdir   =[/gaolongshan]
+     ----ftpLdir   =[./]
+     ----fileName  =[busilist_20190114_0.xml]
+     ----ftpCtrPNum=[21]
+     ---------ftp para end----------
+     
+     ftpRet=[Connected to 192.168.0.154 (192.168.0.154).
+220 Microsoft FTP Service
+Remote system type is Windows_NT.
+331 Password required for Administrator.
+530 User cannot log in.
+Login failed.
+No proxy connection.
+Connected to 192.168.0.154.
+Mode: stream; Type: ascii; Form: non-print; Structure: file
+Verbose: on; Bell: off; Prompting: on; Globbing: on
+Store unique: off; Receive unique: off
+Case: off; CR stripping: on
+Ntrans: off
+Nmap: off
+Hash mark printing: off; Use of PORT cmds: on
+Tick counter printing: off
+530 Please login with USER and PASS.
+Local directory now /home/fczx/src/IIImete/sh
+530 Please login with USER and PASS.
+Passive mode refused.
+221 Goodbye.] 
+ftpRet=[Connected to 192.168.0.154 (192.168.0.154).
+220 Microsoft FTP Service
+Remote system type is Windows_NT.
+331 Password required for Administrator.
+530 User cannot log in.
+Login failed.
+No proxy connection.
+Connected to 192.168.0.154.
+Mode: stream; Type: ascii; Form: non-print; Structure: file
+Verbose: on; Bell: off; Prompting: on; Globbing: on
+Store unique: off; Receive unique: off
+Case: off; CR stripping: on
+Ntrans: off
+Nmap: off
+Hash mark printing: off; Use of PORT cmds: on
+Tick counter printing: off
+530 Please login with USER and PASS.
+Local directory now /home/fczx/src/IIImete/sh
+530 Please login with USER and PASS.
+Passive mode refused.
+221 Goodbye.]
+2019/01/14 13:56:07.613490469 the ftp username [Administrator] or passwd [qwer1235] is error
+2019/01/14 13:56:53.339744384 NOWPSSHNUM=[1]
+     shDebugFlag=[15]
+     logFile=[./log/getFserStas.log]
+     fileNameTmp=[busilist_20190114_0\.xml]--------
+     
+     ---------ftp para begine--------
+     ----ftpIP     =[192.168.0.154]
+     ----ftpUser   =[Administrator]
+     ----ftpPwd    =[qwer1235]
+     ----ftpRdir   =[/gaolongshan]
+     ----ftpLdir   =[./]
+     ----fileName  =[busilist_20190114_0.xml]
+     ----ftpCtrPNum=[21]
+     ---------ftp para end----------
+     
+     ftpRet=[Connected to 192.168.0.154 (192.168.0.154).
+220 Microsoft FTP Service
+Remote system type is Windows_NT.
+331 Password required for Administrator.
+530 User cannot log in.
+Login failed.
+530 Please login with USER and PASS.
+Local directory now /home/fczx/src/IIImete/sh
+530 Please login with USER and PASS.
+Passive mode refused.
+221 Goodbye.] 
+ftpRet=[Connected to 192.168.0.154 (192.168.0.154).
+220 Microsoft FTP Service
+Remote system type is Windows_NT.
+331 Password required for Administrator.
+530 User cannot log in.
+Login failed.
+530 Please login with USER and PASS.
+Local directory now /home/fczx/src/IIImete/sh
+530 Please login with USER and PASS.
+Passive mode refused.
+221 Goodbye.]
+2019/01/14 13:56:53.461554064 the ftp username [Administrator] or passwd [qwer1235] is error
+2019/01/14 14:03:10.404388717 NOWPSSHNUM=[1]
+     shDebugFlag=[15]
+     logFile=[./log/getFserStas.log]
+     fileNameTmp=[busilist_20190114_0\.xml]--------
+     
+     ---------ftp para begine--------
+     ----ftpIP     =[192.168.0.155]
+     ----ftpUser   =[Administrator]
+     ----ftpPwd    =[qwer1234]
+     ----ftpRdir   =[/gaolongshan]
+     ----ftpLdir   =[./]
+     ----fileName  =[busilist_20190114_0.xml]
+     ----ftpCtrPNum=[21]
+     ---------ftp para end----------
+     
+     ftpRet=[ftp: connect: 没有到主机的路由
+Not connected.
+Not connected.
+Local directory now /home/fczx/src/IIImete/sh
+Not connected.] 
+ftpRet=[ftp: connect: 没有到主机的路由
+Not connected.
+Not connected.
+Local directory now /home/fczx/src/IIImete/sh
+Not connected.]
+2019/01/14 14:03:13.518801239 connet ftp server [192.168.0.155] is error
+2019/01/14 14:09:49.090463612 NOWPSSHNUM=[1]
+     shDebugFlag=[15]
+     logFile=[./log/getFserStas.log]
+     fileNameTmp=[busilist_20190114_0\.xml]--------
+     
+     ---------ftp para begine--------
+     ----ftpIP     =[192.168.0.155]
+     ----ftpUser   =[Administrator]
+     ----ftpPwd    =[qwer1234]
+     ----ftpRdir   =[/gaolongshan]
+     ----ftpLdir   =[./]
+     ----fileName  =[busilist_20190114_0.xml]
+     ----ftpCtrPNum=[21]
+     ---------ftp para end----------
+     
+     ftpRet=[ftp: connect: 没有到主机的路由
+Not connected.
+Not connected.
+Local directory now /home/fczx/src/IIImete/sh
+Not connected.
+0] 
+ftpRet=[ftp: connect: 没有到主机的路由
+Not connected.
+Not connected.
+Local directory now /home/fczx/src/IIImete/sh
+Not connected.
+0]
+2019/01/14 14:09:52.204797143 connet ftp server [192.168.0.155] is error
+2019/01/14 14:28:18.478268942 connet ftp server [192.168.0.155] is error
+2019/01/14 14:31:33.993437872 nc -z 192.168.0.155 21 return [1]
+2019/01/14 14:31:33.993437872 connet ftp server [192.168.0.155] is error
+2019/01/14 14:32:17.412773492 NOWPSSHNUM=[1]
+     shDebugFlag=[15]
+     logFile=[./log/getFserStas.log]
+     fileNameTmp=[busilist_20190114_0\.xml]--------
+     
+     ---------ftp para begine--------
+     ----ftpIP     =[192.168.0.154]
+     ----ftpUser   =[Administrator]
+     ----ftpPwd    =[qwer1234]
+     ----ftpRdir   =[/gaolongshan]
+     ----ftpLdir   =[./]
+     ----fileName  =[busilist_20190114_0.xml]
+     ----ftpCtrPNum=[21]
+     ---------ftp para end----------
+     
+     ftpRet=[Connected to 192.168.0.154 (192.168.0.154).
+220 Microsoft FTP Service
+Remote system type is Windows_NT.
+331 Password required for Administrator.
+230 User logged in.
+250 CWD command successful.
+Local directory now /home/fczx/src/IIImete/sh
+227 Entering Passive Mode (192,168,0,154,157,206).
+125 Data connection already open; Transfer starting.
+12-18-18 04:10PM 567328 busilist_20181218_0.xml
+12-19-18 09:54AM 567327 busilist_20181219_0.xml
+12-20-18 08:20AM 567327 busilist_20181220_0.xml
+12-21-18 08:24AM 567327 busilist_20181221_0.xml
+12-22-18 08:20AM 567327 busilist_20181222_0.xml
+12-23-18 08:20AM 567327 busilist_20181223_0.xml
+12-24-18 08:20AM 567327 busilist_20181224_0.xml
+12-25-18 08:20AM 567327 busilist_20181225_0.xml
+12-26-18 08:20AM 567327 busilist_20181226_0.xml
+12-27-18 08:20AM 567327 busilist_20181227_0.xml
+12-28-18 08:20AM 567327 busilist_20181228_0.xml
+12-29-18 08:20AM 567327 busilist_20181229_0.xml
+12-30-18 08:20AM 567327 busilist_20181230_0.xml
+12-31-18 08:20AM 567327 busilist_20181231_0.xml
+01-01-19 08:20AM 567327 busilist_20190101_0.xml
+01-02-19 08:20AM 567327 busilist_20190102_0.xml
+01-03-19 08:20AM 567327 busilist_20190103_0.xml
+01-04-19 08:20AM 567327 busilist_20190104_0.xml
+01-05-19 08:20AM 567327 busilist_20190105_0.xml
+01-06-19 08:20AM 567327 busilist_20190106_0.xml
+01-07-19 08:20AM 567327 busilist_20190107_0.xml
+01-08-19 08:20AM 567327 busilist_20190108_0.xml
+01-09-19 08:20AM 567327 busilist_20190109_0.xml
+01-10-19 08:20AM 567327 busilist_20190110_0.xml
+01-11-19 08:20AM 567327 busilist_20190111_0.xml
+01-12-19 08:20AM 567327 busilist_20190112_0.xml
+01-13-19 08:20AM 567327 busilist_20190113_0.xml
+01-14-19 08:20AM 567327 busilist_20190114_0.xml
+12-18-18 04:05PM <DIR> log
+11-15-18 09:16AM <DIR> tdir1
+01-14-19 08:20AM <DIR> up
+226 Transfer complete.
+221 Goodbye.
+0] 
+2019/01/14 14:32:17.563857144 the ftp server status very good!
+2019/01/14 14:35:29.560240702 NOWPSSHNUM=[1]
+     shDebugFlag=[15]
+     logFile=[./log/getFserStas.log]
+     fileNameTmp=[busilist_20190114_0\.xml]--------
+     
+     ---------ftp para begine--------
+     ----ftpIP     =[192.168.0.154]
+     ----ftpUser   =[Administrator1]
+     ----ftpPwd    =[qwer1234]
+     ----ftpRdir   =[/gaolongshan]
+     ----ftpLdir   =[./]
+     ----fileName  =[busilist_20190114_0.xml]
+     ----ftpCtrPNum=[21]
+     ---------ftp para end----------
+     
+     ftpRet=[Connected to 192.168.0.154 (192.168.0.154).
+220 Microsoft FTP Service
+Remote system type is Windows_NT.
+331 Password required for Administrator1.
+530 User cannot log in.
+Login failed.
+530 Please login with USER and PASS.
+Local directory now /home/fczx/src/IIImete/sh
+530 Please login with USER and PASS.
+Passive mode refused.
+221 Goodbye.
+0] 
+ftpRet=[Connected to 192.168.0.154 (192.168.0.154).
+220 Microsoft FTP Service
+Remote system type is Windows_NT.
+331 Password required for Administrator1.
+530 User cannot log in.
+Login failed.
+530 Please login with USER and PASS.
+Local directory now /home/fczx/src/IIImete/sh
+530 Please login with USER and PASS.
+Passive mode refused.
+221 Goodbye.
+0]
+2019/01/14 14:35:29.717658697 the ftp username [Administrator1] or passwd [qwer1234] is error
+2019/01/14 14:36:42.707111726 NOWPSSHNUM=[1]
+     shDebugFlag=[15]
+     logFile=[./log/getFserStas.log]
+     fileNameTmp=[busilist_20190114_0\.xml]--------
+     
+     ---------ftp para begine--------
+     ----ftpIP     =[192.168.0.154]
+     ----ftpUser   =[Administrator1]
+     ----ftpPwd    =[qwer1234]
+     ----ftpRdir   =[/gaolongshan]
+     ----ftpLdir   =[./]
+     ----fileName  =[busilist_20190114_0.xml]
+     ----ftpCtrPNum=[21]
+     ---------ftp para end----------
+     
+     ftpRet=[Connected to 192.168.0.154 (192.168.0.154).
+220 Microsoft FTP Service
+Remote system type is Windows_NT.
+331 Password required for Administrator1.
+530 User cannot log in.
+Login failed.
+530 Please login with USER and PASS.
+Local directory now /home/fczx/src/IIImete/sh
+530 Please login with USER and PASS.
+Passive mode refused.
+221 Goodbye.] 
+ftpRet=[Connected to 192.168.0.154 (192.168.0.154).
+220 Microsoft FTP Service
+Remote system type is Windows_NT.
+331 Password required for Administrator1.
+530 User cannot log in.
+Login failed.
+530 Please login with USER and PASS.
+Local directory now /home/fczx/src/IIImete/sh
+530 Please login with USER and PASS.
+Passive mode refused.
+221 Goodbye.]
+2019/01/14 14:36:42.827223241 the ftp username [Administrator1] or passwd [qwer1234] is error
+2019/01/14 14:37:30.154591974 NOWPSSHNUM=[1]
+     shDebugFlag=[15]
+     logFile=[./log/getFserStas.log]
+     fileNameTmp=[busilist_20190114_0\.xml]--------
+     
+     ---------ftp para begine--------
+     ----ftpIP     =[192.168.0.154]
+     ----ftpUser   =[Administrator]
+     ----ftpPwd    =[qwer12344]
+     ----ftpRdir   =[/gaolongshan]
+     ----ftpLdir   =[./]
+     ----fileName  =[busilist_20190114_0.xml]
+     ----ftpCtrPNum=[21]
+     ---------ftp para end----------
+     
+     ftpRet=[Connected to 192.168.0.154 (192.168.0.154).
+220 Microsoft FTP Service
+Remote system type is Windows_NT.
+331 Password required for Administrator.
+530 User cannot log in.
+Login failed.
+530 Please login with USER and PASS.
+Local directory now /home/fczx/src/IIImete/sh
+530 Please login with USER and PASS.
+Passive mode refused.
+221 Goodbye.] 
+ftpRet=[Connected to 192.168.0.154 (192.168.0.154).
+220 Microsoft FTP Service
+Remote system type is Windows_NT.
+331 Password required for Administrator.
+530 User cannot log in.
+Login failed.
+530 Please login with USER and PASS.
+Local directory now /home/fczx/src/IIImete/sh
+530 Please login with USER and PASS.
+Passive mode refused.
+221 Goodbye.]
+2019/01/14 14:37:30.286996013 the ftp username [Administrator] or passwd [qwer12344] is error
+2019/01/14 14:44:42.579566709 NOWPSSHNUM=[1]
+     shDebugFlag=[15]
+     logFile=[./log/getFserStas.log]
+     fileNameTmp=[busilist_20190114_0\.xml]--------
+     
+     ---------ftp para begine--------
+     ----ftpIP     =[192.168.0.154]
+     ----ftpUser   =[Administrator]
+     ----ftpPwd    =[qwer12344]
+     ----ftpRdir   =[/gaolongshan]
+     ----ftpLdir   =[./]
+     ----fileName  =[busilist_20190114_0.xml]
+     ----ftpCtrPNum=[21]
+     ---------ftp para end----------
+     
+     ftpRet=[Connected to 192.168.0.154 (192.168.0.154).
+220 Microsoft FTP Service
+Remote system type is Windows_NT.
+331 Password required for Administrator.
+530 User cannot log in.
+Login failed.
+530 Please login with USER and PASS.
+Local directory now /home/fczx/src/IIImete/sh
+530 Please login with USER and PASS.
+Passive mode refused.
+221 Goodbye.] 
+ftpRet=[Connected to 192.168.0.154 (192.168.0.154).
+220 Microsoft FTP Service
+Remote system type is Windows_NT.
+331 Password required for Administrator.
+530 User cannot log in.
+Login failed.
+530 Please login with USER and PASS.
+Local directory now /home/fczx/src/IIImete/sh
+530 Please login with USER and PASS.
+Passive mode refused.
+221 Goodbye.]
+2019/01/14 14:44:42.706319579 the ftp username [Administrator] or passwd [qwer12344] is error
+2019/01/14 14:49:08.385633757 NOWPSSHNUM=[1]
+     shDebugFlag=[15]
+     logFile=[./log/getFserStas.log]
+     fileNameTmp=[busilist_20190114_0\.xml]--------
+     
+     ---------ftp para begine--------
+     ----ftpIP     =[192.168.0.154]
+     ----ftpUser   =[Administrator]
+     ----ftpPwd    =[qwer12344]
+     ----ftpRdir   =[/gaolongshan]
+     ----ftpLdir   =[./]
+     ----fileName  =[busilist_20190114_0.xml]
+     ----ftpCtrPNum=[21]
+     ---------ftp para end----------
+     
+     ftpRet=[Connected to 192.168.0.154 (192.168.0.154).
+220 Microsoft FTP Service
+Remote system type is Windows_NT.
+331 Password required for Administrator.
+530 User cannot log in.
+Login failed.
+530 Please login with USER and PASS.
+Local directory now /home/fczx/src/IIImete/sh
+530 Please login with USER and PASS.
+Passive mode refused.
+221 Goodbye.] 
+ftpRet=[Connected to 192.168.0.154 (192.168.0.154).
+220 Microsoft FTP Service
+Remote system type is Windows_NT.
+331 Password required for Administrator.
+530 User cannot log in.
+Login failed.
+530 Please login with USER and PASS.
+Local directory now /home/fczx/src/IIImete/sh
+530 Please login with USER and PASS.
+Passive mode refused.
+221 Goodbye.]
+2019/01/14 14:49:08.506799580 the ftp username [Administrator] or passwd [qwer12344] is error
+2019/01/14 14:50:30.028489283 NOWPSSHNUM=[1]
+     shDebugFlag=[15]
+     logFile=[./log/getFserStas.log]
+     fileNameTmp=[busilist_20190114_0\.xml]--------
+     
+     ---------ftp para begine--------
+     ----ftpIP     =[192.168.0.154]
+     ----ftpUser   =[Administrator]
+     ----ftpPwd    =[qwer12344]
+     ----ftpRdir   =[/gaolongshan]
+     ----ftpLdir   =[./]
+     ----fileName  =[busilist_20190114_0.xml]
+     ----ftpCtrPNum=[21]
+     ---------ftp para end----------
+     
+     ftpRet=[Connected to 192.168.0.154 (192.168.0.154).
+220 Microsoft FTP Service
+Remote system type is Windows_NT.
+331 Password required for Administrator.
+530 User cannot log in.
+Login failed.
+530 Please login with USER and PASS.
+Local directory now /home/fczx/src/IIImete/sh
+530 Please login with USER and PASS.
+Passive mode refused.
+221 Goodbye.] 
+ftpRet=[Connected to 192.168.0.154 (192.168.0.154).
+220 Microsoft FTP Service
+Remote system type is Windows_NT.
+331 Password required for Administrator.
+530 User cannot log in.
+Login failed.
+530 Please login with USER and PASS.
+Local directory now /home/fczx/src/IIImete/sh
+530 Please login with USER and PASS.
+Passive mode refused.
+221 Goodbye.]
+2019/01/14 14:50:30.158176519 the ftp username [Administrator] or passwd [qwer12344] is error
+2019/01/14 14:52:38.785338418 NOWPSSHNUM=[1]
+     shDebugFlag=[15]
+     logFile=[./log/getFserStas.log]
+     fileNameTmp=[busilist_20190114_0\.xml]--------
+     
+     ---------ftp para begine--------
+     ----ftpIP     =[192.168.0.154]
+     ----ftpUser   =[Administrator]
+     ----ftpPwd    =[qwer12344]
+     ----ftpRdir   =[/gaolongshan]
+     ----ftpLdir   =[./]
+     ----fileName  =[busilist_20190114_0.xml]
+     ----ftpCtrPNum=[21]
+     ---------ftp para end----------
+     
+     ftpRet=[Connected to 192.168.0.154 (192.168.0.154).
+220 Microsoft FTP Service
+Remote system type is Windows_NT.
+331 Password required for Administrator.
+530 User cannot log in.
+Login failed.
+530 Please login with USER and PASS.
+Local directory now /home/fczx/src/IIImete/sh
+530 Please login with USER and PASS.
+Passive mode refused.
+221 Goodbye.] 
+ftpRet=[Connected to 192.168.0.154 (192.168.0.154).
+220 Microsoft FTP Service
+Remote system type is Windows_NT.
+331 Password required for Administrator.
+530 User cannot log in.
+Login failed.
+530 Please login with USER and PASS.
+Local directory now /home/fczx/src/IIImete/sh
+530 Please login with USER and PASS.
+Passive mode refused.
+221 Goodbye.]
+2019/01/14 14:52:38.911502353 the ftp username [Administrator] or passwd [qwer12344] is error
+2019/01/14 14:54:11.875419781 NOWPSSHNUM=[1]
+     shDebugFlag=[15]
+     logFile=[./log/getFserStas.log]
+     fileNameTmp=[busilist_20190114_0\.xml]--------
+     
+     ---------ftp para begine--------
+     ----ftpIP     =[192.168.0.154]
+     ----ftpUser   =[Administrator]
+     ----ftpPwd    =[qwer12344]
+     ----ftpRdir   =[/gaolongshan]
+     ----ftpLdir   =[./]
+     ----fileName  =[busilist_20190114_0.xml]
+     ----ftpCtrPNum=[21]
+     ---------ftp para end----------
+     
+     ftpRet=[Connected to 192.168.0.154 (192.168.0.154).
+220 Microsoft FTP Service
+Remote system type is Windows_NT.
+331 Password required for Administrator.
+530 User cannot log in.
+Login failed.
+530 Please login with USER and PASS.
+Local directory now /home/fczx/src/IIImete/sh
+530 Please login with USER and PASS.
+Passive mode refused.
+221 Goodbye.] 
+ftpRet=[Connected to 192.168.0.154 (192.168.0.154).
+220 Microsoft FTP Service
+Remote system type is Windows_NT.
+331 Password required for Administrator.
+530 User cannot log in.
+Login failed.
+530 Please login with USER and PASS.
+Local directory now /home/fczx/src/IIImete/sh
+530 Please login with USER and PASS.
+Passive mode refused.
+221 Goodbye.]
+2019/01/14 14:54:11.998806239 the ftp username [Administrator] or passwd [qwer12344] is error
+2019/01/14 14:57:03.238354515 NOWPSSHNUM=[1]
+     shDebugFlag=[15]
+     logFile=[./log/getFserStas.log]
+     fileNameTmp=[busilist_20190114_0\.xml]--------
+     
+     ---------ftp para begine--------
+     ----ftpIP     =[192.168.0.154]
+     ----ftpUser   =[Administrator]
+     ----ftpPwd    =[qwer1234]
+     ----ftpRdir   =[/gaolongshan]
+     ----ftpLdir   =[./]
+     ----fileName  =[busilist_20190114_0.xml]
+     ----ftpCtrPNum=[21]
+     ---------ftp para end----------
+     
+     ftpRet=[Connected to 192.168.0.154 (192.168.0.154).
+220 Microsoft FTP Service
+Remote system type is Windows_NT.
+331 Password required for Administrator.
+230 User logged in.
+250 CWD command successful.
+Local directory now /home/fczx/src/IIImete/sh
+227 Entering Passive Mode (192,168,0,154,158,106).
+125 Data connection already open; Transfer starting.
+12-18-18 04:10PM 567328 busilist_20181218_0.xml
+12-19-18 09:54AM 567327 busilist_20181219_0.xml
+12-20-18 08:20AM 567327 busilist_20181220_0.xml
+12-21-18 08:24AM 567327 busilist_20181221_0.xml
+12-22-18 08:20AM 567327 busilist_20181222_0.xml
+12-23-18 08:20AM 567327 busilist_20181223_0.xml
+12-24-18 08:20AM 567327 busilist_20181224_0.xml
+12-25-18 08:20AM 567327 busilist_20181225_0.xml
+12-26-18 08:20AM 567327 busilist_20181226_0.xml
+12-27-18 08:20AM 567327 busilist_20181227_0.xml
+12-28-18 08:20AM 567327 busilist_20181228_0.xml
+12-29-18 08:20AM 567327 busilist_20181229_0.xml
+12-30-18 08:20AM 567327 busilist_20181230_0.xml
+12-31-18 08:20AM 567327 busilist_20181231_0.xml
+01-01-19 08:20AM 567327 busilist_20190101_0.xml
+01-02-19 08:20AM 567327 busilist_20190102_0.xml
+01-03-19 08:20AM 567327 busilist_20190103_0.xml
+01-04-19 08:20AM 567327 busilist_20190104_0.xml
+01-05-19 08:20AM 567327 busilist_20190105_0.xml
+01-06-19 08:20AM 567327 busilist_20190106_0.xml
+01-07-19 08:20AM 567327 busilist_20190107_0.xml
+01-08-19 08:20AM 567327 busilist_20190108_0.xml
+01-09-19 08:20AM 567327 busilist_20190109_0.xml
+01-10-19 08:20AM 567327 busilist_20190110_0.xml
+01-11-19 08:20AM 567327 busilist_20190111_0.xml
+01-12-19 08:20AM 567327 busilist_20190112_0.xml
+01-13-19 08:20AM 567327 busilist_20190113_0.xml
+01-14-19 08:20AM 567327 busilist_20190114_0.xml
+12-18-18 04:05PM <DIR> log
+11-15-18 09:16AM <DIR> tdir1
+01-14-19 08:20AM <DIR> up
+226 Transfer complete.
+221 Goodbye.] 
+2019/01/14 14:57:03.382715243 the ftp server status very good!
+
+2019/01/14 14:58:05.152280611 NOWPSSHNUM=[1]
+     shDebugFlag=[15]
+     logFile=[./log/getFserStas.log]
+     fileNameTmp=[busilist_20190114_0\.xml]--------
+     
+     ---------ftp para begine--------
+     ----ftpIP     =[192.168.0.154]
+     ----ftpUser   =[Administrator]
+     ----ftpPwd    =[qwer1234]
+     ----ftpRdir   =[/gaolongshan1]
+     ----ftpLdir   =[./]
+     ----fileName  =[busilist_20190114_0.xml]
+     ----ftpCtrPNum=[21]
+     ---------ftp para end----------
+     
+     ftpRet=[Connected to 192.168.0.154 (192.168.0.154).
+220 Microsoft FTP Service
+Remote system type is Windows_NT.
+331 Password required for Administrator.
+230 User logged in.
+550 The system cannot find the file specified.
+Local directory now /home/fczx/src/IIImete/sh
+227 Entering Passive Mode (192,168,0,154,158,113).
+125 Data connection already open; Transfer starting.
+09-21-18 01:08PM <DIR> aspnet_client
+01-14-19 08:20AM <DIR> gaolongshan
+07-27-17 09:13AM 169726 libmete.a
+01-05-19 08:20AM <DIR> meiqiaozhen
+06-22-17 10:20AM <DIR> root
+12-06-18 04:30PM <DIR> Test
+06-23-18 03:02PM <DIR> test1
+11-01-18 04:28PM <DIR> Test2
+04-09-18 01:57PM <DIR> tmp
+12-29-17 01:29PM <DIR> up
+06-22-17 10:10AM <DIR> fczx
+01-14-19 08:20AM <DIR> zhuanghe
+226 Transfer complete.
+221 Goodbye.] 
+ftpRet=[Connected to 192.168.0.154 (192.168.0.154).
+220 Microsoft FTP Service
+Remote system type is Windows_NT.
+331 Password required for Administrator.
+230 User logged in.
+550 The system cannot find the file specified.
+Local directory now /home/fczx/src/IIImete/sh
+227 Entering Passive Mode (192,168,0,154,158,113).
+125 Data connection already open; Transfer starting.
+09-21-18 01:08PM <DIR> aspnet_client
+01-14-19 08:20AM <DIR> gaolongshan
+07-27-17 09:13AM 169726 libmete.a
+01-05-19 08:20AM <DIR> meiqiaozhen
+06-22-17 10:20AM <DIR> root
+12-06-18 04:30PM <DIR> Test
+06-23-18 03:02PM <DIR> test1
+11-01-18 04:28PM <DIR> Test2
+04-09-18 01:57PM <DIR> tmp
+12-29-17 01:29PM <DIR> up
+06-22-17 10:10AM <DIR> fczx
+01-14-19 08:20AM <DIR> zhuanghe
+226 Transfer complete.
+221 Goodbye.]
+2019/01/14 14:58:05.274624623 the file path [/gaolongshan1]is error
+2019/01/14 15:34:09.324372355 NOWPSSHNUM=[1]
+     shDebugFlag=[15]
+     logFile=[./log/getFserStas.log]
+     fileNameTmp=[busilist_20190114_0\.xml]--------
+     
+     ---------ftp para begine--------
+     ----ftpIP     =[192.168.0.154]
+     ----ftpUser   =[Administrator]
+     ----ftpPwd    =[qwer1234]
+     ----ftpRdir   =[/gaolongshan1]
+     ----ftpLdir   =[./]
+     ----fileName  =[busilist_20190114_0.xml]
+     ----ftpCtrPNum=[21]
+     ---------ftp para end----------
+     
+     ftpRet=[Connected to 192.168.0.154 (192.168.0.154).
+220 Microsoft FTP Service
+Remote system type is Windows_NT.
+331 Password required for Administrator.
+230 User logged in.
+550 The system cannot find the file specified.
+Local directory now /home/fczx/src/IIImete/sh
+227 Entering Passive Mode (192,168,0,154,159,79).
+125 Data connection already open; Transfer starting.
+09-21-18 01:08PM <DIR> aspnet_client
+01-14-19 08:20AM <DIR> gaolongshan
+07-27-17 09:13AM 169726 libmete.a
+01-05-19 08:20AM <DIR> meiqiaozhen
+06-22-17 10:20AM <DIR> root
+12-06-18 04:30PM <DIR> Test
+06-23-18 03:02PM <DIR> test1
+11-01-18 04:28PM <DIR> Test2
+04-09-18 01:57PM <DIR> tmp
+12-29-17 01:29PM <DIR> up
+06-22-17 10:10AM <DIR> fczx
+01-14-19 08:20AM <DIR> zhuanghe
+226 Transfer complete.
+221 Goodbye.] 
+ftpRet=[Connected to 192.168.0.154 (192.168.0.154).
+220 Microsoft FTP Service
+Remote system type is Windows_NT.
+331 Password required for Administrator.
+230 User logged in.
+550 The system cannot find the file specified.
+Local directory now /home/fczx/src/IIImete/sh
+227 Entering Passive Mode (192,168,0,154,159,79).
+125 Data connection already open; Transfer starting.
+09-21-18 01:08PM <DIR> aspnet_client
+01-14-19 08:20AM <DIR> gaolongshan
+07-27-17 09:13AM 169726 libmete.a
+01-05-19 08:20AM <DIR> meiqiaozhen
+06-22-17 10:20AM <DIR> root
+12-06-18 04:30PM <DIR> Test
+06-23-18 03:02PM <DIR> test1
+11-01-18 04:28PM <DIR> Test2
+04-09-18 01:57PM <DIR> tmp
+12-29-17 01:29PM <DIR> up
+06-22-17 10:10AM <DIR> fczx
+01-14-19 08:20AM <DIR> zhuanghe
+226 Transfer complete.
+221 Goodbye.]
+2019/01/14 15:34:09.466500221 the file path [/gaolongshan1]is error
+2019/01/14 15:35:52.033942025 NOWPSSHNUM=[1]
+     shDebugFlag=[15]
+     logFile=[./log/getFserStas.log]
+     fileNameTmp=[busilist_20190114_0\.xml]--------
+     
+     ---------ftp para begine--------
+     ----ftpIP     =[192.168.0.154]
+     ----ftpUser   =[Administrator]
+     ----ftpPwd    =[qwer1234]
+     ----ftpRdir   =[/gaolongshan1]
+     ----ftpLdir   =[./]
+     ----fileName  =[busilist_20190114_0.xml]
+     ----ftpCtrPNum=[21]
+     ---------ftp para end----------
+     
+     ftpRet=[Connected to 192.168.0.154 (192.168.0.154).
+220 Microsoft FTP Service
+Remote system type is Windows_NT.
+331 Password required for Administrator.
+230 User logged in.
+550 The system cannot find the file specified.
+Local directory now /home/fczx/src/IIImete/sh
+227 Entering Passive Mode (192,168,0,154,159,90).
+125 Data connection already open; Transfer starting.
+09-21-18 01:08PM <DIR> aspnet_client
+01-14-19 08:20AM <DIR> gaolongshan
+07-27-17 09:13AM 169726 libmete.a
+01-05-19 08:20AM <DIR> meiqiaozhen
+06-22-17 10:20AM <DIR> root
+12-06-18 04:30PM <DIR> Test
+06-23-18 03:02PM <DIR> test1
+11-01-18 04:28PM <DIR> Test2
+04-09-18 01:57PM <DIR> tmp
+12-29-17 01:29PM <DIR> up
+06-22-17 10:10AM <DIR> fczx
+01-14-19 08:20AM <DIR> zhuanghe
+226 Transfer complete.
+221 Goodbye.] 
+ftpRet=[Connected to 192.168.0.154 (192.168.0.154).
+220 Microsoft FTP Service
+Remote system type is Windows_NT.
+331 Password required for Administrator.
+230 User logged in.
+550 The system cannot find the file specified.
+Local directory now /home/fczx/src/IIImete/sh
+227 Entering Passive Mode (192,168,0,154,159,90).
+125 Data connection already open; Transfer starting.
+09-21-18 01:08PM <DIR> aspnet_client
+01-14-19 08:20AM <DIR> gaolongshan
+07-27-17 09:13AM 169726 libmete.a
+01-05-19 08:20AM <DIR> meiqiaozhen
+06-22-17 10:20AM <DIR> root
+12-06-18 04:30PM <DIR> Test
+06-23-18 03:02PM <DIR> test1
+11-01-18 04:28PM <DIR> Test2
+04-09-18 01:57PM <DIR> tmp
+12-29-17 01:29PM <DIR> up
+06-22-17 10:10AM <DIR> fczx
+01-14-19 08:20AM <DIR> zhuanghe
+226 Transfer complete.
+221 Goodbye.]
+2019/01/14 15:35:52.164651503 the file path [/gaolongshan1]is error
+2019/01/14 15:36:43.869277909 NOWPSSHNUM=[1]
+     shDebugFlag=[15]
+     logFile=[./log/getFserStas.log]
+     fileNameTmp=[busilist_20190114_01\.xml]--------
+     
+     ---------ftp para begine--------
+     ----ftpIP     =[192.168.0.154]
+     ----ftpUser   =[Administrator]
+     ----ftpPwd    =[qwer1234]
+     ----ftpRdir   =[/gaolongshan1]
+     ----ftpLdir   =[./]
+     ----fileName  =[busilist_20190114_01.xml]
+     ----ftpCtrPNum=[21]
+     ---------ftp para end----------
+     
+     ftpRet=[Connected to 192.168.0.154 (192.168.0.154).
+220 Microsoft FTP Service
+Remote system type is Windows_NT.
+331 Password required for Administrator.
+230 User logged in.
+550 The system cannot find the file specified.
+Local directory now /home/fczx/src/IIImete/sh
+227 Entering Passive Mode (192,168,0,154,159,97).
+125 Data connection already open; Transfer starting.
+09-21-18 01:08PM <DIR> aspnet_client
+01-14-19 08:20AM <DIR> gaolongshan
+07-27-17 09:13AM 169726 libmete.a
+01-05-19 08:20AM <DIR> meiqiaozhen
+06-22-17 10:20AM <DIR> root
+12-06-18 04:30PM <DIR> Test
+06-23-18 03:02PM <DIR> test1
+11-01-18 04:28PM <DIR> Test2
+04-09-18 01:57PM <DIR> tmp
+12-29-17 01:29PM <DIR> up
+06-22-17 10:10AM <DIR> fczx
+01-14-19 08:20AM <DIR> zhuanghe
+226 Transfer complete.
+221 Goodbye.] 
+ftpRet=[Connected to 192.168.0.154 (192.168.0.154).
+220 Microsoft FTP Service
+Remote system type is Windows_NT.
+331 Password required for Administrator.
+230 User logged in.
+550 The system cannot find the file specified.
+Local directory now /home/fczx/src/IIImete/sh
+227 Entering Passive Mode (192,168,0,154,159,97).
+125 Data connection already open; Transfer starting.
+09-21-18 01:08PM <DIR> aspnet_client
+01-14-19 08:20AM <DIR> gaolongshan
+07-27-17 09:13AM 169726 libmete.a
+01-05-19 08:20AM <DIR> meiqiaozhen
+06-22-17 10:20AM <DIR> root
+12-06-18 04:30PM <DIR> Test
+06-23-18 03:02PM <DIR> test1
+11-01-18 04:28PM <DIR> Test2
+04-09-18 01:57PM <DIR> tmp
+12-29-17 01:29PM <DIR> up
+06-22-17 10:10AM <DIR> fczx
+01-14-19 08:20AM <DIR> zhuanghe
+226 Transfer complete.
+221 Goodbye.]
+2019/01/14 15:36:44.008197145 the file path [/gaolongshan1]is error
+2019/01/14 15:36:55.821571793 NOWPSSHNUM=[1]
+     shDebugFlag=[15]
+     logFile=[./log/getFserStas.log]
+     fileNameTmp=[busilist_20190114_01\.xml]--------
+     
+     ---------ftp para begine--------
+     ----ftpIP     =[192.168.0.154]
+     ----ftpUser   =[Administrator]
+     ----ftpPwd    =[qwer1234]
+     ----ftpRdir   =[/gaolongshan]
+     ----ftpLdir   =[./]
+     ----fileName  =[busilist_20190114_01.xml]
+     ----ftpCtrPNum=[21]
+     ---------ftp para end----------
+     
+     ftpRet=[Connected to 192.168.0.154 (192.168.0.154).
+220 Microsoft FTP Service
+Remote system type is Windows_NT.
+331 Password required for Administrator.
+230 User logged in.
+250 CWD command successful.
+Local directory now /home/fczx/src/IIImete/sh
+227 Entering Passive Mode (192,168,0,154,159,99).
+125 Data connection already open; Transfer starting.
+12-18-18 04:10PM 567328 busilist_20181218_0.xml
+12-19-18 09:54AM 567327 busilist_20181219_0.xml
+12-20-18 08:20AM 567327 busilist_20181220_0.xml
+12-21-18 08:24AM 567327 busilist_20181221_0.xml
+12-22-18 08:20AM 567327 busilist_20181222_0.xml
+12-23-18 08:20AM 567327 busilist_20181223_0.xml
+12-24-18 08:20AM 567327 busilist_20181224_0.xml
+12-25-18 08:20AM 567327 busilist_20181225_0.xml
+12-26-18 08:20AM 567327 busilist_20181226_0.xml
+12-27-18 08:20AM 567327 busilist_20181227_0.xml
+12-28-18 08:20AM 567327 busilist_20181228_0.xml
+12-29-18 08:20AM 567327 busilist_20181229_0.xml
+12-30-18 08:20AM 567327 busilist_20181230_0.xml
+12-31-18 08:20AM 567327 busilist_20181231_0.xml
+01-01-19 08:20AM 567327 busilist_20190101_0.xml
+01-02-19 08:20AM 567327 busilist_20190102_0.xml
+01-03-19 08:20AM 567327 busilist_20190103_0.xml
+01-04-19 08:20AM 567327 busilist_20190104_0.xml
+01-05-19 08:20AM 567327 busilist_20190105_0.xml
+01-06-19 08:20AM 567327 busilist_20190106_0.xml
+01-07-19 08:20AM 567327 busilist_20190107_0.xml
+01-08-19 08:20AM 567327 busilist_20190108_0.xml
+01-09-19 08:20AM 567327 busilist_20190109_0.xml
+01-10-19 08:20AM 567327 busilist_20190110_0.xml
+01-11-19 08:20AM 567327 busilist_20190111_0.xml
+01-12-19 08:20AM 567327 busilist_20190112_0.xml
+01-13-19 08:20AM 567327 busilist_20190113_0.xml
+01-14-19 08:20AM 567327 busilist_20190114_0.xml
+12-18-18 04:05PM <DIR> log
+11-15-18 09:16AM <DIR> tdir1
+01-14-19 08:20AM <DIR> up
+226 Transfer complete.
+221 Goodbye.] 
+ftpRet=[Connected to 192.168.0.154 (192.168.0.154).
+220 Microsoft FTP Service
+Remote system type is Windows_NT.
+331 Password required for Administrator.
+230 User logged in.
+250 CWD command successful.
+Local directory now /home/fczx/src/IIImete/sh
+227 Entering Passive Mode (192,168,0,154,159,99).
+125 Data connection already open; Transfer starting.
+12-18-18 04:10PM 567328 busilist_20181218_0.xml
+12-19-18 09:54AM 567327 busilist_20181219_0.xml
+12-20-18 08:20AM 567327 busilist_20181220_0.xml
+12-21-18 08:24AM 567327 busilist_20181221_0.xml
+12-22-18 08:20AM 567327 busilist_20181222_0.xml
+12-23-18 08:20AM 567327 busilist_20181223_0.xml
+12-24-18 08:20AM 567327 busilist_20181224_0.xml
+12-25-18 08:20AM 567327 busilist_20181225_0.xml
+12-26-18 08:20AM 567327 busilist_20181226_0.xml
+12-27-18 08:20AM 567327 busilist_20181227_0.xml
+12-28-18 08:20AM 567327 busilist_20181228_0.xml
+12-29-18 08:20AM 567327 busilist_20181229_0.xml
+12-30-18 08:20AM 567327 busilist_20181230_0.xml
+12-31-18 08:20AM 567327 busilist_20181231_0.xml
+01-01-19 08:20AM 567327 busilist_20190101_0.xml
+01-02-19 08:20AM 567327 busilist_20190102_0.xml
+01-03-19 08:20AM 567327 busilist_20190103_0.xml
+01-04-19 08:20AM 567327 busilist_20190104_0.xml
+01-05-19 08:20AM 567327 busilist_20190105_0.xml
+01-06-19 08:20AM 567327 busilist_20190106_0.xml
+01-07-19 08:20AM 567327 busilist_20190107_0.xml
+01-08-19 08:20AM 567327 busilist_20190108_0.xml
+01-09-19 08:20AM 567327 busilist_20190109_0.xml
+01-10-19 08:20AM 567327 busilist_20190110_0.xml
+01-11-19 08:20AM 567327 busilist_20190111_0.xml
+01-12-19 08:20AM 567327 busilist_20190112_0.xml
+01-13-19 08:20AM 567327 busilist_20190113_0.xml
+01-14-19 08:20AM 567327 busilist_20190114_0.xml
+12-18-18 04:05PM <DIR> log
+11-15-18 09:16AM <DIR> tdir1
+01-14-19 08:20AM <DIR> up
+226 Transfer complete.
+221 Goodbye.]
+2019/01/14 15:36:55.964297846the file  [busilist_20190114_01.xml] is not exists
+2019/01/14 15:44:15.949423059 NOWPSSHNUM=[1]
+     shDebugFlag=[15]
+     logFile=[./log/getFserStas.log]
+     fileNameTmp=[busilist_20190114_0\.xml]--------
+     
+     ---------ftp para begine--------
+     ----ftpIP     =[192.168.0.154]
+     ----ftpUser   =[Administrator]
+     ----ftpPwd    =[qwer1234]
+     ----ftpRdir   =[/gaolongshan]
+     ----ftpLdir   =[./]
+     ----fileName  =[busilist_20190114_0.xml]
+     ----ftpCtrPNum=[21]
+     ---------ftp para end----------
+     
+     ftpRet=[Connected to 192.168.0.154 (192.168.0.154).
+220 Microsoft FTP Service
+Remote system type is Windows_NT.
+331 Password required for Administrator.
+230 User logged in.
+250 CWD command successful.
+Local directory now /home/fczx/src/IIImete/sh
+227 Entering Passive Mode (192,168,0,154,159,144).
+125 Data connection already open; Transfer starting.
+12-18-18 04:10PM 567328 busilist_20181218_0.xml
+12-19-18 09:54AM 567327 busilist_20181219_0.xml
+12-20-18 08:20AM 567327 busilist_20181220_0.xml
+12-21-18 08:24AM 567327 busilist_20181221_0.xml
+12-22-18 08:20AM 567327 busilist_20181222_0.xml
+12-23-18 08:20AM 567327 busilist_20181223_0.xml
+12-24-18 08:20AM 567327 busilist_20181224_0.xml
+12-25-18 08:20AM 567327 busilist_20181225_0.xml
+12-26-18 08:20AM 567327 busilist_20181226_0.xml
+12-27-18 08:20AM 567327 busilist_20181227_0.xml
+12-28-18 08:20AM 567327 busilist_20181228_0.xml
+12-29-18 08:20AM 567327 busilist_20181229_0.xml
+12-30-18 08:20AM 567327 busilist_20181230_0.xml
+12-31-18 08:20AM 567327 busilist_20181231_0.xml
+01-01-19 08:20AM 567327 busilist_20190101_0.xml
+01-02-19 08:20AM 567327 busilist_20190102_0.xml
+01-03-19 08:20AM 567327 busilist_20190103_0.xml
+01-04-19 08:20AM 567327 busilist_20190104_0.xml
+01-05-19 08:20AM 567327 busilist_20190105_0.xml
+01-06-19 08:20AM 567327 busilist_20190106_0.xml
+01-07-19 08:20AM 567327 busilist_20190107_0.xml
+01-08-19 08:20AM 567327 busilist_20190108_0.xml
+01-09-19 08:20AM 567327 busilist_20190109_0.xml
+01-10-19 08:20AM 567327 busilist_20190110_0.xml
+01-11-19 08:20AM 567327 busilist_20190111_0.xml
+01-12-19 08:20AM 567327 busilist_20190112_0.xml
+01-13-19 08:20AM 567327 busilist_20190113_0.xml
+01-14-19 08:20AM 567327 busilist_20190114_0.xml
+12-18-18 04:05PM <DIR> log
+11-15-18 09:16AM <DIR> tdir1
+01-14-19 08:20AM <DIR> up
+226 Transfer complete.
+221 Goodbye.] 
+2019/01/14 15:44:41.230646688 NOWPSSHNUM=[1]
+     shDebugFlag=[15]
+     logFile=[./log/getFserStas.log]
+     fileNameTmp=[busilist_20190114_0\.xml]--------
+     
+     ---------ftp para begine--------
+     ----ftpIP     =[192.168.0.154]
+     ----ftpUser   =[Administrator]
+     ----ftpPwd    =[qwer1234]
+     ----ftpRdir   =[/gaolongshan]
+     ----ftpLdir   =[./]
+     ----fileName  =[busilist_20190114_0.xml]
+     ----ftpCtrPNum=[21]
+     ---------ftp para end----------
+     
+     ftpRet=[Connected to 192.168.0.154 (192.168.0.154).
+220 Microsoft FTP Service
+Remote system type is Windows_NT.
+331 Password required for Administrator.
+230 User logged in.
+250 CWD command successful.
+Local directory now /home/fczx/src/IIImete/sh
+227 Entering Passive Mode (192,168,0,154,159,148).
+125 Data connection already open; Transfer starting.
+12-18-18 04:10PM 567328 busilist_20181218_0.xml
+12-19-18 09:54AM 567327 busilist_20181219_0.xml
+12-20-18 08:20AM 567327 busilist_20181220_0.xml
+12-21-18 08:24AM 567327 busilist_20181221_0.xml
+12-22-18 08:20AM 567327 busilist_20181222_0.xml
+12-23-18 08:20AM 567327 busilist_20181223_0.xml
+12-24-18 08:20AM 567327 busilist_20181224_0.xml
+12-25-18 08:20AM 567327 busilist_20181225_0.xml
+12-26-18 08:20AM 567327 busilist_20181226_0.xml
+12-27-18 08:20AM 567327 busilist_20181227_0.xml
+12-28-18 08:20AM 567327 busilist_20181228_0.xml
+12-29-18 08:20AM 567327 busilist_20181229_0.xml
+12-30-18 08:20AM 567327 busilist_20181230_0.xml
+12-31-18 08:20AM 567327 busilist_20181231_0.xml
+01-01-19 08:20AM 567327 busilist_20190101_0.xml
+01-02-19 08:20AM 567327 busilist_20190102_0.xml
+01-03-19 08:20AM 567327 busilist_20190103_0.xml
+01-04-19 08:20AM 567327 busilist_20190104_0.xml
+01-05-19 08:20AM 567327 busilist_20190105_0.xml
+01-06-19 08:20AM 567327 busilist_20190106_0.xml
+01-07-19 08:20AM 567327 busilist_20190107_0.xml
+01-08-19 08:20AM 567327 busilist_20190108_0.xml
+01-09-19 08:20AM 567327 busilist_20190109_0.xml
+01-10-19 08:20AM 567327 busilist_20190110_0.xml
+01-11-19 08:20AM 567327 busilist_20190111_0.xml
+01-12-19 08:20AM 567327 busilist_20190112_0.xml
+01-13-19 08:20AM 567327 busilist_20190113_0.xml
+01-14-19 08:20AM 567327 busilist_20190114_0.xml
+12-18-18 04:05PM <DIR> log
+11-15-18 09:16AM <DIR> tdir1
+01-14-19 08:20AM <DIR> up
+226 Transfer complete.
+221 Goodbye.] 
+2019/01/14 15:44:41.367321243 the ftp server status very good!
+
+2019/01/14 15:45:21.029610995 NOWPSSHNUM=[1]
+     shDebugFlag=[15]
+     logFile=[./log/getFserStas.log]
+     fileNameTmp=[busilist_20190114_0\.xml]--------
+     
+     ---------ftp para begine--------
+     ----ftpIP     =[192.168.0.154]
+     ----ftpUser   =[Administrator]
+     ----ftpPwd    =[qwer1234]
+     ----ftpRdir   =[/gaolongshan]
+     ----ftpLdir   =[./tt]
+     ----fileName  =[busilist_20190114_0.xml]
+     ----ftpCtrPNum=[21]
+     ---------ftp para end----------
+     
+     ftpRet=[Connected to 192.168.0.154 (192.168.0.154).
+220 Microsoft FTP Service
+Remote system type is Windows_NT.
+331 Password required for Administrator.
+230 User logged in.
+250 CWD command successful.
+local: ./tt: 没有那个文件或目录
+227 Entering Passive Mode (192,168,0,154,159,153).
+125 Data connection already open; Transfer starting.
+12-18-18 04:10PM 567328 busilist_20181218_0.xml
+12-19-18 09:54AM 567327 busilist_20181219_0.xml
+12-20-18 08:20AM 567327 busilist_20181220_0.xml
+12-21-18 08:24AM 567327 busilist_20181221_0.xml
+12-22-18 08:20AM 567327 busilist_20181222_0.xml
+12-23-18 08:20AM 567327 busilist_20181223_0.xml
+12-24-18 08:20AM 567327 busilist_20181224_0.xml
+12-25-18 08:20AM 567327 busilist_20181225_0.xml
+12-26-18 08:20AM 567327 busilist_20181226_0.xml
+12-27-18 08:20AM 567327 busilist_20181227_0.xml
+12-28-18 08:20AM 567327 busilist_20181228_0.xml
+12-29-18 08:20AM 567327 busilist_20181229_0.xml
+12-30-18 08:20AM 567327 busilist_20181230_0.xml
+12-31-18 08:20AM 567327 busilist_20181231_0.xml
+01-01-19 08:20AM 567327 busilist_20190101_0.xml
+01-02-19 08:20AM 567327 busilist_20190102_0.xml
+01-03-19 08:20AM 567327 busilist_20190103_0.xml
+01-04-19 08:20AM 567327 busilist_20190104_0.xml
+01-05-19 08:20AM 567327 busilist_20190105_0.xml
+01-06-19 08:20AM 567327 busilist_20190106_0.xml
+01-07-19 08:20AM 567327 busilist_20190107_0.xml
+01-08-19 08:20AM 567327 busilist_20190108_0.xml
+01-09-19 08:20AM 567327 busilist_20190109_0.xml
+01-10-19 08:20AM 567327 busilist_20190110_0.xml
+01-11-19 08:20AM 567327 busilist_20190111_0.xml
+01-12-19 08:20AM 567327 busilist_20190112_0.xml
+01-13-19 08:20AM 567327 busilist_20190113_0.xml
+01-14-19 08:20AM 567327 busilist_20190114_0.xml
+12-18-18 04:05PM <DIR> log
+11-15-18 09:16AM <DIR> tdir1
+01-14-19 08:20AM <DIR> up
+226 Transfer complete.
+221 Goodbye.] 
+ftpRet=[Connected to 192.168.0.154 (192.168.0.154).
+220 Microsoft FTP Service
+Remote system type is Windows_NT.
+331 Password required for Administrator.
+230 User logged in.
+250 CWD command successful.
+local: ./tt: 没有那个文件或目录
+227 Entering Passive Mode (192,168,0,154,159,153).
+125 Data connection already open; Transfer starting.
+12-18-18 04:10PM 567328 busilist_20181218_0.xml
+12-19-18 09:54AM 567327 busilist_20181219_0.xml
+12-20-18 08:20AM 567327 busilist_20181220_0.xml
+12-21-18 08:24AM 567327 busilist_20181221_0.xml
+12-22-18 08:20AM 567327 busilist_20181222_0.xml
+12-23-18 08:20AM 567327 busilist_20181223_0.xml
+12-24-18 08:20AM 567327 busilist_20181224_0.xml
+12-25-18 08:20AM 567327 busilist_20181225_0.xml
+12-26-18 08:20AM 567327 busilist_20181226_0.xml
+12-27-18 08:20AM 567327 busilist_20181227_0.xml
+12-28-18 08:20AM 567327 busilist_20181228_0.xml
+12-29-18 08:20AM 567327 busilist_20181229_0.xml
+12-30-18 08:20AM 567327 busilist_20181230_0.xml
+12-31-18 08:20AM 567327 busilist_20181231_0.xml
+01-01-19 08:20AM 567327 busilist_20190101_0.xml
+01-02-19 08:20AM 567327 busilist_20190102_0.xml
+01-03-19 08:20AM 567327 busilist_20190103_0.xml
+01-04-19 08:20AM 567327 busilist_20190104_0.xml
+01-05-19 08:20AM 567327 busilist_20190105_0.xml
+01-06-19 08:20AM 567327 busilist_20190106_0.xml
+01-07-19 08:20AM 567327 busilist_20190107_0.xml
+01-08-19 08:20AM 567327 busilist_20190108_0.xml
+01-09-19 08:20AM 567327 busilist_20190109_0.xml
+01-10-19 08:20AM 567327 busilist_20190110_0.xml
+01-11-19 08:20AM 567327 busilist_20190111_0.xml
+01-12-19 08:20AM 567327 busilist_20190112_0.xml
+01-13-19 08:20AM 567327 busilist_20190113_0.xml
+01-14-19 08:20AM 567327 busilist_20190114_0.xml
+12-18-18 04:05PM <DIR> log
+11-15-18 09:16AM <DIR> tdir1
+01-14-19 08:20AM <DIR> up
+226 Transfer complete.
+221 Goodbye.]
+2019/01/14 15:45:21.168142598the local file path [./tt] is error
+ftpRet=[]
+2019/01/14 15:47:20.511615837the local file path [./tt] is error
+ftpRet=[]
+2019/01/14 15:49:42.189201930the local file path [./tt] is error
+2019/01/14 15:50:40.838987166the local file path [./tt] is error
+2019/01/14 17:44:33.666109332 NOWPSSHNUM=[1]
+     shDebugFlag=[15]
+     logFile=[./log/getFserStas.log]
+     fileNameTmp=[busilist_20190114_0\.xml]--------
+     
+     ---------ftp para begine--------
+     ----ftpIP     =[192.168.0.154]
+     ----ftpUser   =[Administrator]
+     ----ftpPwd    =[qwer1234]
+     ----ftpRdir   =[/gaolongshan]
+     ----ftpLdir   =[./tt]
+     ----fileName  =[busilist_20190114_0.xml]
+     ----ftpCtrPNum=[21]
+     ---------ftp para end----------
+     
+2019/01/14 17:44:33.666109332the local file path [./tt] is error
+2019/01/14 17:45:34.067262209 NOWPSSHNUM=[1]
+     shDebugFlag=[15]
+     logFile=[./log/getFserStas.log]
+     fileNameTmp=[busilist_20190114_0\.xml]--------
+     
+     ---------ftp para begine--------
+     ----ftpIP     =[192.168.0.155]
+     ----ftpUser   =[Administrator]
+     ----ftpPwd    =[qwer1234]
+     ----ftpRdir   =[/gaolongshan]
+     ----ftpLdir   =[./]
+     ----fileName  =[busilist_20190114_0.xml]
+     ----ftpCtrPNum=[21]
+     ---------ftp para end----------
+     
+2019/01/14 17:45:34.067262209 connet ftp server [192.168.0.155 21] is error
+2019/01/14 17:46:02.245206494 NOWPSSHNUM=[1]
+     shDebugFlag=[15]
+     logFile=[./log/getFserStas.log]
+     fileNameTmp=[busilist_20190114_0\.xml]--------
+     
+     ---------ftp para begine--------
+     ----ftpIP     =[192.168.0.154]
+     ----ftpUser   =[Administrator]
+     ----ftpPwd    =[qwer1234]
+     ----ftpRdir   =[/gaolongshan]
+     ----ftpLdir   =[./tt]
+     ----fileName  =[busilist_20190114_0.xml]
+     ----ftpCtrPNum=[21]
+     ---------ftp para end----------
+     
+2019/01/14 17:46:02.245206494the local file path [./tt] is error
+2019/01/14 17:46:53.419991870 NOWPSSHNUM=[1]
+     shDebugFlag=[15]
+     logFile=[./log/getFserStas.log]
+     fileNameTmp=[busilist_20190114_0\.xml]--------
+     
+     ---------ftp para begine--------
+     ----ftpIP     =[192.168.0.154]
+     ----ftpUser   =[Administrator]
+     ----ftpPwd    =[qwer1234]
+     ----ftpRdir   =[/gaolongshan]
+     ----ftpLdir   =[./]
+     ----fileName  =[busilist_20190114_0.xml]
+     ----ftpCtrPNum=[21]
+     ---------ftp para end----------
+     
+2019/01/14 17:46:53.653230899 the ftp server status very good!
+
+2019/01/14 18:00:33.333232866 NOWPSSHNUM=[2]
+     shDebugFlag=[15]
+     logFile=[./log/getFserStas.log]
+     fileNameTmp=[]--------
+     ---------ftp para begine--------
+     ----ftpIP     =[192.168.0.154]
+     ----ftpUser   =[Administrator]
+     ----ftpPwd    =[qwer1234]
+     ----ftpRdir   =[/gaolongshan]
+     ----ftpLdir   =[./]
+     ----fileName  =[busilist_20190114_0.xml]
+     ----ftpCtrPNum=[21]
+     ---------ftp para end----------
+     
+2019/01/14 18:00:33.562427563 the ftp server status very good!
+
+2019/01/14 18:00:44.849947443 NOWPSSHNUM=[2]
+     shDebugFlag=[15]
+     logFile=[./log/getFserStas.log]
+     fileNameTmp=[]--------
+     ---------ftp para begine--------
+     ----ftpIP     =[192.168.0.154]
+     ----ftpUser   =[Administrator]
+     ----ftpPwd    =[qwer1234]
+     ----ftpRdir   =[/gaolongshan]
+     ----ftpLdir   =[./]
+     ----fileName  =[busilist_20190114_0.xml]
+     ----ftpCtrPNum=[21]
+     ---------ftp para end----------
+     
+2019/01/14 18:00:45.051741597 the ftp server status very good!
+
+2019/01/14 18:01:50.769596002 NOWPSSHNUM=[1]
+     shDebugFlag=[15]
+     logFile=[./log/getFserStas.log]
+     fileNameTmp=[]--------
+     ---------ftp para begine--------
+     ----ftpIP     =[192.168.0.154]
+     ----ftpUser   =[Administrator]
+     ----ftpPwd    =[qwer1234]
+     ----ftpRdir   =[/gaolongshan]
+     ----ftpLdir   =[./]
+     ----fileName  =[busilist_20190114_0.xml]
+     ----ftpCtrPNum=[21]
+     ---------ftp para end----------
+     
+2019/01/14 18:01:51.005392905 the ftp server status very good!
+
+2019/01/14 18:02:57.550274297 NOWPSSHNUM=[2]
+     shDebugFlag=[15]
+     logFile=[./log/getFserStas.log]
+     fileNameTmp=[]--------
+     ---------ftp para begine--------
+     ----ftpIP     =[192.168.0.154]
+     ----ftpUser   =[Administrator]
+     ----ftpPwd    =[qwer1234]
+     ----ftpRdir   =[/gaolongshan]
+     ----ftpLdir   =[./]
+     ----fileName  =[busilist_20190114_0.xml]
+     ----ftpCtrPNum=[21]
+     ---------ftp para end----------
+     
+2019/01/14 18:02:57.781287601 the ftp server status very good!
+
+2019/01/14 18:05:34.101198329 NOWPSSHNUM=[2]
+     shDebugFlag=[15]
+     logFile=[./log/getFserStas.log]
+     fileNameTmp=[]--------
+     ---------ftp para begine--------
+     ----ftpIP     =[192.168.0.154]
+     ----ftpUser   =[Administrator]
+     ----ftpPwd    =[qwer1234]
+     ----ftpRdir   =[/gaolongshan]
+     ----ftpLdir   =[./]
+     ----fileName  =[busilist_20190114_0.xml]
+     ----ftpCtrPNum=[21]
+     ---------ftp para end----------
+     
+
+ftpRet=[function getFtpSerStatu 2019/01/14 18:05:34.243131808 
+         debugflag=[1]
+         fileNameTmp=[busilist_20190114_0\.xml]--------
+         
+         ---------ftp para begine--------
+         ----ftpIP     =[192.168.0.154]
+         ----ftpUser   =[Administrator]
+         ----ftpPwd    =[qwer1234]
+         ----ftpRdir   =[/gaolongshan]
+         ----ftpLdir   =[./]
+         ----fileName  =[busilist_20190114_0.xml]
+         ----ftpCtrPNum=[21]
+         ---------ftp para end----------
+         
+         ftpRet=[Connected to 192.168.0.154 (192.168.0.154).
+220 Microsoft FTP Service
+Remote system type is Windows_NT.
+331 Password required for Administrator.
+230 User logged in.
+250 CWD command successful.
+Local directory now /home/fczx/src/IIImete/sh
+227 Entering Passive Mode (192,168,0,154,162,249).
+125 Data connection already open; Transfer starting.
+12-18-18 04:10PM 567328 busilist_20181218_0.xml
+12-19-18 09:54AM 567327 busilist_20181219_0.xml
+12-20-18 08:20AM 567327 busilist_20181220_0.xml
+12-21-18 08:24AM 567327 busilist_20181221_0.xml
+12-22-18 08:20AM 567327 busilist_20181222_0.xml
+12-23-18 08:20AM 567327 busilist_20181223_0.xml
+12-24-18 08:20AM 567327 busilist_20181224_0.xml
+12-25-18 08:20AM 567327 busilist_20181225_0.xml
+12-26-18 08:20AM 567327 busilist_20181226_0.xml
+12-27-18 08:20AM 567327 busilist_20181227_0.xml
+12-28-18 08:20AM 567327 busilist_20181228_0.xml
+12-29-18 08:20AM 567327 busilist_20181229_0.xml
+12-30-18 08:20AM 567327 busilist_20181230_0.xml
+12-31-18 08:20AM 567327 busilist_20181231_0.xml
+01-01-19 08:20AM 567327 busilist_20190101_0.xml
+01-02-19 08:20AM 567327 busilist_20190102_0.xml
+01-03-19 08:20AM 567327 busilist_20190103_0.xml
+01-04-19 08:20AM 567327 busilist_20190104_0.xml
+01-05-19 08:20AM 567327 busilist_20190105_0.xml
+01-06-19 08:20AM 567327 busilist_20190106_0.xml
+01-07-19 08:20AM 567327 busilist_20190107_0.xml
+01-08-19 08:20AM 567327 busilist_20190108_0.xml
+01-09-19 08:20AM 567327 busilist_20190109_0.xml
+01-10-19 08:20AM 567327 busilist_20190110_0.xml
+01-11-19 08:20AM 567327 busilist_20190111_0.xml
+01-12-19 08:20AM 567327 busilist_20190112_0.xml
+01-13-19 08:20AM 567327 busilist_20190113_0.xml
+01-14-19 08:20AM 567327 busilist_20190114_0.xml
+12-18-18 04:05PM <DIR> log
+11-15-18 09:16AM <DIR> tdir1
+01-14-19 08:20AM <DIR> up
+226 Transfer complete.
+221 Goodbye.] 
+Connected to 192.168.0.154 (192.168.0.154).
+220 Microsoft FTP Service
+Remote system type is Windows_NT.
+331 Password required for Administrator.
+230 User logged in.
+250 CWD command successful.
+Local directory now /home/fczx/src/IIImete/sh
+227 Entering Passive Mode (192,168,0,154,162,249).
+125 Data connection already open; Transfer starting.
+12-18-18 04:10PM 567328 busilist_20181218_0.xml
+12-19-18 09:54AM 567327 busilist_20181219_0.xml
+12-20-18 08:20AM 567327 busilist_20181220_0.xml
+12-21-18 08:24AM 567327 busilist_20181221_0.xml
+12-22-18 08:20AM 567327 busilist_20181222_0.xml
+12-23-18 08:20AM 567327 busilist_20181223_0.xml
+12-24-18 08:20AM 567327 busilist_20181224_0.xml
+12-25-18 08:20AM 567327 busilist_20181225_0.xml
+12-26-18 08:20AM 567327 busilist_20181226_0.xml
+12-27-18 08:20AM 567327 busilist_20181227_0.xml
+12-28-18 08:20AM 567327 busilist_20181228_0.xml
+12-29-18 08:20AM 567327 busilist_20181229_0.xml
+12-30-18 08:20AM 567327 busilist_20181230_0.xml
+12-31-18 08:20AM 567327 busilist_20181231_0.xml
+01-01-19 08:20AM 567327 busilist_20190101_0.xml
+01-02-19 08:20AM 567327 busilist_20190102_0.xml
+01-03-19 08:20AM 567327 busilist_20190103_0.xml
+01-04-19 08:20AM 567327 busilist_20190104_0.xml
+01-05-19 08:20AM 567327 busilist_20190105_0.xml
+01-06-19 08:20AM 567327 busilist_20190106_0.xml
+01-07-19 08:20AM 567327 busilist_20190107_0.xml
+01-08-19 08:20AM 567327 busilist_20190108_0.xml
+01-09-19 08:20AM 567327 busilist_20190109_0.xml
+01-10-19 08:20AM 567327 busilist_20190110_0.xml
+01-11-19 08:20AM 567327 busilist_20190111_0.xml
+01-12-19 08:20AM 567327 busilist_20190112_0.xml
+01-13-19 08:20AM 567327 busilist_20190113_0.xml
+01-14-19 08:20AM 567327 busilist_20190114_0.xml
+12-18-18 04:05PM <DIR> log
+11-15-18 09:16AM <DIR> tdir1
+01-14-19 08:20AM <DIR> up
+226 Transfer complete.
+221 Goodbye.]
+2019/01/14 18:05:34.336782548 the ftp server status very good!
+
+2019/01/14 18:11:36.779532390 NOWPSSHNUM=[1]
+     shDebugFlag=[15]
+     logFile=[./log/getFserStas.log]
+     fileNameTmp=[]--------
+     ---------ftp para begine--------
+     ----ftpIP     =[192.168.0.154]
+     ----ftpUser   =[Administrator]
+     ----ftpPwd    =[qwer1234]
+     ----ftpRdir   =[/gaolongshan]
+     ----ftpLdir   =[./]
+     ----fileName  =[busilist_20190114_0.xml]
+     ----ftpCtrPNum=[21]
+     ---------ftp para end----------
+     
+
+ftpRet=[function getFtpSerStatu input param 2019/01/14 18:11:36.893910523 
+         debugflag=[1]
+         fileNameTmp=[busilist_20190114_0\.xml]--------
+         ---------ftp para begine--------
+         ----ftpIP     =[192.168.0.154]
+         ----ftpUser   =[Administrator]
+         ----ftpPwd    =[qwer1234]
+         ----ftpRdir   =[/gaolongshan]
+         ----ftpLdir   =[./]
+         ----fileName  =[busilist_20190114_0.xml]
+         ----ftpCtrPNum=[21]
+         ---------ftp para end----------
+         
+Connected to 192.168.0.154 (192.168.0.154).
+220 Microsoft FTP Service
+Remote system type is Windows_NT.
+331 Password required for Administrator.
+230 User logged in.
+250 CWD command successful.
+Local directory now /home/fczx/src/IIImete/sh
+227 Entering Passive Mode (192,168,0,154,163,30).
+125 Data connection already open; Transfer starting.
+12-18-18 04:10PM 567328 busilist_20181218_0.xml
+12-19-18 09:54AM 567327 busilist_20181219_0.xml
+12-20-18 08:20AM 567327 busilist_20181220_0.xml
+12-21-18 08:24AM 567327 busilist_20181221_0.xml
+12-22-18 08:20AM 567327 busilist_20181222_0.xml
+12-23-18 08:20AM 567327 busilist_20181223_0.xml
+12-24-18 08:20AM 567327 busilist_20181224_0.xml
+12-25-18 08:20AM 567327 busilist_20181225_0.xml
+12-26-18 08:20AM 567327 busilist_20181226_0.xml
+12-27-18 08:20AM 567327 busilist_20181227_0.xml
+12-28-18 08:20AM 567327 busilist_20181228_0.xml
+12-29-18 08:20AM 567327 busilist_20181229_0.xml
+12-30-18 08:20AM 567327 busilist_20181230_0.xml
+12-31-18 08:20AM 567327 busilist_20181231_0.xml
+01-01-19 08:20AM 567327 busilist_20190101_0.xml
+01-02-19 08:20AM 567327 busilist_20190102_0.xml
+01-03-19 08:20AM 567327 busilist_20190103_0.xml
+01-04-19 08:20AM 567327 busilist_20190104_0.xml
+01-05-19 08:20AM 567327 busilist_20190105_0.xml
+01-06-19 08:20AM 567327 busilist_20190106_0.xml
+01-07-19 08:20AM 567327 busilist_20190107_0.xml
+01-08-19 08:20AM 567327 busilist_20190108_0.xml
+01-09-19 08:20AM 567327 busilist_20190109_0.xml
+01-10-19 08:20AM 567327 busilist_20190110_0.xml
+01-11-19 08:20AM 567327 busilist_20190111_0.xml
+01-12-19 08:20AM 567327 busilist_20190112_0.xml
+01-13-19 08:20AM 567327 busilist_20190113_0.xml
+01-14-19 08:20AM 567327 busilist_20190114_0.xml
+12-18-18 04:05PM <DIR> log
+11-15-18 09:16AM <DIR> tdir1
+01-14-19 08:20AM <DIR> up
+226 Transfer complete.
+221 Goodbye.]
+2019/01/14 18:11:37.025386903 the ftp server status very good!
+
+2019/01/14 18:13:00.037139382 NOWPSSHNUM=[1]
+     shDebugFlag=[15]
+     logFile=[./log/getFserStas.log]
+     fileNameTmp=[]--------
+     ---------ftp para begine--------
+     ----ftpIP     =[192.168.0.154]
+     ----ftpUser   =[Administrator]
+     ----ftpPwd    =[qwer1234]
+     ----ftpRdir   =[/gaolongshan]
+     ----ftpLdir   =[./]
+     ----fileName  =[busilist_20190114_0.xml]
+     ----ftpCtrPNum=[21]
+     ---------ftp para end----------
+     
+
+ftpRet=[Connected to 192.168.0.154 (192.168.0.154).
+220 Microsoft FTP Service
+Remote system type is Windows_NT.
+331 Password required for Administrator.
+230 User logged in.
+250 CWD command successful.
+Local directory now /home/fczx/src/IIImete/sh
+227 Entering Passive Mode (192,168,0,154,163,39).
+125 Data connection already open; Transfer starting.
+12-18-18 04:10PM 567328 busilist_20181218_0.xml
+12-19-18 09:54AM 567327 busilist_20181219_0.xml
+12-20-18 08:20AM 567327 busilist_20181220_0.xml
+12-21-18 08:24AM 567327 busilist_20181221_0.xml
+12-22-18 08:20AM 567327 busilist_20181222_0.xml
+12-23-18 08:20AM 567327 busilist_20181223_0.xml
+12-24-18 08:20AM 567327 busilist_20181224_0.xml
+12-25-18 08:20AM 567327 busilist_20181225_0.xml
+12-26-18 08:20AM 567327 busilist_20181226_0.xml
+12-27-18 08:20AM 567327 busilist_20181227_0.xml
+12-28-18 08:20AM 567327 busilist_20181228_0.xml
+12-29-18 08:20AM 567327 busilist_20181229_0.xml
+12-30-18 08:20AM 567327 busilist_20181230_0.xml
+12-31-18 08:20AM 567327 busilist_20181231_0.xml
+01-01-19 08:20AM 567327 busilist_20190101_0.xml
+01-02-19 08:20AM 567327 busilist_20190102_0.xml
+01-03-19 08:20AM 567327 busilist_20190103_0.xml
+01-04-19 08:20AM 567327 busilist_20190104_0.xml
+01-05-19 08:20AM 567327 busilist_20190105_0.xml
+01-06-19 08:20AM 567327 busilist_20190106_0.xml
+01-07-19 08:20AM 567327 busilist_20190107_0.xml
+01-08-19 08:20AM 567327 busilist_20190108_0.xml
+01-09-19 08:20AM 567327 busilist_20190109_0.xml
+01-10-19 08:20AM 567327 busilist_20190110_0.xml
+01-11-19 08:20AM 567327 busilist_20190111_0.xml
+01-12-19 08:20AM 567327 busilist_20190112_0.xml
+01-13-19 08:20AM 567327 busilist_20190113_0.xml
+01-14-19 08:20AM 567327 busilist_20190114_0.xml
+12-18-18 04:05PM <DIR> log
+11-15-18 09:16AM <DIR> tdir1
+01-14-19 08:20AM <DIR> up
+226 Transfer complete.
+221 Goodbye.]
+2019/01/14 18:13:00.262123657 the ftp server status very good!
+
+2019/01/14 18:14:46.536299875 NOWPSSHNUM=[2]
+     shDebugFlag=[3]
+     logFile=[./log/getFserStas.log]
+     fileNameTmp=[]--------
+     ---------ftp para begine--------
+     ----ftpIP     =[192.168.0.154]
+     ----ftpUser   =[Administrator]
+     ----ftpPwd    =[qwer1234]
+     ----ftpRdir   =[/gaolongshan]
+     ----ftpLdir   =[./]
+     ----fileName  =[busilist_20190114_0.xml]
+     ----ftpCtrPNum=[21]
+     ---------ftp para end----------
+     
+2019/01/14 18:14:46.767863917 the ftp server status very good!
+
+2019/01/14 18:15:03.069210258 NOWPSSHNUM=[1]
+     shDebugFlag=[7]
+     logFile=[./log/getFserStas.log]
+     fileNameTmp=[]--------
+     ---------ftp para begine--------
+     ----ftpIP     =[192.168.0.154]
+     ----ftpUser   =[Administrator]
+     ----ftpPwd    =[qwer1234]
+     ----ftpRdir   =[/gaolongshan]
+     ----ftpLdir   =[./]
+     ----fileName  =[busilist_20190114_0.xml]
+     ----ftpCtrPNum=[21]
+     ---------ftp para end----------
+     
+
+ftpRet=[Connected to 192.168.0.154 (192.168.0.154).
+220 Microsoft FTP Service
+Remote system type is Windows_NT.
+331 Password required for Administrator.
+230 User logged in.
+250 CWD command successful.
+Local directory now /home/fczx/src/IIImete/sh
+227 Entering Passive Mode (192,168,0,154,163,53).
+125 Data connection already open; Transfer starting.
+12-18-18 04:10PM 567328 busilist_20181218_0.xml
+12-19-18 09:54AM 567327 busilist_20181219_0.xml
+12-20-18 08:20AM 567327 busilist_20181220_0.xml
+12-21-18 08:24AM 567327 busilist_20181221_0.xml
+12-22-18 08:20AM 567327 busilist_20181222_0.xml
+12-23-18 08:20AM 567327 busilist_20181223_0.xml
+12-24-18 08:20AM 567327 busilist_20181224_0.xml
+12-25-18 08:20AM 567327 busilist_20181225_0.xml
+12-26-18 08:20AM 567327 busilist_20181226_0.xml
+12-27-18 08:20AM 567327 busilist_20181227_0.xml
+12-28-18 08:20AM 567327 busilist_20181228_0.xml
+12-29-18 08:20AM 567327 busilist_20181229_0.xml
+12-30-18 08:20AM 567327 busilist_20181230_0.xml
+12-31-18 08:20AM 567327 busilist_20181231_0.xml
+01-01-19 08:20AM 567327 busilist_20190101_0.xml
+01-02-19 08:20AM 567327 busilist_20190102_0.xml
+01-03-19 08:20AM 567327 busilist_20190103_0.xml
+01-04-19 08:20AM 567327 busilist_20190104_0.xml
+01-05-19 08:20AM 567327 busilist_20190105_0.xml
+01-06-19 08:20AM 567327 busilist_20190106_0.xml
+01-07-19 08:20AM 567327 busilist_20190107_0.xml
+01-08-19 08:20AM 567327 busilist_20190108_0.xml
+01-09-19 08:20AM 567327 busilist_20190109_0.xml
+01-10-19 08:20AM 567327 busilist_20190110_0.xml
+01-11-19 08:20AM 567327 busilist_20190111_0.xml
+01-12-19 08:20AM 567327 busilist_20190112_0.xml
+01-13-19 08:20AM 567327 busilist_20190113_0.xml
+01-14-19 08:20AM 567327 busilist_20190114_0.xml
+12-18-18 04:05PM <DIR> log
+11-15-18 09:16AM <DIR> tdir1
+01-14-19 08:20AM <DIR> up
+226 Transfer complete.
+221 Goodbye.]
+2019/01/14 18:15:03.309104399 the ftp server status very good!
+
+2019/01/14 18:15:28.701918219 NOWPSSHNUM=[1]
+     shDebugFlag=[3]
+     logFile=[./log/getFserStas.log]
+     fileNameTmp=[]--------
+     ---------ftp para begine--------
+     ----ftpIP     =[192.168.0.154]
+     ----ftpUser   =[Administrator]
+     ----ftpPwd    =[qwer1234]
+     ----ftpRdir   =[/gaolongshan]
+     ----ftpLdir   =[./]
+     ----fileName  =[busilist_20190114_0.xml]
+     ----ftpCtrPNum=[21]
+     ---------ftp para end----------
+     
+2019/01/14 18:15:28.934619391 the ftp server status very good!
+
+2019/01/14 18:16:04.716324093 NOWPSSHNUM=[1]
+     shDebugFlag=[3]
+     logFile=[./log/getFserStas.log]
+     ---------ftp para begine--------
+     ----ftpIP     =[192.168.0.154]
+     ----ftpUser   =[Administrator]
+     ----ftpPwd    =[qwer1234]
+     ----ftpRdir   =[/gaolongshan]
+     ----ftpLdir   =[./]
+     ----fileName  =[busilist_20190114_0.xml]
+     ----ftpCtrPNum=[21]
+     ---------ftp para end----------
+     
+2019/01/14 18:16:04.947472358 the ftp server status very good!
+
+2019/01/14 18:16:27.957887431 NOWPSSHNUM=[1]
+     shDebugFlag=[3]
+     logFile=[./log/getFserStas.log]
+     ---------ftp para begine--------
+     ----ftpIP     =[192.168.0.154]
+     ----ftpUser   =[Administrator]
+     ----ftpPwd    =[qwer1234]
+     ----ftpRdir   =[/gaolongshan]
+     ----ftpLdir   =[./]
+     ----fileName  =[busilist_20190114_0.xml1]
+     ----ftpCtrPNum=[21]
+     ---------ftp para end----------
+     
+
+ftpRet=[Connected to 192.168.0.154 (192.168.0.154).
+220 Microsoft FTP Service
+Remote system type is Windows_NT.
+331 Password required for Administrator.
+230 User logged in.
+250 CWD command successful.
+Local directory now /home/fczx/src/IIImete/sh
+227 Entering Passive Mode (192,168,0,154,163,66).
+125 Data connection already open; Transfer starting.
+12-18-18 04:10PM 567328 busilist_20181218_0.xml
+12-19-18 09:54AM 567327 busilist_20181219_0.xml
+12-20-18 08:20AM 567327 busilist_20181220_0.xml
+12-21-18 08:24AM 567327 busilist_20181221_0.xml
+12-22-18 08:20AM 567327 busilist_20181222_0.xml
+12-23-18 08:20AM 567327 busilist_20181223_0.xml
+12-24-18 08:20AM 567327 busilist_20181224_0.xml
+12-25-18 08:20AM 567327 busilist_20181225_0.xml
+12-26-18 08:20AM 567327 busilist_20181226_0.xml
+12-27-18 08:20AM 567327 busilist_20181227_0.xml
+12-28-18 08:20AM 567327 busilist_20181228_0.xml
+12-29-18 08:20AM 567327 busilist_20181229_0.xml
+12-30-18 08:20AM 567327 busilist_20181230_0.xml
+12-31-18 08:20AM 567327 busilist_20181231_0.xml
+01-01-19 08:20AM 567327 busilist_20190101_0.xml
+01-02-19 08:20AM 567327 busilist_20190102_0.xml
+01-03-19 08:20AM 567327 busilist_20190103_0.xml
+01-04-19 08:20AM 567327 busilist_20190104_0.xml
+01-05-19 08:20AM 567327 busilist_20190105_0.xml
+01-06-19 08:20AM 567327 busilist_20190106_0.xml
+01-07-19 08:20AM 567327 busilist_20190107_0.xml
+01-08-19 08:20AM 567327 busilist_20190108_0.xml
+01-09-19 08:20AM 567327 busilist_20190109_0.xml
+01-10-19 08:20AM 567327 busilist_20190110_0.xml
+01-11-19 08:20AM 567327 busilist_20190111_0.xml
+01-12-19 08:20AM 567327 busilist_20190112_0.xml
+01-13-19 08:20AM 567327 busilist_20190113_0.xml
+01-14-19 08:20AM 567327 busilist_20190114_0.xml
+12-18-18 04:05PM <DIR> log
+11-15-18 09:16AM <DIR> tdir1
+01-14-19 08:20AM <DIR> up
+226 Transfer complete.
+221 Goodbye.]
+2019/01/14 18:16:28.185348412the file  [busilist_20190114_0.xml1] is not exists
+
+2019/01/14 18:17:05.879530412 NOWPSSHNUM=[1]
+     shDebugFlag=[3]
+     logFile=[./log/getFserStas.log]
+     ---------ftp para begine--------
+     ----ftpIP     =[192.168.0.154]
+     ----ftpUser   =[Administrator]
+     ----ftpPwd    =[qwer1234]
+     ----ftpRdir   =[/gaolongshan1]
+     ----ftpLdir   =[./]
+     ----fileName  =[busilist_20190114_0.xml]
+     ----ftpCtrPNum=[21]
+     ---------ftp para end----------
+     
+
+ftpRet=[Connected to 192.168.0.154 (192.168.0.154).
+220 Microsoft FTP Service
+Remote system type is Windows_NT.
+331 Password required for Administrator.
+230 User logged in.
+550 The system cannot find the file specified.
+Local directory now /home/fczx/src/IIImete/sh
+227 Entering Passive Mode (192,168,0,154,163,70).
+125 Data connection already open; Transfer starting.
+09-21-18 01:08PM <DIR> aspnet_client
+01-14-19 08:20AM <DIR> gaolongshan
+07-27-17 09:13AM 169726 libmete.a
+01-05-19 08:20AM <DIR> meiqiaozhen
+06-22-17 10:20AM <DIR> root
+12-06-18 04:30PM <DIR> Test
+06-23-18 03:02PM <DIR> test1
+11-01-18 04:28PM <DIR> Test2
+04-09-18 01:57PM <DIR> tmp
+12-29-17 01:29PM <DIR> up
+06-22-17 10:10AM <DIR> fczx
+01-14-19 08:20AM <DIR> zhuanghe
+226 Transfer complete.
+221 Goodbye.]
+2019/01/14 18:17:06.101848738 the file path [/gaolongshan1]is error
+
+2019/01/14 18:45:29.499522032 NOWPSSHNUM=[1]
+     shDebugFlag=[3]
+     logFile=[./log/getFserStas.log]
+     ---------ftp para begine--------
+     ----ftpIP     =[192.168.0.154]
+     ----ftpUser   =[Administrator]
+     ----ftpPwd    =[qwer1234]
+     ----ftpRdir   =[/gaolongshan1]
+     ----ftpLdir   =[./]
+     ----fileName  =[busilist_20190114_0.xml]
+     ----ftpCtrPNum=[21]
+     ---------ftp para end----------
+     
+
+ftpRet=[Connected to 192.168.0.154 (192.168.0.154).
+220 Microsoft FTP Service
+Remote system type is Windows_NT.
+331 Password required for Administrator.
+230 User logged in.
+550 The system cannot find the file specified.
+Local directory now /home/fczx/src/IIImete/sh
+227 Entering Passive Mode (192,168,0,154,163,244).
+125 Data connection already open; Transfer starting.
+09-21-18 01:08PM <DIR> aspnet_client
+01-14-19 08:20AM <DIR> gaolongshan
+07-27-17 09:13AM 169726 libmete.a
+01-05-19 08:20AM <DIR> meiqiaozhen
+06-22-17 10:20AM <DIR> root
+12-06-18 04:30PM <DIR> Test
+06-23-18 03:02PM <DIR> test1
+11-01-18 04:28PM <DIR> Test2
+04-09-18 01:57PM <DIR> tmp
+12-29-17 01:29PM <DIR> up
+06-22-17 10:10AM <DIR> fczx
+01-14-19 08:20AM <DIR> zhuanghe
+226 Transfer complete.
+221 Goodbye.]
+2019/01/14 18:45:29.717744895 the file path [/gaolongshan1]is error
+
+2019/01/14 18:45:45.052032942 NOWPSSHNUM=[1]
+     shDebugFlag=[3]
+     logFile=[./log/getFserStas.log]
+     ---------ftp para begine--------
+     ----ftpIP     =[192.168.0.154]
+     ----ftpUser   =[Administrator]
+     ----ftpPwd    =[qwer1234]
+     ----ftpRdir   =[/gaolongshan]
+     ----ftpLdir   =[./]
+     ----fileName  =[busilist_20190114_0.xml]
+     ----ftpCtrPNum=[21]
+     ---------ftp para end----------
+     
+2019/01/14 18:45:45.284887087 the ftp server status very good!
+
+2019/01/15 14:05:54.489003450 NOWPSSHNUM=[1]
+     shDebugFlag=[3]
+     logFile=[./log/getFserStas.log]
+     ---------ftp para begine--------
+     ----ftpIP     =[192.168.0.155]
+     ----ftpUser   =[Administrator]
+     ----ftpPwd    =[qwer1234]
+     ----ftpRdir   =[/gaolongshan]
+     ----ftpLdir   =[./]
+     ----fileName  =[busilist_20190114_0.xml]
+     ----ftpCtrPNum=[21]
+     ---------ftp para end----------
+     
+2019/01/15 14:05:57.629141068 connet ftp server [192.168.0.155 21] is error
+
+2019/01/15 16:29:36.645034158 NOWPSSHNUM=[1]
+     shDebugFlag=[3]
+     logFile=[./log/getFserStas.log]
+     ---------ftp para begine--------
+     ----ftpIP     =[192.168.0.155]
+     ----ftpUser   =[Administrator]
+     ----ftpPwd    =[qwer1234]
+     ----ftpRdir   =[/gaolongshan]
+     ----ftpLdir   =[./]
+     ----fileName  =[busilist_20190114_0.xml]
+     ----ftpCtrPNum=[21]
+     ---------ftp para end----------
+     
+2019/01/15 16:29:36.754625952 the ftp server status very good!
+
+2019/01/15 16:31:03.911825211 NOWPSSHNUM=[1]
+     shDebugFlag=[3]
+     logFile=[./log/getFserStas.log]
+     ---------ftp para begine--------
+     ----ftpIP     =[192.168.0.155]
+     ----ftpUser   =[Administrator]
+     ----ftpPwd    =[qwer1234]
+     ----ftpRdir   =[/gaolongshan]
+     ----ftpLdir   =[./]
+     ----fileName  =[busilist_20190114_0.xml]
+     ----ftpCtrPNum=[21]
+     ---------ftp para end----------
+     
+2019/01/15 16:31:04.007854985 the ftp server status very good!
+
+2019/01/15 16:32:30.953125897 input error,please input like this:
+                 getFserStas.sh <ftpIP> <ftpUser> <ftpPwd> <ftpRdir> <ftpLdir> <fileName>
+2019/01/15 16:33:34.292254820 NOWPSSHNUM=[1]
+     shDebugFlag=[3]
+     logFile=[./log/getFserStas.log]
+     ---------ftp para begine--------
+     ----ftpIP     =[192.168.0.155]
+     ----ftpUser   =[Administrator]
+     ----ftpPwd    =[qwer1234]
+     ----ftpRdir   =[/gaolongshan]
+     ----ftpLdir   =[./]
+     ----fileName  =[busilist_20190114_0.xml]
+     ----ftpCtrPNum=[21]
+     ---------ftp para end----------
+     
+2019/01/15 16:33:34.390004939 the ftp server status very good!
+
+2019/01/15 16:56:36.306163689 NOWPSSHNUM=[1]
+     shDebugFlag=[3]
+     logFile=[./log/getFserStas.log]
+     ---------ftp para begine--------
+     ----ftpIP     =[192.168.0.155]
+     ----ftpUser   =[Administrator]
+     ----ftpPwd    =[qwer1234]
+     ----ftpRdir   =[/gaolongshan]
+     ----ftpLdir   =[./]
+     ----fileName  =[busilist_20190114_0.xml]
+     ----ftpCtrPNum=[21]
+     ---------ftp para end----------
+     
+2019/01/15 16:56:39.454983668 connet ftp server [192.168.0.155 21] is error
+
+2019/01/15 16:57:27.477480190 NOWPSSHNUM=[1]
+     shDebugFlag=[3]
+     logFile=[./log/getFserStas.log]
+     ---------ftp para begine--------
+     ----ftpIP     =[192.168.0.154]
+     ----ftpUser   =[Administrator]
+     ----ftpPwd    =[qwer1234]
+     ----ftpRdir   =[/gaolongshan]
+     ----ftpLdir   =[./]
+     ----fileName  =[busilist_20190114_0.xml]
+     ----ftpCtrPNum=[21]
+     ---------ftp para end----------
+     
+2019/01/15 16:57:27.737820502 the ftp server status very good!
+
+2019/01/15 16:57:41.023738872 NOWPSSHNUM=[2]
+     shDebugFlag=[3]
+     logFile=[./log/getFserStas.log]
+     ---------ftp para begine--------
+     ----ftpIP     =[192.168.0.154]
+     ----ftpUser   =[Administrator]
+     ----ftpPwd    =[qwer1234]
+     ----ftpRdir   =[/gaolongshan]
+     ----ftpLdir   =[./]
+     ----fileName  =[busilist_20190114_0.xml1]
+     ----ftpCtrPNum=[21]
+     ---------ftp para end----------
+     
+
+ftpRet=[function getFtpSerStatu input param 2019/01/15 16:57:41.142713163 
+         debugflag=[1]
+         fileNameTmp=[busilist_20190114_0\.xml1]--------
+         ---------ftp para begine--------
+         ----ftpIP     =[192.168.0.154]
+         ----ftpUser   =[Administrator]
+         ----ftpPwd    =[qwer1234]
+         ----ftpRdir   =[/gaolongshan]
+         ----ftpLdir   =[./]
+         ----fileName  =[busilist_20190114_0.xml1]
+         ----ftpCtrPNum=[21]
+         ---------ftp para end----------
+         
+Connected to 192.168.0.154 (192.168.0.154).
+220 Microsoft FTP Service
+Remote system type is Windows_NT.
+331 Password required for Administrator.
+230 User logged in.
+250 CWD command successful.
+Local directory now /home/fczx/src/IIImete/sh
+227 Entering Passive Mode (192,168,0,154,195,249).
+125 Data connection already open; Transfer starting.
+12-18-18 04:10PM 567328 busilist_20181218_0.xml
+12-19-18 09:54AM 567327 busilist_20181219_0.xml
+12-20-18 08:20AM 567327 busilist_20181220_0.xml
+12-21-18 08:24AM 567327 busilist_20181221_0.xml
+12-22-18 08:20AM 567327 busilist_20181222_0.xml
+12-23-18 08:20AM 567327 busilist_20181223_0.xml
+12-24-18 08:20AM 567327 busilist_20181224_0.xml
+12-25-18 08:20AM 567327 busilist_20181225_0.xml
+12-26-18 08:20AM 567327 busilist_20181226_0.xml
+12-27-18 08:20AM 567327 busilist_20181227_0.xml
+12-28-18 08:20AM 567327 busilist_20181228_0.xml
+12-29-18 08:20AM 567327 busilist_20181229_0.xml
+12-30-18 08:20AM 567327 busilist_20181230_0.xml
+12-31-18 08:20AM 567327 busilist_20181231_0.xml
+01-01-19 08:20AM 567327 busilist_20190101_0.xml
+01-02-19 08:20AM 567327 busilist_20190102_0.xml
+01-03-19 08:20AM 567327 busilist_20190103_0.xml
+01-04-19 08:20AM 567327 busilist_20190104_0.xml
+01-05-19 08:20AM 567327 busilist_20190105_0.xml
+01-06-19 08:20AM 567327 busilist_20190106_0.xml
+01-07-19 08:20AM 567327 busilist_20190107_0.xml
+01-08-19 08:20AM 567327 busilist_20190108_0.xml
+01-09-19 08:20AM 567327 busilist_20190109_0.xml
+01-10-19 08:20AM 567327 busilist_20190110_0.xml
+01-11-19 08:20AM 567327 busilist_20190111_0.xml
+01-12-19 08:20AM 567327 busilist_20190112_0.xml
+01-13-19 08:20AM 567327 busilist_20190113_0.xml
+01-14-19 08:20AM 567327 busilist_20190114_0.xml
+01-15-19 08:20AM 567327 busilist_20190115_0.xml
+12-18-18 04:05PM <DIR> log
+11-15-18 09:16AM <DIR> tdir1
+01-15-19 08:20AM <DIR> up
+226 Transfer complete.
+221 Goodbye.]
+2019/01/15 16:57:41.269224197the file  [busilist_20190114_0.xml1] is not exists
+
+2019/01/15 16:58:11.557950084 NOWPSSHNUM=[1]
+     shDebugFlag=[3]
+     logFile=[./log/getFserStas.log]
+     ---------ftp para begine--------
+     ----ftpIP     =[192.168.0.154]
+     ----ftpUser   =[Administrator]
+     ----ftpPwd    =[qwer1234]
+     ----ftpRdir   =[/gaolongshan]
+     ----ftpLdir   =[./tt]
+     ----fileName  =[busilist_20190114_0.xml]
+     ----ftpCtrPNum=[21]
+     ---------ftp para end----------
+     
+2019/01/15 16:58:11.673003607the local file path [./tt] is error
+
+2019/01/15 16:58:32.407079409 NOWPSSHNUM=[1]
+     shDebugFlag=[3]
+     logFile=[./log/getFserStas.log]
+     ---------ftp para begine--------
+     ----ftpIP     =[192.168.0.154]
+     ----ftpUser   =[Administrator]
+     ----ftpPwd    =[qwer1234]
+     ----ftpRdir   =[/gaolongshan1]
+     ----ftpLdir   =[./]
+     ----fileName  =[busilist_20190114_0.xml]
+     ----ftpCtrPNum=[21]
+     ---------ftp para end----------
+     
+
+ftpRet=[function getFtpSerStatu input param 2019/01/15 16:58:32.525144533 
+         debugflag=[1]
+         fileNameTmp=[busilist_20190114_0\.xml]--------
+         ---------ftp para begine--------
+         ----ftpIP     =[192.168.0.154]
+         ----ftpUser   =[Administrator]
+         ----ftpPwd    =[qwer1234]
+         ----ftpRdir   =[/gaolongshan1]
+         ----ftpLdir   =[./]
+         ----fileName  =[busilist_20190114_0.xml]
+         ----ftpCtrPNum=[21]
+         ---------ftp para end----------
+         
+Connected to 192.168.0.154 (192.168.0.154).
+220 Microsoft FTP Service
+Remote system type is Windows_NT.
+331 Password required for Administrator.
+230 User logged in.
+550 The system cannot find the file specified.
+Local directory now /home/fczx/src/IIImete/sh
+227 Entering Passive Mode (192,168,0,154,195,255).
+125 Data connection already open; Transfer starting.
+09-21-18 01:08PM <DIR> aspnet_client
+01-15-19 08:20AM <DIR> gaolongshan
+07-27-17 09:13AM 169726 libmete.a
+01-05-19 08:20AM <DIR> meiqiaozhen
+06-22-17 10:20AM <DIR> root
+12-06-18 04:30PM <DIR> Test
+06-23-18 03:02PM <DIR> test1
+11-01-18 04:28PM <DIR> Test2
+04-09-18 01:57PM <DIR> tmp
+12-29-17 01:29PM <DIR> up
+06-22-17 10:10AM <DIR> fczx
+01-15-19 08:20AM <DIR> zhuanghe
+226 Transfer complete.
+221 Goodbye.]
+2019/01/15 16:58:32.625560618 the file path [/gaolongshan1]is error
+
+2019/01/15 17:05:42.511521908 NOWPSSHNUM=[2]
+     shDebugFlag=[3]
+     logFile=[./log/getFserStas.log]
+     ---------ftp para begine--------
+     ----ftpIP     =[192.168.0.154]
+     ----ftpUser   =[Administrator]
+     ----ftpPwd    =[qwer1234]
+     ----ftpRdir   =[/gaolongshan1]
+     ----ftpLdir   =[./]
+     ----fileName  =[meteShFunc.sh]
+     ----ftpCtrPNum=[21]
+     ---------ftp para end----------
+     
+
+ftpRet=[function getFtpSerStatu input param 2019/01/15 17:05:42.632611291 
+         debugflag=[1]
+         fileNameTmp=[meteShFunc\.sh]--------
+         ---------ftp para begine--------
+         ----ftpIP     =[192.168.0.154]
+         ----ftpUser   =[Administrator]
+         ----ftpPwd    =[qwer1234]
+         ----ftpRdir   =[/gaolongshan1]
+         ----ftpLdir   =[./]
+         ----fileName  =[meteShFunc.sh]
+         ----ftpCtrPNum=[21]
+         ---------ftp para end----------
+         
+Connected to 192.168.0.154 (192.168.0.154).
+220 Microsoft FTP Service
+Remote system type is Windows_NT.
+331 Password required for Administrator.
+230 User logged in.
+550 The system cannot find the file specified.
+Local directory now /home/fczx/src/IIImete/sh
+227 Entering Passive Mode (192,168,0,154,196,43).
+125 Data connection already open; Transfer starting.
+09-21-18 01:08PM <DIR> aspnet_client
+01-15-19 08:20AM <DIR> gaolongshan
+07-27-17 09:13AM 169726 libmete.a
+01-05-19 08:20AM <DIR> meiqiaozhen
+06-22-17 10:20AM <DIR> root
+12-06-18 04:30PM <DIR> Test
+06-23-18 03:02PM <DIR> test1
+11-01-18 04:28PM <DIR> Test2
+04-09-18 01:57PM <DIR> tmp
+12-29-17 01:29PM <DIR> up
+06-22-17 10:10AM <DIR> fczx
+01-15-19 08:20AM <DIR> zhuanghe
+226 Transfer complete.
+221 Goodbye.]
+2019/01/15 17:05:42.730495018 the file path [/gaolongshan1]is error
+
+2019/01/21 14:32:49.091364064 NOWPSSHNUM=[1]
+     shDebugFlag=[3]
+     logFile=[./log/getFserStas.log]
+     ---------ftp para begine--------
+     ----ftpIP     =[192.168.0.154]
+     ----ftpUser   =[Administrator]
+     ----ftpPwd    =[qwer1235]
+     ----ftpRdir   =[/gaolongshan]
+     ----ftpLdir   =[./]
+     ----fileName  =[busilist_20190114_0.xml]
+     ----ftpCtrPNum=[21]
+     ---------ftp para end----------
+     
+
+ftpRet=[function getFtpSerStatu input param 2019/01/21 14:32:49.237806959 
+         debugflag=[1]
+         opFlag=[0],opStr=[downlaod],opCmd=[mget]
+         trsType=[0],typeStr=[ascii]
+         trsMode=[0],modeStr=[passive],modeOpt=[-p]
+         fileNameTmp=[busilist_20190114_0\.xml]--------
+         ---------ftp para begine--------
+         ----ftpIP     =[192.168.0.154]
+         ----ftpUser   =[Administrator]
+         ----ftpPwd    =[qwer1235]
+         ----ftpRdir   =[/gaolongshan]
+         ----ftpLdir   =[./]
+         ----fileName  =[busilist_20190114_0.xml]
+         ----ftpCtrPNum=[21]
+         ---------ftp para end----------
+         
+Connected to 192.168.0.154 (192.168.0.154).
+220 Microsoft FTP Service
+Remote system type is Windows_NT.
+331 Password required for Administrator.
+530 User cannot log in.
+Login failed.
+200 Type set to A.
+530 Please login with USER and PASS.
+Local directory now /home/fczx/src/IIImete/sh
+530 Please login with USER and PASS.
+Passive mode refused.
+221 Goodbye.]
+2019/01/21 14:32:49.365280275 the ftp username [Administrator] or passwd [qwer1235] is error
+
+2019/01/21 14:38:11.881249562 getFserStas.sh input param
+     shDebugFlag=[3]
+     logFile=[./log/getFserStas.log]
+     ---------ftp para begine--------
+     ----ftpIP     =[192.168.0.154]
+     ----ftpUser   =[Administrator]
+     ----ftpPwd    =[qwer1235]
+     ----ftpRdir   =[/gaolongshan]
+     ----ftpLdir   =[./]
+     ----fileName  =[busilist_20190114_0.xml]
+     ----ftpCtrPNum=[21]
+     ---------ftp para end----------
+     
+
+2019/01/21 14:38:12.042675201 ftpRet=[function getFtpSerStatu input param 2019/01/21 14:38:11.969548824 
+         debugflag=[1]
+         opFlag=[0],opStr=[downlaod],opCmd=[mget]
+         trsType=[0],typeStr=[ascii]
+         trsMode=[0],modeStr=[passive],modeOpt=[-p]
+         fileNameTmp=[busilist_20190114_0\.xml]--------
+         ---------ftp para begine--------
+         ----ftpIP     =[192.168.0.154]
+         ----ftpUser   =[Administrator]
+         ----ftpPwd    =[qwer1235]
+         ----ftpRdir   =[/gaolongshan]
+         ----ftpLdir   =[./]
+         ----fileName  =[busilist_20190114_0.xml]
+         ----ftpCtrPNum=[21]
+         ---------ftp para end----------
+         
+Connected to 192.168.0.154 (192.168.0.154).
+220 Microsoft FTP Service
+Remote system type is Windows_NT.
+331 Password required for Administrator.
+530 User cannot log in.
+Login failed.
+200 Type set to A.
+530 Please login with USER and PASS.
+Local directory now /home/fczx/src/IIImete/sh
+530 Please login with USER and PASS.
+Passive mode refused.
+221 Goodbye.]
+2019/01/21 14:38:12.042675201 the ftp username [Administrator] or passwd [qwer1235] is error
+
+2019/01/21 14:39:03.008456478 getFserStas.sh input param
+     shDebugFlag=[3]
+     logFile=[./log/getFserStas.log]
+     ---------ftp para begine--------
+     ----ftpIP     =[192.168.0.155]
+     ----ftpUser   =[Administrator]
+     ----ftpPwd    =[qwer1234]
+     ----ftpRdir   =[/gaolongshan]
+     ----ftpLdir   =[./]
+     ----fileName  =[busilist_20190114_0.xml]
+     ----ftpCtrPNum=[21]
+     ---------ftp para end----------
+     
+2019/01/21 14:39:06.140461894 connet ftp server [192.168.0.155 21] is error
+
+2019/01/21 14:39:55.280473320 getFserStas.sh input param
+     shDebugFlag=[3]
+     logFile=[./log/getFserStas.log]
+     ---------ftp para begine--------
+     ----ftpIP     =[192.168.0.154]
+     ----ftpUser   =[Administrator]
+     ----ftpPwd    =[qwer1234]
+     ----ftpRdir   =[/gaolongshan]
+     ----ftpLdir   =[./]
+     ----fileName  =[busilist_20190114_0.xml]
+     ----ftpCtrPNum=[21]
+     ---------ftp para end----------
+     
+
+2019/01/21 14:39:55.508249322 ftpRet=[function getFtpSerStatu input param 2019/01/21 14:39:55.384528767 
+         debugflag=[1]
+         opFlag=[0],opStr=[downlaod],opCmd=[mget]
+         trsType=[0],typeStr=[ascii]
+         trsMode=[0],modeStr=[passive],modeOpt=[-p]
+         fileNameTmp=[busilist_20190114_0\.xml]--------
+         ---------ftp para begine--------
+         ----ftpIP     =[192.168.0.154]
+         ----ftpUser   =[Administrator]
+         ----ftpPwd    =[qwer1234]
+         ----ftpRdir   =[/gaolongshan]
+         ----ftpLdir   =[./]
+         ----fileName  =[busilist_20190114_0.xml]
+         ----ftpCtrPNum=[21]
+         ---------ftp para end----------
+         
+Connected to 192.168.0.154 (192.168.0.154).
+220 Microsoft FTP Service
+Remote system type is Windows_NT.
+331 Password required for Administrator.
+230 User logged in.
+200 Type set to A.
+250 CWD command successful.
+Local directory now /home/fczx/src/IIImete/sh
+227 Entering Passive Mode (192,168,0,154,148,85).
+125 Data connection already open; Transfer starting.
+01-21-19 01:31PM 557314 busilist_20181219_0.xml
+12-20-18 08:20AM 567327 busilist_20181220_0.xml
+12-21-18 08:24AM 567327 busilist_20181221_0.xml
+12-22-18 08:20AM 567327 busilist_20181222_0.xml
+12-23-18 08:20AM 567327 busilist_20181223_0.xml
+12-24-18 08:20AM 567327 busilist_20181224_0.xml
+12-25-18 08:20AM 567327 busilist_20181225_0.xml
+12-26-18 08:20AM 567327 busilist_20181226_0.xml
+12-27-18 08:20AM 567327 busilist_20181227_0.xml
+12-28-18 08:20AM 567327 busilist_20181228_0.xml
+12-29-18 08:20AM 567327 busilist_20181229_0.xml
+12-30-18 08:20AM 567327 busilist_20181230_0.xml
+12-31-18 08:20AM 567327 busilist_20181231_0.xml
+01-01-19 08:20AM 567327 busilist_20190101_0.xml
+01-02-19 08:20AM 567327 busilist_20190102_0.xml
+01-03-19 08:20AM 567327 busilist_20190103_0.xml
+01-04-19 08:20AM 567327 busilist_20190104_0.xml
+01-05-19 08:20AM 567327 busilist_20190105_0.xml
+01-06-19 08:20AM 567327 busilist_20190106_0.xml
+01-07-19 08:20AM 567327 busilist_20190107_0.xml
+01-08-19 08:20AM 567327 busilist_20190108_0.xml
+01-09-19 08:20AM 567327 busilist_20190109_0.xml
+01-10-19 08:20AM 567327 busilist_20190110_0.xml
+01-11-19 08:20AM 567327 busilist_20190111_0.xml
+01-12-19 08:20AM 567327 busilist_20190112_0.xml
+01-13-19 08:20AM 567327 busilist_20190113_0.xml
+01-15-19 08:20AM 567327 busilist_20190115_0.xml
+01-16-19 08:20AM 567327 busilist_20190116_0.xml
+01-17-19 08:20AM 567327 busilist_20190117_0.xml
+01-18-19 08:20AM 567327 busilist_20190118_0.xml
+01-19-19 08:20AM 567327 busilist_20190119_0.xml
+01-20-19 08:20AM 567327 busilist_20190120_0.xml
+01-21-19 08:20AM 567327 busilist_20190121_0.xml
+12-18-18 04:05PM <DIR> log
+11-15-18 09:16AM <DIR> tdir1
+01-21-19 08:20AM <DIR> up
+226 Transfer complete.
+221 Goodbye.]
+2019/01/21 14:39:55.508249322the file  [busilist_20190114_0.xml] is not exists
+
+2019/01/21 14:40:47.541570363 getFserStas.sh input param
+     shDebugFlag=[3]
+     logFile=[./log/getFserStas.log]
+     ---------ftp para begine--------
+     ----ftpIP     =[192.168.0.154]
+     ----ftpUser   =[Administrator]
+     ----ftpPwd    =[qwer1234]
+     ----ftpRdir   =[/gaolongshan]
+     ----ftpLdir   =[./]
+     ----fileName  =[busilist_20181219_0.xml]
+     ----ftpCtrPNum=[21]
+     ---------ftp para end----------
+     
+2019/01/21 14:40:47.766915549 the ftp server status very good!
+
+2019/01/21 14:48:13.051272891 getFserStas.sh input param
+     shDebugFlag=[3]
+     opFlag=[0],opStr=[downlaod],opCmd=[mget]
+     trsType=[0],typeStr=[ascii]
+     trsMode=[0],modeStr=[passive],modeOpt=[-p]
+     logFile=[./log/getFserStas.log]
+     ---------ftp para begine--------
+     ----ftpIP     =[192.168.0.154]
+     ----ftpUser   =[Administrator]
+     ----ftpPwd    =[qwer1234]
+     ----ftpRdir   =[/gaolongshan]
+     ----ftpLdir   =[./]
+     ----fileName  =[busilist_20181219_0.xml]
+     ----ftpCtrPNum=[21]
+     ---------ftp para end----------
+     
+2019/01/21 14:48:13.310493199 the ftp server status very good!
+
+2019/01/21 14:52:14.444108384 getFserStas.sh input param
+     shDebugFlag=[3]
+     opFlag=[0],opStr=[downlaod],opCmd=[mget]
+     trsType=[0],typeStr=[ascii]
+     trsMode=[0],modeStr=[passive],modeOpt=[-p]
+     logFile=[./log/getFserStas.log]
+     ---------ftp para begine--------
+     ----ftpIP     =[192.168.0.154]
+     ----ftpUser   =[Administrator]
+     ----ftpPwd    =[qwer1234]
+     ----ftpRdir   =[/gaolongshan]
+     ----ftpLdir   =[./]
+     ----fileName  =[busilist_20181219_0.xml]
+     ----ftpCtrPNum=[21]
+     ---------ftp para end----------
+     
+2019/01/21 14:52:14.665690175 the ftp server status very good!
+
+2019/01/23 18:12:08.077741009 getFserStas.sh input param
+     shDebugFlag=[3]
+     opFlag=[0],opStr=[downlaod],opCmd=[mget]
+     trsType=[0],typeStr=[ascii]
+     trsMode=[0],modeStr=[passive],modeOpt=[-p]
+     logFile=[./log/getFserStas.log]
+     ---------ftp para begine--------
+     ----ftpIP     =[192.168.0.154]
+     ----ftpUser   =[Administrator]
+     ----ftpPwd    =[qwer1234]
+     ----ftpRdir   =[/gaolongshan]
+     ----ftpLdir   =[./]
+     ----fileName  =[busilist_20181219_0.xml]
+     ----ftpCtrPNum=[21]
+     ---------ftp para end----------
+     
+2019/01/23 18:12:08.373296778 the ftp server status very good!
+
+2019/01/23 18:13:40.774985568 getFserStas.sh input param
+     shDebugFlag=[3]
+     opFlag=[0],opStr=[downlaod],opCmd=[mget]
+     trsType=[0],typeStr=[ascii]
+     trsMode=[0],modeStr=[passive],modeOpt=[-p]
+     logFile=[./log/getFserStas.log]
+     ---------ftp para begine--------
+     ----ftpIP     =[192.168.0.154]
+     ----ftpUser   =[Administrator]
+     ----ftpPwd    =[qwer1234]
+     ----ftpRdir   =[/gaolongshan]
+     ----ftpLdir   =[./]
+     ----fileName  =[busilist_20181219_0.xml]
+     ----ftpCtrPNum=[21]
+     ---------ftp para end----------
+     
+2019/01/23 18:13:41.024907177 the ftp server status very good!
+
+2019/01/23 18:15:47.211025497 getFserStas.sh input param
+     shDebugFlag=[3]
+     opFlag=[0],opStr=[downlaod],opCmd=[mget]
+     trsType=[0],typeStr=[ascii]
+     trsMode=[0],modeStr=[passive],modeOpt=[-p]
+     logFile=[./log/getFserStas.log]
+     ---------ftp para begine--------
+     ----ftpIP     =[192.168.0.154]
+     ----ftpUser   =[Administrator]
+     ----ftpPwd    =[qwer1234]
+     ----ftpRdir   =[/gaolongshan]
+     ----ftpLdir   =[./]
+     ----fileName  =[busilist_20181219_0.xml]
+     ----ftpCtrPNum=[21]
+     ---------ftp para end----------
+     
+2019/01/23 18:15:47.441356429 the ftp server status very good!
+
+2019/01/23 18:16:21.189438349 getFserStas.sh input param
+     shDebugFlag=[3]
+     opFlag=[0],opStr=[downlaod],opCmd=[mget]
+     trsType=[0],typeStr=[ascii]
+     trsMode=[0],modeStr=[passive],modeOpt=[-p]
+     logFile=[./log/getFserStas.log]
+     ---------ftp para begine--------
+     ----ftpIP     =[192.168.0.154]
+     ----ftpUser   =[Administrator]
+     ----ftpPwd    =[qwer1234]
+     ----ftpRdir   =[/gaolongshan]
+     ----ftpLdir   =[./]
+     ----fileName  =[busilist_20181219_0.xml1]
+     ----ftpCtrPNum=[21]
+     ---------ftp para end----------
+     
+
+2019/01/23 18:16:21.427057261 ftpRet=[function getFtpSerStatu input param 2019/01/23 18:16:21.302654885 
+         debugflag=[1]
+         opFlag=[0],opStr=[downlaod],opCmd=[mget]
+         trsType=[0],typeStr=[ascii]
+         trsMode=[0],modeStr=[passive],modeOpt=[-p]
+         fileNameTmp=[busilist_20181219_0\.xml1]--------
+         ---------ftp para begine--------
+         ----ftpIP     =[192.168.0.154]
+         ----ftpUser   =[Administrator]
+         ----ftpPwd    =[qwer1234]
+         ----ftpRdir   =[/gaolongshan]
+         ----ftpLdir   =[./]
+         ----fileName  =[busilist_20181219_0.xml1]
+         ----ftpCtrPNum=[21]
+         ---------ftp para end----------
+         
+Connected to 192.168.0.154 (192.168.0.154).
+220 Microsoft FTP Service
+Remote system type is Windows_NT.
+331 Password required for Administrator.
+230 User logged in.
+200 Type set to A.
+250 CWD command successful.
+Local directory now /home/fczx/src/IIImete/sh
+227 Entering Passive Mode (192,168,0,154,223,17).
+125 Data connection already open; Transfer starting.
+01-21-19 01:31PM 557314 busilist_20181219_0.xml
+12-20-18 08:20AM 567327 busilist_20181220_0.xml
+12-21-18 08:24AM 567327 busilist_20181221_0.xml
+12-22-18 08:20AM 567327 busilist_20181222_0.xml
+12-23-18 08:20AM 567327 busilist_20181223_0.xml
+12-24-18 08:20AM 567327 busilist_20181224_0.xml
+12-25-18 08:20AM 567327 busilist_20181225_0.xml
+12-26-18 08:20AM 567327 busilist_20181226_0.xml
+12-27-18 08:20AM 567327 busilist_20181227_0.xml
+12-28-18 08:20AM 567327 busilist_20181228_0.xml
+12-29-18 08:20AM 567327 busilist_20181229_0.xml
+12-30-18 08:20AM 567327 busilist_20181230_0.xml
+12-31-18 08:20AM 567327 busilist_20181231_0.xml
+01-01-19 08:20AM 567327 busilist_20190101_0.xml
+01-02-19 08:20AM 567327 busilist_20190102_0.xml
+01-03-19 08:20AM 567327 busilist_20190103_0.xml
+01-04-19 08:20AM 567327 busilist_20190104_0.xml
+01-05-19 08:20AM 567327 busilist_20190105_0.xml
+01-06-19 08:20AM 567327 busilist_20190106_0.xml
+01-07-19 08:20AM 567327 busilist_20190107_0.xml
+01-08-19 08:20AM 567327 busilist_20190108_0.xml
+01-09-19 08:20AM 567327 busilist_20190109_0.xml
+01-10-19 08:20AM 567327 busilist_20190110_0.xml
+01-11-19 08:20AM 567327 busilist_20190111_0.xml
+01-12-19 08:20AM 567327 busilist_20190112_0.xml
+01-13-19 08:20AM 567327 busilist_20190113_0.xml
+01-15-19 08:20AM 567327 busilist_20190115_0.xml
+01-16-19 08:20AM 567327 busilist_20190116_0.xml
+01-17-19 08:20AM 567327 busilist_20190117_0.xml
+01-18-19 08:20AM 567327 busilist_20190118_0.xml
+01-19-19 08:20AM 567327 busilist_20190119_0.xml
+01-20-19 08:20AM 567327 busilist_20190120_0.xml
+01-21-19 08:20AM 567327 busilist_20190121_0.xml
+01-22-19 08:20AM 567327 busilist_20190122_0.xml
+01-23-19 08:20AM 567327 busilist_20190123_0.xml
+12-18-18 04:05PM <DIR> log
+11-15-18 09:16AM <DIR> tdir1
+01-23-19 08:20AM <DIR> up
+226 Transfer complete.
+221 Goodbye.]
+2019/01/23 18:16:21.427057261the file  [busilist_20181219_0.xml1] is not exists
+
+2019/01/23 18:17:10.886844059 getFserStas.sh input param
+     shDebugFlag=[3]
+     opFlag=[0],opStr=[downlaod],opCmd=[mget]
+     trsType=[1],typeStr=[binary]
+     trsMode=[0],modeStr=[passive],modeOpt=[-p]
+     logFile=[./log/getFserStas.log]
+     ---------ftp para begine--------
+     ----ftpIP     =[192.168.0.154]
+     ----ftpUser   =[Administrator]
+     ----ftpPwd    =[qwer1234]
+     ----ftpRdir   =[/gaolongshan]
+     ----ftpLdir   =[./]
+     ----fileName  =[busilist_20181219_0.xml]
+     ----ftpCtrPNum=[21]
+     ---------ftp para end----------
+     
+2019/01/23 18:17:11.107893109 the ftp server status very good!
+
+2019/01/23 18:41:15.000634121 getFserStas.sh input param
+     shDebugFlag=[3]
+     opFlag=[0],opStr=[downlaod],opCmd=[mget]
+     trsType=[1],typeStr=[binary]
+     trsMode=[0],modeStr=[passive],modeOpt=[-p]
+     logFile=[./log/getFserStas.log]
+     ---------ftp para begine--------
+     ----ftpIP     =[192.168.0.154]
+     ----ftpUser   =[Administrator]
+     ----ftpPwd    =[qwer1234]
+     ----ftpRdir   =[/gaolongshan]
+     ----ftpLdir   =[./]
+     ----fileName  =[busilist_20181219_0.xml]
+     ----ftpCtrPNum=[21]
+     ---------ftp para end----------
+     
+2019/01/23 18:41:15.240719871 the ftp server status very good!
+
+2019/01/23 18:42:33.298387531 getFserStas.sh input param
+     shDebugFlag=[3]
+     opFlag=[0],opStr=[downlaod],opCmd=[mget]
+     trsType=[1],typeStr=[binary]
+     trsMode=[1],modeStr=[active],modeOpt=[-A]
+     logFile=[./log/getFserStas.log]
+     ---------ftp para begine--------
+     ----ftpIP     =[192.168.0.154]
+     ----ftpUser   =[Administrator]
+     ----ftpPwd    =[qwer1234]
+     ----ftpRdir   =[/gaolongshan]
+     ----ftpLdir   =[./]
+     ----fileName  =[busilist_20181219_0.xml]
+     ----ftpCtrPNum=[21]
+     ---------ftp para end----------
+     
+2019/01/23 18:42:33.538853077 the ftp server status very good!
+
+2019/01/23 18:43:39.400076849 getFserStas.sh input param
+     shDebugFlag=[3]
+     opFlag=[0],opStr=[downlaod],opCmd=[mget]
+     trsType=[1],typeStr=[binary]
+     trsMode=[1],modeStr=[active],modeOpt=[-A]
+     logFile=[./log/getFserStas.log]
+     ---------ftp para begine--------
+     ----ftpIP     =[192.168.0.154]
+     ----ftpUser   =[Administrator]
+     ----ftpPwd    =[qwer1234]
+     ----ftpRdir   =[/gaolongshan]
+     ----ftpLdir   =[./]
+     ----fileName  =[busilist_20181219_0.xml1]
+     ----ftpCtrPNum=[21]
+     ---------ftp para end----------
+     
+
+2019/01/23 18:43:39.652620593 ftpRet=[function getFtpSerStatu input param 2019/01/23 18:43:39.522392286 
+         debugflag=[1]
+         opFlag=[0],opStr=[downlaod],opCmd=[mget]
+         trsType=[1],typeStr=[binary]
+         trsMode=[1],modeStr=[active],modeOpt=[-A]
+         fileNameTmp=[busilist_20181219_0\.xml1]--------
+         ---------ftp para begine--------
+         ----ftpIP     =[192.168.0.154]
+         ----ftpUser   =[Administrator]
+         ----ftpPwd    =[qwer1234]
+         ----ftpRdir   =[/gaolongshan]
+         ----ftpLdir   =[./]
+         ----fileName  =[busilist_20181219_0.xml1]
+         ----ftpCtrPNum=[21]
+         ---------ftp para end----------
+         
+Connected to 192.168.0.154 (192.168.0.154).
+220 Microsoft FTP Service
+Remote system type is Windows_NT.
+331 Password required for Administrator.
+230 User logged in.
+200 Type set to I.
+250 CWD command successful.
+Local directory now /home/fczx/src/IIImete/sh
+200 PORT command successful.
+125 Data connection already open; Transfer starting.
+01-21-19 01:31PM 557314 busilist_20181219_0.xml
+12-20-18 08:20AM 567327 busilist_20181220_0.xml
+12-21-18 08:24AM 567327 busilist_20181221_0.xml
+12-22-18 08:20AM 567327 busilist_20181222_0.xml
+12-23-18 08:20AM 567327 busilist_20181223_0.xml
+12-24-18 08:20AM 567327 busilist_20181224_0.xml
+12-25-18 08:20AM 567327 busilist_20181225_0.xml
+12-26-18 08:20AM 567327 busilist_20181226_0.xml
+12-27-18 08:20AM 567327 busilist_20181227_0.xml
+12-28-18 08:20AM 567327 busilist_20181228_0.xml
+12-29-18 08:20AM 567327 busilist_20181229_0.xml
+12-30-18 08:20AM 567327 busilist_20181230_0.xml
+12-31-18 08:20AM 567327 busilist_20181231_0.xml
+01-01-19 08:20AM 567327 busilist_20190101_0.xml
+01-02-19 08:20AM 567327 busilist_20190102_0.xml
+01-03-19 08:20AM 567327 busilist_20190103_0.xml
+01-04-19 08:20AM 567327 busilist_20190104_0.xml
+01-05-19 08:20AM 567327 busilist_20190105_0.xml
+01-06-19 08:20AM 567327 busilist_20190106_0.xml
+01-07-19 08:20AM 567327 busilist_20190107_0.xml
+01-08-19 08:20AM 567327 busilist_20190108_0.xml
+01-09-19 08:20AM 567327 busilist_20190109_0.xml
+01-10-19 08:20AM 567327 busilist_20190110_0.xml
+01-11-19 08:20AM 567327 busilist_20190111_0.xml
+01-12-19 08:20AM 567327 busilist_20190112_0.xml
+01-13-19 08:20AM 567327 busilist_20190113_0.xml
+01-15-19 08:20AM 567327 busilist_20190115_0.xml
+01-16-19 08:20AM 567327 busilist_20190116_0.xml
+01-17-19 08:20AM 567327 busilist_20190117_0.xml
+01-18-19 08:20AM 567327 busilist_20190118_0.xml
+01-19-19 08:20AM 567327 busilist_20190119_0.xml
+01-20-19 08:20AM 567327 busilist_20190120_0.xml
+01-21-19 08:20AM 567327 busilist_20190121_0.xml
+01-22-19 08:20AM 567327 busilist_20190122_0.xml
+01-23-19 08:20AM 567327 busilist_20190123_0.xml
+12-18-18 04:05PM <DIR> log
+11-15-18 09:16AM <DIR> tdir1
+01-23-19 08:20AM <DIR> up
+226 Transfer complete.
+221 Goodbye.]
+2019/01/23 18:43:39.652620593the file  [busilist_20181219_0.xml1] is not exists
+
+2019/01/23 18:45:29.531566974 getFserStas.sh input param
+     shDebugFlag=[3]
+     opFlag=[0],opStr=[downlaod],opCmd=[mget]
+     trsType=[1],typeStr=[binary]
+     trsMode=[0],modeStr=[passive],modeOpt=[-p]
+     logFile=[./log/getFserStas.log]
+     ---------ftp para begine--------
+     ----ftpIP     =[192.168.0.154]
+     ----ftpUser   =[Administrator]
+     ----ftpPwd    =[qwer1234]
+     ----ftpRdir   =[/gaolongshan]
+     ----ftpLdir   =[./]
+     ----fileName  =[busilist_20181219_0.xml1]
+     ----ftpCtrPNum=[21]
+     ---------ftp para end----------
+     
+
+2019/01/23 18:45:29.783422314 ftpRet=[function getFtpSerStatu input param 2019/01/23 18:45:29.654864559 
+         debugflag=[1]
+         opFlag=[0],opStr=[downlaod],opCmd=[mget]
+         trsType=[1],typeStr=[binary]
+         trsMode=[0],modeStr=[passive],modeOpt=[-p]
+         fileNameTmp=[busilist_20181219_0\.xml1]--------
+         ---------ftp para begine--------
+         ----ftpIP     =[192.168.0.154]
+         ----ftpUser   =[Administrator]
+         ----ftpPwd    =[qwer1234]
+         ----ftpRdir   =[/gaolongshan]
+         ----ftpLdir   =[./]
+         ----fileName  =[busilist_20181219_0.xml1]
+         ----ftpCtrPNum=[21]
+         ---------ftp para end----------
+         
+Connected to 192.168.0.154 (192.168.0.154).
+220 Microsoft FTP Service
+Remote system type is Windows_NT.
+331 Password required for Administrator.
+230 User logged in.
+200 Type set to I.
+250 CWD command successful.
+Local directory now /home/fczx/src/IIImete/sh
+227 Entering Passive Mode (192,168,0,154,223,200).
+125 Data connection already open; Transfer starting.
+01-21-19 01:31PM 557314 busilist_20181219_0.xml
+12-20-18 08:20AM 567327 busilist_20181220_0.xml
+12-21-18 08:24AM 567327 busilist_20181221_0.xml
+12-22-18 08:20AM 567327 busilist_20181222_0.xml
+12-23-18 08:20AM 567327 busilist_20181223_0.xml
+12-24-18 08:20AM 567327 busilist_20181224_0.xml
+12-25-18 08:20AM 567327 busilist_20181225_0.xml
+12-26-18 08:20AM 567327 busilist_20181226_0.xml
+12-27-18 08:20AM 567327 busilist_20181227_0.xml
+12-28-18 08:20AM 567327 busilist_20181228_0.xml
+12-29-18 08:20AM 567327 busilist_20181229_0.xml
+12-30-18 08:20AM 567327 busilist_20181230_0.xml
+12-31-18 08:20AM 567327 busilist_20181231_0.xml
+01-01-19 08:20AM 567327 busilist_20190101_0.xml
+01-02-19 08:20AM 567327 busilist_20190102_0.xml
+01-03-19 08:20AM 567327 busilist_20190103_0.xml
+01-04-19 08:20AM 567327 busilist_20190104_0.xml
+01-05-19 08:20AM 567327 busilist_20190105_0.xml
+01-06-19 08:20AM 567327 busilist_20190106_0.xml
+01-07-19 08:20AM 567327 busilist_20190107_0.xml
+01-08-19 08:20AM 567327 busilist_20190108_0.xml
+01-09-19 08:20AM 567327 busilist_20190109_0.xml
+01-10-19 08:20AM 567327 busilist_20190110_0.xml
+01-11-19 08:20AM 567327 busilist_20190111_0.xml
+01-12-19 08:20AM 567327 busilist_20190112_0.xml
+01-13-19 08:20AM 567327 busilist_20190113_0.xml
+01-15-19 08:20AM 567327 busilist_20190115_0.xml
+01-16-19 08:20AM 567327 busilist_20190116_0.xml
+01-17-19 08:20AM 567327 busilist_20190117_0.xml
+01-18-19 08:20AM 567327 busilist_20190118_0.xml
+01-19-19 08:20AM 567327 busilist_20190119_0.xml
+01-20-19 08:20AM 567327 busilist_20190120_0.xml
+01-21-19 08:20AM 567327 busilist_20190121_0.xml
+01-22-19 08:20AM 567327 busilist_20190122_0.xml
+01-23-19 08:20AM 567327 busilist_20190123_0.xml
+12-18-18 04:05PM <DIR> log
+11-15-18 09:16AM <DIR> tdir1
+01-23-19 08:20AM <DIR> up
+226 Transfer complete.
+221 Goodbye.]
+2019/01/23 18:45:29.783422314the file  [busilist_20181219_0.xml1] is not exists
+

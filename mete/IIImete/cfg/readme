@@ -1,0 +1,5 @@
+自动生成配置文件的使用：
+1、修改autoCfg.sh脚本中的配置项，如：反隔目录、ftp server的ip、等
+2、运行脚本autoCfg.sh生成配置文件
+3、检查生成的配置文件locaCfg.xml.ck是否正确
+4、修改配置文件locaCfg.xml.ck的名称为locaCfg.xml

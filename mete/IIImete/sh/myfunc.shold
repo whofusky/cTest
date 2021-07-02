@@ -1,0 +1,216 @@
+#!/bin/bash
+
+#############################################################################
+#author       :    fushikai
+#date         :    20190115
+#linux_version:    Red Hat Enterprise Linux Server release 6.7
+#dsc          :
+#    A simple personalized shell script function
+#    
+#
+#############################################################################
+
+
+function getFileDirFromStr() # dirname=$(getFileDirFromStr $allFile)
+{
+    if [ $# -ne 1 ];then
+        echo "  Error: function getFileDirFromStr input parameters not eq 1!"
+        return 1
+    fi
+
+    if [  -z "$1" ];then
+        echo "  Error: function getFileDirFromStr input parameters is null!"
+        return 2
+    fi
+    
+    dirStr=$(echo "$1"|awk -F'/' '{for(i=1;i<NF;i++){printf "%s/",$i}}')
+    if [ -z "${dirStr}" ];then
+        dirStr="./"
+    fi
+
+    echo "${dirStr}"
+    return 0
+}
+
+
+function outShDebugMsg() #out put $4 to $1; use like: outShDebugMsg $logfile $cfgdebug $valdebug $putcontent $clearflag
+{
+    if [ $# -ne 4 -a $# -ne 5 ];then
+        echo "  Error: function outShDebugMsg input parameters not eq 4 or 5 !"
+        return 1
+    fi
+
+    inum=$#
+    logFile=$1
+    cfgDebugFlag=$2
+    valDebugFlag=$3
+    puttxt="$4"
+    
+    tcheck=$(echo "${cfgDebugFlag}"|sed -n "/^[1-9][0-9]*$/p"|wc -l)
+    [ ${tcheck} -eq 0 ] && cfgDebugFlag=0
+    tcheck=$(echo "${valDebugFlag}"|sed -n "/^[1-9][0-9]*$/p"|wc -l)
+    [ ${tcheck} -eq 0 ] && valDebugFlag=0
+
+    if [ $((${cfgDebugFlag}&${valDebugFlag})) -ne ${valDebugFlag} ];then
+        return 0
+    fi
+    
+    #output content to standard output device if the log file name is empty
+    if [ -z "${logFile}" ];then
+        echo -e "${puttxt}"
+        return 0
+    fi
+
+    tmpdir=$(getFileDirFromStr "${logFile}")
+    ret=$?
+    [ ${ret} -ne 0 ] && echo "${tmpdir}" && return ${ret}
+
+    if [ ! -d "${tmpdir}" ];then
+        echo "  Error: dirname [${tmpdir}] not exist!"
+        return 2
+    fi
+
+    clearFlag=0
+    [ ${inum} -eq 5 ] && clearFlag=$5
+    tcheck=$(echo "${clearFlag}"|sed -n "/^[0-9]$/p"|wc -l)
+    [ ${tcheck} -eq 0 ] && clearFlag=0
+    [ ${clearFlag} -eq 1 ] && >${logFile}
+    
+    if [ ${clearFlag} -eq 2 ];then
+        echo -e "${puttxt}"|tee -a ${logFile}
+    else
+        echo -e "${puttxt}">>${logFile}
+    fi
+    
+    return 0
+}
+
+
+function getFtpSerStatu() #get ftp server's status
+{
+    if [ $# -ne 7 ];then
+        return 1
+    fi
+    
+    debugflag=0
+
+    #ftp ip address
+    ftpIP=$1
+
+    #ftp username
+    ftpUser=$2
+
+    #ftp password
+    ftpPwd=$3
+    
+    #ftp server path
+    ftpRdir="$4"
+
+    #ftp client local path
+    ftpLdir="$5"
+
+    #file name on the service to be processed
+    fileName="$6"
+
+    #the port number
+    ftpCtrPNum=$7
+
+    #if the file name ${fileName} is mutiple file names(separated by spaces or table keys),replaced with | ,and remove the head and tail | (if any)
+    #if the file name R{fileName} contains . replace it whith \. ther is a wildcard * replaced by .{0,} for the subsequent grep -E syntax lookup
+    if [ -n "${fileName}" ];then
+       fileNameTmp=$(echo $fileName|sed 's/[ ,\t]\{1,\}/\|/g'|sed 's/^|//'|sed 's/|$//'|sed 's/\./\\./g'|sed 's/\*\{1,\}/.\{0,\}/g')
+    fi
+
+    logTime="$(date '+%Y/%m/%d %H:%M:%S.%N')"
+
+    outmsg="function getFtpSerStatu input param ${logTime} 
+         debugflag=[${debugflag}]
+         fileNameTmp=[$fileNameTmp]--------
+         ---------ftp para begine--------
+         ----ftpIP     =[${ftpIP}]
+         ----ftpUser   =[${ftpUser}]
+         ----ftpPwd    =[${ftpPwd}]
+         ----ftpRdir   =[${ftpRdir}]
+         ----ftpLdir   =[${ftpLdir}]
+         ----fileName  =[${fileName}]
+         ----ftpCtrPNum=[${ftpCtrPNum}]
+         ---------ftp para end----------
+         "
+    outShDebugMsg "" ${debugflag} 1 "${outmsg}"
+    
+    if [[ ! -d "${ftpLdir}" ]];then
+        #local path error
+        echo "local path [${ftpLdir}] error"
+        return 10
+    fi
+
+    nc -z ${ftpIP} ${ftpCtrPNum} >/dev/null 2>&1
+    ret=$?
+    if [ ${ret} -ne 0 ];then
+        #connect ftp server error
+        echo "connect ftp server[${ftpIP} ${ftpCtrPNum}] error"
+        return 11
+    fi
+
+    if [ -z "${ftpRdir}" ];then
+        ftpRdir="./"
+    fi
+    if [ -z "${ftpLdir}" ];then
+        ftpLdir="./"
+    fi
+
+    ftpRet=$(echo "open ${ftpIP} ${ftpCtrPNum}
+          user ${ftpUser} ${ftpPwd}
+          cd ${ftpRdir}
+          lcd ${ftpLdir}
+          ls
+          bye"|ftp -n -v 2>&1|while read tmpRead
+    do      
+    echo ${tmpRead}     
+    done);
+
+    logTime="$(date '+%Y/%m/%d %H:%M:%S.%N')"
+
+    #service ready
+    v220=$(echo ${ftpRet}|grep -E "\s+\<220\>\s+"|wc -l)
+    #Password required
+    v331=$(echo ${ftpRet}|grep -E "\s+\<331\>\s+"|wc -l)
+    #not logging in to the network
+    v530=$(echo ${ftpRet}|grep -E "\s+\<530\>\s+"|wc -l)
+    #login to the internet
+    v230=$(echo ${ftpRet}|grep -E "\s+\<230\>\s+"|wc -l)
+    #The system cannot find the file specified.
+    v550=$(echo ${ftpRet}|grep -E "\s+\<550\>\s+"|wc -l)
+
+    #TTNUM=$(echo ${ftpRet}|grep -E "User[ ]+cannot[ ]+log"|wc -l)
+    #if [[ "${TTNUM}" -gt 0 ]];then
+    if [[ "${v331}" -gt 0 && "${v530}" -gt 0 ]];then
+        #wrong user name or password
+        echo "${ftpRet}"
+        return 12
+    fi
+
+    #路径错误 或 文件名
+    #TTNUM=$(echo ${ftpRet}|grep -E "cannot[ ]+find[ ]+the[ ]+file"|wc -l)
+    #if [[ "${TTNUM}" -gt 0 ]];then
+    if [[ "${v230}" -gt 0 && "${v550}" -gt 0 ]];then
+        #The system cannot find the file specified.
+        echo "${ftpRet}"
+        return 13
+    fi
+
+    if [ -n "${fileName}" ];then
+        TTNUM=$(echo ${ftpRet}|grep -Ew "${fileNameTmp}"|wc -l)
+        if [[ "${TTNUM}" -eq 0 ]];then
+            #the file  [${fileName}] is not exists"
+            echo "${ftpRet}"
+            return 14
+        fi
+    fi
+
+    echo "${ftpRet}"
+    return 0
+}
+
+
+

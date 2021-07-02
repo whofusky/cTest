@@ -1,0 +1,203 @@
+#ifndef MACRO_H
+#define MACRO_H
+
+
+#define BIN_CNTR1				1	//二进制计数器读数1
+#define BIP_CNTR1				2	//双极性二进制计数器读数1
+#define BCD_CNTR1				3	//BCD计数器读数1
+
+#define APDU_TYPE				0	//APDU域有效标识
+#define ASDU_TYPE				1	//ASDU域有效标识
+#define APDUANDASDU_TYPE		2	//APDU与ASDU域有效标识
+
+/***********************APDU系统编号************************/
+#define APDU_APCI_INDEX			0	//应用规约控制接口
+#define ASDU_TID_INDEX			1	//类型标识
+#define ASDU_LNG_INDEX			2	//ASDU长度
+#define ASDU_VSQ_INDEX			3	//可变结构体限定词
+#define ASDU_COT_INDEX			4	//传送原因
+#define ASDU_ADDR_INDEX			5	//ASDU公共地址
+#define BODY_TID_INDEX			6	//信息体类型
+#define BODY_ADDR_INDEX			7	//信息体地址
+#define BODY_SET_INDEX			8	//信息元素集
+#define BODY_TSP_INDEX			9	//信息体时标
+#define ASDU_TSP_INDEX			10	//ASDU时标
+/************************************************************/
+
+/* 功能为将value的index位设置为0或1*/
+#define SetBit(sign,index,value_p)\
+{\
+	u_char bit;\
+	if (value_p == 0){\
+	bit = 1<< index;\
+	u_char nMark	 = 0;\
+	nMark = (~nMark) ^ (bit);\
+	sign &= nMark;\
+	}\
+	else{\
+	bit   = 1<<index;\
+	sign |= bit;\
+	}\
+}
+
+/***************************104帧***************************/
+#define APDUMAX 255
+#define I_F				0		//I帧
+#define S_F				1		//S帧
+#define U_F				3		//U帧
+#define UNKNOW_F		2
+
+#define U_SRTDT_ACT		0x04	//U帧STARTDT激活
+#define U_SRTDT_CON		0x08	//U帧STARTDT确认
+#define U_STPDT_ACT		0x10	//U帧STOPDT激活
+#define U_STPDT_CON		0x20	//U帧STOPDT确认
+#define U_TST_ACT		0x40	//U帧TESTFR激活
+#define U_TST_CON		0x80	//U帧TESTFR确认
+#endif // MACRO_H
+
+/***************************************************************************/
+/*****************************配置信息*************************************/
+#define CHILD_STAND_NUM	2
+/**************************************************************************/
+#define ACTIVE_TYPE		1	//主动
+#define PASSIVE_TYPE	0	//被动
+
+/**************************配套协议编码************************************/
+#define P_101				0x01
+#define P_102				0x02
+#define P_103				0x03
+#define P_104				0x04
+
+/********************************帧格式************************************/
+#define F1_2				2
+#define UNDEFINE			0xFF
+#define SRTCHAR_F1_1		UNDEFINE
+#define SGLCTLCHAR_F1_1		0x0	// SGLCTLCHAR:单控制字符
+#define SRTCHAR_F1_2_V		0x68	//F1_2：FT1.2，V：变长，SRTCHAR起始字符
+#define SRTCHAR_F1_2_F		0x10	//F：定长
+#define SGLCTLCHAR1_F1_2	0xE5	// SGLCTLCHAR1:单控制字符1
+#define SGLCTLCHAR2_F1_2	0xA2	// SGLCTLCHAR2:单控制字符2
+#define ENDCHAR_F1_2		0x16		//ENDCHAR:结束字符
+#define SRTCHAR_F2			0x27
+#define SGLCTLCHAR_F2		0x14
+#define SRTCHAR_F3			0x0564
+#define DBLCTLCHAR_F3		0x123D  //DBLCTLCHAR: 双控制字符，启动字符2
+
+/*******************************功能编码**************************************/
+
+#define STN_INIT		1		//站初始化
+#define QUE_DATA		2		//查询数据
+#define CYC_TRNS		3		//周期传输
+#define ACQ_EVT			4		//收集事件
+#define QUKCHK_EVT		5		//快检事件
+#define STN_INRGTN		6		//站召唤
+#define CLK_SYN			7		//时钟同步
+#define CMD_TRNS		8		//命令传输
+#define ACMU_TRNS		9		//累积量传输
+#define PARA_LD			10		//参数加载
+#define TST_PRCD		11		//测试过程
+#define FILE_TRNS		12		//文件传输
+#define ACQ_TRNSDLY	    13		//收集传输延迟值
+
+/*****************************模式码******************************************/
+
+#define AUTO		254
+#define UNKNOWN		255
+#define ONLY_ONE	0		//唯一模式
+
+//用查询方式采集数据
+#define POLL_EVT	0		//此方式不能插入其它数据通信过程
+#define POLL_DATA	1		//此方式可插入事件突发过程
+#define RD_DATA		2
+
+
+/**************************通信层编码********************************************/
+#define PHY_LVL			0x01
+#define LNK_LVL			0x02
+#define NAS_LVL			0x04			//网络访问层
+#define LNK_NAS_LVL		0x06                                                                                                                                              
+
+#define APP_LVL			0x08
+#define LNK_APP_LVL		0x82		//=(APP_LVL<<4)|LNK_LVL
+#define NAS_APP_LVL		0x83		//=(APP_LVL<<4)|NAS_LVL
+#define LNK_NAS_APP_LVL	0x86		//=(APP_LVL<<4)|LNK_NAS_LVL
+#define UNKNOWN_LVL		0x00
+
+/*************************/
+#define MC_SEND_WAIT_CHECK		 0x11			// 发送等待验收
+#define MC_SEND_CNUE_EXEC		 0x12			// 发送连续执行
+#define MC_SEND_SSN_RETRY		 0x13			// 发送会话重试
+#define MC_SEND_SSN_FNSH		 0x16			// 发送会话完成
+
+#define MC_NO_SEND_WAIT_CHECK	 0x01		// 不发送等待验收
+#define MC_NO_SEND_CNUE_EXEC	 0x02		// 不发送连续执行
+#define MC_NO_SEND_SSN_STOP		 0x04		// 不发送会话中止
+#define MC_NO_SEND_SSN_FNSH		 0x06		// 不发送会话完成
+/*********************************************************************/
+/*                以下在基本规则、101和104规约库中定义               */
+/****/
+//
+#define UNDEDFINE_TID	0
+#define M_SP			1
+#define M_DP			3
+//...
+#define F_DR			126
+#define OUTRANGE_TID	127
+
+//#define time stamp type
+#define NO_TMSTAMP		0
+#define CP16_TM2a		2
+#define CP24_TM2a		3
+#define CP56_TM2a		7
+
+/******************************基本应用功能**************************************/
+#define C_IC_NA			100	//召唤命令类型标识(tid)
+#define C_RD_NA			102	//读命令类型标识（tid）
+#define C_CS_NA			103	//时钟同步命令类型标识（tid）
+
+#define C_N				1	//可变结构限定词N部分;
+#define C_SQ			1	//可变结构限定词SQ部分;
+
+#define C_COT_1			1	//周期、循环;
+#define C_COT_3			3	//突发(自发);
+#define C_COT_5			5	//请求;
+#define C_COT_6			6	//激活站召唤;
+#define C_COT_7			7	//确认激活站召唤;
+#define C_COT_20		20	//响应站召唤;
+#define C_COT_36		36	//响应第16组召唤;
+
+#define C_STEP_NO_ONE	1	//步号：1
+#define C_STEP_NO_TWO	2	//步号：2
+
+/***************************************************************************/
+#define TIMER_NOP	0		//定时器空操作，继续原状态（或暂停恢复）
+#define TIMER_START	1		//定时器启动操作
+#define TIMER_STOP	2		//定时器定值操作，重新复位
+#define TIMER_PAUSE	3		//定时器暂停操作
+
+/***************************************************************************/
+
+// 站点角色
+#define MASTER_STATION     0x1  // 控制站（主站）
+#define SLAVE_STATION      0x2  // 被控制站（子站）
+#define COMBINED_STATION   0x3  // 系统站（综合站）
+
+// 控制站（主站）的状态类型
+#define MASTER_STOPPED              0x0  // STOPPED连接
+#define MASTER_STARTED              0x1  // STARTED连接
+#define MASTER_UNCONFIRMED_STOPPED  0x2  // 挂起未确认STOPPED连接
+#define MASTER_PEND_STARTED         0x3  // 挂起STARTED连接
+#define MASTER_PEND_STOPPED         0x4  // 挂起STOPPED连接
+
+// 被控制站（子站）的状态类型
+#define SLAVE_STOPPED               0x0  // STOPPED连接
+#define SLAVE_STARTED               0x1  // STOPPED连接
+#define SLAVE_UNCONFIRMED_STOPPED   0x2  // 挂起未确认STOPPED连接
+
+// 定义数据帧的类型的功能
+#define IEC104_TESTFR_ACK   0x83  // TESTFR确认
+#define IEC104_TESTFR_ACT   0x43  // TESTFR激活
+#define IEC104_STOPDT_ACK   0x23  // STOPDT确认
+#define IEC104_STOPDT_ACT   0x13  // STOPDT激活
+#define IEC104_STARTDT_ACK  0x0B  // STARTDT确认
+#define IEC104_STARTDT_ACT  0x07  // STARTDT激活

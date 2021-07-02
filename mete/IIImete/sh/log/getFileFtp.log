@@ -1,0 +1,951 @@
+2019/01/16 10:49:20.759174495 getFileFtp.sh:6:start -->
+2019/01/16 10:49:20.759174495 mkdir -p ../filedo/down/back
+2019/01/16 10:49:21.089503028 getFileFtp.sh:6:unsucessfull 
+2019/01/16 10:52:57.844998228 getFileFtp.sh:6:start -->
+2019/01/16 10:53:16.483842235 getFileFtp.sh:6:end 
+2019/01/16 11:00:21.845600635 --debug:input param nums:6
+                   --logFile=[./log/getFileFtp.log]
+2019/01/16 11:00:21.845600635 shDebugFlag=[15]
+        ---------ftp para begine--------
+        ----ftpIP     =[192.168.0.154]
+        ----ftpUser   =[Administrator]
+        ----ftpPwd    =[qwer1234]
+        ----ftpRdir   =[/gaolongshan]
+        ----ftpLdir   =[./]
+        ----fileName  =[busilist_20181218_0.xml]
+        ----ftpCtrPNum=[21]
+        ----ftpTrType =[ascii]
+        ---------ftp para end----------
+
+2019/01/16 11:00:22.219279001 ftpRet=[function getFtpSerStatu input param 2019/01/16 11:00:21.999513379 
+         debugflag=[1]
+         opFlag=[0],opStr=[downlaod],opCmd=[mget]
+         trsType=[0],typeStr=[ascii]
+         trsMode=[0],modeStr=[passive],modeOpt=[-p]
+         fileNameTmp=[busilist_20181218_0\.xml]--------
+         ---------ftp para begine--------
+         ----ftpIP     =[192.168.0.154]
+         ----ftpUser   =[Administrator]
+         ----ftpPwd    =[qwer1234]
+         ----ftpRdir   =[/gaolongshan]
+         ----ftpLdir   =[./]
+         ----fileName  =[busilist_20181218_0.xml]
+         ----ftpCtrPNum=[21]
+         ---------ftp para end----------
+         
+Connected to 192.168.0.154 (192.168.0.154).
+220 Microsoft FTP Service
+Remote system type is Windows_NT.
+331 Password required for Administrator.
+230 User logged in.
+200 Type set to A.
+250 CWD command successful.
+Local directory now /home/fczx/src/IIImete/sh
+Interactive mode off.
+local: busilist_20181218_0.xml remote: busilist_20181218_0.xml
+227 Entering Passive Mode (192,168,0,154,222,4).
+125 Data connection already open; Transfer starting.
+226 Transfer complete.
+567328 bytes received in 0.106 secs (5370.59 Kbytes/sec)
+221 Goodbye.]
+2019/01/16 11:00:22.219279001 numDFiles=[1],ftpRetD=[Local directory now /home/fczx/src/IIImete/sh
+Interactive mode off.]
+2019/01/16 11:00:22.219279001 ++++++.//busilist_20181218_0.xml 
+2019/01/16 11:06:15.339324289 --debug:input param nums:6
+                   --logFile=[./log/getFileFtp.log]
+2019/01/16 11:06:15.339324289 shDebugFlag=[15]
+        ---------ftp para begine--------
+        ----ftpIP     =[192.168.0.154]
+        ----ftpUser   =[Administrator]
+        ----ftpPwd    =[qwer1234]
+        ----ftpRdir   =[/gaolongshan]
+        ----ftpLdir   =[.]
+        ----fileName  =[busilist_20181219_0.xml]
+        ----ftpCtrPNum=[21]
+        ----ftpTrType =[ascii]
+        ---------ftp para end----------
+
+2019/01/16 11:06:15.681793084 ftpRet=[function getFtpSerStatu input param 2019/01/16 11:06:15.482628455 
+         debugflag=[1]
+         opFlag=[0],opStr=[downlaod],opCmd=[mget]
+         trsType=[0],typeStr=[ascii]
+         trsMode=[0],modeStr=[passive],modeOpt=[-p]
+         fileNameTmp=[busilist_20181219_0\.xml]--------
+         ---------ftp para begine--------
+         ----ftpIP     =[192.168.0.154]
+         ----ftpUser   =[Administrator]
+         ----ftpPwd    =[qwer1234]
+         ----ftpRdir   =[/gaolongshan]
+         ----ftpLdir   =[.]
+         ----fileName  =[busilist_20181219_0.xml]
+         ----ftpCtrPNum=[21]
+         ---------ftp para end----------
+         
+Connected to 192.168.0.154 (192.168.0.154).
+220 Microsoft FTP Service
+Remote system type is Windows_NT.
+331 Password required for Administrator.
+230 User logged in.
+200 Type set to A.
+250 CWD command successful.
+Local directory now /home/fczx/src/IIImete/sh
+Interactive mode off.
+local: busilist_20181219_0.xml remote: busilist_20181219_0.xml
+227 Entering Passive Mode (192,168,0,154,222,48).
+125 Data connection already open; Transfer starting.
+226 Transfer complete.
+567327 bytes received in 0.101 secs (5594.55 Kbytes/sec)
+221 Goodbye.]
+2019/01/16 11:06:15.681793084 numDFiles=[1],ftpRetD=[Local directory now /home/fczx/src/IIImete/sh
+Interactive mode off.]
+2019/01/16 11:06:15.681793084 ++++++./busilist_20181219_0.xml 
+2019/01/16 11:13:15.562002187 --debug:input param nums:6
+                   --logFile=[./log/getFileFtp.log]
+2019/01/16 11:13:15.562002187 shDebugFlag=[15]
+        ---------ftp para begine--------
+        ----ftpIP     =[192.168.0.154]
+        ----ftpUser   =[Administrator]
+        ----ftpPwd    =[qwer1234]
+        ----ftpRdir   =[/gaolongshan]
+        ----ftpLdir   =[.]
+        ----fileName  =[busilist_20181219_0.xml]
+        ----ftpCtrPNum=[21]
+        ----ftpTrType =[ascii]
+        ---------ftp para end----------
+
+2019/01/16 11:13:15.882321868 ftpRet=[function getFtpSerStatu input param 2019/01/16 11:13:15.717130397 
+         debugflag=[1]
+         opFlag=[0],opStr=[downlaod],opCmd=[mget]
+         trsType=[0],typeStr=[ascii]
+         trsMode=[0],modeStr=[passive],modeOpt=[-p]
+         fileNameTmp=[busilist_20181219_0\.xml]--------
+         ---------ftp para begine--------
+         ----ftpIP     =[192.168.0.154]
+         ----ftpUser   =[Administrator]
+         ----ftpPwd    =[qwer1234]
+         ----ftpRdir   =[/gaolongshan]
+         ----ftpLdir   =[.]
+         ----fileName  =[busilist_20181219_0.xml]
+         ----ftpCtrPNum=[21]
+         ---------ftp para end----------
+         
+Connected to 192.168.0.154 (192.168.0.154).
+220 Microsoft FTP Service
+Remote system type is Windows_NT.
+331 Password required for Administrator.
+230 User logged in.
+200 Type set to A.
+250 CWD command successful.
+Local directory now /home/fczx/src/IIImete/sh
+Interactive mode off.
+local: busilist_20181219_0.xml remote: busilist_20181219_0.xml
+227 Entering Passive Mode (192,168,0,154,222,93).
+125 Data connection already open; Transfer starting.
+226 Transfer complete.
+567327 bytes received in 0.0644 secs (8815.31 Kbytes/sec)
+221 Goodbye.]
+2019/01/16 11:13:15.882321868 numDFiles=[1],ftpRetD=[Local directory now /home/fczx/src/IIImete/sh
+Interactive mode off.]
+2019/01/16 11:13:15.882321868 ++++++./busilist_20181219_0.xml 
+2019/01/16 11:27:52.323846266 --debug:input param nums:6
+                   --logFile=[./log/getFileFtp.log]
+2019/01/16 11:27:52.323846266 shDebugFlag=[15]
+        ---------ftp para begine--------
+        ----ftpIP     =[192.168.0.154]
+        ----ftpUser   =[Administrator]
+        ----ftpPwd    =[qwer1234]
+        ----ftpRdir   =[/gaolongshan]
+        ----ftpLdir   =[./tmpD]
+        ----ftpLdirAims=[.]
+        ----fileName  =[busilist_20181219_0.xml]
+        ----ftpCtrPNum=[21]
+        ----ftpTrType =[ascii]
+        ---------ftp para end----------
+
+2019/01/16 11:27:52.630133166 ftpRet=[function getFtpSerStatu input param 2019/01/16 11:27:52.464066818 
+         debugflag=[1]
+         opFlag=[0],opStr=[downlaod],opCmd=[mget]
+         trsType=[0],typeStr=[ascii]
+         trsMode=[0],modeStr=[passive],modeOpt=[-p]
+         fileNameTmp=[busilist_20181219_0\.xml]--------
+         ---------ftp para begine--------
+         ----ftpIP     =[192.168.0.154]
+         ----ftpUser   =[Administrator]
+         ----ftpPwd    =[qwer1234]
+         ----ftpRdir   =[/gaolongshan]
+         ----ftpLdir   =[./tmpD]
+         ----fileName  =[busilist_20181219_0.xml]
+         ----ftpCtrPNum=[21]
+         ---------ftp para end----------
+         
+Connected to 192.168.0.154 (192.168.0.154).
+220 Microsoft FTP Service
+Remote system type is Windows_NT.
+331 Password required for Administrator.
+230 User logged in.
+200 Type set to A.
+250 CWD command successful.
+Local directory now /home/fczx/src/IIImete/sh/tmpD
+Interactive mode off.
+local: busilist_20181219_0.xml remote: busilist_20181219_0.xml
+227 Entering Passive Mode (192,168,0,154,222,186).
+125 Data connection already open; Transfer starting.
+226 Transfer complete.
+567327 bytes received in 0.0682 secs (8314.19 Kbytes/sec)
+221 Goodbye.]
+2019/01/16 11:27:52.630133166 numDFiles=[1],ftpRetD=[Local directory now /home/fczx/src/IIImete/sh/tmpD
+Interactive mode off.]
+2019/01/16 11:27:52.630133166 ++++++./tmpD/busilist_20181219_0.xml 
+2019/01/16 13:30:19.744247007 getFileFtp.sh:6:start -->
+2019/01/16 13:30:19.744247007 --debug:input param nums:6
+                   --logFile=[./log/getFileFtp.log]
+2019/01/16 13:30:19.744247007 shDebugFlag=[255]
+        ---------ftp para begine--------
+        ----ftpIP     =[192.168.0.154]
+        ----ftpUser   =[Administrator]
+        ----ftpPwd    =[qwer1234]
+        ----ftpRdir   =[/gaolongshan]
+        ----ftpLdir   =[./tmpD]
+        ----ftpLdirAims=[.]
+        ----fileName  =[busilist_20181219_0.xml]
+        ----ftpCtrPNum=[21]
+        ----ftpTrType =[ascii]
+        ---------ftp para end----------
+
+2019/01/16 13:30:20.081427492 ftpRet=[function getFtpSerStatu input param 2019/01/16 13:30:19.916543801 
+         debugflag=[1]
+         opFlag=[0],opStr=[downlaod],opCmd=[mget]
+         trsType=[0],typeStr=[ascii]
+         trsMode=[0],modeStr=[passive],modeOpt=[-p]
+         fileNameTmp=[busilist_20181219_0\.xml]--------
+         ---------ftp para begine--------
+         ----ftpIP     =[192.168.0.154]
+         ----ftpUser   =[Administrator]
+         ----ftpPwd    =[qwer1234]
+         ----ftpRdir   =[/gaolongshan]
+         ----ftpLdir   =[./tmpD]
+         ----fileName  =[busilist_20181219_0.xml]
+         ----ftpCtrPNum=[21]
+         ---------ftp para end----------
+         
+Connected to 192.168.0.154 (192.168.0.154).
+220 Microsoft FTP Service
+Remote system type is Windows_NT.
+331 Password required for Administrator.
+230 User logged in.
+200 Type set to A.
+250 CWD command successful.
+Local directory now /home/fczx/src/IIImete/sh/tmpD
+Interactive mode off.
+local: busilist_20181219_0.xml remote: busilist_20181219_0.xml
+227 Entering Passive Mode (192,168,0,154,225,166).
+125 Data connection already open; Transfer starting.
+226 Transfer complete.
+567327 bytes received in 0.0666 secs (8515.48 Kbytes/sec)
+221 Goodbye.]
+2019/01/16 13:30:20.081427492 numDFiles=[1],ftpRetD=[Local directory now /home/fczx/src/IIImete/sh/tmpD
+Interactive mode off.]
+2019/01/16 13:30:20.081427492 ++++++./tmpD/busilist_20181219_0.xml 
+2019/01/16 13:30:20.476179115 getFileFtp.sh:6:end 
+2019/01/16 13:38:46.108765951 getFileFtp.sh:6:start -->
+2019/01/16 13:38:46.108765951 --debug:input param nums:6
+                   --logFile=[./log/getFileFtp.log]
+2019/01/16 13:38:46.108765951 shDebugFlag=[255]
+        ---------ftp para begine--------
+        ----ftpIP     =[192.168.0.154]
+        ----ftpUser   =[Administrator]
+        ----ftpPwd    =[qwer1234]
+        ----ftpRdir   =[/gaolongshan]
+        ----ftpLdir   =[./tmpD]
+        ----ftpLdirAims=[.]
+        ----fileName  =[busilist_20181219_0.xml]
+        ----ftpCtrPNum=[21]
+        ----ftpTrType =[ascii]
+        ---------ftp para end----------
+
+2019/01/16 13:38:46.375759928 ftpRet=[function getFtpSerStatu input param 2019/01/16 13:38:46.273054731 
+         debugflag=[1]
+         opFlag=[0],opStr=[downlaod],opCmd=[mget]
+         trsType=[0],typeStr=[ascii]
+         trsMode=[0],modeStr=[passive],modeOpt=[-p]
+         fileNameTmp=[busilist_20181219_0\.xml]--------
+         ---------ftp para begine--------
+         ----ftpIP     =[192.168.0.154]
+         ----ftpUser   =[Administrator]
+         ----ftpPwd    =[qwer1234]
+         ----ftpRdir   =[/gaolongshan]
+         ----ftpLdir   =[./tmpD]
+         ----fileName  =[busilist_20181219_0.xml]
+         ----ftpCtrPNum=[21]
+         ---------ftp para end----------
+         
+Connected to 192.168.0.154 (192.168.0.154).
+220 Microsoft FTP Service
+Remote system type is Windows_NT.
+331 Password required for Administrator.
+230 User logged in.
+200 Type set to A.
+250 CWD command successful.
+Local directory now /home/fczx/src/IIImete/sh/tmpD
+Interactive mode off.
+The system cannot find the file specified.
+221 Goodbye.]
+2019/01/16 13:38:46.441596497 getFileFtp.sh:6:unsucessfull 
+2019/01/16 13:44:29.522116246 getFileFtp.sh:6:start -->
+2019/01/16 13:44:29.522116246 --debug:input param nums:6
+                   --logFile=[./log/getFileFtp.log]
+2019/01/16 13:44:29.522116246 shDebugFlag=[255]
+        ---------ftp para begine--------
+        ----ftpIP     =[192.168.0.154]
+        ----ftpUser   =[Administrator]
+        ----ftpPwd    =[qwer1234]
+        ----ftpRdir   =[/gaolongshan]
+        ----ftpLdir   =[./tmpD]
+        ----ftpLdirAims=[.]
+        ----fileName  =[busilist_20181219_0.xml]
+        ----ftpCtrPNum=[21]
+        ----ftpTrType =[ascii]
+        ---------ftp para end----------
+
+2019/01/16 13:44:29.868099043 ftpRet=[function getFtpSerStatu input param 2019/01/16 13:44:29.698743059 
+         debugflag=[1]
+         opFlag=[0],opStr=[downlaod],opCmd=[mget]
+         trsType=[0],typeStr=[ascii]
+         trsMode=[0],modeStr=[passive],modeOpt=[-p]
+         fileNameTmp=[busilist_20181219_0\.xml]--------
+         ---------ftp para begine--------
+         ----ftpIP     =[192.168.0.154]
+         ----ftpUser   =[Administrator]
+         ----ftpPwd    =[qwer1234]
+         ----ftpRdir   =[/gaolongshan]
+         ----ftpLdir   =[./tmpD]
+         ----fileName  =[busilist_20181219_0.xml]
+         ----ftpCtrPNum=[21]
+         ---------ftp para end----------
+         
+Connected to 192.168.0.154 (192.168.0.154).
+220 Microsoft FTP Service
+Remote system type is Windows_NT.
+331 Password required for Administrator.
+230 User logged in.
+200 Type set to A.
+250 CWD command successful.
+Local directory now /home/fczx/src/IIImete/sh/tmpD
+Interactive mode off.
+local: busilist_20181219_0.xml remote: busilist_20181219_0.xml
+227 Entering Passive Mode (192,168,0,154,226,2).
+150 Opening ASCII mode data connection.
+226 Transfer complete.
+567327 bytes received in 0.0704 secs (8057.25 Kbytes/sec)
+221 Goodbye.]
+2019/01/16 13:44:29.868099043 numDFiles=[1],ftpRetD=[Local directory now /home/fczx/src/IIImete/sh/tmpD
+Interactive mode off.]
+2019/01/16 13:44:29.868099043 ++++++./tmpD/busilist_20181219_0.xml 
+2019/01/16 13:44:30.214693108 getFileFtp.sh:6:end 
+2019/01/16 13:47:02.175882652 getFileFtp.sh:6:start -->
+2019/01/16 13:47:02.175882652 --debug:input param nums:6
+                   --logFile=[./log/getFileFtp.log]
+2019/01/16 13:47:02.175882652 shDebugFlag=[255]
+        ---------ftp para begine--------
+        ----ftpIP     =[192.168.0.154]
+        ----ftpUser   =[Administrator]
+        ----ftpPwd    =[qwer1234]
+        ----ftpRdir   =[/gaolongshan]
+        ----ftpLdir   =[./tmpD]
+        ----ftpLdirAims=[.]
+        ----fileName  =[busilist_20181219_0.xml]
+        ----ftpCtrPNum=[21]
+        ----ftpTrType =[ascii]
+        ---------ftp para end----------
+
+2019/01/16 13:47:02.419876427 ftpRet=[function getFtpSerStatu input param 2019/01/16 13:47:02.306612229 
+         debugflag=[1]
+         opFlag=[0],opStr=[downlaod],opCmd=[mget]
+         trsType=[0],typeStr=[ascii]
+         trsMode=[0],modeStr=[passive],modeOpt=[-p]
+         fileNameTmp=[busilist_20181219_0\.xml]--------
+         ---------ftp para begine--------
+         ----ftpIP     =[192.168.0.154]
+         ----ftpUser   =[Administrator]
+         ----ftpPwd    =[qwer1234]
+         ----ftpRdir   =[/gaolongshan]
+         ----ftpLdir   =[./tmpD]
+         ----fileName  =[busilist_20181219_0.xml]
+         ----ftpCtrPNum=[21]
+         ---------ftp para end----------
+         
+Connected to 192.168.0.154 (192.168.0.154).
+220 Microsoft FTP Service
+Remote system type is Windows_NT.
+331 Password required for Administrator.
+230 User logged in.
+200 Type set to A.
+250 CWD command successful.
+Local directory now /home/fczx/src/IIImete/sh/tmpD
+Interactive mode off.
+local: busilist_20181219_0.xml remote: busilist_20181219_0.xml
+227 Entering Passive Mode (192,168,0,154,226,21).
+125 Data connection already open; Transfer starting.
+226 Transfer complete.
+567327 bytes received in 0.0484 secs (11729.87 Kbytes/sec)
+221 Goodbye.]
+2019/01/16 13:47:02.419876427 numDFiles=[1],ftpRetD=[Local directory now /home/fczx/src/IIImete/sh/tmpD
+Interactive mode off.]
+2019/01/16 13:47:02.419876427 ++++++./tmpD/busilist_20181219_0.xml 
+2019/01/16 13:47:02.650203801 getFileFtp.sh:6:end 
+2019/01/16 13:51:07.933659330 getFileFtp.sh:6:start -->
+2019/01/16 13:51:07.933659330 --debug:input param nums:6
+                   --logFile=[./log/getFileFtp.log]
+2019/01/16 13:51:07.933659330 shDebugFlag=[255]
+        ---------ftp para begine--------
+        ----ftpIP     =[192.168.0.154]
+        ----ftpUser   =[Administrator]
+        ----ftpPwd    =[qwer1234]
+        ----ftpRdir   =[/gaolongshan]
+        ----ftpLdir   =[./tmpD]
+        ----ftpLdirAims=[.]
+        ----fileName  =[busilist_20181219_0.xml]
+        ----ftpCtrPNum=[21]
+        ----ftpTrType =[ascii]
+        ---------ftp para end----------
+
+2019/01/16 13:51:08.307187876 ftpRet=[function getFtpSerStatu input param 2019/01/16 13:51:08.127274945 
+         debugflag=[1]
+         opFlag=[0],opStr=[downlaod],opCmd=[mget]
+         trsType=[0],typeStr=[ascii]
+         trsMode=[0],modeStr=[passive],modeOpt=[-p]
+         fileNameTmp=[busilist_20181219_0\.xml]--------
+         ---------ftp para begine--------
+         ----ftpIP     =[192.168.0.154]
+         ----ftpUser   =[Administrator]
+         ----ftpPwd    =[qwer1234]
+         ----ftpRdir   =[/gaolongshan]
+         ----ftpLdir   =[./tmpD]
+         ----fileName  =[busilist_20181219_0.xml]
+         ----ftpCtrPNum=[21]
+         ---------ftp para end----------
+         
+Connected to 192.168.0.154 (192.168.0.154).
+220 Microsoft FTP Service
+Remote system type is Windows_NT.
+331 Password required for Administrator.
+230 User logged in.
+200 Type set to A.
+250 CWD command successful.
+Local directory now /home/fczx/src/IIImete/sh/tmpD
+Interactive mode off.
+local: busilist_20181219_0.xml remote: busilist_20181219_0.xml
+227 Entering Passive Mode (192,168,0,154,226,49).
+125 Data connection already open; Transfer starting.
+226 Transfer complete.
+567327 bytes received in 0.0725 secs (7824.77 Kbytes/sec)
+221 Goodbye.]
+2019/01/16 13:51:08.307187876 numDFiles=[1],ftpRetD=[Local directory now /home/fczx/src/IIImete/sh/tmpD
+Interactive mode off.]
+2019/01/16 13:51:08.307187876 ++++++./tmpD/busilist_20181219_0.xml 
+2019/01/16 13:51:08.718497189 getFileFtp.sh:6:end 
+2019/01/16 13:53:16.652991778 getFileFtp.sh:6:start -->
+2019/01/16 13:53:16.652991778 --debug:input param nums:6
+                   --logFile=[./log/getFileFtp.log]
+2019/01/16 13:53:16.652991778 shDebugFlag=[255]
+        ---------ftp para begine--------
+        ----ftpIP     =[192.168.0.154]
+        ----ftpUser   =[Administrator]
+        ----ftpPwd    =[qwer1234]
+        ----ftpRdir   =[/gaolongshan]
+        ----ftpLdir   =[./tmpD]
+        ----ftpLdirAims=[.]
+        ----fileName  =[busilist_20181219_0.xml]
+        ----ftpCtrPNum=[21]
+        ----ftpTrType =[ascii]
+        ---------ftp para end----------
+
+2019/01/16 13:53:16.998034056 ftpRet=[function getFtpSerStatu input param 2019/01/16 13:53:16.833170422 
+         debugflag=[1]
+         opFlag=[0],opStr=[downlaod],opCmd=[mget]
+         trsType=[0],typeStr=[ascii]
+         trsMode=[0],modeStr=[passive],modeOpt=[-p]
+         fileNameTmp=[busilist_20181219_0\.xml]--------
+         ---------ftp para begine--------
+         ----ftpIP     =[192.168.0.154]
+         ----ftpUser   =[Administrator]
+         ----ftpPwd    =[qwer1234]
+         ----ftpRdir   =[/gaolongshan]
+         ----ftpLdir   =[./tmpD]
+         ----fileName  =[busilist_20181219_0.xml]
+         ----ftpCtrPNum=[21]
+         ---------ftp para end----------
+         
+Connected to 192.168.0.154 (192.168.0.154).
+220 Microsoft FTP Service
+Remote system type is Windows_NT.
+331 Password required for Administrator.
+230 User logged in.
+200 Type set to A.
+250 CWD command successful.
+Local directory now /home/fczx/src/IIImete/sh/tmpD
+Interactive mode off.
+local: busilist_20181219_0.xml remote: busilist_20181219_0.xml
+227 Entering Passive Mode (192,168,0,154,226,65).
+125 Data connection already open; Transfer starting.
+226 Transfer complete.
+567327 bytes received in 0.0638 secs (8896.18 Kbytes/sec)
+221 Goodbye.]
+2019/01/16 13:53:16.998034056 numDFiles=[1],ftpRetD=[Local directory now /home/fczx/src/IIImete/sh/tmpD
+Interactive mode off.]
+2019/01/16 13:53:16.998034056 ++++++./tmpD/busilist_20181219_0.xml 
+2019/01/16 13:53:17.431339866 getFileFtp.sh:6:end 
+2019/01/16 13:55:01.097204380 getFileFtp.sh:6:start -->
+2019/01/16 13:55:01.097204380 --debug:input param nums:6
+                   --logFile=[./log/getFileFtp.log]
+2019/01/16 13:55:01.097204380 shDebugFlag=[255]
+        ---------ftp para begine--------
+        ----ftpIP     =[192.168.0.154]
+        ----ftpUser   =[Administrator]
+        ----ftpPwd    =[qwer1234]
+        ----ftpRdir   =[/gaolongshan]
+        ----ftpLdir   =[./tmpD]
+        ----ftpLdirAims=[.]
+        ----fileName  =[busilist_20181219_0.xml]
+        ----ftpCtrPNum=[21]
+        ----ftpTrType =[ascii]
+        ---------ftp para end----------
+
+2019/01/16 13:55:01.468204186 ftpRet=[function getFtpSerStatu input param 2019/01/16 13:55:01.285115200 
+         debugflag=[1]
+         opFlag=[0],opStr=[downlaod],opCmd=[mget]
+         trsType=[0],typeStr=[ascii]
+         trsMode=[0],modeStr=[passive],modeOpt=[-p]
+         fileNameTmp=[busilist_20181219_0\.xml]--------
+         ---------ftp para begine--------
+         ----ftpIP     =[192.168.0.154]
+         ----ftpUser   =[Administrator]
+         ----ftpPwd    =[qwer1234]
+         ----ftpRdir   =[/gaolongshan]
+         ----ftpLdir   =[./tmpD]
+         ----fileName  =[busilist_20181219_0.xml]
+         ----ftpCtrPNum=[21]
+         ---------ftp para end----------
+         
+Connected to 192.168.0.154 (192.168.0.154).
+220 Microsoft FTP Service
+Remote system type is Windows_NT.
+331 Password required for Administrator.
+230 User logged in.
+200 Type set to A.
+250 CWD command successful.
+Local directory now /home/fczx/src/IIImete/sh/tmpD
+Interactive mode off.
+local: busilist_20181219_0.xml remote: busilist_20181219_0.xml
+227 Entering Passive Mode (192,168,0,154,226,77).
+125 Data connection already open; Transfer starting.
+226 Transfer complete.
+567327 bytes received in 0.0701 secs (8095.88 Kbytes/sec)
+221 Goodbye.]
+2019/01/16 13:55:01.468204186 numDFiles=[1],ftpRetD=[Local directory now /home/fczx/src/IIImete/sh/tmpD
+Interactive mode off.]
+2019/01/16 13:55:01.468204186 ++++++./tmpD/busilist_20181219_0.xml 
+2019/01/16 13:55:01.874217646 getFileFtp.sh:6:end 
+2019/01/16 14:16:52.363974969 getFileFtp.sh:6:start -->
+2019/01/16 14:16:52.363974969 --debug:input param nums:6
+                   --logFile=[./log/getFileFtp.log]
+2019/01/16 14:16:52.363974969 shDebugFlag=[255]
+        ---------ftp para begine--------
+        ----ftpIP     =[192.168.0.154]
+        ----ftpUser   =[Administrator]
+        ----ftpPwd    =[qwer1234]
+        ----ftpRdir   =[/gaolongshan]
+        ----ftpLdir   =[./tmpD]
+        ----ftpLdirAims=[.]
+        ----fileName  =[busilist_20181219_0.xml]
+        ----ftpCtrPNum=[21]
+        ----ftpTrType =[ascii]
+        ---------ftp para end----------
+
+2019/01/16 14:16:52.718365748 ftpRet=[function getFtpSerStatu input param 2019/01/16 14:16:52.553134570 
+         debugflag=[1]
+         opFlag=[0],opStr=[downlaod],opCmd=[mget]
+         trsType=[0],typeStr=[ascii]
+         trsMode=[0],modeStr=[passive],modeOpt=[-p]
+         fileNameTmp=[busilist_20181219_0\.xml]--------
+         ---------ftp para begine--------
+         ----ftpIP     =[192.168.0.154]
+         ----ftpUser   =[Administrator]
+         ----ftpPwd    =[qwer1234]
+         ----ftpRdir   =[/gaolongshan]
+         ----ftpLdir   =[./tmpD]
+         ----fileName  =[busilist_20181219_0.xml]
+         ----ftpCtrPNum=[21]
+         ---------ftp para end----------
+         
+Connected to 192.168.0.154 (192.168.0.154).
+220 Microsoft FTP Service
+Remote system type is Windows_NT.
+331 Password required for Administrator.
+230 User logged in.
+200 Type set to A.
+250 CWD command successful.
+Local directory now /home/fczx/src/IIImete/sh/tmpD
+Interactive mode off.
+local: busilist_20181219_0.xml remote: busilist_20181219_0.xml
+227 Entering Passive Mode (192,168,0,154,226,214).
+125 Data connection already open; Transfer starting.
+226 Transfer complete.
+567327 bytes received in 0.0701 secs (8088.61 Kbytes/sec)
+221 Goodbye.]
+2019/01/16 14:16:52.718365748 numDFiles=[1],ftpRetD=[Local directory now /home/fczx/src/IIImete/sh/tmpD
+Interactive mode off.]
+2019/01/16 14:16:52.718365748 ++++++./tmpD/busilist_20181219_0.xml 
+
+ 2019/01/16 14:16:52.930607707:Enter the shell function [deterSameFile]
+The input of function [ deterSameFile] is as follows:
+  01: [255]
+  02: [../filedo/down/back]
+  03: [busilist_20181219_0.xml]
+
+2019/01/16 14:16:52.954759855:shell function [deterSameFile] excution ends,ret=[0]
+2019/01/16 14:16:52.718365748 ++++fusktest++++mvFlag=[0],rmFlag=[1],trfName=[busilist_20181219_0.xml],statf=[0],stat=[0] 
+2019/01/16 14:16:53.071561017 The file[busilist_20181219_0.xml] downloaded from the [192.168.0.154:21/gaolongshan]service already exists and will be deleted 
+2019/01/16 14:16:53.198067332 getFileFtp.sh:6:end 
+2019/01/16 14:21:02.386410519 getFileFtp.sh:6:start -->
+2019/01/16 14:21:02.386410519 --debug:input param nums:6
+                   --logFile=[./log/getFileFtp.log]
+2019/01/16 14:21:02.386410519 shDebugFlag=[255]
+        ---------ftp para begine--------
+        ----ftpIP     =[192.168.0.154]
+        ----ftpUser   =[Administrator]
+        ----ftpPwd    =[qwer1234]
+        ----ftpRdir   =[/gaolongshan]
+        ----ftpLdir   =[./tmpD]
+        ----ftpLdirAims=[.]
+        ----fileName  =[busilist_20181219_0.xml]
+        ----ftpCtrPNum=[21]
+        ----ftpTrType =[ascii]
+        ---------ftp para end----------
+
+2019/01/16 14:21:02.723682370 retstat=[0],ftpRet=[function getFtpSerStatu input param 2019/01/16 14:21:02.561564519 
+         debugflag=[1]
+         opFlag=[0],opStr=[downlaod],opCmd=[mget]
+         trsType=[0],typeStr=[ascii]
+         trsMode=[0],modeStr=[passive],modeOpt=[-p]
+         fileNameTmp=[busilist_20181219_0\.xml]--------
+         ---------ftp para begine--------
+         ----ftpIP     =[192.168.0.154]
+         ----ftpUser   =[Administrator]
+         ----ftpPwd    =[qwer1234]
+         ----ftpRdir   =[/gaolongshan]
+         ----ftpLdir   =[./tmpD]
+         ----fileName  =[busilist_20181219_0.xml]
+         ----ftpCtrPNum=[21]
+         ---------ftp para end----------
+         
+Connected to 192.168.0.154 (192.168.0.154).
+220 Microsoft FTP Service
+Remote system type is Windows_NT.
+331 Password required for Administrator.
+230 User logged in.
+200 Type set to A.
+250 CWD command successful.
+Local directory now /home/fczx/src/IIImete/sh/tmpD
+Interactive mode off.
+local: busilist_20181219_0.xml remote: busilist_20181219_0.xml
+227 Entering Passive Mode (192,168,0,154,226,241).
+125 Data connection already open; Transfer starting.
+226 Transfer complete.
+567327 bytes received in 0.069 secs (8221.53 Kbytes/sec)
+221 Goodbye.]
+2019/01/16 14:21:02.723682370 numDFiles=[1],ftpRetD=[Local directory now /home/fczx/src/IIImete/sh/tmpD
+Interactive mode off.]
+2019/01/16 14:21:02.723682370 ++++++./tmpD/busilist_20181219_0.xml 
+
+ 2019/01/16 14:21:02.945973906:Enter the shell function [deterSameFile]
+The input of function [ deterSameFile] is as follows:
+  01: [255]
+  02: [../filedo/down/back]
+  03: [busilist_20181219_0.xml]
+
+2019/01/16 14:21:02.971448349:shell function [deterSameFile] excution ends,ret=[0]
+2019/01/16 14:21:02.723682370 ++++fusktest++++mvFlag=[0],rmFlag=[1],trfName=[busilist_20181219_0.xml],statf=[0],stat=[0] 
+2019/01/16 14:21:03.083380490 The file[busilist_20181219_0.xml] downloaded from the [192.168.0.154:21/gaolongshan]service already exists and will be deleted 
+2019/01/16 14:21:03.208536405 getFileFtp.sh:6:end 
+
+2019/01/16 14:26:05.672582835 getFileFtp.sh:6:start -->
+2019/01/16 14:26:05.672582835 --debug:input param nums:6
+                   --logFile=[./log/getFileFtp.log]
+2019/01/16 14:26:05.672582835 shDebugFlag=[255]
+        ---------ftp para begine--------
+        ----ftpIP     =[192.168.0.154]
+        ----ftpUser   =[Administrator]
+        ----ftpPwd    =[qwer1234]
+        ----ftpRdir   =[/gaolongshan]
+        ----ftpLdir   =[./tmpD]
+        ----ftpLdirAims=[.]
+        ----fileName  =[busilist_20181219_0.xml]
+        ----ftpCtrPNum=[21]
+        ----ftpTrType =[ascii]
+        ---------ftp para end----------
+
+
+2019/01/16 14:26:06.009327110 retstat=[0],ftpRet=[function getFtpSerStatu input param 2019/01/16 14:26:05.846413997 
+         debugflag=[1]
+         opFlag=[0],opStr=[downlaod],opCmd=[mget]
+         trsType=[0],typeStr=[ascii]
+         trsMode=[0],modeStr=[passive],modeOpt=[-p]
+         fileNameTmp=[busilist_20181219_0\.xml]--------
+         ---------ftp para begine--------
+         ----ftpIP     =[192.168.0.154]
+         ----ftpUser   =[Administrator]
+         ----ftpPwd    =[qwer1234]
+         ----ftpRdir   =[/gaolongshan]
+         ----ftpLdir   =[./tmpD]
+         ----fileName  =[busilist_20181219_0.xml]
+         ----ftpCtrPNum=[21]
+         ---------ftp para end----------
+         
+Connected to 192.168.0.154 (192.168.0.154).
+220 Microsoft FTP Service
+Remote system type is Windows_NT.
+331 Password required for Administrator.
+230 User logged in.
+200 Type set to A.
+250 CWD command successful.
+Local directory now /home/fczx/src/IIImete/sh/tmpD
+Interactive mode off.
+local: busilist_20181219_0.xml remote: busilist_20181219_0.xml
+227 Entering Passive Mode (192,168,0,154,227,22).
+125 Data connection already open; Transfer starting.
+226 Transfer complete.
+567327 bytes received in 0.0667 secs (8506.16 Kbytes/sec)
+221 Goodbye.]
+
+2019/01/16 14:26:06.009327110 numDFiles=[1],ftpRetD=[Local directory now /home/fczx/src/IIImete/sh/tmpD
+Interactive mode off.]
+2019/01/16 14:26:06.009327110 ++++++./tmpD/busilist_20181219_0.xml 
+
+
+ 2019/01/16 14:26:06.217793907:Enter the shell function [deterSameFile]
+The input of function [ deterSameFile] is as follows:
+  01: [255]
+  02: [../filedo/down/back]
+  03: [busilist_20181219_0.xml]
+
+2019/01/16 14:26:06.245424408:shell function [deterSameFile] excution ends,ret=[0]
+
+
+2019/01/16 14:26:06.009327110 ++++fusktest++++mvFlag=[0],rmFlag=[1],trfName=[busilist_20181219_0.xml],statf=[0],stat=[0] 
+
+2019/01/16 14:26:06.359713709 The file[busilist_20181219_0.xml] downloaded from the [192.168.0.154:21/gaolongshan]service already exists and will be deleted 
+2019/01/16 14:26:06.453014690 getFileFtp.sh:6:end 
+
+
+2019/01/19 14:23:39.168950467 getFileFtp.sh:6:start -->
+2019/01/19 14:23:39.168950467 --debug:input param nums:6
+                   --logFile=[./log/getFileFtp.log]
+2019/01/19 14:23:39.168950467 shDebugFlag=[255]
+        ---------ftp para begine--------
+        ----ftpIP     =[192.168.0.154]
+        ----ftpUser   =[Administrator]
+        ----ftpPwd    =[qwer1234]
+        ----ftpRdir   =[/gaolongshan]
+        ----ftpLdir   =[./tmpD]
+        ----ftpLdirAims=[.]
+        ----fileName  =[busilist_20181219_01.xml]
+        ----ftpCtrPNum=[21]
+        ----ftpTrType =[ascii]
+        ---------ftp para end----------
+
+
+2019/01/19 14:23:39.434962273 retstat=[0],ftpRet=[function getFtpSerStatu input param 2019/01/19 14:23:39.332980836 
+         debugflag=[1]
+         opFlag=[0],opStr=[downlaod],opCmd=[mget]
+         trsType=[0],typeStr=[ascii]
+         trsMode=[0],modeStr=[passive],modeOpt=[-p]
+         fileNameTmp=[busilist_20181219_01\.xml]--------
+         ---------ftp para begine--------
+         ----ftpIP     =[192.168.0.154]
+         ----ftpUser   =[Administrator]
+         ----ftpPwd    =[qwer1234]
+         ----ftpRdir   =[/gaolongshan]
+         ----ftpLdir   =[./tmpD]
+         ----fileName  =[busilist_20181219_01.xml]
+         ----ftpCtrPNum=[21]
+         ---------ftp para end----------
+         
+Connected to 192.168.0.154 (192.168.0.154).
+220 Microsoft FTP Service
+Remote system type is Windows_NT.
+331 Password required for Administrator.
+230 User logged in.
+200 Type set to A.
+250 CWD command successful.
+Local directory now /home/fczx/src/IIImete/sh/tmpD
+Interactive mode off.
+The system cannot find the file specified.
+221 Goodbye.]
+
+2019/01/19 14:23:39.494487031 getFileFtp.sh:6:unsucessfull 
+
+
+2019/01/21 13:17:28.285558625 getFileFtp.sh:6:start -->
+2019/01/21 13:17:28.285558625 --debug:input param nums:6
+                   --logFile=[./log/getFileFtp.log]
+2019/01/21 13:17:28.285558625 shDebugFlag=[255]
+        ---------ftp para begine--------
+        ----ftpIP     =[192.168.0.154]
+        ----ftpUser   =[Administrator]
+        ----ftpPwd    =[qwer1234]
+        ----ftpRdir   =[/gaolongshan]
+        ----ftpLdir   =[./tmpD]
+        ----ftpLdirAims=[.]
+        ----fileName  =[busilist_20181219_01.xml]
+        ----ftpCtrPNum=[21]
+        ----ftpTrType =[ascii]
+        ---------ftp para end----------
+
+
+2019/01/21 13:17:28.592556944 retstat=[14],ftpRet=[function getFtpSerStatu input param 2019/01/21 13:17:28.461981927 
+         debugflag=[1]
+         opFlag=[0],opStr=[downlaod],opCmd=[mget]
+         trsType=[0],typeStr=[ascii]
+         trsMode=[0],modeStr=[passive],modeOpt=[-p]
+         fileNameTmp=[busilist_20181219_01\.xml]--------
+         ---------ftp para begine--------
+         ----ftpIP     =[192.168.0.154]
+         ----ftpUser   =[Administrator]
+         ----ftpPwd    =[qwer1234]
+         ----ftpRdir   =[/gaolongshan]
+         ----ftpLdir   =[./tmpD]
+         ----fileName  =[busilist_20181219_01.xml]
+         ----ftpCtrPNum=[21]
+         ---------ftp para end----------
+         
+Connected to 192.168.0.154 (192.168.0.154).
+220 Microsoft FTP Service
+Remote system type is Windows_NT.
+331 Password required for Administrator.
+230 User logged in.
+200 Type set to A.
+250 CWD command successful.
+Local directory now /home/fczx/src/IIImete/sh/tmpD
+Interactive mode off.
+The system cannot find the file specified.
+221 Goodbye.]
+
+2019/01/21 13:17:28.650537891 getFileFtp.sh:6:unsucessfull 
+
+
+2019/01/21 13:29:41.882278640 getFileFtp.sh:6:start -->
+2019/01/21 13:29:41.882278640 --debug:input param nums:6
+                   --logFile=[./log/getFileFtp.log]
+2019/01/21 13:29:41.882278640 shDebugFlag=[255]
+        ---------ftp para begine--------
+        ----ftpIP     =[192.168.0.154]
+        ----ftpUser   =[Administrator]
+        ----ftpPwd    =[qwer1234]
+        ----ftpRdir   =[/gaolongshan]
+        ----ftpLdir   =[./tmpD]
+        ----ftpLdirAims=[.]
+        ----fileName  =[busilist_20181219_01.xml]
+        ----ftpCtrPNum=[21]
+        ----ftpTrType =[ascii]
+        ---------ftp para end----------
+
+
+2019/01/21 13:29:42.174566332 retstat=[14],ftpRet=[function getOrPutFtpFile input param 2019/01/21 13:29:42.064587295 
+         debugflag=[1]
+         opFlag=[0],opStr=[downlaod],opCmd=[mget]
+         trsType=[0],typeStr=[ascii]
+         trsMode=[0],modeStr=[passive],modeOpt=[-p]
+         fileNameTmp=[busilist_20181219_01\.xml]--------
+         ---------ftp para begine--------
+         ----ftpIP     =[192.168.0.154]
+         ----ftpUser   =[Administrator]
+         ----ftpPwd    =[qwer1234]
+         ----ftpRdir   =[/gaolongshan]
+         ----ftpLdir   =[./tmpD]
+         ----fileName  =[busilist_20181219_01.xml]
+         ----ftpCtrPNum=[21]
+         ---------ftp para end----------
+         
+Connected to 192.168.0.154 (192.168.0.154).
+220 Microsoft FTP Service
+Remote system type is Windows_NT.
+331 Password required for Administrator.
+230 User logged in.
+200 Type set to A.
+250 CWD command successful.
+Local directory now /home/fczx/src/IIImete/sh/tmpD
+Interactive mode off.
+The system cannot find the file specified.
+221 Goodbye.]
+
+2019/01/21 13:29:42.233138662 getFileFtp.sh:6:unsuccessfull 
+
+
+2019/01/21 13:30:04.744769098 getFileFtp.sh:6:start -->
+2019/01/21 13:30:04.744769098 --debug:input param nums:6
+                   --logFile=[./log/getFileFtp.log]
+2019/01/21 13:30:04.744769098 shDebugFlag=[255]
+        ---------ftp para begine--------
+        ----ftpIP     =[192.168.0.154]
+        ----ftpUser   =[Administrator]
+        ----ftpPwd    =[qwer1234]
+        ----ftpRdir   =[/gaolongshan]
+        ----ftpLdir   =[./tmpD]
+        ----ftpLdirAims=[.]
+        ----fileName  =[busilist_20181219_0.xml]
+        ----ftpCtrPNum=[21]
+        ----ftpTrType =[ascii]
+        ---------ftp para end----------
+
+
+2019/01/21 13:30:05.218225718 retstat=[0],ftpRet=[function getOrPutFtpFile input param 2019/01/21 13:30:04.928956547 
+         debugflag=[1]
+         opFlag=[0],opStr=[downlaod],opCmd=[mget]
+         trsType=[0],typeStr=[ascii]
+         trsMode=[0],modeStr=[passive],modeOpt=[-p]
+         fileNameTmp=[busilist_20181219_0\.xml]--------
+         ---------ftp para begine--------
+         ----ftpIP     =[192.168.0.154]
+         ----ftpUser   =[Administrator]
+         ----ftpPwd    =[qwer1234]
+         ----ftpRdir   =[/gaolongshan]
+         ----ftpLdir   =[./tmpD]
+         ----fileName  =[busilist_20181219_0.xml]
+         ----ftpCtrPNum=[21]
+         ---------ftp para end----------
+         
+Connected to 192.168.0.154 (192.168.0.154).
+220 Microsoft FTP Service
+Remote system type is Windows_NT.
+331 Password required for Administrator.
+230 User logged in.
+200 Type set to A.
+250 CWD command successful.
+Local directory now /home/fczx/src/IIImete/sh/tmpD
+Interactive mode off.
+local: busilist_20181219_0.xml remote: busilist_20181219_0.xml
+227 Entering Passive Mode (192,168,0,154,146,169).
+125 Data connection already open; Transfer starting.
+226 Transfer complete.
+557314 bytes received in 0.115 secs (4865.88 Kbytes/sec)
+221 Goodbye.]
+
+2019/01/21 13:30:05.218225718 numDFiles=[1],ftpRetD=[Local directory now /home/fczx/src/IIImete/sh/tmpD
+Interactive mode off.]
+2019/01/21 13:30:05.218225718 ++++++./tmpD/busilist_20181219_0.xml 
+
+
+ 2019/01/21 13:30:05.429754694:Enter the shell function [deterSameFile]
+The input of function [ deterSameFile] is as follows:
+  01: [255]
+  02: [../filedo/down/back]
+  03: [busilist_20181219_0.xml]
+
+2019/01/21 13:30:05.455228004:shell function [deterSameFile] excution ends,ret=[2]
+
+
+2019/01/21 13:30:05.218225718 ++++fusktest++++mvFlag=[1],rmFlag=[0],trfName=[busilist_20181219_0.xml],statf=[0],stat=[2] 
+
+2019/01/21 13:30:05.649132754 getFileFtp.sh:6:end 
+

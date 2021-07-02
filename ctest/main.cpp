@@ -30,6 +30,9 @@ int main()
     //    "tt" /*当设置dirName_p时才设置此值：日志名为logPrefixName_$YYYYMMDD.log*/
     //    );
 
+    char tmpStr[1024] = {0};
+    int  sizeofStr = sizeof(tmpStr);
+    WriteLog( LOGDEBUG, "sizeof(tmpStr[1024])=[%d]", sizeofStr );
     //printf("tUcVal=[0x%x],ttul=[%lu]\n",tUcVal,ttul);
     WriteLog( LOGDEBUG, "hahha" );
     WriteLog( LOGDEBUG, "hahha21" );

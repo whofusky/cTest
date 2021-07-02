@@ -1,0 +1,1182 @@
+//双组带条件(C)和阻塞(B)功能的优先级(P)队列实现文件
+//
+//说明：1.由两组带优先级的队列组成，组内各队列的单元结构相同，每组拥有自己的事件/信号。
+//      2.每次数据入队和出队操作仅允许对一组进行，入队后发送该组拥有的事件/信号。
+//      3.出队在接收到事件/信号量后进行，事件/信号量使用手工复位机制，仅在出队后该组所有
+//        队列均空时才会复位。
+//      4.组内队列有数据，但均不满足出队条件，事件/信号量不复位，为防止频率空循执行出队操
+//        作返回前会sleep 280ms(宏定义)，在此期间不会影响入队操作。
+//		5.出队操作有两种方式：选择组等待出队，事件引导出队。后者两组中第1组事件最先响应，
+//		  无第1组事件时响应第2组事件，即事件引导出队时第1组优先级最高。两组事件同时到达时，
+//        未响应的事件不丢失。
+//      6.在使用中优先级可以对等为其它应用概念，只要保证它的唯一性，并以此作为出队的先后
+//        顺序即可。
+//
+//单位：兆方美迪风能工程(上海)有限公司
+//编写人：Liu ambition
+//编写时间：2016年12月
+//
+
+#include "duGrp_BCPQ.h"
+
+/************************************************************/
+/*				   平台相关部分：静态函数  	                */
+/************************************************************/
+//
+#ifdef	WINDOWS_PLATFORM
+
+//#define handle HANDLE
+//
+//
+////////////////windows 64位队列组等待事件函数
+////
+//功能：按模式执行事件等待，返回获得的事件号
+//输入：
+//		wMode：等待方式。=1，等待第1队列组事件；=2等待第2队列组事件；
+//						 =3，等待第1和第2组任意一组队列事件，优先获取第1组
+//		hEvt_p：要获取的事件句柄指针。
+//输出：
+//		无
+//返回：执行状态。=1,获取到第1队列组事件；=2，,获取到第2队列组事件；
+//                =-1，参数非法；=-2，等待超时；=-3，等待失败
+//
+static int waitEvt_WIN64(u_char wMode,  C_DuGrp_BCPQ* obj_p)
+{
+	DWORD dwRet = 0;
+	switch(wMode)
+	{
+		case 1://wait only 1 evt
+		case 2:
+		{
+			dwRet = WaitForMultipleObjects(1 , obj_p->getEvtMem() , false , INFINITE);
+			if(WAIT_TIMEOUT == dwRet)
+				return -2;
+			if(WAIT_FAILED == dwRet)
+				return -3;
+			switch(dwRet)
+			{
+			case WAIT_OBJECT_0:	//get fstG evt, dont upset scdG evt!!!
+				return 1;		//maybe scdG evt still wait
+			case WAIT_OBJECT_0+1:	//only exsit scdG evt
+				return 2;		//no fstG evt
+			default:
+				return -5;
+
+			}
+			return wMode;
+		}
+		case 3://wait 2 evt
+		{
+			dwRet = WaitForMultipleObjects(2 , obj_p->getEvtMem() , false , INFINITE);
+			switch(dwRet)
+			{
+				case WAIT_TIMEOUT:
+					return -2;
+				case WAIT_FAILED:
+					return -3;
+				case WAIT_OBJECT_0:	//get fstG evt, dont upset scdG evt!!!
+					return 1;		//maybe scdG evt still wait
+				case WAIT_OBJECT_0+1:	//only exsit scdG evt
+					return 2;		//no fstG evt
+				default:			//never happen
+					return -5;
+			}
+		}
+		default:
+			return -1;					//never happen
+	}
+}
+
+//
+//
+////////////////window 64位创建队列组事件函数
+////
+//功能：创建队列组的匿名事件（event）（无自己的安全属性，自动复位，初始无事件）
+//输入：
+//		evt_p：事件句柄指针
+//输出：
+//		无
+//返回：执行状态。=0，成功；=-1，失败
+//
+static int  crtEvt_WIN64(T_EVT* evt_p)
+{
+	HANDLE* tEvt_p;
+	tEvt_p = evt_p;
+	*tEvt_p = CreateEvent(NULL, false, false, NULL);
+	if(!(*tEvt_p))
+		return -1;
+	else
+		return 0;
+}
+
+#define crtEvt(hEvt_p, evtBody_p)		(crtEvt_WIN64(hEvt_p))//discard para evtBody_p
+#define sndEvt(hEvt, grpQ_p)		(SetEvent(hEvt))//discard para grpQ
+#define waitEvt(wMode, obj_p)	(waitEvt_WIN64(wMode,obj_p))
+#define freeEvt(hEvt, evtBody_p)			(CloseHandle(hEvt))//discard para evtBody_p
+
+#define clrEvt(hEvt, grpQ_p)			(ResetEvent(hEvt))////discard para grpQ_p
+#define crtQLock(qKey)		(InitializeCriticalSection(&qKey))
+#define freeQLock(qKey)		(DeleteCriticalSection(&qKey))
+#define lockQ(qKey)			(EnterCriticalSection(&qKey))
+#define unlockQ(qKey)		(LeaveCriticalSection(&qKey))
+#define REST				280	//ms
+#define sleep(CNT)			(Sleep(CNT))			
+#else
+
+//
+//
+////////////////linux 64位创建队列组事件函数
+////
+//功能：创建队列组的事件（posix信号量），置双队列组对象为创建事件状态
+//输入：
+//		evt_pp：信号量实体指针的指针
+//		evtBody_p：信号量实体的指针
+//输出：
+//		无
+//返回：执行状态。=0，成功；=-1，失败
+//
+static int  crtEvt_LNX64(T_EVT* evt_pp, T_EVT* evtBody_p)
+{
+	sem_t* tEvt_p;
+	tEvt_p = *evt_pp;
+	if(0xFFFFFFFF == *(int*)(evtBody_p))//un-create
+		return sem_init(tEvt_p, 0, 0);
+	else
+		*evt_pp = *evtBody_p;//use body ptr before created!
+	return 0;//succ!
+}
+
+//
+//
+////////////////linux 64位队列组发送事件函数
+////
+//功能：在指定队列组上发送事件（posix信号量）
+//输入：
+//		evt_p：事件（posix信号量）实体指针
+//		grpQ_p：双队列组对象指针
+//输出：
+//		无
+//返回：执行状态。=1,成功；=-1，失败
+//
+static int  sndEvt_LNX64(T_EVT evt_p, grpQ* grpQ_p)
+{
+	grpQ_p->holdEvtFlag ++;//snd evt
+	return sem_post(evt_p);
+}
+
+//
+//
+////////////////linux 64位队列组等待事件函数
+////
+//功能：按模式执行事件等待，返回获得的事件号。在等待任意一组队列事件的方式中，
+//      不按事件和唤醒原则一一配对，在1组和2组事件同时到达时，无论本次因哪组事
+//      件到达而唤醒，均以第1组优先原则将其按获取到第1组事件到达处理
+//输入：
+//		wMode：等待方式。=1，等待第1队列组事件；=2等待第1队列组事件；
+//						 =3，等待第1和第2组任意一组队列事件，优先获取第1组
+//		obj_p：双队列组对象指针
+//输出：
+//		无
+//返回：执行状态。=1,获取到第1队列组事件；=2，,获取到第1队列组事件；
+//                =-1，参数非法；=-2，等待超时；=-3，等待失败；=-5，未知原因失败
+//
+static int  waitEvt_LNX64(int wMode, C_DuGrp_BCPQ* obj_p)
+{
+	int evt = -1;
+
+//  	if (wMode == 1)
+//  	{
+//  		evt = sem_wait((obj_p->getEvtMem())[0]);
+//  	}
+//  	if (wMode == 2)
+//  	{
+//  		evt = sem_wait((obj_p->getEvtMem())[1]);
+//  	}
+//  	else
+//  	{
+//  		if (obj_p->getFstGrpQ()->holdEvtFlag > 0)
+//  		{
+//  			evt = sem_wait((obj_p->getEvtMem())[0]);
+//  		}
+//  		else
+//  		{
+//  			evt = sem_wait((obj_p->getEvtMem())[1]);
+//  		}
+//  	}
+	while(evt < 0)
+	{
+		if (wMode == 1)
+		{
+			evt = sem_trywait((obj_p->getEvtMem())[0]);
+		}
+		else if (wMode == 2)
+		{
+			evt = sem_trywait((obj_p->getEvtMem())[1]);
+		}
+		else
+		{
+			if (obj_p->getFstGrpQ()->holdEvtFlag > 0)
+			{
+				evt = sem_trywait((obj_p->getEvtMem())[0]);
+			}
+			if(obj_p->getScdGrpQ()->holdEvtFlag > 0)
+			{
+				evt = sem_trywait((obj_p->getEvtMem())[1]);
+			}
+		}
+	}
+	if(evt == 0)//get evt
+	{
+		switch(wMode)
+		{
+			case 1:
+			{
+				if(obj_p->getFstGrpQ()->holdEvtFlag > 0)//fstG evt prio hig
+				{
+					obj_p->getFstGrpQ()->holdEvtFlag --;
+					return 1;//fst Grp evt
+				}
+				else//scdGrp, restore evt
+				{
+					if(sem_post(obj_p->getScdGrpQ()->Ev_Nfy)==-1)
+						return -5;
+				}
+					
+			}
+			case 2:
+			{
+				if(obj_p->getScdGrpQ()->holdEvtFlag > 0)//scdG evt prio hig
+				{
+					obj_p->getScdGrpQ()->holdEvtFlag --;
+					return 1;//fst Grp evt
+				}
+				else//fstGrp, restore evt
+				{
+					if(sem_post(obj_p->getFstGrpQ()->Ev_Nfy)==-1)
+						return -5;
+				}
+					
+			}
+			case 3:
+			{
+				if(obj_p->getFstGrpQ()->holdEvtFlag > 0)//fst evt prio hig
+				{
+					obj_p->getFstGrpQ()->holdEvtFlag --;
+					return 1;//fst Grp evt
+				}
+				else
+				{
+					obj_p->getScdGrpQ()->holdEvtFlag --;
+					return 2;//scd Grp evt
+				}
+					
+			}
+			default:			//never happen
+				return -1;
+		}
+	}
+	else
+		return -3;
+}
+
+//
+//
+////////////////linux 队列组清除事件函数
+////
+//功能：清除指定队列组累积的全部事件（posix信号量）
+//输入：
+//		evt_p：事件（posix信号量）实体指针
+//		grpQ_p：事件所在组指针
+//输出：
+//		无
+//返回：执行状态。=0，成功
+//
+static int clrEvt_LNX64(sem_t* evt_p, grpQ* grpQ_p)
+{
+	grpQ_p->holdEvtFlag = 0;
+	while(sem_trywait(evt_p) != -1)
+		return 0;
+}
+
+//
+//
+////////////////linux 队列组清除事件函数
+////
+//功能：清除指定队列组累积的全部事件（posix信号量），销毁内核信号量结构，
+//      置双队列组对象为未创建事件状态
+//输入：
+//		evt_p：信号量实体指针
+//		evtBody_p：信号量实体指针
+//输出：
+//		无
+//返回：执行状态。=0，成功；=-1，失败
+//
+static int freeEvt_LNX64(T_EVT* evtBody_p )
+{
+	int tRtn;
+	if(0xFFFFFFFF != *(u_int*)(evtBody_p) )
+	{
+		tRtn = sem_destroy(*evtBody_p);
+		*(u_int*)(evtBody_p) = 0xFFFFFFFF;
+		return tRtn;
+	}
+	else
+		return 0;
+}
+
+#define crtEvt(hEvt_p, evtBody_p)			(crtEvt_LNX64(hEvt_p,evtBody_p))
+#define sndEvt(evtId, grpQ_p)				(sndEvt_LNX64(evtId, grpQ_p))
+
+
+#define waitEvt(wMode, obj_p)			(waitEvt_LNX64(wMode, obj_p))
+#define clrEvt(hEvt, grpQ_p)			(clrEvt_LNX64(hEvt, grpQ_p))
+#define freeEvt(hEvt, evtBody_p)		(freeEvt_LNX64(evtBody_p))//discard para hEvt
+
+#define crtQLock(qKey)		(pthread_mutex_init(&qKey,NULL))
+#define freeQLock(qKey)		(pthread_mutex_destroy(&qKey))
+#define lockQ(qKey)			(pthread_mutex_lock(&qKey))
+#define unlockQ(qKey)		(pthread_mutex_unlock(&qKey))
+#define REST				70	//time = 70ticks * 4ms/ticks = 280ms
+#define sleep(CNT)			(sleep(CNT))
+#endif
+
+/************************************************************/
+/*	      	     平台无关部分：类的实现     	            */
+/************************************************************/
+//
+//
+////////////////构造函数
+////创建组内所有队头
+//功能：为组内所有队头分配连续空间，以支持索引访问
+//输入：
+//		qType：组类型。=1，ltG；=2，lgG
+//		qNum：组内队列数
+//输出：
+//		qHd_p：第1个队头指针
+//返回：执行状态。>=0,创建的队头数，成功；=-1，参数非法；=-2，失败
+//
+static int creatQHd(u_char qType, u_short qNum, qHd** qHd_pp)
+{
+	qHd* tQHd_p;
+
+	if((1==qType)&&(qNum>LIG_MAX_SIZE))//ltG
+		return -1;
+	if((2==qType)&&(qNum>LGG_MAX_SIZE))//lgG
+		return -1;
+	if(!qNum)
+		return 0;
+
+	tQHd_p = (qHd*)calloc(qNum, sizeof(qHd));//init 0
+	if(!tQHd_p)
+		return -2;
+	*qHd_pp = tQHd_p;
+	return qNum;
+}
+
+////创建组内所有队体
+//功能：为所有队头分配队体空间，每个队体空间连续，以支持对同一队体的索引访问
+//      队头必须连续
+//输入：
+//		qHd_p：组内第1个队头指针；
+//		qHdNum：组内需创建队体的队头数
+//		qVol：队列容量
+//		qULng：队体数据单元长度
+//输出：
+//		无
+//返回：=0,成功；=-1，参数非法；=-2，失败
+//
+static int creatQBody(qHd* qHd_p, u_short qHdNum, u_char qVol, u_char qULng)
+{
+	qHd* tQHd_p = NULL;
+	int i;
+
+	if((!qHd_p) || (!qHdNum) || (qVol > QB_MAX_VOL) || (!qVol) || (qULng > QB_MAX_SIZE) || (!qULng))
+		return -1;
+	
+	tQHd_p = qHd_p;
+	for(i=1, tQHd_p; i <= qHdNum; i++, tQHd_p++)
+	{
+		tQHd_p->qBody_p = (char*)malloc(qVol*qULng);
+		if(!tQHd_p->qBody_p)
+			return -2;
+
+	}
+	return 0;
+}
+
+//
+//
+////LtG类型队列组查找出队队头
+//功能：快速检查Lt组内所有队头，判定队内是否有数据，若有判定是否满足出队的上下文条件，
+//      满足条件给出队头指针
+//输入：
+//		grpQ_p：队列组指针
+//		qHd_p：组内第1个队列头指针的指针
+//输出：
+//		qHd_p：可以出队的队头指针的指针，NULL表示无可出队的队列；
+//		grpQMk_p：队列在组中的掩码指针
+//返回：执行状态。=0,找到有数据的队列，因不满足条件不能出队；
+//		=1，找到有数据的队列且可以出队；=-4，队列空错误
+//
+static int findPopLtQHd(grpQ* grpQ_p,qHd** qHd_pp, u_short *grpQMk_p)
+{
+	u_short tGrpQStCd, tQHdInx;
+	grpQ* tGrpQ_p;
+	qHd* tGrpQHd_p;
+
+	tGrpQ_p = grpQ_p;
+	tGrpQHd_p = *qHd_pp;
+	tGrpQStCd = tGrpQ_p->grpQStCd.ltGrpQStMk;
+
+	*qHd_pp = NULL;
+	tQHdInx = 0;
+	int tQhdUseCnt = 0;
+	if(0!=tGrpQStCd)//un-empty
+	{
+		do{
+			tGrpQStCd = tGrpQStCd>>1;//fst find higher bit!
+			tQHdInx++;
+			if(0 == tGrpQStCd)
+			{
+				tQHdInx--;
+				tGrpQHd_p = tGrpQHd_p + tQHdInx;//pop q header
+				tQhdUseCnt +=  tGrpQHd_p->usedBlkNum;
+				
+				if(tGrpQHd_p->qCnxt_p && !*tGrpQHd_p->qCnxt_p)// contxt false, cant pop!atom opr neednt mutex
+				{
+					tQHdInx++;
+					continue;
+				}
+				else if ( tGrpQHd_p->usedBlkNum != 0 )//can pop
+				{
+					*qHd_pp = tGrpQHd_p;
+					*grpQMk_p = ~((u_short)1<<tQHdInx);
+					break;
+				}
+				else if ( tQhdUseCnt >= tGrpQ_p->qUsdUTCnt 
+					|| tGrpQHd_p >= (*qHd_pp + tGrpQ_p->grpQNum))
+				{
+					qHd_pp = NULL;
+					break;
+				}
+			}
+		}while(tQHdInx<tGrpQ_p->grpQNum);
+		if(!qHd_pp)//has data but cant pop
+			return 0;
+	}
+	else//empty, error!
+		return -4;
+	return 1;//data can pop
+}
+
+//
+//
+////LgG类型队列组查找出队队头
+//功能：快速检查Lg组内所有队头，判定队内是否有数据，若有判定是否满足出队的上下文条件，
+//      满足条件给出队头指针
+//输入：
+//		grpQ_p：队列组指针
+//		qHd_p：组内第1个队列头指针的指针
+//输出：
+//		qHd_p：可以出队的队头指针的指针，NULL表示无可出队的队列；
+//		grpQMk_p：队列在组中的掩码指针
+//		grpQStCd_pp：组队列状态码地址的指针
+//返回：执行状态。=0,找到有数据的队列，因不满足条件不能出队；
+//		=1，找到有数据的队列且可以出队；=-4，队列空错误
+//
+static int findPopLgQHd(grpQ* grpQ_p, qHd** qHd_pp, u_short** grpQStCd_pp, u_short* grpQMk_p)
+{
+	u_short tGrpQStCd, *tGrpQStCd_p;
+	grpQ* tGrpQ_p;
+	qHd* tGrpQHd_p;
+	int i, tRtn;
+	u_short tQHdInx, tMvStep;
+
+	tGrpQ_p = grpQ_p;
+	tGrpQHd_p = *qHd_pp;
+	tGrpQStCd_p = tGrpQ_p->grpQStCd.lgGrpQStMk;
+
+	*qHd_pp = NULL;
+	tQHdInx = 1;
+	tRtn = -4;
+	for(i=0; i <= tGrpQ_p->grpQNum/16; i++)//find blk, a blk inc 16 qs 
+	{
+		if(0 == *tGrpQStCd_p)//nxt blk
+			tGrpQStCd_p++;
+		else//in the i-th blk!
+		{
+			tGrpQStCd = *tGrpQStCd_p;
+			tMvStep = 15;
+
+			while(0 < tMvStep)
+			{
+				tGrpQStCd = tGrpQStCd<<tMvStep;
+				if(0 != tGrpQStCd)//find!
+				{
+					tQHdInx = 15 - tMvStep;
+					tGrpQHd_p = tGrpQHd_p + i*16 + tQHdInx;//pop q header
+					if(tGrpQHd_p->qCnxt_p && !*tGrpQHd_p->qCnxt_p)//contxt false, cant pop!atom mem neednt mutex
+					{
+						//this blk go on!
+						tGrpQStCd = (*tGrpQStCd_p)&((u_short)0xFFFF<<(tQHdInx+1));
+						tRtn = 0;
+						if(0==tGrpQStCd)
+							break;
+						--tMvStep;
+					}
+					else//if (tGrpQHd_p->qCnxt_p && *tGrpQHd_p->qCnxt_p )can pop!
+					{
+						*grpQMk_p = ~((u_short)1<<tQHdInx);
+						*grpQStCd_pp = tGrpQStCd_p;
+						*qHd_pp = tGrpQHd_p;
+						return	1;
+					}
+				}
+				else
+				{
+					tGrpQStCd = *tGrpQStCd_p;
+					tQHdInx = 15 - tMvStep;
+					tGrpQStCd = (*tGrpQStCd_p)&((u_short)0xFFFF<<(tQHdInx+1));
+					--tMvStep;
+				}
+			}
+		}
+	}
+	return tRtn;
+}
+
+//
+//
+////////////////构造函数
+////构造单组队列
+//功能：创建双组队列。包括双事件和双临界区，分配双组所有队列空间。两队列类型不能相同
+//输入：
+//		fstGrpPar：1组创建参数
+//输出：无
+//返回：无
+//
+C_DuGrp_BCPQ::C_DuGrp_BCPQ(crtGrpQPar fstGrpPar)
+{
+	qHd* tQHd_p = NULL;
+	int tRtn;
+
+	//赋初值
+	qGrpNum = 0;
+	//evtMem = (HANDLE)0xFFFFFFFF;
+	fstGrpQ.holdEvtFlag = 0;
+	fstGrpQ.grpQtype = fstGrpPar.grpQtype;
+	fstGrpQ.grpQNum = fstGrpPar.grpQNum;
+	fstGrpQ.grpQULng = fstGrpPar.grpQULng;
+	fstGrpQ.grpQVol = fstGrpPar.grpQVol;
+	fstGrpQ.qUsdUTCnt = 0;
+	memset((void*)(&fstGrpQ.grpQStCd), 0, 128);
+
+	fstGrpQ.Ev_Nfy = (T_EVT)0;
+//	fstGrpQ.grpQKey = NULL;
+	fstGrpQ.grpQHd_p = NULL;
+
+	//创建事件和互斥体
+#ifndef WINDOWS_PLATFORM
+	int initNum = 0xFFFFFFFF;
+	evtMem[0] = *(T_EVT*)&initNum;
+	fstGrpQ.Ev_Nfy = &this->evt_Vlu[0];
+#endif
+	if(crtEvt(&(fstGrpQ.Ev_Nfy) , &evtMem[0])==-1)
+		return;
+	this->evtMem[0] = fstGrpQ.Ev_Nfy;//[0]-fst
+
+	crtQLock(fstGrpQ.grpQKey);
+	
+	////////分配队列空间
+	//建队头
+	tRtn = creatQHd(fstGrpQ.grpQtype, fstGrpQ.grpQNum, &tQHd_p);
+	if(tRtn <= 0)
+	{
+		fstGrpQ.grpQNum = 0;
+		fstGrpQ.grpQULng = 0;
+		fstGrpQ.grpQVol = 0;
+		if (tRtn < 0 )
+		{
+			fstGrpQ.grpQtype = 0;
+			return;
+		}
+		
+	}
+	//建队尾
+	if ( tRtn )
+	{
+		tQHd_p->qCnxt_p = NULL;//(u_char*)"";
+		tRtn = creatQBody(tQHd_p, fstGrpQ.grpQNum, fstGrpQ.grpQVol, fstGrpQ.grpQULng);
+	}	
+	if(tRtn<0)
+	{
+		fstGrpQ.grpQtype = 0;
+		fstGrpQ.grpQNum = 0;
+		fstGrpQ.grpQULng = 0;
+		fstGrpQ.grpQVol = 0;
+		return;
+	}
+	fstGrpQ.grpQHd_p = tQHd_p;
+	qGrpNum = 1;
+}
+
+//
+//
+////构造双组队列
+//功能：创建双组队列。包括双事件和双临界区，分配双组所有队列空间
+//输入：
+//		fstGrpPar：1组创建参数；
+//		scdGrpPar：2组创建参数
+//输出：无
+//返回：无
+//
+C_DuGrp_BCPQ::C_DuGrp_BCPQ(crtGrpQPar fstGrpPar, crtGrpQPar scdGrpPar)
+{
+	grpQ* tGrpQ_p;
+	crtGrpQPar* tCrtGrpQPar_p;
+	qHd* tQHd_p;
+	qHd** tQHd_pp = &tQHd_p;
+	int tRtn;
+	
+	if(fstGrpPar.grpQtype == scdGrpPar.grpQtype)
+		return;
+	if((1 != fstGrpPar.grpQtype) && (2 != fstGrpPar.grpQtype))
+		return;
+	if((1 != scdGrpPar.grpQtype) && (2 != scdGrpPar.grpQtype))
+		return;
+
+	qGrpNum = 0;
+	fstGrpQ.holdEvtFlag = 0;//fstG no evt!for lnx!
+	fstGrpQ.qUsdUTCnt = 0;
+	memset(&fstGrpQ.grpQStCd, 0, 128);
+	fstGrpQ.Ev_Nfy = (T_EVT)0;
+//	fstGrpQ.grpQKey_p = NULL;
+	fstGrpQ.grpQHd_p = NULL;
+
+	scdGrpQ.holdEvtFlag = 0;//scdG no evt!for lnx!
+	scdGrpQ.qUsdUTCnt = 0;
+	memset(&scdGrpQ.grpQStCd, 0, 128);
+	scdGrpQ.Ev_Nfy = (T_EVT)0;
+//	scdGrpQ.grpQKey_p = NULL;
+	scdGrpQ.grpQHd_p = NULL;
+
+	int i = 2;
+	//赋初值
+	while(i)
+	{
+		if(1==i)//fstG
+		{
+			tGrpQ_p = &fstGrpQ;
+			tCrtGrpQPar_p = &fstGrpPar;
+		}
+		else//scdG
+		{
+			tGrpQ_p = &scdGrpQ;
+			tCrtGrpQPar_p = &scdGrpPar;
+		}
+#ifndef WINDOWS_PLATFORM
+		int initNum = 0xFFFFFFFF;
+		evtMem[i-1] = *(T_EVT*)&initNum;
+		tGrpQ_p->Ev_Nfy = &this->evt_Vlu[i-1];
+		//memcpy(tGrpQ_p->Ev_Nfy,&ev_NfyInit,sizeof(ev_NfyInit));
+#endif
+		if(crtEvt(&tGrpQ_p->Ev_Nfy, &evtMem[i-1])==-1)//lnx-sem_t, win-handle
+				return;
+		this->evtMem[i-1] = tGrpQ_p->Ev_Nfy;//[0]-fst;[1]--scd
+
+		--i;
+			
+		crtQLock(tGrpQ_p->grpQKey);
+		                                                   
+		tGrpQ_p->grpQtype = tCrtGrpQPar_p->grpQtype;
+		tGrpQ_p->grpQNum = tCrtGrpQPar_p->grpQNum;
+		tGrpQ_p->grpQULng = tCrtGrpQPar_p->grpQULng;
+		tGrpQ_p->grpQVol = tCrtGrpQPar_p->grpQVol;
+
+		tQHd_p = NULL;
+		////////分配队列空间
+		//建队头
+		tRtn = creatQHd(tGrpQ_p->grpQtype, tGrpQ_p->grpQNum, tQHd_pp);
+		if(tRtn<=0)
+		{
+			tGrpQ_p->grpQNum = 0;
+			tGrpQ_p->grpQULng = 0;
+			tGrpQ_p->grpQVol = 0;
+
+			if(tRtn<0)
+			{
+				tGrpQ_p->grpQtype = 0;
+				return;
+			}
+		}
+
+		//建队尾
+		if(tRtn)
+		{
+			tQHd_p->qCnxt_p = NULL;//(u_char*)"";
+			tRtn = creatQBody(tQHd_p, tGrpQ_p->grpQNum, tGrpQ_p->grpQVol, tGrpQ_p->grpQULng);
+		}
+
+		if(tRtn<0)
+		{
+			tGrpQ_p->grpQtype = 0;
+			tGrpQ_p->grpQNum = 0;
+			tGrpQ_p->grpQULng = 0;
+			tGrpQ_p->grpQVol = 0;
+			return;
+		}
+		tGrpQ_p->grpQHd_p = tQHd_p;
+		qGrpNum++;
+	}
+}
+
+//
+//
+////////////////析构函数
+////
+//功能：销毁单或双事件和临界区，释放队列空间
+//输入：无
+//输出：无
+//
+C_DuGrp_BCPQ::~C_DuGrp_BCPQ()
+{
+	qHd* tQHd_p;
+	if(fstGrpQ.grpQNum)
+	{
+		freeEvt(fstGrpQ.Ev_Nfy, evtMem);
+		freeQLock(fstGrpQ.grpQKey);
+
+		for(fstGrpQ.grpQNum,tQHd_p = fstGrpQ.grpQHd_p; fstGrpQ.grpQNum > 0; fstGrpQ.grpQNum--,tQHd_p++)
+			free(tQHd_p->qBody_p);
+		free(fstGrpQ.grpQHd_p);
+	}
+	if(scdGrpQ.grpQNum)
+	{
+		freeEvt(scdGrpQ.Ev_Nfy, evtMem);
+		freeQLock(scdGrpQ.grpQKey);
+		for(scdGrpQ.grpQNum,tQHd_p = scdGrpQ.grpQHd_p; scdGrpQ.grpQNum > 0; scdGrpQ.grpQNum--,tQHd_p++)
+			free(tQHd_p->qBody_p);
+		free(scdGrpQ.grpQHd_p);
+	}
+}
+
+//
+//
+////////////////设置队列的出队上下文状态
+////
+//功能：销毁单或双事件和临界区，释放队列空间
+//输入：grpId，组Id。=1，第1组；=2，第2组
+//      qIdx，队列索引。=0xFFFF FFFF，设置全组
+//      cnxt_p，出队上下文状态指针
+//输出：无
+//返回：=0，成功；=-1，参数错误；=-2，失败
+//
+int C_DuGrp_BCPQ::setCnxtQ(u_char grpId, u_short qIdx, void* cnxt_p)
+{
+	grpQ* tGrpQ_p;
+	qHd* tGrpQHd_p;
+	u_short tNum;
+
+	//参数检查
+	if((1!= grpId) && (2!= grpId))
+		return -1;
+	if(!cnxt_p)
+		return -1;
+	if(1==grpId)
+		tGrpQ_p = &fstGrpQ;
+	else
+		tGrpQ_p = &scdGrpQ;
+	if((qIdx>tGrpQ_p->grpQNum)&&(qIdx!=0xFFFFFFFF))//max qId = grpQNum-1
+		return -1;
+
+	//设置，不会并行，不上锁
+	if(0xFFFFFFFF==qIdx)
+	{
+		tNum = tGrpQ_p->grpQNum;
+		do{
+			tGrpQHd_p = tGrpQ_p->grpQHd_p;
+// 			if(!(tGrpQHd_p->qCnxt_p))
+// 				return -2;
+			tGrpQHd_p->qCnxt_p = (u_char*)cnxt_p;
+
+			tGrpQHd_p = tGrpQHd_p++;
+		}while(tNum--);
+		return 0;
+	}
+
+	tGrpQHd_p = tGrpQ_p->grpQHd_p + qIdx;
+// 	if(!(tGrpQHd_p->qCnxt_p))
+// 		return -2;
+	tGrpQHd_p->qCnxt_p = (u_char*)cnxt_p;
+	return 0;
+}
+
+//
+//
+////////////////数据块入队
+////
+//功能：数据或空数据入队，发送事件。空数据入队，仅发送事件
+//输入：
+//		grpId：  入队数据块和发事件操作针对的组号，第1组=1（fstGrpQ）；第2组=2(scdGrpQ)
+//               有数据块入队，但无法入队时，不发事件
+//		qPrio：  数据块入队的优先级，可用于队列索引（如通道（组）号），取值从0开始
+//		dBlk_p： 数据块指针，=NULL时无数据入队，仅发事件
+//		dBlkLng：数据块长，一块数据为队列的一个数据单元
+//输出：无				 
+//返回值：>=0，成功。有数据入队时，表示入队后，队列剩余可用单元数；仅发事件时，表示事件所属组
+//        < 0，失败。=-1，参数错误；=-2,队列满，无法入队；=3，未知错误
+//		
+int C_DuGrp_BCPQ::pshQ(u_char grpId, u_short qPrio, char *dBlk_p, u_char dBlkLng)
+{
+	grpQ* tGrpQ_p;
+	qHd* tQhd_p;
+	char* tPshPos_p;
+	u_short tGrpQStCd;
+	int tRtn;
+
+	//检查参数
+	if((1 != grpId) && (2 != grpId))
+		return -1;
+	if(1 == grpId)
+		tGrpQ_p = &fstGrpQ;
+	else
+		tGrpQ_p = &scdGrpQ;
+
+	//仅发事件
+	if(!dBlk_p)
+	{
+		sndEvt(tGrpQ_p->Ev_Nfy,tGrpQ_p);
+		return grpId;
+	}
+
+	if(qPrio >= tGrpQ_p->grpQNum)//prio. from 0 to grpQNum-1
+		return -1;
+	if ( dBlkLng <= 0 || (tGrpQ_p->grpQULng > 0 && dBlkLng > tGrpQ_p->grpQULng) )
+	{
+		return -1;
+	}
+
+	///////////数据块入队，且发事件
+	lockQ(tGrpQ_p->grpQKey);
+	tQhd_p = tGrpQ_p->grpQHd_p + qPrio;	//find q-head.
+	if(tQhd_p->usedBlkNum >= tGrpQ_p->grpQVol)	//q full?
+	{
+		unlockQ(tGrpQ_p->grpQKey);
+		return -2;
+	}
+
+	//入队
+	if(tPshPos_p = tQhd_p->qBody_p)
+	{
+		tPshPos_p = tPshPos_p + (tQhd_p->pshQIndx * tGrpQ_p->grpQULng);
+		if(!memcpy(tPshPos_p, dBlk_p, dBlkLng))
+		{
+			unlockQ(tGrpQ_p->grpQKey);
+			return -3;
+		}
+		tQhd_p->pshQIndx = (++tQhd_p->pshQIndx) % tGrpQ_p->grpQVol;
+		tQhd_p->usedBlkNum++;
+		tGrpQ_p->qUsdUTCnt++;
+
+		//设置组队列状态码
+		if(1 == tGrpQ_p->grpQtype)//ltG
+		{
+			tGrpQStCd = (u_short)1<<qPrio;
+			tGrpQ_p->grpQStCd.ltGrpQStMk = tGrpQ_p->grpQStCd.ltGrpQStMk|tGrpQStCd;
+		}
+		else//lgG
+		{
+			tGrpQStCd = (u_short)1<<(qPrio%16);
+			tGrpQ_p->grpQStCd.lgGrpQStMk[qPrio/16] = tGrpQ_p->grpQStCd.lgGrpQStMk[qPrio/16]|tGrpQStCd;
+		}
+	}
+	else//erro. cause unknown!
+	{
+		unlockQ(tGrpQ_p->grpQKey);
+		return -3;
+	}
+
+	tRtn = tGrpQ_p->grpQVol - tQhd_p->usedBlkNum;
+	if(tRtn < 0)
+	{
+		unlockQ(tGrpQ_p->grpQKey);
+		return -3;
+	}
+	unlockQ(tGrpQ_p->grpQKey);
+	
+	//发事件
+	tGrpQ_p->evtSnd++;
+	sndEvt(tGrpQ_p->Ev_Nfy,tGrpQ_p);
+//	sleep(5); //test
+	return tRtn;
+}
+
+//
+//
+////////数据块出队
+////
+//功能：接收事件后，数据或空数据出队，空数据出队，相当于仅接收事件。出队后队空复位事件
+//输入：
+//		grpId：  等待数据和接收事件的队列组。第1组=0x1；第2组=0x2；两组中的任意一个=0x3
+//		dBlk_p： 接收出队数据单元的数据块指针，=NULL时只等grpId组事件
+//输出：
+//		dBlkLng_p：出队的数据单元长度，空数据出队时，值为0
+//返回值：> 0，成功，响应的事件所属队列组号。=1，1组队列事件；=2，2组队列事件
+//        < 0，错误原因码。=-1，输入参数错误；=-2,等待超时；=-3，等待失败；
+//				           =-4，队空错误（正常队空不返回）；=-5,未知原因的失败
+//						   =0，队列非空，但不满足上下文条件，无法出队
+//		
+int C_DuGrp_BCPQ::popQ(u_char grpId, char* dBlk_p, u_char* dBlkLng_p)
+{
+	int tEvtNo;
+	T_EVT* tEvt_p;
+	grpQ*	tGrpQ_p;
+	qHd* tGrpQHd_p;
+	u_char* tPopQPos;
+//	u_short tGrpTmp = 0;
+	u_short* tGrpTmp_p = NULL;
+	u_short tGrpQMk = 0, *tGrpQStCd_p = NULL, ** tGrpQStCd_pp = NULL;
+	int tRtn;
+
+	tGrpQStCd_pp = &tGrpTmp_p;
+	//参数检查
+	if((grpId < 1) || (grpId > 3))
+		return -1;
+	
+	if(1 == grpId)
+		tEvt_p = &fstGrpQ.Ev_Nfy;
+	else if(2 == grpId)
+		tEvt_p = &scdGrpQ.Ev_Nfy;
+	else//=3
+		tEvt_p = &fstGrpQ.Ev_Nfy;
+
+	//不取数据，只等事件
+	if(!dBlk_p)
+		return waitEvt(grpId, this);
+
+	if(!dBlkLng_p)
+		return -1;
+	//等事件到达后取数据
+ 	tEvtNo = waitEvt(grpId, this);//wait...
+	if(tEvtNo < 0)
+		return tEvtNo;
+
+
+	if(1==tEvtNo)		//fstG evt
+	{
+		tGrpQ_p = &fstGrpQ;
+		if(!tGrpQ_p->grpQVol || *dBlkLng_p > tGrpQ_p->grpQULng)//no qs, only rcv evt
+		{
+			tGrpQ_p->evtRev++;
+			*dBlkLng_p = 0;
+			return tEvtNo;
+		}
+	}
+	else				// 2: scdG evt
+	{
+		tGrpQ_p = &scdGrpQ;
+		if(!tGrpQ_p->grpQVol|| *dBlkLng_p > tGrpQ_p->grpQULng)//no qs, only rcv evt
+		{
+			tGrpQ_p->evtRev++;
+			*dBlkLng_p = 0;
+			return tEvtNo;
+		}
+	}
+
+
+	//开始取数据
+	lockQ(tGrpQ_p->grpQKey);	
+
+	tGrpQ_p->evtRev++;
+
+	//找出队的队头
+	tGrpQHd_p = tGrpQ_p->grpQHd_p;
+	if(1 == tGrpQ_p->grpQtype)//ltG
+	{
+		tRtn = findPopLtQHd(tGrpQ_p, &tGrpQHd_p, &tGrpQMk);//rtn=0|1|-4
+		if(tRtn <= 0)
+		{
+			unlockQ(tGrpQ_p->grpQKey);
+			if(!tRtn)
+			{
+				sleep(REST);//have a rest!
+				sndEvt(tGrpQ_p->Ev_Nfy,tGrpQ_p);
+			}
+			return tRtn;//-4,0
+		}
+	}
+	else//lgG
+	{
+		tRtn = findPopLgQHd(tGrpQ_p, &tGrpQHd_p, tGrpQStCd_pp, &tGrpQMk);//rtn=0|1|-4
+		if(tRtn <= 0)
+		{
+			unlockQ(tGrpQ_p->grpQKey);
+			if(!tRtn)
+			{
+				sleep(REST);//have a rest!
+				sndEvt(tGrpQ_p->Ev_Nfy,tGrpQ_p);
+			}
+			return tRtn;//-4,0
+		}
+	}
+
+	//rtn =1
+	tPopQPos = (u_char*)tGrpQHd_p->qBody_p + tGrpQHd_p->popQIndx * tGrpQ_p->grpQULng;
+	if(memcpy(dBlk_p, tPopQPos, /**dBlkLng_p*/tGrpQ_p->grpQULng)==NULL)
+	{
+		*dBlkLng_p = 0;
+		unlockQ(tGrpQ_p->grpQKey);
+		return -4;
+	}
+	
+	tGrpQHd_p->popQIndx = (++tGrpQHd_p->popQIndx) % tGrpQ_p->grpQVol;
+	tGrpQHd_p->usedBlkNum--;
+	tGrpQ_p->qUsdUTCnt--;
+	*dBlkLng_p = tGrpQ_p->grpQULng;
+
+	if ( *tGrpQStCd_pp )
+	{// lgG
+		tGrpQStCd_p = *tGrpQStCd_pp;
+		if(!tGrpQHd_p->usedBlkNum)
+			*tGrpQStCd_p = tGrpQMk&(*tGrpQStCd_p);
+	}
+	else
+	{
+		tGrpQStCd_p = &(tGrpQ_p->grpQStCd.ltGrpQStMk);
+		if(!tGrpQHd_p->usedBlkNum)
+			*tGrpQStCd_p = tGrpQMk&(*tGrpQStCd_p);
+	}
+	
+	if(!tGrpQ_p->qUsdUTCnt)//reset evt
+	{
+		clrEvt(tGrpQ_p->Ev_Nfy,tGrpQ_p);
+	}
+	else // cnt > 0,have data wait to pop
+	{
+		sndEvt(tGrpQ_p->Ev_Nfy,tGrpQ_p); 
+
+	}
+	unlockQ(tGrpQ_p->grpQKey);
+	return tEvtNo;
+}
+
+//
+//
+////////清除指定队列内的全部数据
+////
+//功能：根据输入队列组和队列优先级，可用作通道（组）号，清除对应队列的全部数据
+//输入：
+//		grpId：要清除数据的队列所在组号。第1组=0x1；第2组=0x2
+//		prio： 要清除数据的队列优先级
+//输出：
+//		无
+//返回值：= 0，成功；=-1，待失败
+//		
+int C_DuGrp_BCPQ::clrGQ(u_char grpId, u_short qPrio)
+{
+	grpQ* tGrpQ_p;
+	qHd* tQHd_p;
+	u_short tGrpQStCd;
+	T_EVT* tEvt_p;
+
+	//检查参数
+	if((1!=grpId)&&(2!=grpId))
+		return -1;
+	if(1==grpId)
+	{
+		tGrpQ_p = &fstGrpQ;
+		tEvt_p = &fstGrpQ.Ev_Nfy;
+	}
+	else
+	{
+		tGrpQ_p = &scdGrpQ;
+		tEvt_p = &scdGrpQ.Ev_Nfy;
+	}
+	if(qPrio>=tGrpQ_p->grpQNum)//prio. from 0 to grpQNum-1
+		return -1;
+
+	//////////清除数据
+	lockQ(tGrpQ_p->grpQKey);
+	tQHd_p = tGrpQ_p->grpQHd_p + qPrio;	//find q-head.
+	tGrpQ_p->qUsdUTCnt = tGrpQ_p->qUsdUTCnt - tQHd_p->usedBlkNum;
+	tQHd_p->usedBlkNum = 0;
+	tQHd_p->pshQIndx = 0;
+	tQHd_p->popQIndx = 0;
+
+	//清队列状态码
+	if(1==tGrpQ_p->grpQtype)//ltG
+		tGrpQ_p->grpQStCd.ltGrpQStMk = (tGrpQ_p->grpQStCd.ltGrpQStMk)&(~((u_short)1<<qPrio));
+	else//lgG
+	{
+		tGrpQStCd = ~((u_short)1<<(qPrio%16));
+		tGrpQ_p->grpQStCd.lgGrpQStMk[qPrio/16] = tGrpQ_p->grpQStCd.lgGrpQStMk[qPrio/16]&tGrpQStCd;
+	}
+
+	if(!tGrpQ_p->qUsdUTCnt)//reset evt!
+		clrEvt(*tEvt_p, tGrpQ_p);
+
+	unlockQ(tGrpQ_p->grpQKey);
+	return 0;
+}
+
+//
+//
+////////清除指定队列组中所有队列的全部数据
+////
+//功能：根据输入队列组，清除指定队列组中所有队列的全部数据
+//输入：
+//		grpId：要清除数据的队列所在组号。第1组=0x1；第2组=0x2
+//输出：
+//		无
+//返回值：= 0，成功；=-1，待失败
+//
+int C_DuGrp_BCPQ::clrG(u_char grpId)
+{
+	grpQ* tGrpQ_p;
+	qHd* tQHd_p;
+	T_EVT* tEvt_p;
+	int i;
+
+	//检查参数
+	if((1!=grpId)&&(2!=grpId))
+		return -1;
+	if(1==grpId)
+	{
+		tGrpQ_p = &fstGrpQ;
+		tEvt_p = &fstGrpQ.Ev_Nfy;
+	}
+	else
+	{
+		tGrpQ_p = &scdGrpQ;
+		tEvt_p = &scdGrpQ.Ev_Nfy;
+	}
+
+	lockQ(tGrpQ_p->grpQKey);
+	tGrpQ_p->qUsdUTCnt = 0;
+	for(i=0;i<64;i++)
+		tGrpQ_p->grpQStCd.lgGrpQStMk[i] = 0;
+	
+	for(i =0,tQHd_p = tGrpQ_p->grpQHd_p; i<tGrpQ_p->grpQNum; tQHd_p++, i++)
+	{
+		tGrpQ_p->grpQHd_p->usedBlkNum = 0;
+		tGrpQ_p->grpQHd_p->pshQIndx = 0;
+		tGrpQ_p->grpQHd_p->popQIndx = 0;
+	}
+	unlockQ(tGrpQ_p->grpQKey);
+	return 0;
+}
+
+T_EVT* C_DuGrp_BCPQ::getEvtMem()
+{
+	return evtMem;
+}
+
+grpQ* C_DuGrp_BCPQ::getFstGrpQ()
+{
+	return &fstGrpQ;
+}
+
+grpQ* C_DuGrp_BCPQ::getScdGrpQ()
+{
+	return &scdGrpQ;
+}

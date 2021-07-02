@@ -1,0 +1,10 @@
+[2017-08-17:02-38-31]###[FileMonitor::threadHandler]###event: {
+   "ID" : 0,
+   "KeyWord" : "StorageEvent",
+   "Parameter" : {
+      "Dir" : "/home/fczx/filedo/down/yes",
+      "FileName" : "busilist_0817001.xml",
+      "Operation" : "MovedTo",
+      "capTime" : "2017-08-17:02-38-31"
+   }
+}

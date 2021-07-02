@@ -1,0 +1,7 @@
+make的说明：
+1、要生成运行的主程序 ThrMeteM 可以直接输入make 即可
+2、生成测试程序Mtst，make Mtst
+3、生成停主程序的stopG，make stopG
+4、生成上面所有的程序,make all
+关于配置文件：
+1、可以直接阅读cfg下的readme即可

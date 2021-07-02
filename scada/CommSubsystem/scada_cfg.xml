@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scada>
+	<remoteIP1 ip="192.168.0.192" port="2404" localip="198.168.0.87" localport="10000" >remote1</remoteIP1> 
+	<remoteIP2 ip="192.168.0.86" port="502" localip="198.168.0.87" localport="10001" >remote2</remoteIP2>
+	<remoteIP3 ip="192.168.0.129" port="505" localip="192.168.0.87" localport="10002" >remote3</remoteIP3>
+	<remoteIP4 ip="192.168.0.51" port="9000">remote4</remoteIP4>
+      <localIP ip="192.168.0.87" port="5407">local</localIP>
+</scada>

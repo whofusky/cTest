@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<!-- 20170713 业务清单提供情况 -->
+<file>
+    <itemDesc>
+        <jobNumber>1</jobNumber>
+    </itemDesc>
+    <itemList>
+        <itemData>
+            <name>111111</name>
+            <commitTime></commitTime>
+        </itemData>
+    </itemList>
+</file>

@@ -1,0 +1,155 @@
+#!/bin/bash
+.SUFFIXES:.cpp .i .s .o
+
+###################################################
+HOMEDIR=$(HOME)
+PUBDIR=$(HOMEDIR)/public
+BINDIR=$(HOMEDIR)/bin
+##主要内容说明
+##HOMEDIR:用户主目录
+##PUBDIR:公共函数代码目录
+##BINDIR:bin文件目录
+##
+###################################################
+
+SYSINCL = -I/usr/include
+PUBINCL = -I$(PUBDIR)/include -I$(PUBDIR)/libthread/include
+OTHERINCL = -I$(HOMEDIR)/include -I$(HOMEDIR)/include/xmlUniveralParse
+CUSTOMS_HEAD =
+
+SYSLIBS = -lpthread
+OSOURLIBS = -L$(PUBDIR)/lib -ltinyxml2 -ljson_linux-gcc-4.4.7_libmt
+PUBLIBS = -L$(PUBDIR)/lib -lFileMonitor -lEventManager \
+     -lInfra -lBase
+OTHERLIBS = -L$(PUBDIR)/lib -lhlthRprtWrtXml -lmete -lbaseFunc  
+CUSTOMS_LIB =
+
+#动态连接库
+#DYNLIB = -L$(PUBDIR)/libso -lmetesh
+DYNLIB = 
+
+INCLUDES = $(SYSINCL) $(PUBINCL) $(OTHERINCL) $(CUSTOMS_HEAD)
+LIBS = $(CUSTOMS_LIB) $(OTHERLIBS) $(PUBLIBS) $(OSOURLIBS) $(SYSLIBS) $(DYNLIB)
+##编译时头文件和链接库
+
+###################################################
+GFLAG = -g -Wall
+##编译参数
+
+###################################################
+XCC=g++ $(GFLAG)
+##主要编译命令
+
+###################################################
+
+
+###################################################
+#REMIND_MSG ="input ERROR,please input like this: make Rtest"
+
+_ALL:all
+#	@echo $(REMIND_MSG)
+
+#.cpp预处理	
+.cpp.i:
+	$(XCC) $(INCLUDES) -E $< -o $(<:.cpp=.i)
+
+#对预处理文件.i生成汇编代码.s
+.i.s:
+	$(XCC) -S $< -o $(<:.i=.s)
+
+#将汇编文件.s编译为目标文件.o
+.s.o:
+	$(XCC) -c $< -o $(<:.s=.o)	
+    
+#.cpp为自己编译代码
+.cpp.o:
+	@echo ""
+	$(XCC) $(INCLUDES) -E $< -o $(<:.cpp=.i)
+	$(XCC) $(INCLUDES) -S $(<:.cpp=.i) -o $(<:.cpp=.s)	
+	$(XCC) -c $(<:.cpp=.s) -o $(<:.cpp=.o)	
+
+clean:
+	@echo ""
+	rm -f *.i
+	rm -f *.s	
+	rm -f *.o	
+	@echo ""	
+
+cls:
+	@echo ""
+	rm -f *.i
+	rm -f *.s	
+	rm -f *.o	
+	@echo ""	
+
+######################################################
+all:cls libmete.a libbaseFunc.a libhlthRprtWrtXml.a lib102slave.a libxmlDataRep.a libxmlParse.a libxmlAppItfc.a
+
+xmlall: cls libxmlDataRep.a libxmlParse.a libxmlAppItfc.a
+mete: cls libbaseFunc.a libmete.a libhlthRprtWrtXml.a
+
+1:cls libmete.a
+2:cls libbaseFunc.a
+3:cls libhlthRprtWrtXml.a
+##4:cls libMutex.a
+5:cls lib102slave.a
+6:cls libxmlDataRep.a
+7:cls libxmlParse.a
+8:cls libxmlAppItfc.a
+
+OBJ1=funcLib.o
+OBJ2=baseFunc.o
+OBJ3=hlthRprtWrtXml.o
+102sobj=102buff.o slave.o
+xmlDataRepOBJ = xmlDataRepresentation.o dataRepresentation.o
+xmlParseOBJ = xmlParse.o
+xmlAppItfcOBJ = xmlAppItfc.o
+######################################################
+
+#将 目标文件.o archives 成静态库
+
+###III区气象服务器程序，功能函数
+libmete.a:$(OBJ1)
+	ar -rv $(PUBDIR)/lib/libmete.a $(OBJ1)
+	@echo ""
+
+###基础函数	
+libbaseFunc.a:$(OBJ2)
+	ar -rv $(PUBDIR)/lib/libbaseFunc.a $(OBJ2)
+	@echo ""	
+
+###健康报告生成函数
+libhlthRprtWrtXml.a:$(OBJ3)
+	ar -rv $(PUBDIR)/lib/libhlthRprtWrtXml.a $(OBJ3)
+	@echo ""	
+
+###此处考虑用muxd的公共库
+#libMutex.a:Mutex.o
+#	ar -rv $(PUBDIR)/lib/libMutex.a Mutex.o
+#	@echo ""	
+	
+###102上传协议子站 封装的库	
+lib102slave.a:$(102sobj)
+	ar -rv $(PUBDIR)/lib/$@ $(102sobj)
+	@echo ""		
+
+################XML 解析工具 公共库 begine################################
+libxmlDataRep.a:$(xmlDataRepOBJ)
+	ar -rv $(PUBDIR)/lib/$@ $(xmlDataRepOBJ)
+	@echo ""
+
+libxmlParse.a:$(xmlParseOBJ)
+	ar -rv $(PUBDIR)/lib/$@ $(xmlParseOBJ)
+	@echo ""
+
+libxmlAppItfc.a:$(xmlAppItfcOBJ)
+	ar -rv $(PUBDIR)/lib/$@ $(xmlAppItfcOBJ)
+	@echo ""		
+################XML 解析工具 公共库 end################################
+
+
+
+
+
+
+
