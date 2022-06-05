@@ -26,7 +26,7 @@
 #endif
 
 
-void PauseThreadSleep(const int& sec, const int& us);
+void PauseThreadSleep(const int& sec, const int& us)
 
 
 #endif//_BASE_H_

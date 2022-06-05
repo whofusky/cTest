@@ -34,7 +34,7 @@ private:
 	int mRepet;
 	bool mAutoRelease;
 
-};
+}
 
 
 

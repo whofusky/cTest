@@ -2,7 +2,6 @@
 #ifndef _C_TIMERPOOL_H_
 #define _C_TIMERPOOL_H_
 
-#include <vector>
 #include "libBase/Base.h"
 #include "infra/Thread.h"
 

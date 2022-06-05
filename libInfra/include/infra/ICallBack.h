@@ -23,6 +23,6 @@ public:
     virtual ~ICallBack();
     virtual void handleCallBack( Json::Value& ret) = 0;
 
-}
+};
 
 #endif//_I_CALLBACK_H_

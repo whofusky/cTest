@@ -22,7 +22,7 @@
 
 
 
-
+// use pipe  or list
 class MessageQueue
 {
 public:
@@ -41,7 +41,7 @@ private:
 	std::list<Message> mQueue; //list本身不是多线程安全的
 	CMutex             mMutex;
 
-}
+};
 
 
 

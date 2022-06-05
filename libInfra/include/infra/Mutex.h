@@ -33,7 +33,7 @@ private:
     CMutex( CMutex& obj );
     pthread_mutex_t mMutex;
 
-}
+};
 
 class CMutexGuard
 {
@@ -45,7 +45,7 @@ private:
     CMutexGuard(); 
     CMutex mLock;   
         
-}
+};
 
 
 

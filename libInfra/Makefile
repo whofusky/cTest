@@ -42,7 +42,8 @@ EXCUTE_BIN		:= $(if $(myexe),$(myexe),)
 # Environment settings. The value of PROJECT_DIR shoule be set in the *nix system as the the absolute dir path of your project.
 # PROJECT_DIR	:= /home/test_usr
 #CURDIR    		:= $(PROJECT_DIR)/src/pbl
-CURDIR     		:= $(shell pwd)
+#CURDIR     		:= $(shell pwd)
+CURDIR     		:= .
 PROJECT_DIR     := $(CURDIR)
 TMPFILE_DIR     := $(PROJECT_DIR)/tmpFile
 PRG_BIN_DIR		:= $(PROJECT_DIR)/bin
