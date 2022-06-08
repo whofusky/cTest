@@ -7,11 +7,10 @@
 *********************************************************/
 #include <stdio.h>
 #include <unistd.h>
-#include <time.h>
 #include <sys/select.h>
+#include <time.h>
 
-#include "timer/TimerPool.h"
-#include "log/Log.h"
+#include "TimerPool.h"
 
 CTimerPool* CTimerPool::mInstance = NULL;
 
@@ -38,10 +37,12 @@ bool CTimerPool::startTimerPool( void )
 	}
 
 	startThread();
-	mIsStart = True;
+	mIsStart = true;
 
 	return true;
 }
+
+
 
 bool CTimerPool::stopTimerPool( void )
 {
@@ -57,20 +58,17 @@ bool CTimerPool::stopTimerPool( void )
 }
 
 
-bool CTimerPool::enableTimer( int second, 
-	int microsecond, 
-	int repet, 
-	sp<ITimerHandler> obj,
-	TIMER_HANDLER func
-	)
+bool CTimerPool::enableTimer( 
+        int second, 
+        int microsecond, 
+        int repet, 
+        sp<ITimerHandler> obj, 
+        TIMER_HANDLER func )
 {
 	CMutexGuard autoGuard( mLock );
 	std::vector<TIMER_CB_NODE>::iterator it;
 
-	for( it = mCB.begin();
-		 it != mCB.end();
-		 it++
-		)
+	for( it = mCB.begin(); it != mCB.end(); it++ )
 	{
 		if( it->mCB_Obj == obj )
 		{
@@ -79,13 +77,13 @@ bool CTimerPool::enableTimer( int second,
 	}
 
 	TIMER_CB_NODE tCB_Node;
-	tCB_Node.mCB_Obj = obj;
-	tCB_Node.mCB_Func = func;
+	tCB_Node.mCB_Obj      = obj;
+	tCB_Node.mCB_Func     = func;
 	tCB_Node.mInternalSec = second;
 	tCB_Node.mInternalMic = microsecond;
-	tCB_Node.mRepetNum = repet;
-	tCB_Node.mTickNum = 0;
-	tCB_Node.mValid = true;
+	tCB_Node.mRepetNum    = repet;
+	tCB_Node.mTickNum     = 0;
+	tCB_Node.mValid       = true;
 
 	mCB.push_back( tCB_Node );
 
@@ -97,10 +95,7 @@ bool CTimerPool::disableTimer( ITimerHandler* obj, TIMER_HANDLER func )
 	CMutexGuard autoGuard( mLock );
 	std::vector<TIMER_CB_NODE>::iterator it;
 
-	for( it = mCB.begin();
-		it != mCB.end();
-		it++
-		)
+	for( it = mCB.begin(); it != mCB.end(); it++ )
 	{
 		if( it->mCB_Obj == obj )
 		{
@@ -122,7 +117,8 @@ void CTimerPool::threadHandler()
 		tmpVal.tv_usec = 0;
 		if( !mIsStart )
 		{
-			usleep(10);
+			//usleep(10);
+			PauseThreadSleep(0, 10);
 			continue;
 		}
 
@@ -132,12 +128,11 @@ void CTimerPool::threadHandler()
 
 		std::vector<TIMER_CB_NODE>::iterator it;
 
-		for( it = mCB.begin();
-			it != mCB.end();
-			)
+		for( it = mCB.begin(); it != mCB.end(); )
 		{
 			if( it->mValid == false )
 			{
+				it++;
 				continue;
 			}
 			

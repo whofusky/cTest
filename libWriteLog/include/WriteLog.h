@@ -10,6 +10,7 @@
 #ifndef LIB_WRITELOG_H
 #define LIB_WRITELOG_H
 
+#include <stdlib.h>
 
 
 /******************************************************************************/

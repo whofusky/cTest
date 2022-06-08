@@ -3,8 +3,10 @@
 #define _C_TIMERPOOL_H_
 
 #include <vector>
-#include "libBase/Base.h"
-#include "infra/Thread.h"
+#include "Base.h"
+#include "Thread.h"
+#include "smartPointer.h"
+#include "Mutex.h"
 
 
 
@@ -25,15 +27,22 @@ public:
 		virtual void onTimerTick(void) = 0;
 	};
 
-	typedef void ( ITimerHandler::onTimerTick*TIMER_HANDLER)(void);
+	typedef void ( ITimerHandler::*TIMER_HANDLER)(void);
 
 	bool startTimerPool(void);
 
 	bool stopTimerPool(void);
 
-	bool enableTimer( int second, int microsecond, int repet, sp<ITimerHandler> obj,TIMER_HANDLER func );
+	bool enableTimer( 
+            int second, 
+            int microsecond, 
+            int repet, 
+            sp<ITimerHandler> obj,
+            TIMER_HANDLER func );
 
-	bool disableTimer( ITimerHandler* obj, TIMER_HANDLER func );
+	bool disableTimer( 
+            ITimerHandler* obj, 
+            TIMER_HANDLER func );
 
 private:
 	void threadHandler();
@@ -47,16 +56,16 @@ private:
 		int               mInternalMic;
 		int               mRepetNum;
 		int               mTickNum;
-		int               mValid;
+		bool              mValid;
 	}TIMER_CB_NODE;
 
 	std::vector<TIMER_CB_NODE> mCB;
-	static CTimerPool*  mInstance;
+	static CTimerPool*         mInstance;
 
-	bool mIsStart;
+	bool   mIsStart;
 	CMutex mLock;
 
-}
+};
 
 
 

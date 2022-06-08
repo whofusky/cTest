@@ -118,7 +118,9 @@ CUR_CPP 	:= $(filter %.cpp, $(CUR_SRC))
 #CUR_OBJ	:= $(addprefix $(PRG_BIN_DIR)/,$(notdir $(CUR_CPP:.cpp=.o) $(CUR_C:.c=.o)))
 #CUR_DEP	:= $(addprefix $(PRG_BIN_DIR)/,$(notdir $(CUR_CPP:.cpp=.d) $(CUR_C:.c=.d)))
 #CUR_FUNOBJ    := $(shell echo $(CUR_OBJ)|sed 's,$(CURDIR)/[^/]*.o\s*,,g')
-CUR_INC_DIR = $(shell ls -AxR $(PRG_INC_DIR)|grep ":"|tr -d ':')
+#CUR_INC_DIR = $(shell ls -AxR $(PRG_INC_DIR)|grep ":"|tr -d ':')
+NO_RECURSIVE_INC := noRecursive
+CUR_INC_DIR = $(shell ls -AxR $(PRG_INC_DIR)|grep -v "$(PRG_INC_DIR)/$(NO_RECURSIVE_INC)"|grep ":"|tr -d ':') $(PRG_INC_DIR)/$(NO_RECURSIVE_INC)
 CUR_INC 	:= $(foreach subdir,$(CUR_INC_DIR),$(subdir)/*.h)
 SRC_H   	:= $(filter %.h, $(CUR_INC))
 CUR_OBJ		:= $(strip $(CUR_CPP:.cpp=.o) $(CUR_C:.c=.o))
@@ -143,7 +145,9 @@ LDFLAGS    	:=
 LD_LIB_DIR 	:= -L $(DEPEND_LIB_DIR)
 LD_LIB_TMP1 := $(foreach subdir,$(DEPEND_LIB_DIR),$(wildcard $(subdir)/*.a $(subdir)/*.so))
 LD_LIB_TMP2 := $(notdir $(LD_LIB_TMP1))
-LD_LIBS	   	:= $(shell echo $(LD_LIB_TMP2)|sed 's,\(\s*\)\(lib\)\([^\.]*\)\(\.a\|\.so\),\1-l\3,g')
+#LD_SYS_LIBS := -lpthread
+LD_SYS_LIBS := 
+LD_LIBS	   	:= $(shell echo $(LD_LIB_TMP2)|sed 's,\(\s*\)\(lib\)\([^\.]*\)\(\.a\|\.so\),\1-l\3,g') $(LD_SYS_LIBS)
 XLD_FLG	   	:= -Xlinker "-(" $(LDFLAGS) -Xlinker "-)"
 
 

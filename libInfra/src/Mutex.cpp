@@ -15,7 +15,7 @@
 
 #include <stdio.h>
 #include "Mutex.h"
-#include "WriteLog"
+#include "WriteLog.h"
 
 CMutex::CMutex()
 {

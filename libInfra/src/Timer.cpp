@@ -10,8 +10,8 @@
 #include <time.h>
 #include <sys/select.h>
 
-#include "infra/Timer.h"
-#include "libBase/WriteLog.h"
+#include "Timer.h"
+#include "WriteLog.h"
 
 CTimer::CTimer()
 {
@@ -70,7 +70,7 @@ bool CTimer::stopTime(void)
 {
 	stopThread();
 	mIsStart = false;
-	reutrn true;
+	return true;
 }
 
 bool CTimer::isStart(void)

@@ -2,8 +2,8 @@
 #ifndef _C_TIMER_H_
 #define _C_TIMER_H_
 
-#include "baseFunc/Base.h"
-#include "infra/Thread.h"
+#include "Base.h"
+#include "Thread.h"
 
 
 

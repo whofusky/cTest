@@ -90,7 +90,9 @@ CUR_C   	:= $(filter %.c, $(CUR_SRC))
 CUR_CPP 	:= $(filter %.cpp, $(CUR_SRC))
 
 # Get the include files, object files, dependent files by searching from PRG_INC_DIR.
-CUR_INC_DIR = $(shell ls -AxR $(PRG_INC_DIR)|grep ":"|tr -d ':')
+#CUR_INC_DIR = $(shell ls -AxR $(PRG_INC_DIR)|grep ":"|tr -d ':')
+NO_RECURSIVE_INC := noRecursive
+CUR_INC_DIR = $(shell ls -AxR $(PRG_INC_DIR)|grep -v "$(PRG_INC_DIR)/$(NO_RECURSIVE_INC)"|grep ":"|tr -d ':') $(PRG_INC_DIR)/$(NO_RECURSIVE_INC)
 CUR_INC 	:= $(foreach subdir,$(CUR_INC_DIR),$(subdir)/*.h)
 SRC_H   	:= $(filter %.h, $(CUR_INC))
 #CUR_OBJ	:= $(addprefix $(PRG_BIN_DIR)/,$(strip $(CUR_CPP:.cpp=.o) $(CUR_C:.c=.o)))

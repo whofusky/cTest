@@ -20,7 +20,7 @@
 #include "WriteLog.h"
 #include "Looper.h"
 #include "Handler.h"
-#include "libBase/Base.h"
+#include "Base.h"
 
 
 using namespace std;
@@ -35,7 +35,7 @@ using namespace std;
 //    return;
 //}
 
-map<pthread_t, Looper*> Looper::mLooperMap = map<pathread_t, Looper*>();
+map<pthread_t, Looper*> Looper::mLooperMap = map<pthread_t, Looper*>();
 
 CMutex Looper::mLooperMutex;
 
@@ -77,7 +77,7 @@ void Looper::decRef()
 		mRefNum--;
 		if( mRefNum == 0 )
 		{
-			std::map<pthrad_t,Looper*>::iterator it;
+			std::map<pthread_t,Looper*>::iterator it;
 			mLooperMutex.Lock();
 			for( it = mLooperMap.begin();
 				 it != mLooperMap.end();
@@ -90,7 +90,7 @@ void Looper::decRef()
 					break;
 				}
 			}
-			mLooperMutex.Unlock();
+			mLooperMutex.unLock();
 			delete this;
 		}
 	}
@@ -120,7 +120,7 @@ void Looper::Loop()
 				msg.mCallBack->handleCallBack(
 					handler->getCallBackRet()
 					);
-				Json::value clear = Json::value::null;
+				Json::Value clear = Json::Value::null;
 				handler->setCallBackRet( clear );
 			}
 		}
@@ -140,7 +140,7 @@ Looper* Looper::getLooper()
 	tID = pthread_self();
 	CMutexGuard guard( mLooperMutex);
 
-	std::map<pathread_t,Looper*>::iterator it;
+	std::map<pthread_t,Looper*>::iterator it;
 	it = mLooperMap.find( tID );
 	if( it == mLooperMap.end() )
 	{

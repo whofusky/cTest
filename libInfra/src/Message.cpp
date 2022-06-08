@@ -33,19 +33,19 @@ Message::~Message()
 
 }
 
-Message::Message( const Message& obj )
-{
-	mIsValid      = obj.isValid();
-	mWhat         = obj.mWhat;
-	mArg1         = obj.mArg1;
-	mArg2         = obj.mArg2;
-	mMetaStr      = obj.mMetaStr;
-	mAttr         = obj.mAttr;
-	mTarget       = obj.mTarget;
-	mCallBack     = obj.mCallBack;
-	mTargetLooper = obj.mTargetLooper;
-	mWhen         = obj.mWhen;
-}
+//Message::Message( Message& obj )
+//{
+//	mIsValid      = obj.isValid();
+//	mWhat         = obj.mWhat;
+//	mArg1         = obj.mArg1;
+//	mArg2         = obj.mArg2;
+//	mMetaStr      = obj.mMetaStr;
+//	mAttr         = obj.mAttr;
+//	mTarget       = obj.mTarget;
+//	mCallBack     = obj.mCallBack;
+//	mTargetLooper = obj.mTargetLooper;
+//	mWhen         = obj.mWhen;
+//}
 
 Message& Message::operator = ( Message& obj )
 {

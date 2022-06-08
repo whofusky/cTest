@@ -34,12 +34,12 @@ public:
 
 	bool sendMessageDelayed( Message msg, long delayMillis );
 
-	void setCallBackRet( Json::value& ret );
+	void setCallBackRet( Json::Value& ret );
 
-	Json::value& getCallBackRet();
+	Json::Value& getCallBackRet();
 
 private:
-	Json::value mRet;
+	Json::Value mRet;
 
 };
 

@@ -139,7 +139,7 @@ sp<T>::~sp()
 }
 
 template<typename T>
-sp<T>& sp<T>::operator = (const sp<T>& otehr)
+sp<T>& sp<T>::operator = (const sp<T>& other)
 {
 	if( other.m_ptr )
 	{

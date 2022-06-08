@@ -16,7 +16,6 @@
 
 #include "Handler.h"
 #include "Looper.h"
-//#include "Log.h"
 #include "WriteLog.h"
 
 Handler::Handler()
@@ -63,14 +62,14 @@ bool Handler::sendMessageDelayed( Message msg, long delayMillis )
 	return true;
 }
 
-void Handler::setCallBackRet( Json::value& ret )
+void Handler::setCallBackRet( Json::Value& ret )
 {
 	mRet = ret;
 }
 
 
-Json::value&  Handler::getCallBackRet()
+Json::Value&  Handler::getCallBackRet()
 {
-	Json::value& ret = mRet;
+	Json::Value& ret = mRet;
 	return ret;
 }

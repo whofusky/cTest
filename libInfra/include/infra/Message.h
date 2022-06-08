@@ -23,7 +23,7 @@ class Message
 {
 public:
     Message();
-    Message(const Message& obj);
+    //Message(Message& obj);
     ~Message();
     
     //void Lock( void );
@@ -39,7 +39,7 @@ public:
     int  mArg1;
     int  mArg2;
     std::string mMetaStr;
-    Json::value mAttr;
+    Json::Value mAttr;
     void* mTarget;
     void* mTargetLooper;
     ICallBack* mCallBack;
