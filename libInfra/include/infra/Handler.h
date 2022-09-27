@@ -30,9 +30,9 @@ public:
 public:
     virtual void handleMessage( Message msg);
 
-	bool sendMessage( Message msg );
+	bool sendMessage( Message& msg );
 
-	bool sendMessageDelayed( Message msg, long delayMillis );
+	bool sendMessageDelayed( Message& msg, long delayMillis );
 
 	void setCallBackRet( Json::Value& ret );
 

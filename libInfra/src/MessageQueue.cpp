@@ -24,7 +24,7 @@ MessageQueue::~MessageQueue()
 {}
 
 
-bool MessageQueue::enqueueMessage( Message msg, long delayMillis )
+bool MessageQueue::enqueueMessage( Message& msg, long delayMillis )
 {
 	CMutexGuard tGuard(mMutex);
 

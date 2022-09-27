@@ -33,7 +33,7 @@ public:
     ~MessageQueue();
 
 	//消息进入队列
-	bool enqueueMessage( Message msg, long delayMillis );
+	bool enqueueMessage( Message& msg, long delayMillis );
 
 	Message dequeueMessage();
 

@@ -20,12 +20,12 @@
 #include "WriteLog.h"
 #include "Version.h"
 
-//__attribute__((constructor)) static void my_thread_init()
-//{
-//    PrintToStdout( LOGINITINFO, 
-//            "%s,CompileTime:[%s %s]", 
-//            LIB_INFRA_VERSION, __DATE__,__TIME__);
-//}
+__attribute__((constructor)) static void my_thread_init()
+{
+    PrintToStdout( LOGINITINFO, 
+            "%s,CompileTime:[%s %s]", 
+            LIB_INFRA_VERSION, __DATE__,__TIME__);
+}
 
 CThread::CThread()
 {

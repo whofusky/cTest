@@ -35,7 +35,7 @@ void Handler::handleMessage( Message msg )
 }
 
 
-bool Handler::sendMessage( Message msg )
+bool Handler::sendMessage( Message& msg )
 {
 	Looper* loop = (Looper*) msg.mTargetLooper;
 
@@ -49,7 +49,7 @@ bool Handler::sendMessage( Message msg )
 }
 
 
-bool Handler::sendMessageDelayed( Message msg, long delayMillis )
+bool Handler::sendMessageDelayed( Message& msg, long delayMillis )
 {
 	Looper* loop = (Looper*) msg.mTargetLooper;
 
