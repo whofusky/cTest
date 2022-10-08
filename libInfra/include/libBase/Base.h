@@ -27,6 +27,7 @@
 
 
 void PauseThreadSleep(const int& sec, const int& us);
+void getFormatTime( char* buf, int bufLen, const char* timeFormat="%Y-%m-%d_%H:%M:%S", int addSeconds=0 );
 
 
 #endif//_BASE_H_

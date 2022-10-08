@@ -12,7 +12,9 @@
  *
  ***********************************************************/
 
+#include <sys/time.h>
 #include <time.h>
+#include <string.h>
 
 #include "Base.h"
 
@@ -28,6 +30,27 @@ void PauseThreadSleep(const int& sec, const int& us)
         tDly.tv_nsec = us*1000;
     }
     nanosleep( &tDly, NULL );
+
+    return;
+}
+
+
+void getFormatTime( char* buf, int bufLen, const char* timeFormat, int addSeconds)
+{
+    memset( buf, 0, bufLen );
+
+    struct timeval tv;
+    time_t nowTimeSec;
+    struct tm curTime;
+
+    gettimeofday( &tv, NULL );
+
+    nowTimeSec = tv.tv_sec;
+    nowTimeSec += addSeconds;
+
+    localtime_r( &nowTimeSec, &curTime );
+
+    strftime( buf, bufLen, timeFormat, &curTime );
 
     return;
 }

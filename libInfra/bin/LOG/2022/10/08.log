@@ -1,0 +1,4 @@
+14:56:33.686782 main.cpp:35[DEBUG:sizeof(tmpStr[1024])=[1024]]
+14:56:33.686856 main.cpp:37[DEBUG:hahha]
+14:56:33.686887 main.cpp:38[DEBUG:hahha21]
+14:56:33.686907 main.cpp:39[DEBUG:hahha2,[1],[fushikai]]

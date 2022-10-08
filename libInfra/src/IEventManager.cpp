@@ -196,7 +196,7 @@ unsigned char IEventManager::detachEventHandler(
     return True;
 }
 
-unsigned char IEventManager::nofifyEvent(
+unsigned char IEventManager::notifyEvent(
         const char* event,
         EVENT_ACTION action,
         Json::Value& evenAttr )

@@ -75,7 +75,7 @@ public:
 
     //通告事件的发生
     //
-    unsigned char nofifyEvent( const char* event,
+    unsigned char notifyEvent( const char* event,
             EVENT_ACTION aaction,
             Json::Value& eventAttr );
     
