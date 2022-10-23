@@ -11,7 +11,7 @@
 #include <sys/select.h>
 
 #include "Timer.h"
-#include "WriteLog.h"
+//#include "WriteLog.h"
 
 CTimer::CTimer()
 {

@@ -1,78 +1,74 @@
-/***********************************************************
-*
-*
-*  TimerPool.h
-*
-*  Create by muxd
-*
-*  2017/07/31
-**********************************************************/
-#ifndef _C_TIMER_POOL_H_
-#define _C_TIMER_POOL_H_
+
+#ifndef _C_TIMERPOOL_H_
+#define _C_TIMERPOOL_H_
+
 #include <vector>
-#include "base/Base.h"
-#include "thread/Thread.h"
-#include "smartPointer/smartPointer.h"
-#include "mutex/Mutex.h"
+#include "Base.h"
+#include "Thread.h"
+#include "smartPointer.h"
+#include "Mutex.h"
+
+
+
 
 class CTimerPool: public CThread
 {
-private:
-    CTimerPool();
-    virtual ~CTimerPool();
-
 public:
+	CTimerPool();
+    virtual ~CTimerPool();
+    
+public:
+	static CTimerPool* Initialize();
 
-    static CTimerPool* Initialize();
+	class ITimerHandler: public RefBase
+	{
+	public:
+		virtual ~ITimerHandler() {}
+		virtual void onTimerTick(void) = 0;
+	};
 
-    class ITimerHandler: public RefBase
-    {
-    public:
-        virtual ~ITimerHandler() {}
+	typedef void ( ITimerHandler::*TIMER_HANDLER)(void);
 
-        virtual void onTimerTick( void ) = 0;
+	bool startTimerPool(void);
 
-    };
+	bool stopTimerPool(void);
 
-    typedef void ( ITimerHandler::*TIMER_HANDLER )( void );
+	bool enableTimer( 
+            int second, 
+            int microsecond, 
+            int repet, 
+            sp<ITimerHandler> obj,
+            TIMER_HANDLER func );
 
-    bool startTimerPool( void );
-
-    bool stopTimerPool( void );
-
-    bool enableTimer(
-        int second,
-        int microsecond,
-        int repet,
-        sp<ITimerHandler> obj,
-        TIMER_HANDLER func );
-
-    bool disableTimer(
-        ITimerHandler* obj,
-        TIMER_HANDLER func );
-
-private:
-    void threadHandler();
+	bool disableTimer( 
+            ITimerHandler* obj, 
+            TIMER_HANDLER func );
 
 private:
+	void threadHandler();
 
-    typedef struct timer_cb_node
-    {
-        sp<ITimerHandler>  mCB_Obj;
-        TIMER_HANDLER      mCB_Func;
-        int                mInternalSec;
-        int                mInternalMic;
-        int                mRepetNum;
-        int                mTickNum;
-        bool               mValid;
-    } TIMER_CB_NODE;
+private:
+	typedef struct timer_cb_node
+	{
+		sp<ITimerHandler> mCB_Obj;
+		TIMER_HANDLER     mCB_Func;
+		int               mInternalSec;
+		int               mInternalMic;
+		int               mRepetNum;
+		int               mTickNum;
+		bool              mValid;
+	}TIMER_CB_NODE;
 
-    std::vector< TIMER_CB_NODE > mCB;
-    static CTimerPool*           mInstance;
+	std::vector<TIMER_CB_NODE> mCB;
+	static CTimerPool*         mInstance;
 
-    bool   mIsStart;
-    CMutex mLock;
+	bool   mIsStart;
+	CMutex mLock;
+
 };
 
-#endif //_C_TIMER_POOL_H_
 
+
+
+
+#endif//_C_TIMERPOOL_H_

@@ -1,14 +1,15 @@
-/***********************************************************
-*
-*
-*  Base.h
-*
-*  Create by muxd 
-*
-*  2017/07/08
-***********************************************************/
 #ifndef _BASE_H_
 #define _BASE_H_
+
+
+
+#ifndef __u_char_defined
+    typedef unsigned char   u_char;
+    typedef unsigned short  u_short;
+    typedef unsigned int    u_int;
+    typedef unsigned long   u_long;
+#define __u_char_defined
+#endif
 
 #define Int32  int
 #define UInt32 unsigned int
@@ -16,8 +17,17 @@
 #define I8     char
 #define Bool   unsigned char
 
-#define True  1
-#define False 0
+#ifndef True
+#define True   1
+#endif
 
-#endif //_BASE_H_
+#ifndef False
+#define False  0
+#endif
 
+
+void PauseThreadSleep(const int& sec, const int& us);
+void getFormatTime( char* buf, int bufLen, const char* timeFormat="%Y-%m-%d_%H:%M:%S", int addSeconds=0 );
+
+
+#endif//_BASE_H_

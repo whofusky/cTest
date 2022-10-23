@@ -27,6 +27,7 @@ function F_lsSrcFile()
     [ ! -d "${srcDir}" ] && return 1
 
     ls -1 "${srcDir}/"lib* 2>/dev/null
+    ls -1 "${baseDir}/include/"*.h 2>/dev/null
     return 0
 }
 

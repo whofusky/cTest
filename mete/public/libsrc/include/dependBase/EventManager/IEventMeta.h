@@ -1,34 +1,33 @@
 /***********************************************************
-*
-*
-*  IEventMeta.h
-*
-*  Create by muxd
-*
-*  2017/08/07
-***********************************************************/
+ *
+ * @file    IEventMeta.h
+ *
+ * @brief   IEventMeta头文件
+ *
+ * @author  
+ *
+ * @date    2022-09-30
+ *
+ * @version V10.010.000
+ *
+ ***********************************************************/
+
+#ifndef _I_IEVENTMETA_H_
+#define _I_IEVENTMETA_H_
 
 #define STORAGE_EVENT  "StorageEvent"
+    #define STORAGE_FILE_STOCK      "FileStock"   /*存量文件:在程序启动之前就存在的文件*/
     #define STORAGE_FILE_ADDED      "FileAdded"
+    #define STORAGE_FILE_MODIFY     "FileModify"
     #define STORAGE_FILE_DELETED    "FileDeleted"
     #define STORAGE_FILE_MOVEDTO    "MovedTo"
     #define STORAGE_FILE_MOVEDFROM  "MovedFrom"
 
-
 #define SYSTEM_OPERATION_LOG  "SystemOperationLog"
-    #define OPEN_FILE_ERROR     "OpenFileError"
-    #define READ_FILE_ERROR	    "ReadFileError"
-    #define WRITE_FILE_ERROR    "WriteFileError"
-    #define CLOSE_FILE_ERROR    "CloseFileError"
-    #define PARSE_XML_ERROR	    "ParseXMLError"
+    #define OPEN_FILE_ERROR      "OpenFileError"
+    #define READ_FILE_ERROR      "ReadFileError"
+    #define WRITE_FILE_ERROR     "writeFileError"
+    #define CLOSE_FILE_ERROR     "CloseFileError"
+    #define PARSE_FILE_ERROR     "ParseXMLError"
 
-    #define INFRA_MESSAGE_QUEUE_FULL        "InfraMessageQueueFull"
-    #define INFRA_CREATE_THREAD_ERROR       "InfraCreateThreadError"
-    #define INFRA_START_THREAD_ERROR        "InfraStartThreadError"
-    #define INFRA_STOP_THREAD_ERROR         "InfraStopThreadError"
-
-    #define MERGE_BUSSINESSLIST_CONFLICT         "MergeBusinesslistConflict"
-    #define MERGE_BUSSINESSLIST_ERROR            "MergeBusinesslistError"
-    #define MERGE_BUSSINESSLIST_COORDINATE_ERROR "MergeBusinessCoordinateError"
-    #define MERGE_BUSSINESSLIST_MODE_ERROR       "MergeBusinessModeError"
-
+#endif//_I_IEVENTMETA_H_

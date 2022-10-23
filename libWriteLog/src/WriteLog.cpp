@@ -111,7 +111,7 @@ const char* GetCurDateTime()
     pgsCurStrTime.tv_usec = tv.tv_usec;
 
     snprintf( pgsCurStrTime_a, CUR_STR_TIME_LEN,
-              "%04d-%02d-%02d %02d:%02d:%02d.%lu",
+              "%04d-%02d-%02d_%02d:%02d:%02d.%lu",
               pgsCurStrTime.tm_year, pgsCurStrTime.tm_mon, 
               pgsCurStrTime.tm_mday, pgsCurStrTime.tm_hour, 
               pgsCurStrTime.tm_min, pgsCurStrTime.tm_sec,

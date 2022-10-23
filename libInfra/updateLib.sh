@@ -27,6 +27,8 @@ function F_lsSrcFile()
     [ ! -d "${srcDir}" ] && return 1
 
     ls -1 "${srcDir}/"lib* 2>/dev/null
+    find "${baseDir}/include"  "*.h" -print 2>/dev/null|grep -v "/noRecursive/"
+
     return 0
 }
 

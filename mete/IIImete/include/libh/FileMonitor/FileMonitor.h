@@ -1,46 +1,111 @@
 /***********************************************************
-*
-*
-*  FileMonitor.h
-*
-*  Create by muxd
-*
-*  2017/07/08
-**********************************************************/
-#ifndef _FILE_MONITOR_H_
-#define _FILE_MONITOR_H_
-#include <string>
-#include <map>
-#include "base/Base.h"
-#include "thread/Thread.h"
-#include "mutex/Mutex.h"
+ *
+ * @file    FileMonitor.h
+ *
+ * @brief   FileMonitor头文件
+ *
+ * @author  
+ *
+ * @date    2022-09-30
+ *
+ * @version V10.010.000
+ *
+ ***********************************************************/
 
-#define EVENT_CREATE    0x01
-#define EVENT_DELETE    0x02
-#define EVENT_MOVE_TO   0x04
-#define EVENT_MOVE_FROM 0x08
+#ifndef _I_FILEMONOTIR_H_
+#define _I_FILEMONOTIR_H_
+
+#include <string>
+#include <vector>
+#include <map>
+#include "Base.h"
+#include "Thread.h"
+#include "Mutex.h"
+
+//监测文件事件类型定义
+#define EVENT_CREATE     0x01
+#define EVENT_DELETE     0x02
+#define EVENT_MOVE_TO    0x04
+#define EVENT_MOVE_FROM  0x08
+#define EVENT_MODIFY     0x10
+#define EVENT_STOCK      0x20    /*存量文件:启动进程之前已有的文件*/
+
 
 class FileMonitor: public CThread
 {
-public:
-    typedef void (*NotifyHanlder)(const int event_mask);
+    public:
+        static FileMonitor* Instance();
+    private:
+        static FileMonitor* mInstance;
 
-public:
-    FileMonitor();
-    ~FileMonitor();
+    typedef struct _stu_MONITOR_INFO{
+        int wd;
+        std::string MonitorPath;
+        std::vector<std::string> MonitorFiles;
+        std::vector<std::string> MonitorPrefix;
+        std::vector<std::string> MonitorSuffix;
+    }stu_MONITOR_INFO;
 
-    bool startMonitor( const char* monitor_dir_path,
-                     unsigned int evnt );
+    //用于存储程序启动前监视目录，同一目录下的文件
+    typedef struct fl_node
+    {
+        char fileName[100];
+        long int fileMtime;
+        struct fl_node* previous;
+        struct fl_node* next;
+    }MY_FL_NODE;
 
-    bool stopMonitor( const char* monitor_dir_path );
+    public:
+        typedef void (*NotifyHandler)(const int event_mask);
 
-private:
-    std::map< int, std::string > mMonitorPath;
-    std::map< int, UInt32 > mMonitorEvent;
-    CMutex                     mMutex;
-private:
-    void threadHandler();
+    public:
+        FileMonitor();
+        ~FileMonitor();
+
+        //desc :
+        //    启动对某个路径的监控功能
+        //    可重复调用，完成同时对多个路径的监测
+        //
+        //param:
+        //    pMonitorDir : 监控的路径信息
+        //    event       : 关注事件的类型
+        bool startMonitor( const char* pMonitorDir,
+                unsigned int event,
+                std::vector<std::string> &monitorFiles,
+                std::vector<std::string> &monitorPrefix,
+                std::vector<std::string> &monitorSuffix );
+
+        //desc :
+        //    关闭对某个路径的监控功能
+        //    可重复调用，完成对多个路径监控的关闭
+        //
+        //param:
+        //    pMonitorDir : 监控的路径信息
+        bool stopMonitor( const char* pMonitorDir );
+
+    private:
+        int mMonitorFd;
+        std::vector<stu_MONITOR_INFO> mVecMonitorInfo;
+        CMutex   mMutex;
+
+    private:
+        void threadHandler();
+        unsigned int SetEvent(unsigned int event);
+        int getMonitorInfoByWd(int wd, stu_MONITOR_INFO & monitorInfo );
+        int checkMonitorFile( std::string strMonitorFile, stu_MONITOR_INFO &monitorInfo);
+
+    private:
+        //用于存储程序启动前监视目录下的文件
+        std::map< std::string, MY_FL_NODE* > mOldFMap;
+        CMutex   mFlMutex;
+
+        void freeFlNode( MY_FL_NODE** flNodes);
+        void detachOldFiles( std::string &filePath, MY_FL_NODE** flNodes );
+        void attachOldFiles( std::string &filePath, const char* fileName, long int tMtime );
+        int readDirsFile( stu_MONITOR_INFO& stuInfo );
+        void handStockFiles( stu_MONITOR_INFO& stuInfo, unsigned int& event );
+
 };
 
-#endif //_FILE_MONITOR_H_
+#endif//_I_FILEMONOTIR_H_
 

@@ -77,11 +77,11 @@ void _PrintToStdout( const char* FILE_p, int LINE, int logLevel, const char* for
 /******************************************************************************/
 
 #define WriteLog( logLevel, str, arg... )  \
-    _WriteLog(__FILE__, __LINE__, logLevel, str, ##arg); 
+    _WriteLog(basename(__FILE__), __LINE__, logLevel, str, ##arg); 
 
 
 #define PrintToStdout( logLevel, str, arg... )  \
-    _PrintToStdout(__FILE__, __LINE__, logLevel, str, ##arg); 
+    _PrintToStdout(basename(__FILE__), __LINE__, logLevel, str, ##arg); 
 
 /******************************************************************************/
 
