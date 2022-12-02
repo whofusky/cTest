@@ -3,7 +3,7 @@
 #define _C_TIMERPOOL_H_
 
 #include <vector>
-#include "Base.h"
+#include "InfraBase.h"
 #include "Thread.h"
 #include "smartPointer.h"
 #include "Mutex.h"

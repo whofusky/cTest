@@ -26,6 +26,7 @@ private:
     ~TestFileMonitor();
 
 public:
+    static int isRun;
     static TestFileMonitor* Instance();
 private:
     static TestFileMonitor* mInstance;
@@ -37,7 +38,7 @@ public:
             Json::Value& eventAttr 
             );
 
-    void start();
+    void start( const int &pre_val = -1 );
     void stop();
 
 private:
@@ -54,6 +55,7 @@ private:
                 MSG_DELET_FILE,
                 MSG_MOVTO_FILE,
                 MSG_MOVFM_FILE,
+                MSG_CLOSER_FILE,
                 MSG_NULL
             }FILE_TST_HANDLER_MSG;
 
@@ -67,6 +69,21 @@ private:
 
 private:
     void threadHandler();
+
+private:
+    class Delector
+    {
+        public:
+            ~Delector()
+            {
+                if ( TestFileMonitor::mInstance != NULL )
+                {
+                    delete TestFileMonitor::mInstance;
+                }
+            }
+    };
+
+    static Delector delector;
 
 };
 

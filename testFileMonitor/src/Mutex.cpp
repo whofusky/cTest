@@ -15,7 +15,7 @@
 
 #include <stdio.h>
 #include "Mutex.h"
-//#include "WriteLog.h"
+#include "CustomOutLog.h"
 
 CMutex::CMutex()
 {
@@ -30,9 +30,7 @@ CMutex::~CMutex()
 
 CMutex::CMutex( CMutex& obj)
 {
-    //PrintToStdout( LOGERROR, 
-    printf("%s:%s:%d:ERROR:[CMutex(CMutex& obj) format is Error!]\n", 
-            __FILE__,__FUNCTION__,__LINE__ );    
+    b_write_log(_ERROR,"CMutex(CMutex& obj) format is Error!" );    
 }
 
 
@@ -54,9 +52,7 @@ void CMutex::unLock()
 
 CMutexGuard::CMutexGuard()
 {
-    //PrintToStdout( LOGERROR, 
-    printf("%s:%s:%d:ERROR:[CMutexGuard() format is Error!]\n",
-         __FILE__,__FUNCTION__,__LINE__ );  
+    b_write_log(_ERROR,"CMutexGuard() format is Error!");  
 }   
 
 CMutexGuard::CMutexGuard( CMutex& mutex )

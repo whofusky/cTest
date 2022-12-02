@@ -7,10 +7,12 @@
 *********************************************************/
 #include <stdio.h>
 #include <unistd.h>
+#include <sys/syscall.h>
 #include <sys/select.h>
 #include <time.h>
 
 #include "TimerPool.h"
+#include "CustomOutLog.h"
 
 CTimerPool* CTimerPool::mInstance = NULL;
 
@@ -110,6 +112,10 @@ bool CTimerPool::disableTimer( ITimerHandler* obj, TIMER_HANDLER func )
 
 void CTimerPool::threadHandler()
 {
+    pid_t tid;
+    tid = syscall(SYS_gettid);
+    b_write_log(_INFO,"thread id[%d]", tid);
+
 	while( isAlive() )
 	{
 		struct timeval tmpVal;

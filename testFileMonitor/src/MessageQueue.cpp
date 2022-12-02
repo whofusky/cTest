@@ -15,7 +15,7 @@
 #include <stdio.h>
 
 #include "MessageQueue.h"
-//#include "WriteLog.h"
+#include "CustomOutLog.h"
 
 MessageQueue::MessageQueue()
 {}
@@ -30,9 +30,7 @@ bool MessageQueue::enqueueMessage( Message& msg, long delayMillis )
 
 	if( mQueue.size() >= MESSAGE_QUEUE_SIZE )
 	{
-        //PrintToStdout( LOGERROR,
-        printf ("%s:%s:%d:ERROR:[enqueueMessage size is %lu>%d]\n",
-                __FILE__,__FUNCTION__,__LINE__,
+        b_write_log(_ERROR,"enqueueMessage size is %lu>%d", 
                 mQueue.size(), MESSAGE_QUEUE_SIZE );
 
 		return false;

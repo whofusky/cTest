@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <string.h>
-#include "WriteLog.h"
+#include "CustomOutLog.h"
 
 typedef unsigned char  u_char;
 typedef unsigned short u_short;
@@ -32,11 +32,11 @@ int main()
 
     char tmpStr[1024] = {0};
     int  sizeofStr = sizeof(tmpStr);
-    WriteLog( LOGDEBUG, "sizeof(tmpStr[1024])=[%d]", sizeofStr );
-    //printf("tUcVal=[0x%x],ttul=[%lu]\n",tUcVal,ttul);
-    WriteLog( LOGDEBUG, "hahha" );
-    WriteLog( LOGDEBUG, "hahha21" );
-    WriteLog( LOGDEBUG, "hahha2,[%d],[%s]",1,"fushikai" );
+    c_write_log( _DEBUG, "sizeof(tmpStr[1024])=[%d]", sizeofStr );
+    //c_write_log(_DEBUG,"tUcVal=[0x%x],ttul=[%lu]",tUcVal,ttul);
+    c_write_log( _DEBUG, "hahha" );
+    c_write_log( _DEBUG, "hahha21" );
+    c_write_log( _DEBUG, "hahha2,[%d],[%s]",1,"fushikai" );
     
 
     return 0;

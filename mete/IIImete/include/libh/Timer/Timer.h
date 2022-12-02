@@ -2,7 +2,7 @@
 #ifndef _C_TIMER_H_
 #define _C_TIMER_H_
 
-#include "Base.h"
+#include "InfraBase.h"
 #include "Thread.h"
 
 

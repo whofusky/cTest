@@ -30,11 +30,12 @@ private:
     ~IEventManager();
     
 public:
+    static int isRun;
     static IEventManager* Initialize();
 
 public:
     //功能启动接口
-    unsigned char start();
+    unsigned char start( const int &pre_val = -1 );
     
     //功能关闭接口
     unsigned char stop();
@@ -127,6 +128,22 @@ private:
 private:
         static IEventManager* mInstance;
         CMutex                mLock;
+
+private:
+    class Delector
+    {
+        public:
+            ~Delector()
+            {
+                if ( IEventManager::mInstance != NULL )
+                {
+                    delete IEventManager::mInstance;
+                    IEventManager::mInstance = NULL;
+                }
+            }
+    };
+
+    static Delector delector;
 
 };
 

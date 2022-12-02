@@ -16,11 +16,12 @@
 #include <unistd.h>
 #include <sys/time.h>
 #include <sys/types.h>
+#include <sys/syscall.h>
 
-//#include "WriteLog.h"
 #include "Looper.h"
 #include "Handler.h"
-#include "Base.h"
+#include "InfraBase.h"
+#include "CustomOutLog.h"
 
 
 using namespace std;
@@ -96,9 +97,7 @@ void Looper::decRef()
 	}
 	else
 	{
-		//PrintToStdout( LOGERROR, 
-        printf("%s:%s:%d:ERROR:[Looper Reference Num Error,mRefNum=[%d]]\n", 
-                __FILE__,__FUNCTION__,__LINE__,mRefNum );
+        b_write_log(_ERROR,"Looper Reference Num Error,mRefNum=[%d]",mRefNum );
 	}
 
     return;
@@ -108,6 +107,10 @@ void Looper::decRef()
 
 void Looper::Loop()
 {
+    pid_t tid;
+    tid = syscall(SYS_gettid);
+    b_write_log(_DEBUG,"thread id [%d] begin loop", tid );
+
 	while(1)
 	{
 		Message msg = mQueue->dequeueMessage();

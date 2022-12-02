@@ -4,217 +4,182 @@
 
 #include <stdio.h>
 #include <string.h>
-#include <unistd.h>
+#include <algorithm>
 
+#include <unistd.h>
 #include <string>
 #include <map>
 #include <stdlib.h>
+#include <sys/syscall.h>
+#include "json/json.h"
 
-#include <dirent.h>
-#include <sys/types.h>
-#include <sys/stat.h>
-#include <unistd.h>
 
-typedef struct cb_node
+#include "ELFcmd.h"
+
+#include "InfraBase.h"
+#include "CustomOutLog.h"
+
+
+
+
+#define PID_STATU_LEN 20    /*取进程可读信息字符串最大长度*/
+//此处的结构是存储/proc/pid/status中信息,
+//   进程状态也是带解读模式的如: S (sleeping)
+//   其中内存信息是带单位的如: 184 kB
+typedef struct
 {
-    char  CB_Obj[10];
-    char  CB_Func[10];
-    struct cb_node* CB_Next;
-}CB_NODE;
+       char name[PID_STATU_LEN];   /*进程名*/
+       char state[PID_STATU_LEN];  /*进程的状态*/
+       int  ppid;                  /*进程的父进程*/
+       char vmsize[PID_STATU_LEN]; /*进程现在正在占用的内存*/
+       char vmpeak[PID_STATU_LEN]; /*当前进程运行过程中占用内存的峰值*/
+       char vmrss[PID_STATU_LEN];  /*是程序现在使用的物理内存*/
+       char vmhwm[PID_STATU_LEN];  /*是程序得到分配到物理内存的峰值*/
+}p_s_info;
 
-std::map< std::string, CB_NODE* > mCB;
-
-unsigned char attachEventHandler( 
-        const char* event,
-        const char* obj,
-        const char* func 
-        )
+// get hunan readable progress stauts info
+int getHRPSInfo( int pid, p_s_info &retInfo )
 {
-    std::string tEvent( event );
-    std::map<std::string, CB_NODE*>::iterator it;
+    char tmpc[100] = {0};
+    memset( &retInfo, 0, sizeof(p_s_info) );
+    snprintf( tmpc,sizeof(tmpc),"%d",pid);
 
-    PrintToStdout( LOGDEBUG, "attach event=[%s]",tEvent.c_str() );
-    printf("%s:%s:%d fusktest\n",__FILE__,__FUNCTION__,__LINE__);
+    std::string pfname = "/proc/";
+    pfname += tmpc + std::string("/status");
 
-    for( it = mCB.begin(); it != mCB.end(); it++ )
+    std::string strVal[8];
+    int inoutnum = 7;
+
+    // 取/proc/pid/status文件的内容
+    //  str[0] Name   进程名
+    //  str[1] State  进程的状态
+    //  str[2] PPid   进程的父进程
+    //  str[3] VmSize 进程现在正在占用的内存
+    //  str[4] VmPeak 当前进程运行过程中占用内存的峰值
+    //  str[5] VmRSS  是程序现在使用的物理内存
+    //  str[6] VmHWM  是程序得到分配到物理内存的峰值
+    int ret = ELFcmd::getPidStatus( pfname.c_str(), strVal, inoutnum );
+    if ( ret != 0 )
     {
-        if( it->first == tEvent )
-        {
-            CB_NODE* node = it->second;
-            while( node->CB_Next != NULL )
-            {
-                node = node->CB_Next;
-            }
-
-            PrintToStdout( LOGDEBUG, "attach preNode[obj:%s,func:%s] point to cur!",
-                   node->CB_Obj,node->CB_Func );
-
-            CB_NODE* tCB_Node = (CB_NODE*) calloc( 1, sizeof( CB_NODE ) );
-            strcpy(tCB_Node->CB_Obj,obj);
-            strcpy(tCB_Node->CB_Func,func);
-            tCB_Node->CB_Next = NULL;
-
-            node->CB_Next     = tCB_Node;
-
-            return 1;
-        }
+        b_write_log(_ERROR,"ELFcmd::getPidStatus return[%d]", ret);
+        return ret;
     }
+    snprintf( retInfo.name, sizeof(retInfo.name),
+            "%s", strVal[0].c_str() );
+    snprintf( retInfo.state, sizeof(retInfo.state),
+            "%s", strVal[1].c_str() );
+    retInfo.ppid = atoi( strVal[2].c_str() );
+    snprintf( retInfo.vmsize, sizeof(retInfo.vmsize),
+            "%s", strVal[3].c_str() );
+    snprintf( retInfo.vmpeak, sizeof(retInfo.vmpeak),
+            "%s", strVal[4].c_str() );
+    snprintf( retInfo.vmrss, sizeof(retInfo.vmrss),
+            "%s", strVal[5].c_str() );
+    snprintf( retInfo.vmhwm, sizeof(retInfo.vmhwm),
+            "%s", strVal[6].c_str() );
 
-    CB_NODE* tCB_Node = (CB_NODE*) calloc( 1,sizeof( CB_NODE ) );
-    strcpy(tCB_Node->CB_Obj,obj);
-    strcpy(tCB_Node->CB_Func,func);
-    tCB_Node->CB_Next = NULL;
-
-    PrintToStdout( LOGDEBUG, "attach head node[obj:%s,func:%s] to build!",
-           tCB_Node->CB_Obj,tCB_Node->CB_Func );
-
-    mCB.insert( make_pair( tEvent, tCB_Node ) );
-
-    return 1;
-}
-
-unsigned char detachEventHandler(
-        const char* event,
-        const char* obj )
-{
-    std::string tEvent( event );
-    std::map<std::string, CB_NODE*>::iterator it;
-
-    PrintToStdout( LOGDEBUG, "detach event=[%s]",tEvent.c_str() );
-
-    for( it = mCB.begin(); it != mCB.end(); )
-    {
-        if( it->first == tEvent )
-        {
-            CB_NODE* node    = it->second;
-            CB_NODE* preNode = it->second;
-            while( node != NULL )
-            {
-                PrintToStdout( LOGDEBUG, "detach in detach while begine" );
-                if( strcmp(node->CB_Obj,obj) == 0 )
-                {
-                    char vHeadFlag = 0;
-                    if ( node == it->second )
-                    {
-                        PrintToStdout( LOGDEBUG, "detach in detach define new [head]" );
-                        it->second = node->CB_Next;
-                        preNode    = node->CB_Next;
-                        vHeadFlag  = 1;
-                    }
-                    else
-                    {
-                        PrintToStdout( LOGDEBUG, "detach preNode[obj:%s,func:%s] point to new next!",
-                               preNode->CB_Obj,preNode->CB_Func );
-                        preNode->CB_Next = node->CB_Next;
-                    }
-
-                    PrintToStdout( LOGDEBUG, "detach free node[obj:%s,func:%s] !",
-                           node->CB_Obj,node->CB_Func );
-
-                    free( node );
-                    if ( vHeadFlag == 1 )
-                    {
-                        node = preNode;
-                    }
-                    else if ( preNode != NULL )
-                    {
-                        node = preNode->CB_Next;
-                    }
-                    else
-                    {
-                        node = NULL;
-                    }
-                    
-                }
-                else
-                {
-                    PrintToStdout( LOGDEBUG, "detach not cur node[%s,%s],to find next node",
-                           node->CB_Obj,node->CB_Func );
-                    preNode = node;
-                    node    = node->CB_Next;
-                }
-            } //end  while( node != NULL && node->CB_Next != NULL )
-
-            if( it->second == NULL )
-            {
-                PrintToStdout( LOGDEBUG, "detach erase map[%s]",tEvent.c_str() );
-                mCB.erase( it++ );
-            }
-            else
-            {
-                PrintToStdout( LOGDEBUG, "detach not shout in here!!!");
-                it++;
-            }
-        } //end if( it->first == tEvent )
-        else
-        {
-            PrintToStdout( LOGDEBUG, "detach [%s] not eq [%s],to find it++", 
-                    it->first.c_str(),tEvent.c_str() );
-            it++;
-        }
-    }
-
-    PrintToStdout( LOGDEBUG, "detach return" );
-
-    return 1;
+    return 0;
 }
 
 int main()
 {
-    /////home/fusky/mygit/cTest
-    //WriteLogInit( 
-    //    LOGDEBUG,
-    //    "/home/fusky/mygit/cTest/log",      /*不设置时默认日志路径为程序运行路径下LOG/$YYYY/$MM*/
-    //    "tt" /*当设置dirName_p时才设置此值：日志名为logPrefixName_$YYYYMMDD.log*/
-    //    );
+    pid_t tid;
+    tid = syscall(SYS_gettid);
+    c_write_log(_INFO,"thread id[%d]", tid);
 
-    //char tmpStr[1024] = {0};
-    //int  sizeofStr = sizeof(tmpStr);
-    //PrintToStdout( LOGDEBUG, "sizeof(tmpStr[1024])=[%d]", sizeofStr );
 
-    //std::map< std::string, MY_FL_NODE* > myFMap;
+    int ret = 0;
+    char tmpStr[1024] = {0};
 
-    attachEventHandler ( "event1","obj0","func0");
-    attachEventHandler ( "event1","obj1","func1");
-    attachEventHandler ( "event1","obj2","func2");
-    attachEventHandler ( "event1","obj3","func3");
-    attachEventHandler ( "event1","obj4","func4");
+    //snprintf( tmpStr, sizeof(tmpStr),"nohup /home/fusky/tmp/t/t.sh >/dev/null 2>&1 &");
+    snprintf( tmpStr, sizeof(tmpStr),"/home/fusky/tmp/t/t.sh");
+    //snprintf( tmpStr, sizeof(tmpStr),"/home/fusky/tmp/t");
 
-    attachEventHandler ( "event2","obj0","func0");
-    attachEventHandler ( "event2","obj1","func1");
-    attachEventHandler ( "event2","obj2","func2");
+    std::string tss;
+    std::string ts1 = "";
+    Json::Value tjval;
+    tjval["id"] = 1;
+    tjval["ss1"] = "";
+    tjval["ss2"] = tss;
+    tjval["ss3"] = ts1;
+    tjval["ss4"] = "haha";
 
-    std::map<std::string, CB_NODE*>::iterator it;
-    for( it = mCB.begin(); it != mCB.end(); it++ )
+    //int aa = tjval["id"].asInt();
+
+    int tpid = 1467306;
+    p_s_info retinfo;
+    ret = getHRPSInfo( tpid, retinfo );
+
+    c_write_log(_DEBUG,"getHRPSInfo ret[%d],tpid[%d],"
+            "name[%s],state[%s],ppid[%d],vmsize[%s],"
+            "vmpeak[%s],vmrss[%s],vmhwm[%s]", 
+            ret, tpid, retinfo.name, retinfo.state,
+           retinfo.ppid, retinfo.vmsize, retinfo.vmpeak,
+          retinfo.vmrss, retinfo.vmrss );
+
+    PNAME_RET_INFO retpinfo;
+    std::string exe_name = "t.sh";
+    std::string full_exe_name = "/home/fusky/tmp/t/t.sh";
+    ret = ELFcmd::getPidByName( exe_name.c_str(), retpinfo );
+    c_write_log(_DEBUG, "getPidByName ret[%d]", ret );
+    for(int i = 0 ;i < retpinfo.curnum; i++)
     {
-        PrintToStdout( LOGDEBUG, "main:event------>[%s]", it->first.c_str() );
-        CB_NODE* tnode = it->second;
-        int i=1;
-        while ( tnode != NULL )
-        {
-            PrintToStdout( LOGDEBUG, "main:   [%d] obj:[%s],func:[%s] !",
-                   i++,tnode->CB_Obj,tnode->CB_Func );
-            tnode = tnode->CB_Next;
-        }
-        PrintToStdout( LOGDEBUG, "main:-------------------------" );
+        c_write_log(_DEBUG,"[%d] pid[%d] runpath[%s]",
+                i, retpinfo.pt[i].pid, retpinfo.pt[i].path.c_str() );
+    }
+    ret = ELFcmd::getPidByFullName( full_exe_name.c_str(), retpinfo );
+    c_write_log(_DEBUG, "getPidByFullName ret[%d]", ret );
+    for(int i = 0 ;i < retpinfo.curnum; i++)
+    {
+        c_write_log(_DEBUG,"[%d] pid[%d] runpath[%s]",
+                i, retpinfo.pt[i].pid, retpinfo.pt[i].path.c_str() );
     }
 
-    PrintToStdout( LOGDEBUG, "main:+++++++++++++++++++++++++" );
-    detachEventHandler( "event2", "obj2" );
-    
-    for( it = mCB.begin(); it != mCB.end(); it++ )
+    //return 0;
+
+    //std::string src = "/home/fusky/2";
+    //std::string dst = "/home/fusky/1";
+    //ret = ELFcmd::cp(src.c_str(), dst.c_str());
+    //c_write_log(_DEBUG,"cp [%s] [%s] return[%d]", 
+    //        src.c_str(), dst.c_str(),ret );
+
+
+    //return 0;
+
+    ////ret = executeShell(tmpStr,NULL);
+    //ret = ELFcmd::system_plus ( tmpStr,
+    //              30,
+    //              0,
+    //              1
+    //            );
+    //c_write_log(_DEBUG, "system_plus ret[%d]", ret );
+
+    PNAME_RET_INFO tRetInfo;
+    //getPidByName( "t.sh" );
+    //ret = getPidByName( "sunloginclient", tRetInfo );
+    ret = ELFcmd::getPidByName( "t.sh", tRetInfo );
+    c_write_log(_DEBUG, "getPidByName ret[%d]", ret );
+    for(int i = 0 ;i < tRetInfo.curnum; i++)
     {
-        PrintToStdout( LOGDEBUG, "main:event------>[%s]", it->first.c_str() );
-        CB_NODE* tnode = it->second;
-        int i=1;
-        while ( tnode != NULL )
-        {
-            PrintToStdout( LOGDEBUG, "main:   [%d] obj:[%s],func:[%s] !",
-                   i++,tnode->CB_Obj,tnode->CB_Func );
-            tnode = tnode->CB_Next;
-        }
-        PrintToStdout( LOGDEBUG, "main:-------------------------" );
+        c_write_log(_DEBUG,"[%d] pid[%d] runpath[%s]",
+                i, tRetInfo.pt[i].pid, tRetInfo.pt[i].path.c_str() );
     }
+
+
+    ret = strcmp("abcde","abcda");
+    c_write_log( _DEBUG, "ret=[%d]", ret);
+    getcwd( tmpStr, 1024);
+    c_write_log( _DEBUG, "getcwd=[%s]", tmpStr);
+
+    c_write_log(_DEBUG,"%s" ",%lu" ,tmpStr,sizeof(tmpStr));
+    c_write_log( _INFO,"tmpStr=[%s]111", tmpStr);
+
+    while ( 1 )
+    {
+        PauseThreadSleep( 2, 0 );
+        c_write_log(_DEBUG,"in while loop");
+    }
+
 
     return 0;
 }

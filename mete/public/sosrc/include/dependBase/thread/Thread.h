@@ -17,6 +17,7 @@
 
 #include <pthread.h>
 
+
 class CThread
 {
 public:
@@ -27,6 +28,7 @@ public:
     unsigned char stopThread( void );
     
     bool isAlive( void );
+
 
 public:
     pthread_t mThreadFD;

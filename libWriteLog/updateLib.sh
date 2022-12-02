@@ -11,6 +11,9 @@
 ##############################################################################
 #
 
+tPwd=$(pwd)
+tCurDirLast="${tPwd##*/}"
+#echo "${tCurDirLast}"
 baseDir=$(dirname $0)
 srcDir="${baseDir}/out_lib"
 findDir="${baseDir}/../"
@@ -27,7 +30,9 @@ function F_lsSrcFile()
     [ ! -d "${srcDir}" ] && return 1
 
     ls -1 "${srcDir}/"lib* 2>/dev/null
-    ls -1 "${baseDir}/include/"*.h 2>/dev/null
+    find "${baseDir}/include" -name "*.h" -print 2>/dev/null|grep -v "/noRecursive/"
+    find "${baseDir}/src"  \( -name "*.cpp" -o -name "*.c" \) -print 2>/dev/null
+
     return 0
 }
 
@@ -37,7 +42,7 @@ function F_lsDstLib()
     local fname="$1"
     fname=$(F_getFileName "${fname}")
     #echo "${FUNCNAME}:fname=[${fname}]"
-    find "${findDir}" -name "${fname}" -print  2>/dev/null|grep -v '/out_lib/'
+    find "${findDir}" -name "${fname}" -print  2>/dev/null|grep -v "/${tCurDirLast}/"
 
     return 0
 }

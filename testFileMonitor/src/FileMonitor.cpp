@@ -11,6 +11,8 @@
  * @version V10.010.000
  *
  ***********************************************************/
+#include <sys/syscall.h>
+#include <stdlib.h>
 #include <sys/inotify.h>
 #include <errno.h>
 #include <stdio.h>
@@ -22,14 +24,27 @@
 #include "FileMonitor.h"
 #include "json/json.h"
 #include "IEventManager.h"
-//#include "WriteLog.h"
+#include "CustomOutLog.h"
+
+
+
 
 #define MONI_DATASIZE  8192   /* 1024*8 */
+
+
+
 
 static pthread_mutex_t  gsMutex = PTHREAD_MUTEX_INITIALIZER;
 
 
+
+
+
 FileMonitor* FileMonitor::mInstance = NULL;
+int FileMonitor::isRun = 0;
+
+
+
 
 //@brief:
 // 释放MY_FL_NODE* 变量空间
@@ -58,6 +73,37 @@ void FileMonitor::freeFlNode( MY_FL_NODE** flNodes)
     *flNodes = NULL;
     return;
 }
+
+
+
+//@brief:
+// 将字符串inS按分隔符delimiter拆分到vec中去 
+void FileMonitor::spStrToVec(std::string &inS, const char* delimiter, std::vector<std::string> &vec) 
+{
+    inS.erase( 0, inS.find_first_not_of(" ") );
+    inS.erase( inS.find_last_not_of(" ") + 1 );
+    if ( inS.empty() )
+    {
+        return;
+    }
+    
+    std::string ts;
+    std::string::size_type head = 0;
+    std::string::size_type tail = inS.find( delimiter, head );
+    while ( tail != inS.npos )
+    {
+        ts = inS.substr( head, tail - head );
+        vec.push_back( ts );
+        head = tail + 1;
+        tail = inS.find( delimiter, head );
+    }
+    ts = inS.substr( head );
+    vec.push_back( ts );
+
+    return;
+}
+
+
 
 
 //@brief:
@@ -271,11 +317,9 @@ void FileMonitor::handStockFiles( stu_MONITOR_INFO& stuInfo, unsigned int& event
     MY_FL_NODE* tFL_p = tFlNode;
     while ( tFL_p != NULL )
     {
-        //PrintToStdout( LOGDEBUG, "file[%s],mtime[%ld]", tFL_p->fileName, tFL_p->fileMtime );
         Json::Value eventAttr;
 
-        printf("%s:%s:%d:DEBUG:[stock file[%s/%s]]\n", 
-            __FILE__,__FUNCTION__,__LINE__,
+        b_write_log(_DEBUG,"stock file[%s/%s]", 
             stuInfo.MonitorPath.c_str(), tFL_p->fileName );
 
         char curTime_a[64] = {0};
@@ -326,11 +370,13 @@ unsigned int FileMonitor::SetEvent( unsigned int event )
     {
         flag |= IN_MODIFY;
     }
+    if ( EVENT_CLOSEWRITE & event )
+    {
+        flag |= IN_CLOSE_WRITE;
+    }
     if (flag == 0 )
     {
-        //PrintToStdout( LOGERROR,"Bad event set, event is [%08x]", event );
-        printf("%s:%s:%d:ERROR:[Bad event set, event is [%08x]]\n",
-                __FILE__,__FUNCTION__,__LINE__, event );
+        b_write_log(_ERROR,"Bad event set, event is [%08x]", event );
     }
 
     return flag;
@@ -379,6 +425,15 @@ int FileMonitor::checkMonitorFile(
         stu_MONITOR_INFO &monitorInfo
         )
 {
+    //没有对文件名,文件前缀,文件后缀进行设置则任何文件都让其通过
+    if ( monitorInfo.MonitorFiles.size() == 0
+            && monitorInfo.MonitorPrefix.size() == 0
+            && monitorInfo.MonitorSuffix.size() == 0
+       )
+    {
+        return 0;
+    }
+
     std::vector<std::string>::iterator it;
 
     for ( it = monitorInfo.MonitorFiles.begin();
@@ -392,8 +447,11 @@ int FileMonitor::checkMonitorFile(
         }
     }
 
-    bool prefixFlag = false;
-    bool suffixFlag = false;
+    bool prefixFlag = true;
+    bool suffixFlag = true;
+    if ( monitorInfo.MonitorPrefix.size() > 0 ) prefixFlag = false; 
+
+    if ( monitorInfo.MonitorSuffix.size() > 0 ) suffixFlag = false; 
 
     for ( it = monitorInfo.MonitorPrefix.begin();
           it != monitorInfo.MonitorPrefix.end();
@@ -455,9 +513,7 @@ FileMonitor::FileMonitor()
     mMonitorFd = inotify_init1( IN_NONBLOCK );
     if ( mMonitorFd < 0  )
     {
-        //PrintToStdout( LOGERROR,
-        printf("%s:%s:%d:ERROR:[inotify_init1 fail,mMonitorFd=[%d],errno=[%d],errMsg=[%s]]\n", 
-                __FILE__,__FUNCTION__,__LINE__,
+        b_write_log(_ERROR,"inotify_init1 fail,mMonitorFd=[%d],errno=[%d],errMsg=[%s]", 
                 mMonitorFd, errno, strerror(errno) );
     }
 }
@@ -465,88 +521,145 @@ FileMonitor::FileMonitor()
 
 FileMonitor::~FileMonitor()
 {
+    if ( mMonitorFd >= 0 )
+    {
+        close( mMonitorFd );
+    }
+}
+
+
+unsigned char FileMonitor::start( const int &pre_val )
+{
+    if ( mMonitorFd < 0 )
+    {
+        b_write_log(_ERROR,"inotify_init1( IN_NONBLOCK ) return < %d",
+               mMonitorFd );
+        return False;
+    }
+
+    CMutexGuard tMutexGuard( mMutex );
+
+    if ( pre_val != -1 )
+    {
+        while( 0 == pre_val )
+        {
+            PauseThreadSleep( 0, 10 );
+        }
+        b_write_log(_DEBUG,"Wait for the prepend to end!");
+    }
+
+
+    if ( !isAlive() )
+    {
+        startThread();
+    }
+    b_write_log(_DEBUG,"FileMonitor::start() Done");
+    return True;
+}
+
+
+
+        
+unsigned char FileMonitor::stop()
+{
+
+    rmAllWatch();
+
+    CMutexGuard tMutexGuard( mMutex );
+
     if ( isAlive() )
     {
         stopThread();
     }
+
+    return True;
 }
-        
 
 //@brief:
 //  添加对某个目录的监视
-bool FileMonitor::startMonitor(
-        const char* pMonitorDir,
+//param:
+//    pMonitorDir  : 监控的路径信息
+//    event        : 关注事件的类型
+//    monitorFiles : 关注的文件名(多个用|分隔) 
+//    monitorPrefix: 关注的文件名前缀(多个用|分隔) 
+//    monitorSuffix: 关注的文件名后缀(多个用|分隔) 
+bool FileMonitor::addWatch(
+        const char *pMonitorDir,
         unsigned int event,
-        std::vector<std::string> & monitorFiles,
-        std::vector<std::string> & monitorPrefix,
-        std::vector<std::string> & monitorSuffix
+        const char *monitorFiles,
+        const char *monitorPrefix,
+        const char *monitorSuffix
         )
 {
+    if ( NULL == pMonitorDir )
+    {
+        b_write_log(_ERROR,"pMonitorDir is NULL" );
+        return false;
+    }
+
     if ( mMonitorFd < 0 )
     {
-        //PrintToStdout( LOGERROR,"startMonitor [%s] fail,Fd=[%d]",
-        printf("%s:%s:%d:ERROR:[startMonitor [%s] fail,Fd=[%d]]\n",
-                __FILE__,__FUNCTION__,__LINE__,pMonitorDir, mMonitorFd );
+        b_write_log(_ERROR,"inotify_init1( IN_NONBLOCK ) return < %d",
+               mMonitorFd );
         return false;
     }
 
     //如果开启过同路径的监控，先停止
-    stopMonitor( pMonitorDir );
+    rmWatch( pMonitorDir );
+
+    CMutexGuard tMutexGuard( mMutex );
+
     int wd = -1;
 
     stu_MONITOR_INFO stuMonitorInfo;
     stuMonitorInfo.wd            = wd;
     stuMonitorInfo.MonitorPath   = pMonitorDir;
-    stuMonitorInfo.MonitorFiles  = monitorFiles;
-    stuMonitorInfo.MonitorPrefix = monitorPrefix;
-    stuMonitorInfo.MonitorSuffix = monitorSuffix;
+    std::string ts;
+    if ( monitorFiles != NULL )
+    {
+        b_write_log(_INFO,"[%s],monitorFiles=[%s]",pMonitorDir, monitorFiles );
+
+        ts = monitorFiles;
+        spStrToVec( ts, "|", stuMonitorInfo.MonitorFiles );
+    }
+    if ( monitorPrefix != NULL )
+    {
+        b_write_log(_INFO,"[%s],monitorPrefix=[%s]",pMonitorDir, monitorPrefix );
+
+        ts = monitorPrefix;
+        spStrToVec( ts, "|", stuMonitorInfo.MonitorPrefix );
+    }
+    if ( monitorSuffix != NULL )
+    {
+        b_write_log(_INFO,"[%s],monitorSuffix=[%s]",pMonitorDir,monitorSuffix );
+
+        ts = monitorSuffix;
+        spStrToVec( ts, "|", stuMonitorInfo.MonitorSuffix );
+    }
+
     
     //处理程序启动之前监视目录已经有的(存量)文件
     handStockFiles( stuMonitorInfo, event );
 
-    CMutexGuard tMutexGuard( mMutex );
+
 
     wd = inotify_add_watch( mMonitorFd, pMonitorDir, SetEvent( event ) );
     if ( wd < 0 )
     {
-        //PrintToStdout( LOGERROR,"inotify_add_watch( %d, %s, %u) return[%d],errno=[%d,errMsg=[%s]",
-        printf("%s:%s:%d:ERROR:[inotify_add_watch( %d, %s, %u) return[%d],errno=[%d,errMsg=[%s]]\n",
-                 __FILE__,__FUNCTION__,__LINE__,
-                 mMonitorFd, pMonitorDir, event, wd, errno, strerror(errno) );
+        b_write_log(_ERROR,"inotify_add_watch( %d, %s, %u) "
+                "return[%d],errno=[%d,errMsg=[%s]",
+                 mMonitorFd, pMonitorDir, event, 
+                 wd, errno, strerror(errno) );
 
         return false;
 
     }
 
-    //PrintToStdout( LOGINFO,"start [%s] monitor return [%d]", pMonitorDir, wd );
-    printf("%s:%s:%d:INFO:[start [%s] monitor return [%d]]\n", 
-            __FILE__,__FUNCTION__,__LINE__,pMonitorDir, wd );
+    b_write_log(_INFO,"inotify_add_watch [%s] return [%d]", 
+            pMonitorDir, wd );
 
 
-    std::vector<std::string>::iterator it;
-    //debug: print MonitorFiles
-    printf("%s:%s:%d:INFO:MonitorFiles=[ ",__FILE__,__FUNCTION__,__LINE__);
-    for( it = monitorFiles.begin() ; it != monitorFiles.end() ; it++)
-    {
-        printf(" %s",it->c_str());
-    }
-    printf("]\n" );
 
-    //debug: print MonitorPrefix
-    printf("%s:%s:%d:INFO:MonitorPrefix=[ ",__FILE__,__FUNCTION__,__LINE__);
-    for( it=monitorPrefix.begin() ; it != monitorPrefix.end() ; it++)
-    {
-        printf(" %s",it->c_str());
-    }
-    printf("]\n" );
-
-    //debug: print MonitorSuffix
-    printf("%s:%s:%d:INFO:MonitorSuffix=[ ",__FILE__,__FUNCTION__,__LINE__);
-    for( it = monitorSuffix.begin() ; it != monitorSuffix.end() ; it++)
-    {
-        printf(" %s",it->c_str());
-    }
-    printf("]\n" );
 
     stuMonitorInfo.wd            = wd;
     mVecMonitorInfo.push_back( stuMonitorInfo );
@@ -556,13 +669,15 @@ bool FileMonitor::startMonitor(
         startThread();
     }
 
+
     return true;
 }
 
 
-bool FileMonitor::stopMonitor( const char* pMonitorDir )
+bool FileMonitor::rmWatch( const char* pMonitorDir )
 {
     CMutexGuard tMutexGuard( mMutex );
+    
     std::vector<stu_MONITOR_INFO>::iterator it;
     for( it = mVecMonitorInfo.begin();
          it != mVecMonitorInfo.end();
@@ -573,13 +688,30 @@ bool FileMonitor::stopMonitor( const char* pMonitorDir )
         {
             int ret = inotify_rm_watch( mMonitorFd, it->wd );
 
-            //PrintToStdout( LOGINFO,"stop [%s] monitor return [%d]", 
-            printf("%s:%s:%d:INFO:[stop [%s] monitor return [%d]]\n", 
-                    __FILE__,__FUNCTION__,__LINE__,pMonitorDir, ret );
+            b_write_log(_INFO,"stop [%s] monitor return [%d]",pMonitorDir, ret);
 
             mVecMonitorInfo.erase( it );
             break;
         }
+    }
+    return true;
+}
+
+bool FileMonitor::rmAllWatch()
+{
+    CMutexGuard tMutexGuard( mMutex );
+
+    std::vector<stu_MONITOR_INFO>::iterator it;
+    for( it = mVecMonitorInfo.begin();
+         it != mVecMonitorInfo.end();
+       )
+    {
+        int ret = inotify_rm_watch( mMonitorFd, it->wd );
+
+        b_write_log(_INFO,"stop [%s] monitor return [%d]",
+                it->MonitorPath.c_str(), ret);
+
+        mVecMonitorInfo.erase( it );
     }
     return true;
 }
@@ -592,9 +724,7 @@ static int setJsonMonitorInfo(
         )
 {
 
-    //PrintToStdout( LOGDEBUG,"event-mask:[%08x]", event->mask );
-    printf("%s:%s:%d:DEBUG:[event-mask:[%08x]]\n", 
-            __FILE__,__FUNCTION__,__LINE__,event->mask );
+    b_write_log(_DEBUG,"event-mask:[%08x]",event->mask );
 
     switch( event->mask )
     {
@@ -623,11 +753,15 @@ static int setJsonMonitorInfo(
                 eventAttr["Parameter"]["Operation"] = STORAGE_FILE_MODIFY;
                 break;
             }
+        case IN_CLOSE_WRITE:
+            {
+                eventAttr["Parameter"]["Operation"] = STORAGE_FILE_CLOSEWRITE;
+                break;
+            }
         default:
             {
-                //PrintToStdout( LOGERROR, "event-mask:[%08x] is not support",
-                printf("%s:%s:%d:ERROR:[event-mask:[%08x] is not support]\n",
-                        __FILE__,__FUNCTION__,__LINE__,event->mask );
+                b_write_log(_ERROR,"event-mask:[%08x] is not support", 
+                        event->mask );
 
                 return -1;
             }
@@ -652,6 +786,12 @@ void FileMonitor::threadHandler()
     int num = 0;
     char data[MONI_DATASIZE] = {0};
 
+    pid_t tid;
+    tid = syscall(SYS_gettid);
+    b_write_log(_INFO,"thread id[%d]", tid);
+
+    isRun = 1;
+
     while( isAlive() )
     {
         memset( data, 0, MONI_DATASIZE );
@@ -671,16 +811,14 @@ void FileMonitor::threadHandler()
             iRet = getMonitorInfoByWd( event->wd, stuMonitorInfo );
             if ( iRet != 0 )
             {
-                //PrintToStdout( LOGERROR, "wd=[%d] not fount monitor path!",
-                printf("%s:%s:%d:ERROR:[wd=[%d] not fount monitor path!]\n",
-                        __FILE__,__FUNCTION__,__LINE__,event->wd );
+                b_write_log(_ERROR,"wd=[%d] not fount monitor path!",event->wd);
             }
             else
             {
                 iRet = checkMonitorFile( event->name, stuMonitorInfo );
                 
-                printf("%s:%s:%d:DEBUG:[checkMonitorFile(%s) return[%d]]\n",
-                        __FILE__,__FUNCTION__,__LINE__, event->name, iRet );
+                b_write_log(_DEBUG,"[%s] checkMonitorFile(%s) return[%d]",
+                         stuMonitorInfo.MonitorPath.c_str() ,event->name,iRet);
 
                 if ( iRet == 0 )
                 {
@@ -690,11 +828,9 @@ void FileMonitor::threadHandler()
                             eventAttr );
                     if ( iRet == 0 )
                     {
-                        //PrintToStdout( LOGDEBUG,"event:[%s]",
                         //eventAttr.toStyledString().c_str() );
 
-                        printf("%s:%s:%d:DEBUG:[event:[%s]]\n",
-                                __FILE__,__FUNCTION__,__LINE__,
+                        b_write_log(_DEBUG,"eventAttr:[%s]",
                                 eventAttr.toStyledString().c_str() );
 
                         IEventManager::Initialize()->notifyEvent(
@@ -704,11 +840,7 @@ void FileMonitor::threadHandler()
                     }
                     else
                     {
-
-                        //PrintToStdout( LOGERROR, "setJsonMonitorInfo return fail");
-                        printf("%s:%s:%d:ERROR:[setJsonMonitorInfo return fail]\n",
-                                __FILE__,__FUNCTION__,__LINE__);
-                        
+                        b_write_log(_ERROR,"setJsonMonitorInfo return fail");
                     }
                 }
             }

@@ -17,13 +17,12 @@
 #include <errno.h>
 #include <string.h>
 #include "Thread.h"
-//#include "WriteLog.h"
 #include "Version.h"
+#include "CustomOutLog.h"
 
 //__attribute__((constructor)) static void my_thread_init()
 //{
-//    //PrintToStdout( LOGINITINFO, 
-//    printf("LOGINITINFO:[%s,CompileTime:[%s %s]]\n", 
+//    b_write_log(_INFO,"%s,CompileTime:[%s %s]", 
 //            LIB_INFRA_VERSION, __DATE__,__TIME__);
 //}
 
@@ -44,9 +43,8 @@ unsigned char CThread::startThread()
                          starFunc,
                          ( void* )this ) != 0 )
     {
-        //PrintToStdout( LOGERROR, 
-        printf("%s:%s:%d:ERROR:[pthread_create error, errno=[%d],errMsg=[%s]!]\n",
-               __FILE__,__FUNCTION__,__LINE__,errno, strerror(errno) ); 
+        b_write_log(_ERROR,"pthread_create error, errno=[%d],errMsg=[%s]!",
+               errno, strerror(errno) ); 
         return 0;
     }
     

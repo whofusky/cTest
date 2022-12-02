@@ -14,7 +14,7 @@
 
 #include <stdio.h>
 #include "smartPointer.h"
-//#include "WriteLog.h"
+#include "CustomOutLog.h"
 
 RefBase::RefBase()
 {
@@ -28,18 +28,14 @@ RefBase::~RefBase()
 
 void RefBase::incRef( void )
 {
-   //PrintToStdout( LOGDEBUG, "incRef:%d", mRefNum ); 
-   printf("%s:%s:%d:DEBUG:[incRef:%d]\n", 
-           __FILE__,__FUNCTION__,__LINE__,mRefNum );
+   b_write_log(_DEBUG,"incRef:%d", mRefNum );
 	mRefNum++;
 }
 
 void RefBase::decRef( void )
 {
 	mRefNum--;
-    //PrintToStdout( LOGDEBUG, "decRef:%d", mRefNum );
-    printf("%s:%s:%d:DEBUG:[decRef:%d]\n",
-            __FILE__,__FUNCTION__,__LINE__, mRefNum );
+    b_write_log(_DEBUG, "decRef:%d", mRefNum );
 	if( mRefNum <= 0 )
 	{
 		delete this;

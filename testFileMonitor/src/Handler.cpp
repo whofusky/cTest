@@ -16,7 +16,7 @@
 
 #include "Handler.h"
 #include "Looper.h"
-//#include "WriteLog.h"
+#include "CustomOutLog.h"
 
 Handler::Handler()
 {
@@ -41,9 +41,7 @@ bool Handler::sendMessage( Message& msg )
 
 	if( loop == NULL )
 	{
-        //PrintToStdout( LOGERROR,"sendMessage loop is NULL" );
-        printf("%s:%s:%d:ERROR:[sendMessage loop is NULL]\n",
-             __FILE__,__FUNCTION__,__LINE__ );
+        b_write_log(_ERROR,"sendMessage loop is NULL");
 		return false;
 	}
 	loop->mQueue->enqueueMessage( msg, 0);
@@ -57,9 +55,7 @@ bool Handler::sendMessageDelayed( Message& msg, long delayMillis )
 
 	if( loop == NULL )
 	{
-        //PrintToStdout( LOGERROR,"sendMessageDelayed loop is NULL" );
-        printf("%s:%s:%d:ERROR:[sendMessageDelayed loop is NULL]\n",
-             __FILE__,__FUNCTION__,__LINE__ );
+        b_write_log(_ERROR,"sendMessageDelayed loop is NULL");
 		return false;
 	}
 	loop->mQueue->enqueueMessage( msg, delayMillis );

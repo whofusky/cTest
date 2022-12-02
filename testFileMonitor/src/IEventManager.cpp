@@ -14,15 +14,18 @@
 
 #include <stdio.h>
 #include <malloc.h>
-#include "Base.h"
+#include <unistd.h>
+#include <sys/syscall.h>
+#include "InfraBase.h"
 #include "IEventManager.h"
-//#include "WriteLog.h"
+#include "CustomOutLog.h"
 
 
 static pthread_mutex_t  gsMutex = PTHREAD_MUTEX_INITIALIZER;
 
 
 IEventManager* IEventManager::mInstance = NULL;
+int IEventManager::isRun = 0;
 
 IEventManager::IEventManagerHandler::IEventManagerHandler(
         IEventManager* eventManager )
@@ -97,8 +100,17 @@ IEventManager::~IEventManager()
     }
 }
 
-unsigned char IEventManager::start()
+unsigned char IEventManager::start( const int &pre_val )
 {
+    if ( pre_val != -1 )
+    {
+        while( 0 == pre_val )
+        {
+            PauseThreadSleep( 0, 10 );
+        }
+        b_write_log(_DEBUG,"Wait for the prepend to end!");
+    }
+
     if( mHandler == NULL )
     {
         mHandler = new IEventManagerHandler( this );
@@ -109,9 +121,7 @@ unsigned char IEventManager::start()
     }
     startThread();
 
-    //PrintToStdout( LOGDEBUG, "IEventManager::start() Done" );
-    printf("%s:%s:%d:DEBUG:[IEventManager::start() Done]\n",
-            __FILE__,__FUNCTION__,__LINE__ );
+    b_write_log(_DEBUG,"IEventManager::start() Done");
 
     return True;
 }
@@ -268,9 +278,16 @@ IEventManager* IEventManager::Initialize()
 
 void IEventManager::threadHandler()
 {
+    pid_t tid;
+    tid = syscall(SYS_gettid);
+    b_write_log(_INFO,"thread id[%d]", tid);
+
     mLooper = Looper::getLooper();
     mLooper->incRef();
     mLooper->prepare();
+
+    isRun = 1;
+
     mLooper->Loop();
 
     return;

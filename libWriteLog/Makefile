@@ -145,9 +145,9 @@ LDFLAGS    	:=
 LD_LIB_DIR 	:= -L $(DEPEND_LIB_DIR)
 LD_LIB_TMP1 := $(foreach subdir,$(DEPEND_LIB_DIR),$(wildcard $(subdir)/*.a $(subdir)/*.so))
 LD_LIB_TMP2 := $(notdir $(LD_LIB_TMP1))
-#LD_SYS_LIBS := -lpthread
-LD_SYS_LIBS := 
-LD_LIBS	   	:= $(shell echo $(LD_LIB_TMP2)|sed 's,\(\s*\)\(lib\)\([^\.]*\)\(\.a\|\.so\),\1-l\3,g') $(LD_SYS_LIBS)
+LD_SYS_LIBS := -lpthread
+#LD_SYS_LIBS := 
+LD_LIBS	   	:= $(shell echo $(LD_LIB_TMP2)|sed 's,\(^\s*\|\s\+\)\(lib\)\(\S\+\)\(\.a\|\.so\),\1-l\3,g') $(LD_SYS_LIBS)
 XLD_FLG	   	:= -Xlinker "-(" $(LDFLAGS) -Xlinker "-)"
 
 

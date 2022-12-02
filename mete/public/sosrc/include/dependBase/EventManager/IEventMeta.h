@@ -22,6 +22,7 @@
     #define STORAGE_FILE_DELETED    "FileDeleted"
     #define STORAGE_FILE_MOVEDTO    "MovedTo"
     #define STORAGE_FILE_MOVEDFROM  "MovedFrom"
+    #define STORAGE_FILE_CLOSEWRITE "CloseWrite"
 
 #define SYSTEM_OPERATION_LOG  "SystemOperationLog"
     #define OPEN_FILE_ERROR      "OpenFileError"

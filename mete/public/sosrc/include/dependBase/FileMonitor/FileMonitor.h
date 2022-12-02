@@ -18,7 +18,7 @@
 #include <string>
 #include <vector>
 #include <map>
-#include "Base.h"
+#include "InfraBase.h"
 #include "Thread.h"
 #include "Mutex.h"
 
@@ -29,11 +29,20 @@
 #define EVENT_MOVE_FROM  0x08
 #define EVENT_MODIFY     0x10
 #define EVENT_STOCK      0x20    /*存量文件:启动进程之前已有的文件*/
+#define EVENT_CLOSEWRITE 0x40
 
 
 class FileMonitor: public CThread
 {
     public:
+        //功能启动接口
+        unsigned char start( const int &pre_val = -1 );
+        
+        //功能关闭接口
+        unsigned char stop();
+
+    public:
+        static int isRun;
         static FileMonitor* Instance();
     private:
         static FileMonitor* mInstance;
@@ -58,22 +67,28 @@ class FileMonitor: public CThread
     public:
         typedef void (*NotifyHandler)(const int event_mask);
 
-    public:
+    private:
         FileMonitor();
         ~FileMonitor();
+        bool rmAllWatch();
+
+    public:
 
         //desc :
         //    启动对某个路径的监控功能
         //    可重复调用，完成同时对多个路径的监测
         //
         //param:
-        //    pMonitorDir : 监控的路径信息
-        //    event       : 关注事件的类型
-        bool startMonitor( const char* pMonitorDir,
+        //    pMonitorDir  : 监控的路径信息
+        //    event        : 关注事件的类型
+        //    monitorFiles : 关注的文件名(多个用|分隔) 
+        //    monitorPrefix: 关注的文件名前缀(多个用|分隔) 
+        //    monitorSuffix: 关注的文件名后缀(多个用|分隔) 
+        bool addWatch( const char *pMonitorDir,
                 unsigned int event,
-                std::vector<std::string> &monitorFiles,
-                std::vector<std::string> &monitorPrefix,
-                std::vector<std::string> &monitorSuffix );
+                const char *monitorFiles = NULL,
+                const char *monitorPrefix = NULL,
+                const char *monitorSuffix = NULL );
 
         //desc :
         //    关闭对某个路径的监控功能
@@ -81,7 +96,7 @@ class FileMonitor: public CThread
         //
         //param:
         //    pMonitorDir : 监控的路径信息
-        bool stopMonitor( const char* pMonitorDir );
+        bool rmWatch( const char* pMonitorDir );
 
     private:
         int mMonitorFd;
@@ -104,6 +119,24 @@ class FileMonitor: public CThread
         void attachOldFiles( std::string &filePath, const char* fileName, long int tMtime );
         int readDirsFile( stu_MONITOR_INFO& stuInfo );
         void handStockFiles( stu_MONITOR_INFO& stuInfo, unsigned int& event );
+
+        void spStrToVec(std::string &inS, const char* delimiter, std::vector<std::string> &vec);
+
+private:
+    class Delector
+    {
+        public:
+            ~Delector()
+            {
+                if ( FileMonitor::mInstance != NULL )
+                {
+                    delete FileMonitor::mInstance;
+                    FileMonitor::mInstance = NULL;
+                }
+            }
+    };
+
+    static Delector delector;
 
 };
 

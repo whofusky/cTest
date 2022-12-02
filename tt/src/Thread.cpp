@@ -4,7 +4,7 @@
  *
  * @brief   Thread源文件
  *
- * @author  fu.sky
+ * @author  
  *
  * @date    2021-07-04
  *
@@ -17,13 +17,12 @@
 #include <errno.h>
 #include <string.h>
 #include "Thread.h"
-#include "WriteLog.h"
 #include "Version.h"
+#include "CustomOutLog.h"
 
 //__attribute__((constructor)) static void my_thread_init()
 //{
-//    PrintToStdout( LOGINITINFO, 
-//            "%s,CompileTime:[%s %s]", 
+//    b_write_log(_INFO,"%s,CompileTime:[%s %s]", 
 //            LIB_INFRA_VERSION, __DATE__,__TIME__);
 //}
 
@@ -44,8 +43,7 @@ unsigned char CThread::startThread()
                          starFunc,
                          ( void* )this ) != 0 )
     {
-        PrintToStdout( LOGERROR, 
-                "pthread_create error, errno=[%d],errMsg=[%s]!",
+        b_write_log(_ERROR,"pthread_create error, errno=[%d],errMsg=[%s]!",
                errno, strerror(errno) ); 
         return 0;
     }
