@@ -17,6 +17,7 @@
 #include <sys/stat.h>
 #include <unistd.h>
 #include <string.h>
+#include <pthread.h>
 
 #include "PvCfg.h"
 
@@ -120,9 +121,11 @@ int PvCfg::loadPubCfg()
         return mPubRet;
     }
 
-    mLock.Lock();
+    //mLock.Lock();
+    pthread_mutex_lock( &gsMutex );
     ini_browse(IniCallBack, &mPubCfg, pubCfgFile);
-    mLock.unLock();
+    //mLock.unLock();
+    pthread_mutex_unlock( &gsMutex );
 
     return PVCFG_SUCCESS;
 }
@@ -140,9 +143,11 @@ int PvCfg::loadSftCfg()
     }
 
     //CMutexGuard autoGuard( mLock );
-    mLock.Lock();
+    //mLock.Lock();
+    pthread_mutex_lock( &gsMutex );
     ini_browse(IniCallBack, &mSftCfg, sftCfgFile);
-    mLock.unLock();
+    //mLock.unLock();
+    pthread_mutex_unlock( &gsMutex );
 
     return PVCFG_SUCCESS;
 }
@@ -175,20 +180,24 @@ int PvCfg::getPubCfgVal(
         return PVCFG_INPAR_ERROR;
     }
 
-    CMutexGuard autoGuard( mLock );
+    //CMutexGuard autoGuard( mLock );
+    pthread_mutex_lock( &gsMutex );
 
     if ( ! mPubCfg.isMember(section) )
     {
+        pthread_mutex_unlock( &gsMutex );
         return PVCFG_SECTION_NOT_EXIST;
     }
 
     if ( ! mPubCfg[section].isMember( key ) )
     {
+        pthread_mutex_unlock( &gsMutex );
         return PVCFG_KEY_NOT_EXIST;
     }
     
     value = mPubCfg[section][key].asString();
 
+    pthread_mutex_unlock( &gsMutex );
     return PVCFG_SUCCESS;
 }
 
@@ -206,20 +215,24 @@ int PvCfg::getSftCfgVal(
         return PVCFG_INPAR_ERROR;
     }
 
-    CMutexGuard autoGuard( mLock );
+    //CMutexGuard autoGuard( mLock );
+    pthread_mutex_lock( &gsMutex );
 
     if ( ! mSftCfg.isMember(section) )
     {
+        pthread_mutex_unlock( &gsMutex );
         return PVCFG_SECTION_NOT_EXIST;
     }
 
     if ( ! mSftCfg[section].isMember( key ) )
     {
+        pthread_mutex_unlock( &gsMutex );
         return PVCFG_KEY_NOT_EXIST;
     }
     
     value = mSftCfg[section][key].asString();
 
+    pthread_mutex_unlock( &gsMutex );
     return PVCFG_SUCCESS;
 }
 

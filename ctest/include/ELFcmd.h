@@ -16,6 +16,7 @@
 #define _ELF_CMD_H_
 
 #include <string>
+#include <errno.h>
 
 
 
@@ -49,6 +50,13 @@ private:
     ~ELFcmd();
 
 public:
+
+    // cnt : 文件路径 或 要加密的字符串
+    // omd5: 文件或输入字符串的md5值
+    // return:
+    //       0  成功
+    //       !0 失败
+    static int md5sum( char* cnt, char omd5[32+1] );
 
     // 取/proc/pid/cmdline文件的内容
     static int getCmdlinePar( const char* path, std::string str[],int &inoutnum );

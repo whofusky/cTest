@@ -17,7 +17,7 @@
 
 #include <string>
 #include "json/value.h"
-#include "Mutex.h"
+//#include "Mutex.h"
 #include "PvDir.h"
 #include "minIni.h"
 
@@ -157,7 +157,7 @@ public:
 private:
     Json::Value mPubCfg;  //公共配置文件内容
     Json::Value mSftCfg;  //软件私有版本文件内容
-    CMutex      mLock;
+    //CMutex      mLock;
 
     int         mPubRet;
     int         mSftRet;
