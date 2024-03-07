@@ -29,9 +29,12 @@
 
 // 2.不采用默认输出日志路径时需要用WriteLogInit的接口进行设置
 
-// 3.日志输出控制通过logLevel控制，初始设置此值有2种方法:
+// 3.日志输出控制通过logLevel控制，设置此值有2种方法:
 //   (1) 在程序中用WriteLogInit接口进行设置
-//   (2) 在程序运行的同级目录下新建立文件LogLevel.ini
+//   (2) 通过SetLogLevel 进行设置
+//
+//第三种方法暂时废弃
+//   (3) 在程序运行的同级目录下新建立文件LogLevel.ini
 //       文件内容为LogLevel = 7 其中7为日志级别，数值
 //       参考logLevel enum定义
 
@@ -70,6 +73,7 @@ void WriteLogInit(
         const char* dirName_p=NULL,      /*不设置时默认日志路径为程序运行路径下LOG/$YYYY/$MM*/
         const char* logPrefixName_p=NULL /*当设置dirName_p时才设置此值：日志名为logPrefixName_$YYYYMMDD.log*/
         );
+void SetLogLevel( const int& iLevel=LOGDEBUG );
 
 void _WriteLog ( const char* FILE_p, int LINE, int logLevel, const char* format_p, ... );
 void _PrintToStdout( const char* FILE_p, int LINE, int logLevel, const char* format_p, ... );
@@ -77,11 +81,11 @@ void _PrintToStdout( const char* FILE_p, int LINE, int logLevel, const char* for
 /******************************************************************************/
 
 #define WriteLog( logLevel, str, arg... )  \
-    _WriteLog(basename(__FILE__), __LINE__, logLevel, str, ##arg); 
+    _WriteLog(__FILE__, __LINE__, logLevel, str, ##arg) 
 
 
 #define PrintToStdout( logLevel, str, arg... )  \
-    _PrintToStdout(basename(__FILE__), __LINE__, logLevel, str, ##arg); 
+    _PrintToStdout(__FILE__, __LINE__, logLevel, str, ##arg) 
 
 /******************************************************************************/
 

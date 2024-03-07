@@ -17,7 +17,7 @@
 #include <errno.h>
 #include <string.h>
 #include "Thread.h"
-#include "Version.h"
+//#include "Version.h"
 #include "CustomOutLog.h"
 
 //__attribute__((constructor)) static void my_thread_init()

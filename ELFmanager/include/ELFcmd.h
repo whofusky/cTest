@@ -24,9 +24,6 @@
 #ifndef SAMEEXE_MAX_PIDS
     #define SAMEEXE_MAX_PIDS 10   //同程序名的程序可同时运行的pid的最大个数
 #endif
-#ifndef PV_DIR_MAX_LEN
-    #define PV_DIR_MAX_LEN   1024
-#endif
 
 
 //根据程序名查找进程返回信息结构
@@ -51,12 +48,24 @@ private:
 
 public:
 
-    // cnt : 文件路径 或 要加密的字符串
-    // omd5: 文件或输入字符串的md5值
-    // return:
-    //       0  成功
-    //       !0 失败
-    static int md5sum( char* cnt, char omd5[32+1] );
+    //获取当前运行程序的路径
+    static const char* get_self_exe_path();
+    //获取当前运行程序的的名称(带绝对路径)
+    static const char* get_self_exe_fname();
+
+    // in :
+    //     filename : 文件路径
+    // out:
+    //     omd5     : 文件的md5值
+    // return   :  0  成功  !0 失败
+    static int md5sum( const char* filename, char omd5[32+1] );
+
+    // in :
+    //     instr    : 将要加密的字符串
+    // out:
+    //     omd5     : 字符串的的md5值
+    // return   :  0  成功  !0 失败
+    static int md5str( char* cnt, char omd5[32+1] );
 
     // 取/proc/pid/cmdline文件的内容
     static int getCmdlinePar( const char* path, std::string str[],int &inoutnum );
@@ -130,6 +139,9 @@ public:
     //  mod "rwx" 判断文件或目录是否有相应权限
     static bool fd_exist( const char* f_p ,const char* mode = NULL );
 
+    // chmod u+x
+    static bool chmod_ux( const char* f_p );
+
     static bool isFile( const char* f_p );
     static bool isDir( const char* f_p );
 
@@ -155,7 +167,13 @@ public:
             std::string &fname
             );
 
-private:
+public:
+    //kill -9 进程pid及其子进程
+    //  kill的顺序是按进程的生成顺序逆序进行的(即后生成的进程先kill,先生成的
+    //  后kill)
+    //killAllFlag: 1 子进程也kill; 其他值 只kill pid一个进程
+    //pid:       : 进程号
+    //status     : 返回状态: -2 正常结束进程, 其他值 异常情况
     static void kill9Pbypid( const int &killAllFlag, 
             const pid_t &pid, 
             int &status 

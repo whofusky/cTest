@@ -28,6 +28,16 @@
 #include "CustomOutLog.h"
 #include "InfraBase.h"
 
+static pthread_mutex_t pgsLock = PTHREAD_MUTEX_INITIALIZER;
+
+#define LC_DIR_MAX_LEN    1024        //路径的最大长度
+#define LC_FILENAME_MAX   100         //文件名的最大长度
+#define LC_FULLNAME_MAX   1124        //路径+文件名的最大长度
+
+static char  pgsGetPthFlag = 0;                      //判断是否已经取值
+static char  pgsBaseDir_a[LC_DIR_MAX_LEN]   = {0};   //程序运行路径
+static char  pgsPathFile_a[LC_FULLNAME_MAX] = {0};   //带路径的程序名
+
 #define MC_CBUFFER_SIZE 1024
 
 ///////////////////////////////////md5 src begine
@@ -239,15 +249,94 @@ void MD5Transform(unsigned int state[4],unsigned char block[64]) {
 
 
 
-
-// cnt : 文件路径 或 要加密的字符串
-// omd5: 文件或输入字符串的md5值
-// return:
-//       0  成功
-//       !0 失败
-int ELFcmd::md5sum( char* cnt, char omd5[32+1] )
+// Dsc: 获取当前运行程序的路径值
+static int getAppPath()
 {
-    if ( NULL == cnt )
+
+    int tLen = LC_FULLNAME_MAX -1;
+
+    int r = readlink( "/proc/self/exe", pgsPathFile_a, tLen );
+    if ( r < 0 || r >= tLen )
+    {
+        printf( "readlink fail,errno[%d],errMsg[%s]", errno, strerror(errno) );
+
+        return 1;
+    }
+
+    //带路径值的可执行程序
+    pgsPathFile_a[r] = '\0';
+    int i            = 0;
+    int tFindFlag    = 0;
+    for ( i = r; i>=0; i-- )
+    {
+        if ( pgsPathFile_a[i] == '/' )
+        {
+            //pgsPathFile_a[i] = '\0';
+            strncpy(pgsBaseDir_a,pgsPathFile_a,i);
+            pgsBaseDir_a[i] = '\0';
+            //tLen            = r - i;
+            //strncpy( pgsExe, pgsPathFile_a+i+1, tLen );
+            tFindFlag = 1;
+            break;
+        }
+    }
+
+    if ( tFindFlag == 0 )
+    {
+        return 2;
+    }
+
+    return 0;
+}
+
+
+
+
+
+//获取当前运行程序的路径
+const char* ELFcmd::get_self_exe_path()
+{
+    if ( 0 == pgsGetPthFlag )
+    {
+        pthread_mutex_lock( &pgsLock );
+        if ( 0 == pgsGetPthFlag )
+        {
+            getAppPath();
+            pgsGetPthFlag = 1;
+        }
+        pthread_mutex_unlock( &pgsLock );
+    }
+    return pgsBaseDir_a;
+}
+
+
+
+
+
+
+//获取当前运行程序的的名称(带绝对路径)
+const char* ELFcmd::get_self_exe_fname()
+{
+    if ( 0 == pgsGetPthFlag )
+    {
+        pthread_mutex_lock( &pgsLock );
+        if ( 0 == pgsGetPthFlag )
+        {
+            getAppPath();
+            pgsGetPthFlag = 1;
+        }
+        pthread_mutex_unlock( &pgsLock );
+    }
+    return pgsPathFile_a;
+}
+
+
+// filename : 文件路径
+// omd5     : 文件的md5值
+// return   :  0  成功  !0 失败
+int ELFcmd::md5sum( const char* filename, char omd5[32+1] )
+{
+    if ( NULL == filename )
     {
         return -1;
     }
@@ -256,33 +345,54 @@ int ELFcmd::md5sum( char* cnt, char omd5[32+1] )
 	unsigned char decrypt[16];
     MD5Init(&md5);
 
-    if ( isFile( cnt ) )//如果是文件,求文件的md5
+    FILE *fp = fopen(filename, "rb");
+    if( NULL == fp) 
     {
-		FILE *fp = fopen(cnt, "rb");
-        if( NULL == fp) 
+        return -2;//打开文件错误
+    }
+    
+    unsigned char encrypt[1024];
+    unsigned int ilen = 0;
+    while( !feof(fp) && !ferror(fp) ) 
+    {
+        ilen = fread( encrypt, 1, 1024, fp );
+        if ( !ferror(fp) )
         {
-            return -2;//打开文件错误
+            MD5Update(&md5, encrypt, ilen);
         }
-        
-        unsigned char encrypt[1024];
-        unsigned int ilen = 0;
-        while( !feof(fp) && !ferror(fp) ) 
-        {
-            ilen = fread( encrypt, 1, 1024, fp );
-            if ( !ferror(fp) )
-            {
-                MD5Update(&md5, encrypt, ilen);
-            }
-        }
-        fclose(fp);
-        MD5Final(&md5, decrypt);
+    }
+    fclose(fp);
+    MD5Final(&md5, decrypt);
 
-    }
-    else//求字符串的md5
+    snprintf( omd5, 33,
+            "%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x",
+            decrypt[0],decrypt[1],decrypt[2],decrypt[3],
+            decrypt[4],decrypt[5],decrypt[6],decrypt[7],
+            decrypt[8],decrypt[9],decrypt[10],decrypt[11],
+            decrypt[12],decrypt[13],decrypt[14],decrypt[15]
+            );
+    //omd5[33]='\0';
+
+    return 0;
+}
+
+
+// instr    : 将要加密的字符串
+// omd5     : 字符串的的md5值
+// return   :  0  成功  !0 失败
+int ELFcmd::md5str( char* instr, char omd5[32+1] )
+{
+    if ( NULL == instr )
     {
-        MD5Update(&md5, (unsigned char*)cnt, strlen(cnt));
-        MD5Final(&md5, decrypt);
+        return -1;
     }
+
+	MD5_CTX md5;
+	unsigned char decrypt[16];
+    MD5Init(&md5);
+
+    MD5Update(&md5, (unsigned char*)instr, strlen(instr));
+    MD5Final(&md5, decrypt);
 
     snprintf( omd5, 33,
             "%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x",
@@ -432,8 +542,8 @@ int ELFcmd::getPidByName( const std::string &exe_name, PNAME_RET_INFO &retinfo )
     int tpid = 0;
     int ret  = 0;
 
-    char texepath[PV_DIR_MAX_LEN] = {0};
-    char tcwdpath[PV_DIR_MAX_LEN] = {0};
+    char texepath[LC_DIR_MAX_LEN] = {0};
+    char tcwdpath[LC_DIR_MAX_LEN] = {0};
     std::string strPathRun;
     std::string tPathFile;
     std::string tstrName[3];
@@ -466,10 +576,10 @@ int ELFcmd::getPidByName( const std::string &exe_name, PNAME_RET_INFO &retinfo )
         tPathFile = rpdir + "/" + std::string( dir_fp->d_name );
         tPathFile = tPathFile + "/" +std::string("exe");
         
-        //memset( texepath, 0 , PV_DIR_MAX_LEN );
+        //memset( texepath, 0 , LC_DIR_MAX_LEN );
         
-        int r = readlink( tPathFile.c_str(), texepath, PV_DIR_MAX_LEN );
-        if ( r < 0 || r >= PV_DIR_MAX_LEN )
+        int r = readlink( tPathFile.c_str(), texepath, LC_DIR_MAX_LEN );
+        if ( r < 0 || r >= LC_DIR_MAX_LEN )
         {
             b_write_log( _ERROR,"readlink [%s] fail,errno[%d],errMsg[%s]", 
                     tPathFile.c_str(),errno, strerror(errno) );
@@ -521,14 +631,14 @@ int ELFcmd::getPidByName( const std::string &exe_name, PNAME_RET_INFO &retinfo )
                     tstrName[1].erase(tpos);
                 }
 
-                //memset( tcwdpath, 0 , PV_DIR_MAX_LEN );
+                //memset( tcwdpath, 0 , LC_DIR_MAX_LEN );
                 
                 //file:/proc/pid/cwd
                 tPathFile = rpdir + "/" + std::string( dir_fp->d_name );
                 tPathFile = tPathFile + "/" +std::string("cwd");
 
-                r = readlink( tPathFile.c_str(), tcwdpath, PV_DIR_MAX_LEN );
-                if ( r < 0 || r >= PV_DIR_MAX_LEN )
+                r = readlink( tPathFile.c_str(), tcwdpath, LC_DIR_MAX_LEN );
+                if ( r < 0 || r >= LC_DIR_MAX_LEN )
                 {
                     b_write_log( _ERROR,"readlink [%s] fail,errno[%d],errMsg[%s]", 
                             tPathFile.c_str(),errno, strerror(errno) );
@@ -609,8 +719,8 @@ int ELFcmd::getPidByName( const char* exe_name, PNAME_RET_INFO &retinfo )
     int tpid = 0;
     int ret  = 0;
 
-    char texepath[PV_DIR_MAX_LEN] = {0};
-    char tcwdpath[PV_DIR_MAX_LEN] = {0};
+    char texepath[LC_DIR_MAX_LEN] = {0};
+    char tcwdpath[LC_DIR_MAX_LEN] = {0};
     std::string strPathRun;
     std::string tPathFile;
     std::string tstrName[3];
@@ -643,10 +753,10 @@ int ELFcmd::getPidByName( const char* exe_name, PNAME_RET_INFO &retinfo )
         tPathFile = rpdir + "/" + std::string( dir_fp->d_name );
         tPathFile = tPathFile + "/" +std::string("exe");
         
-        //memset( texepath, 0 , PV_DIR_MAX_LEN );
+        //memset( texepath, 0 , LC_DIR_MAX_LEN );
         
-        int r = readlink( tPathFile.c_str(), texepath, PV_DIR_MAX_LEN );
-        if ( r < 0 || r >= PV_DIR_MAX_LEN )
+        int r = readlink( tPathFile.c_str(), texepath, LC_DIR_MAX_LEN );
+        if ( r < 0 || r >= LC_DIR_MAX_LEN )
         {
             b_write_log( _ERROR,"readlink [%s] fail,errno[%d],errMsg[%s]", 
                     tPathFile.c_str(),errno, strerror(errno) );
@@ -698,14 +808,14 @@ int ELFcmd::getPidByName( const char* exe_name, PNAME_RET_INFO &retinfo )
                     tstrName[1].erase(tpos);
                 }
 
-                //memset( tcwdpath, 0 , PV_DIR_MAX_LEN );
+                //memset( tcwdpath, 0 , LC_DIR_MAX_LEN );
                 
                 //file:/proc/pid/cwd
                 tPathFile = rpdir + "/" + std::string( dir_fp->d_name );
                 tPathFile = tPathFile + "/" +std::string("cwd");
 
-                r = readlink( tPathFile.c_str(), tcwdpath, PV_DIR_MAX_LEN );
-                if ( r < 0 || r >= PV_DIR_MAX_LEN )
+                r = readlink( tPathFile.c_str(), tcwdpath, LC_DIR_MAX_LEN );
+                if ( r < 0 || r >= LC_DIR_MAX_LEN )
                 {
                     b_write_log( _ERROR,"readlink [%s] fail,errno[%d],errMsg[%s]", 
                             tPathFile.c_str(),errno, strerror(errno) );
@@ -786,8 +896,8 @@ int ELFcmd::getPidByFullName( const char* full_exe_name, PNAME_RET_INFO &retinfo
     int tpid = 0;
     int ret  = 0;
 
-    char texepath[PV_DIR_MAX_LEN] = {0};
-    char tcwdpath[PV_DIR_MAX_LEN] = {0};
+    char texepath[LC_DIR_MAX_LEN] = {0};
+    char tcwdpath[LC_DIR_MAX_LEN] = {0};
     std::string strPathRun;
     std::string tPathFile;
     std::string tstrName[3];
@@ -826,10 +936,10 @@ int ELFcmd::getPidByFullName( const char* full_exe_name, PNAME_RET_INFO &retinfo
         tPathFile = rpdir + "/" + std::string( dir_fp->d_name );
         tPathFile = tPathFile + "/" +std::string("exe");
         
-        //memset( texepath, 0 , PV_DIR_MAX_LEN );
+        //memset( texepath, 0 , LC_DIR_MAX_LEN );
         
-        int r = readlink( tPathFile.c_str(), texepath, PV_DIR_MAX_LEN );
-        if ( r < 0 || r >= PV_DIR_MAX_LEN )
+        int r = readlink( tPathFile.c_str(), texepath, LC_DIR_MAX_LEN );
+        if ( r < 0 || r >= LC_DIR_MAX_LEN )
         {
             b_write_log( _ERROR,"readlink [%s] fail,errno[%d],errMsg[%s]", 
                     tPathFile.c_str(),errno, strerror(errno) );
@@ -881,14 +991,14 @@ int ELFcmd::getPidByFullName( const char* full_exe_name, PNAME_RET_INFO &retinfo
                     tstrName[1].erase(tpos);
                 }
 
-                //memset( tcwdpath, 0 , PV_DIR_MAX_LEN );
+                //memset( tcwdpath, 0 , LC_DIR_MAX_LEN );
                 
                 //file:/proc/pid/cwd
                 tPathFile = rpdir + "/" + std::string( dir_fp->d_name );
                 tPathFile = tPathFile + "/" +std::string("cwd");
 
-                r = readlink( tPathFile.c_str(), tcwdpath, PV_DIR_MAX_LEN );
-                if ( r < 0 || r >= PV_DIR_MAX_LEN )
+                r = readlink( tPathFile.c_str(), tcwdpath, LC_DIR_MAX_LEN );
+                if ( r < 0 || r >= LC_DIR_MAX_LEN )
                 {
                     b_write_log( _ERROR,"readlink [%s] fail,errno[%d],errMsg[%s]", 
                             tPathFile.c_str(),errno, strerror(errno) );
@@ -973,8 +1083,8 @@ int ELFcmd::getPidByFullName( const std::string &full_exe_name, PNAME_RET_INFO &
     int tpid = 0;
     int ret  = 0;
 
-    char texepath[PV_DIR_MAX_LEN] = {0};
-    char tcwdpath[PV_DIR_MAX_LEN] = {0};
+    char texepath[LC_DIR_MAX_LEN] = {0};
+    char tcwdpath[LC_DIR_MAX_LEN] = {0};
     std::string strPathRun;
     std::string tPathFile;
     std::string tstrName[3];
@@ -1016,10 +1126,10 @@ int ELFcmd::getPidByFullName( const std::string &full_exe_name, PNAME_RET_INFO &
         tPathFile = rpdir + "/" + std::string( dir_fp->d_name );
         tPathFile = tPathFile + "/" +std::string("exe");
         
-        //memset( texepath, 0 , PV_DIR_MAX_LEN );
+        //memset( texepath, 0 , LC_DIR_MAX_LEN );
         
-        int r = readlink( tPathFile.c_str(), texepath, PV_DIR_MAX_LEN );
-        if ( r < 0 || r >= PV_DIR_MAX_LEN )
+        int r = readlink( tPathFile.c_str(), texepath, LC_DIR_MAX_LEN );
+        if ( r < 0 || r >= LC_DIR_MAX_LEN )
         {
             b_write_log( _ERROR,"readlink [%s] fail,errno[%d],errMsg[%s]", 
                     tPathFile.c_str(),errno, strerror(errno) );
@@ -1071,14 +1181,14 @@ int ELFcmd::getPidByFullName( const std::string &full_exe_name, PNAME_RET_INFO &
                     tstrName[1].erase(tpos);
                 }
 
-                //memset( tcwdpath, 0 , PV_DIR_MAX_LEN );
+                //memset( tcwdpath, 0 , LC_DIR_MAX_LEN );
                 
                 //file:/proc/pid/cwd
                 tPathFile = rpdir + "/" + std::string( dir_fp->d_name );
                 tPathFile = tPathFile + "/" +std::string("cwd");
 
-                r = readlink( tPathFile.c_str(), tcwdpath, PV_DIR_MAX_LEN );
-                if ( r < 0 || r >= PV_DIR_MAX_LEN )
+                r = readlink( tPathFile.c_str(), tcwdpath, LC_DIR_MAX_LEN );
+                if ( r < 0 || r >= LC_DIR_MAX_LEN )
                 {
                     b_write_log( _ERROR,"readlink [%s] fail,errno[%d],errMsg[%s]", 
                             tPathFile.c_str(),errno, strerror(errno) );
@@ -1224,13 +1334,18 @@ int ELFcmd::executeShell ( const char* shName_p, const char* szFormat_p, ... )
 
 
 
-
+//kill -9 进程pid及其子进程
+//  kill的顺序是按进程的生成顺序逆序进行的(即后生成的进程先kill,先生成的
+//  后kill)
+//killAllFlag: 1 子进程也kill; 其他值 只kill pid一个进程
+//pid:       : 进程号
+//status     : 返回状态: -2 正常结束进程, 其他值 异常情况
 void ELFcmd::kill9Pbypid( const int &killAllFlag, const pid_t &pid, int &status )
 {
     if ( killAllFlag == 1 )
     {
         char tPidFile[30] = {0};
-        char tStr[256] = {0};
+        char tStr[1024] = {0};
         strcpy( tPidFile, ".plusTmp_XXXXXX" );
 
         int fd = mkstemp( tPidFile );           
@@ -1245,11 +1360,33 @@ void ELFcmd::kill9Pbypid( const int &killAllFlag, const pid_t &pid, int &status 
 
         }
 
+        //snprintf ( tStr, sizeof ( tStr ),
+        //           "pstree -np %d|awk -F'(' '{i = 2; while "
+        //           "(i <= NF) {print $i;i++}}'|awk -F')' '"
+        //           "{print $1}'|sort -r >%s",
+        //           pid, tPidFile
+        //         );
+
+        //查询所有子进程号(包括进程号自己),按生成进程的逆序排列(即后生成的排在
+        //前面,先生成的排在后面)
         snprintf ( tStr, sizeof ( tStr ),
-                   "pstree -np %d|awk -F'(' '{i = 2; while "
-                   "(i <= NF) {print $i;i++}}'|awk -F')' '"
-                   "{print $1}'|sort -r >%s",
-                   pid, tPidFile
+                   "/bin/bash -c '"
+                    "function F_printSubPid()"
+                    "{"
+                    "    local tout=$(pgrep -P \"$1\" 2>/dev/null);"
+                    "    if [ -z \"${tout}\" ];then"
+                    "        return 0;"
+                    "    fi;"
+                    "    local tnaa;"
+                    "    echo \"${tout}\"|tac|while read tnaa;"
+                    "    do"
+                    "        F_printSubPid \"${tnaa}\";"
+                    "        echo \"${tnaa}\";"
+                    "    done;"
+                    "    return 0;"
+                    "};"
+                   "F_printSubPid \"%d\" >\"%s\" && echo \"%d\" >>\"%s\"'",
+                   pid,tPidFile, pid,tPidFile
                  );
 
         //b_write_log(_DEBUG,"tPidFile=[%s",tPidFile);
@@ -1279,6 +1416,7 @@ void ELFcmd::kill9Pbypid( const int &killAllFlag, const pid_t &pid, int &status 
 
             if ( kill ( tPid, SIGKILL ) == 0 )
             {
+                //b_write_log(_DEBUG,"fusktest kill[%d]",tPid);
                 waitpid ( tPid, NULL, 0 );
             }
             else
@@ -1316,7 +1454,7 @@ void ELFcmd::kill9Pbypid( const int &killAllFlag, const pid_t &pid, int &status 
         {
             waitpid ( pid, NULL, 0 );
             status = -2;
-            //b_write_log(_DEBUG,"kill[%d]",pid);
+            //b_write_log(_DEBUG,"fusktest kill[%d]",pid);
         }
         else
         {
@@ -1545,6 +1683,25 @@ bool ELFcmd::fd_exist( const char* f_p ,const char* mode )
     return false;
 }
 
+//chmod u+x
+bool ELFcmd::chmod_ux( const char* f_p )
+{
+    if ( NULL == f_p ) return false;
+    struct stat sb;
+
+    if ( stat(f_p, &sb) == -1) return false;
+
+    if ( (sb.st_mode & S_IXUSR) != S_IXUSR )
+    {
+        mode_t tmode = ( sb.st_mode | S_IXUSR );
+        if ( chmod( f_p, tmode ) != 0 ) return false;
+        return true;
+    }
+
+    return false;
+}
+
+
 bool ELFcmd::isFile( const char* f_p )
 {
     if ( NULL == f_p ) return false;
@@ -1718,7 +1875,7 @@ int ELFcmd::mv( const char* src, const char* dst)
     if ( ! fd_exist(src) ) return -2;
 
     bool dstIsDir = isDir(dst);
-    if ( fd_exist(dst) && (!dstIsDir) ) return -3;
+    //if ( fd_exist(dst) && (!dstIsDir) ) return -3;
     int ret = 0;
 
     if ( dstIsDir )

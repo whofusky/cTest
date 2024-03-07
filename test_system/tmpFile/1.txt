@@ -1,0 +1,65 @@
+
+#include <string>
+#include <stdlib.h>
+#include <string.h>
+  
+// 将通配符字符串转换为POSIX正则表达式字符串  
+// return 
+//   0  成功
+//   -1 分配内存失败
+int glob_to_posixregex(const char* glob, std::string &regStr) 
+{  
+    //std::string retStr;
+    regStr.clear();
+
+    int glob_len = strlen(glob);  
+
+    // 最多需要双倍的字符数（用于转义） +1（用于结束符'\0'） +1(用于锚定开始^) +1(用于锚定结束$)  
+    int regex_len = glob_len * 2 + 1 +1 +1; 
+    char* tstr = (char*)malloc(regex_len);  
+    if (!tstr) {  
+        //perror("malloc error");  
+        return -1;
+    }  
+  
+    int i = 0; int j = 0;  
+    tstr[j++] = '^';   // 添加 用于锚定开始 '^' 字符
+    for (i = 0; glob[i] != '\0'; i++, j++) {  
+        switch (glob[i]) {  
+            case '*':  
+                // 通配符'*'在正则表达式中匹配任意数量的字符（包括零个字符），使用'.*'表示  
+                tstr[j++] = '.';  
+                tstr[j] = '*';  
+                break;  
+            case '?':  
+                // 通配符'?'在正则表达式中匹配任意单个字符，使用'.'表示  
+                tstr[j] = '.';  
+                break;  
+            case '[':  
+                // 通配符'['开始一个字符类，在正则表达式中我们直接使用它  
+                tstr[j] = '[';  
+                break;  
+            case ']':  
+                // 通配符']'结束一个字符类，在正则表达式中我们直接使用它  
+                tstr[j] = ']';  
+                break;  
+            case '\\':  
+                // 转义字符，我们只需要复制它  
+                tstr[j] = '\\';  
+                j++; // 因为下一个字符也需要被复制  
+                tstr[j] = glob[++i]; // 复制转义后的字符  
+                break;  
+            default:  
+                // 其他字符在正则表达式中直接表示它们自己  
+                tstr[j] = glob[i];  
+        }  
+    }  
+    tstr[j++] = '$';   // 添加 用于锚定结尾 '$' 字符
+    tstr[j] = '\0'; // 添加字符串结束符  
+    regStr = tstr;
+    free(tstr);  
+  
+    return 0;  
+}  
+  
+

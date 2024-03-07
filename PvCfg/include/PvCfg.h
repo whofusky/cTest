@@ -171,6 +171,7 @@ private:
                 if ( PvCfg::mInstance != NULL )
                 {
                     delete PvCfg::mInstance;
+                    PvCfg::mInstance = NULL;
                 }
             }
     };

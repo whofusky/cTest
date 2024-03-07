@@ -12,6 +12,7 @@
 #include <stdlib.h>
 #include <sys/syscall.h>
 #include "json/json.h"
+#include <math.h> // 包含 sin 和 cos 函数
 
 
 #include "ELFcmd.h"
@@ -19,165 +20,110 @@
 #include "InfraBase.h"
 #include "CustomOutLog.h"
 
+typedef struct{
+    double sum_sin;     // 累加 sin 值
+    double sum_cos;     // 累加 cos 值
+    double average_x;   // 计算平均值的 x 分量
+    double average_y;   // 计算平均值的 y 分量
+    double average_dir; // 计算平均风向
+    unsigned int n;     //值的个数
+}T_vetAvg;
 
-
-
-#define PID_STATU_LEN 20    /*取进程可读信息字符串最大长度*/
-//此处的结构是存储/proc/pid/status中信息,
-//   进程状态也是带解读模式的如: S (sleeping)
-//   其中内存信息是带单位的如: 184 kB
-typedef struct
+void cal_vect_avg_1(const float& inVect, T_vetAvg& calData)
 {
-       char name[PID_STATU_LEN];   /*进程名*/
-       char state[PID_STATU_LEN];  /*进程的状态*/
-       int  ppid;                  /*进程的父进程*/
-       char vmsize[PID_STATU_LEN]; /*进程现在正在占用的内存*/
-       char vmpeak[PID_STATU_LEN]; /*当前进程运行过程中占用内存的峰值*/
-       char vmrss[PID_STATU_LEN];  /*是程序现在使用的物理内存*/
-       char vmhwm[PID_STATU_LEN];  /*是程序得到分配到物理内存的峰值*/
-}p_s_info;
+    calData.sum_sin += sin(inVect * M_PI / 180); // 累加 sin 值
+    calData.sum_cos += cos(inVect * M_PI / 180); // 累加 cos 值
+    calData.n++;
 
-// get hunan readable progress stauts info
-int getHRPSInfo( int pid, p_s_info &retInfo )
-{
-    char tmpc[100] = {0};
-    memset( &retInfo, 0, sizeof(p_s_info) );
-    snprintf( tmpc,sizeof(tmpc),"%d",pid);
+    calData.average_x = calData.sum_sin / calData.n; // 计算平均值的 x 分量
+    calData.average_y = calData.sum_cos / calData.n; // 计算平均值的 y 分量
+    calData.average_dir = atan2(calData.average_y, calData.average_x) * 180 / M_PI; // 计算平均风向
+    if ( calData.average_dir < 0 ) calData.average_dir += 360;
 
-    std::string pfname = "/proc/";
-    pfname += tmpc + std::string("/status");
-
-    std::string strVal[8];
-    int inoutnum = 7;
-
-    // 取/proc/pid/status文件的内容
-    //  str[0] Name   进程名
-    //  str[1] State  进程的状态
-    //  str[2] PPid   进程的父进程
-    //  str[3] VmSize 进程现在正在占用的内存
-    //  str[4] VmPeak 当前进程运行过程中占用内存的峰值
-    //  str[5] VmRSS  是程序现在使用的物理内存
-    //  str[6] VmHWM  是程序得到分配到物理内存的峰值
-    int ret = ELFcmd::getPidStatus( pfname.c_str(), strVal, inoutnum );
-    if ( ret != 0 )
-    {
-        b_write_log(_ERROR,"ELFcmd::getPidStatus return[%d]", ret);
-        return ret;
-    }
-    snprintf( retInfo.name, sizeof(retInfo.name),
-            "%s", strVal[0].c_str() );
-    snprintf( retInfo.state, sizeof(retInfo.state),
-            "%s", strVal[1].c_str() );
-    retInfo.ppid = atoi( strVal[2].c_str() );
-    snprintf( retInfo.vmsize, sizeof(retInfo.vmsize),
-            "%s", strVal[3].c_str() );
-    snprintf( retInfo.vmpeak, sizeof(retInfo.vmpeak),
-            "%s", strVal[4].c_str() );
-    snprintf( retInfo.vmrss, sizeof(retInfo.vmrss),
-            "%s", strVal[5].c_str() );
-    snprintf( retInfo.vmhwm, sizeof(retInfo.vmhwm),
-            "%s", strVal[6].c_str() );
-
-    return 0;
+    return;
 }
 
-int main()
+void cal_vect_avg_2(const float& inVect, T_vetAvg& calData)
 {
+    calData.sum_sin += sin(inVect * M_PI / 180); // 累加 sin 值
+    calData.sum_cos += cos(inVect * M_PI / 180); // 累加 cos 值
+    calData.n++;
+
+    calData.average_x = calData.sum_cos / calData.n; // 计算平均值的 x 分量
+    calData.average_y = calData.sum_sin / calData.n; // 计算平均值的 y 分量
+    calData.average_dir = atan2(calData.average_y, calData.average_x) * 180 / M_PI; // 计算平均风向
+    if ( calData.average_dir < 0 ) calData.average_dir += 360;
+
+    return;
+}
+
+std::string::size_type  getStrSpltVal(std::string &inS, 
+        std::string &retS,
+        const char* delimiter,
+        std::string::size_type& head)
+{
+    if ( head == inS.npos ) return inS.npos;
+
+    std::string::size_type tail = inS.find( delimiter, head );
+    if ( tail != inS.npos ) {
+        retS = inS.substr( head, tail - head );
+        head = tail + 1;
+        return 1;
+    }
+    retS = inS.substr( head );
+    head = inS.npos;
+    return 1;
+}
+
+int main(int argc, char *argv[])
+{
+    unsigned long long u64=12345;
+    c_write_log(_INFO,"argc=[%d],u64=[%llu]", argc,u64);
+
     pid_t tid;
     tid = syscall(SYS_gettid);
     c_write_log(_INFO,"thread id[%d]", tid);
 
+    float tf;
+    T_vetAvg cal_1 = {0};
+    T_vetAvg cal_2 = {0};
 
-    int ret = 0;
-    char tmpStr[1024] = {0};
+    //std::string ins="111,222,,333,,11";
+    std::string ins="111,";
+    std::string rets;
+    std::string::size_type head = 0;
+    while( getStrSpltVal(ins, rets, ",", head) != ins.npos ) {
+        c_write_log(_DEBUG,"ins[%s],rets[%s]",ins.c_str(), rets.c_str() );
+    } 
 
-    //snprintf( tmpStr, sizeof(tmpStr),"nohup /home/fusky/tmp/t/t.sh >/dev/null 2>&1 &");
-    snprintf( tmpStr, sizeof(tmpStr),"/home/fusky/tmp/t/t.sh");
-    //snprintf( tmpStr, sizeof(tmpStr),"/home/fusky/tmp/t");
+    //std::string ts1="busi.xml";
+    std::string ts1="busi";
+    std::string ts2= ts1.substr(0,ts1.rfind(".")) + ".tmp";
+    c_write_log(_DEBUG,"ts1=[%s],ts2=[%s]",ts1.c_str(),ts2.c_str());
 
-    std::string tss;
-    std::string ts1 = "";
-    Json::Value tjval;
-    tjval["id"] = 1;
-    tjval["ss1"] = "";
-    tjval["ss2"] = tss;
-    tjval["ss3"] = ts1;
-    tjval["ss4"] = "haha";
+    return 0;
 
-    //int aa = tjval["id"].asInt();
-
-    int tpid = 1467306;
-    p_s_info retinfo;
-    ret = getHRPSInfo( tpid, retinfo );
-
-    c_write_log(_DEBUG,"getHRPSInfo ret[%d],tpid[%d],"
-            "name[%s],state[%s],ppid[%d],vmsize[%s],"
-            "vmpeak[%s],vmrss[%s],vmhwm[%s]", 
-            ret, tpid, retinfo.name, retinfo.state,
-           retinfo.ppid, retinfo.vmsize, retinfo.vmpeak,
-          retinfo.vmrss, retinfo.vmrss );
-
-    PNAME_RET_INFO retpinfo;
-    std::string exe_name = "t.sh";
-    std::string full_exe_name = "/home/fusky/tmp/t/t.sh";
-    ret = ELFcmd::getPidByName( exe_name.c_str(), retpinfo );
-    c_write_log(_DEBUG, "getPidByName ret[%d]", ret );
-    for(int i = 0 ;i < retpinfo.curnum; i++)
+    std::string tmpVal = "30";
+    if ( argc > 1 )
     {
-        c_write_log(_DEBUG,"[%d] pid[%d] runpath[%s]",
-                i, retpinfo.pt[i].pid, retpinfo.pt[i].path.c_str() );
+        for( int i = 1; i < argc; i++ )
+        {
+            tmpVal = argv[i];
+            tf = std::stof( tmpVal );
+            cal_vect_avg_1( tf, cal_1 );
+            cal_vect_avg_2( tf, cal_2 );
+            c_write_log(_DEBUG,"i=[%d],wd[%d]=[%lf],avg1=[%lf]", i,i,tf, cal_1.average_dir );
+            c_write_log(_DEBUG,"i=[%d],wd[%d]=[%lf],avg2=[%lf]", i,i,tf, cal_2.average_dir );
+            c_write_log(_DEBUG,"------------------------------------------------------------------------------");
+        }
     }
-    ret = ELFcmd::getPidByFullName( full_exe_name.c_str(), retpinfo );
-    c_write_log(_DEBUG, "getPidByFullName ret[%d]", ret );
-    for(int i = 0 ;i < retpinfo.curnum; i++)
+    else
     {
-        c_write_log(_DEBUG,"[%d] pid[%d] runpath[%s]",
-                i, retpinfo.pt[i].pid, retpinfo.pt[i].path.c_str() );
-    }
-
-    //return 0;
-
-    //std::string src = "/home/fusky/2";
-    //std::string dst = "/home/fusky/1";
-    //ret = ELFcmd::cp(src.c_str(), dst.c_str());
-    //c_write_log(_DEBUG,"cp [%s] [%s] return[%d]", 
-    //        src.c_str(), dst.c_str(),ret );
-
-
-    //return 0;
-
-    ////ret = executeShell(tmpStr,NULL);
-    //ret = ELFcmd::system_plus ( tmpStr,
-    //              30,
-    //              0,
-    //              1
-    //            );
-    //c_write_log(_DEBUG, "system_plus ret[%d]", ret );
-
-    PNAME_RET_INFO tRetInfo;
-    //getPidByName( "t.sh" );
-    //ret = getPidByName( "sunloginclient", tRetInfo );
-    ret = ELFcmd::getPidByName( "t.sh", tRetInfo );
-    c_write_log(_DEBUG, "getPidByName ret[%d]", ret );
-    for(int i = 0 ;i < tRetInfo.curnum; i++)
-    {
-        c_write_log(_DEBUG,"[%d] pid[%d] runpath[%s]",
-                i, tRetInfo.pt[i].pid, tRetInfo.pt[i].path.c_str() );
-    }
-
-
-    ret = strcmp("abcde","abcda");
-    c_write_log( _DEBUG, "ret=[%d]", ret);
-    getcwd( tmpStr, 1024);
-    c_write_log( _DEBUG, "getcwd=[%s]", tmpStr);
-
-    c_write_log(_DEBUG,"%s" ",%lu" ,tmpStr,sizeof(tmpStr));
-    c_write_log( _INFO,"tmpStr=[%s]111", tmpStr);
-
-    while ( 1 )
-    {
-        PauseThreadSleep( 2, 0 );
-        c_write_log(_DEBUG,"in while loop");
+        tf = std::stof( tmpVal );
+        cal_vect_avg_1( tf, cal_1 );
+        cal_vect_avg_2( tf, cal_2 );
+        c_write_log(_DEBUG,"wd=[%lf],avg1=[%lf]", tf, cal_1.average_dir );
+        c_write_log(_DEBUG,"wd=[%lf],avg2=[%lf]", tf, cal_2.average_dir );
     }
 
 
