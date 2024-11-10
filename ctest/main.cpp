@@ -13,6 +13,7 @@
 #include <sys/syscall.h>
 #include "json/json.h"
 #include <math.h> // 包含 sin 和 cos 函数
+#include <time.h>
 
 
 #include "ELFcmd.h"
@@ -75,8 +76,148 @@ std::string::size_type  getStrSpltVal(std::string &inS,
     return 1;
 }
 
+int my_rund(int min,int max)
+{
+
+    //unsigned int seed = (unsigned int)time(NULL);
+    //unsigned int seed = 1;
+    //
+
+    struct timespec ts;
+    clock_gettime(CLOCK_MONOTONIC, &ts);
+    unsigned int seed = (unsigned int)(ts.tv_sec ^ ts.tv_nsec);
+
+    int ret = min + rand_r(&seed) % (max - min + 1);
+
+    return ret;
+}
+
+
+
+
+//生成[1,x)的随机数
+// 其中x>=2
+double generate_random_1_to_x(double x)
+{
+
+    //unsigned int seed = (unsigned int)time(NULL);
+    //unsigned int seed = 1;
+    //
+    struct drand48_data buffer;
+    double result;
+
+    struct timespec ts;
+    clock_gettime(CLOCK_MONOTONIC, &ts);
+
+	// 初始化随机数生成器的状态
+    srand48_r((long)(ts.tv_sec ^ ts.tv_nsec), &buffer);
+
+    // 生成 [0.0, 1.0) 之间的随机数
+    drand48_r(&buffer, &result);
+
+    double random_number = 0;
+    if ( x < 2 ) x = 2;
+
+    // 将 [0.0, 1.0) 之间的随机数映射到 [1, x) 之间
+    random_number = 1 + (x - 1) * result;
+
+    // 四舍五入保留两位小数
+    random_number = round(random_number * 100.0) / 100.0;
+
+    return random_number;
+
+}
+
+
+
+
+// 判断 a 与 b 的差值绝对值
+// (1) |b - a | >fix_v 时
+//    (1.1) 当 b > a 时
+//         返回: a + [1,fix_v)的随机值
+//    (1.2) 当 b < a 时
+//         返回: a - [1,fix_v)的随机值
+// (2) |b - a | <= fix_v 时
+//     返回 b
+//
+// 最后实现效果为: | return - a| 不能大于 fix_v
+//
+double my_ctrl_val( double a, double b, double fix_v )
+{
+    double d_diff_abs = fabs(b - a);
+    double tdval = 0;
+
+    //c_write_log(_DEBUG,"d_diff_abs=[%f]",d_diff_abs);
+
+    if ( d_diff_abs > fix_v ) {
+        if ( b > a ) {
+            tdval = a + generate_random_1_to_x( fix_v );
+
+        }
+        else {
+            tdval = a - generate_random_1_to_x( fix_v );
+
+        }
+
+        //c_write_log(_DEBUG,"tdval=[%f]",tdval);
+
+        return tdval;
+    }
+    else {
+       return  b;
+    }
+
+   return 0; 
+}
+
+
+double my_str_to_d(const char *str)
+{
+    char *endptr = NULL;
+    double val = strtod( str, &endptr );
+    if (endptr == str) {
+        c_write_log(_ERROR,"No digits were found in the string[%s].\n", str);
+        return 0;
+    }
+
+    if (*endptr != '\0') {
+        c_write_log(_ERROR,"Trailing characters after the number: '%s', the string is [%s].\n", endptr,str);
+        return 0;
+    }
+    return val;
+}
+
+
 int main(int argc, char *argv[])
 {
+    //for(int i=0;i<20;i++) {
+    //    int ret = my_rund(10,100);
+    //    c_write_log(_INFO,"my_rund return val=[%d]",ret );
+    //}
+    
+    ////generate_random_1_to_x
+    //for(int i=0;i<20;i++) {
+    //    double ret = generate_random_1_to_x(2);
+    //    c_write_log(_INFO,"generate_random_1_to_x return val=[%f]",ret );
+    //}
+    //return 0;
+
+    if ( argc != 4 ){
+        c_write_log(_ERROR,"input number not eq 4\n");
+        return 1;
+    }
+    c_write_log(_INFO,"1:[%s]\n",argv[1]);
+    c_write_log(_INFO,"2:[%s]\n",argv[2]);
+    c_write_log(_INFO,"3:[%s]\n",argv[3]);
+    double fst_d = my_str_to_d(argv[1]);
+    double scd_d = my_str_to_d(argv[2]);
+    int fix_v = atoi(argv[3]);
+
+    double retd = my_ctrl_val(fst_d, scd_d, fix_v );
+
+    c_write_log(_INFO,"fst_d=[%f],scd_d=[%f],fix_v=[%d],retd=[%f],abs=[%f]",fst_d,scd_d,fix_v,retd,fabs(retd-fst_d));
+    return 0;
+
     unsigned long long u64=12345;
     c_write_log(_INFO,"argc=[%d],u64=[%llu]", argc,u64);
 
@@ -95,6 +236,8 @@ int main(int argc, char *argv[])
     while( getStrSpltVal(ins, rets, ",", head) != ins.npos ) {
         c_write_log(_DEBUG,"ins[%s],rets[%s]",ins.c_str(), rets.c_str() );
     } 
+
+    
 
     //std::string ts1="busi.xml";
     std::string ts1="busi";
